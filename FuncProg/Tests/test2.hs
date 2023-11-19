@@ -135,3 +135,6 @@ module Test2 where
 
     bigChungus :: Num a => [a] -> [a]
     bigChungus [] = []
+
+    print' :: String -> String
+    print' str = str

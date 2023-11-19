@@ -129,12 +129,88 @@ module Test2 where
             insertions a [] = [[a]]
             insertions a list@(x:xs) = (a : list) : [x : ys | ys <- insertions a xs]
 
--- Problem 12: Running totals:
--- Create a function that takes a list of numbers and returns a new list 
--- where each element is the running total of the original list.
+-- Problem 12: Sum of List:
 
-    bigChungus :: Num a => [a] -> [a]
-    bigChungus [] = []
+    sumList :: [Int] -> Int
+    sumList = foldr (+) 0
 
-    print' :: String -> String
-    print' str = str
+-- Problem 13: Product of List:
+
+    product' :: Num a => [a] -> a
+    product' = foldr (*) 1
+
+-- Problem 14: Length of List:
+
+    length' :: [a] -> Int
+    length' = foldr (\_ acc -> 1 + acc) 0
+
+-- Problem 15: Reverse a List:
+
+    reverseList :: [a] -> [a]
+    reverseList = foldr (\x acc -> acc ++ [x]) []
+
+-- Problem 16: Filter using foldr:
+
+    filterList :: (a -> Bool) -> [a] -> [a]
+    filterList f = foldr (\x acc -> if f x then [x] ++ acc else acc) []
+
+    filterList' :: (a -> Bool) -> [a] -> [a]
+    filterList' f = foldr (\x acc -> check (f x) x acc) [] where
+        check condition x acc
+            | condition = [x] ++ acc
+            | otherwise = acc
+
+-- Problem 17: Check if all elements satisfy a predicate:
+
+    allSatisfy :: (a -> Bool) -> [a] -> Bool
+    allSatisfy f = foldr (\x acc -> if not (f x) then False else acc) True
+
+    allSatisfy' :: (a -> Bool) -> [a] -> Bool
+    allSatisfy' f = foldr (\x acc -> satisfy (f x) acc) True where
+        satisfy condition acc
+            | condition = acc
+            | otherwise = False
+
+-- Problem 18: Existence check using foldr:
+-- Define a function that checks if at least one element in the list satisfies a given predicate
+
+    anySatisfy :: (a -> Bool) -> [a] -> Bool
+    anySatisfy f = foldr (\x acc -> if (f x) then True else acc) False
+
+    anySatisfy' :: (a -> Bool) -> [a] -> Bool
+    anySatisfy' f = foldr (\x acc -> satisfy (f x) acc) False where
+        satisfy condition acc
+            | condition = True
+            | otherwise = acc
+
+-- Problem 19: Append two lists using foldr:
+
+    appendLists :: [a] -> [a] -> [a]
+    appendLists xs ys = foldr (:) ys xs
+
+-- Problem 20: Remove duplicates from a list using foldr:
+
+    removeDuplicates :: Eq a => [a] -> [a]
+    removeDuplicates = foldr (\x acc -> if x `elem` acc then acc else x : acc) []
+
+    removeDuplicates' :: Eq a => [a] -> [a]
+    removeDuplicates' = foldr (\x acc -> isElem x acc) [] where
+        isElem x acc
+            | x `elem` acc = acc
+            | otherwise = x : acc
+
+-- Problem 21: Count occurrences of an element:
+
+    countOccurrences :: Eq a => a -> [a] -> Int
+    countOccurrences e = foldr (\x acc -> if x == e then acc + 1 else acc) 0
+
+-- Problem 22: Make list of specific element:
+
+    makeList :: Eq a => a -> Int -> [a]
+    makeList a n = [a | x <- [1..n]]
+
+-- Problem 23: Flatten a list of lists:
+
+    flattenLists :: [[a]] -> [a]
+    flattenLists = foldr (\xs acc -> xs ++ acc) []
+

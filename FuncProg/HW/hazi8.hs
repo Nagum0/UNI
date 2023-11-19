@@ -42,14 +42,8 @@ dropWhile' f xs = foldr g [] xs where
         | f elem = tail acc
         | otherwise = xs
 
-splitAtPredicate :: (a -> Bool) -> [a] -> ([a], [a])
-splitAtPredicate p xs = foldr f ([], []) xs where
-    f x (prefix, suffix)
-        | p x = ([], x : prefix ++ suffix)
-        | otherwise = (x : prefix, suffix)
-
 splitOn' :: (a -> Bool) -> [a] -> [[a]]
 splitOn' delimiter = foldr f [[]] where
-    f x acc
-        | delimiter x = [] : acc
-        | otherwise = (x : head acc) : tail acc
+    f x (a:acc)
+        | delimiter x = [] : a : acc
+        | otherwise = (x : a) : acc

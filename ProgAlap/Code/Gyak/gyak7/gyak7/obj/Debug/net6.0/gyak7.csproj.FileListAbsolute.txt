@@ -1,0 +1,15 @@
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\bin\Debug\net6.0\gyak7.exe
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\bin\Debug\net6.0\gyak7.deps.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\bin\Debug\net6.0\gyak7.runtimeconfig.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\bin\Debug\net6.0\gyak7.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\bin\Debug\net6.0\gyak7.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.csproj.AssemblyReference.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.GeneratedMSBuildEditorConfig.editorconfig
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.AssemblyInfoInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.AssemblyInfo.cs
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.csproj.CoreCompileInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\refint\gyak7.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\gyak7.genruntimeconfig.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\Gyak\gyak7\gyak7\obj\Debug\net6.0\ref\gyak7.dll

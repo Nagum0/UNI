@@ -1,0 +1,14 @@
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bin/Debug/net7.0/bea2_BeneZakarias
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bin/Debug/net7.0/bea2_BeneZakarias.deps.json
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bin/Debug/net7.0/bea2_BeneZakarias.runtimeconfig.json
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bin/Debug/net7.0/bea2_BeneZakarias.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bin/Debug/net7.0/bea2_BeneZakarias.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.GeneratedMSBuildEditorConfig.editorconfig
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.AssemblyInfoInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.AssemblyInfo.cs
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.csproj.CoreCompileInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/refint/bea2_BeneZakarias.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/bea2_BeneZakarias.genruntimeconfig.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/Debug/net7.0/ref/bea2_BeneZakarias.dll

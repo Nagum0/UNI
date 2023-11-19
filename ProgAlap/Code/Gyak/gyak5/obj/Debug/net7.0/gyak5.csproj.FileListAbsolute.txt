@@ -1,0 +1,14 @@
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/bin/Debug/net7.0/gyak5
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/bin/Debug/net7.0/gyak5.deps.json
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/bin/Debug/net7.0/gyak5.runtimeconfig.json
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/bin/Debug/net7.0/gyak5.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/bin/Debug/net7.0/gyak5.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.GeneratedMSBuildEditorConfig.editorconfig
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.AssemblyInfoInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.AssemblyInfo.cs
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.csproj.CoreCompileInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/refint/gyak5.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/gyak5.genruntimeconfig.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/gyak5/obj/Debug/net7.0/ref/gyak5.dll

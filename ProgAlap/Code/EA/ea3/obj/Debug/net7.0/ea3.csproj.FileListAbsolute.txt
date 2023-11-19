@@ -1,0 +1,14 @@
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/bin/Debug/net7.0/ea3
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/bin/Debug/net7.0/ea3.deps.json
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/bin/Debug/net7.0/ea3.runtimeconfig.json
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/bin/Debug/net7.0/ea3.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/bin/Debug/net7.0/ea3.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.GeneratedMSBuildEditorConfig.editorconfig
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.AssemblyInfoInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.AssemblyInfo.cs
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.csproj.CoreCompileInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/refint/ea3.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ea3.genruntimeconfig.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea3/obj/Debug/net7.0/ref/ea3.dll

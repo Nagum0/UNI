@@ -1,0 +1,5 @@
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\pikachu\ProcedureManager.exe
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\pikachu\ProcedureManager.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\pikachu\ProcedureManager.deps.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\pikachu\ProcedureManager.runtimeconfig.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\pikachu\ProcedureManager.pdb

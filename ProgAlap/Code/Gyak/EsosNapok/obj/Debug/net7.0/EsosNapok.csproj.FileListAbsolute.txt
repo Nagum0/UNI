@@ -1,0 +1,14 @@
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/bin/Debug/net7.0/EsosNapok
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/bin/Debug/net7.0/EsosNapok.deps.json
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/bin/Debug/net7.0/EsosNapok.runtimeconfig.json
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/bin/Debug/net7.0/EsosNapok.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/bin/Debug/net7.0/EsosNapok.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.GeneratedMSBuildEditorConfig.editorconfig
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.AssemblyInfoInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.AssemblyInfo.cs
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.csproj.CoreCompileInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/refint/EsosNapok.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/EsosNapok.genruntimeconfig.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/Gyak/EsosNapok/obj/Debug/net7.0/ref/EsosNapok.dll

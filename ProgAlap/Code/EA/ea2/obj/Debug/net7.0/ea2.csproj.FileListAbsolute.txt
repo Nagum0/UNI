@@ -1,0 +1,14 @@
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/bin/Debug/net7.0/ea2
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/bin/Debug/net7.0/ea2.deps.json
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/bin/Debug/net7.0/ea2.runtimeconfig.json
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/bin/Debug/net7.0/ea2.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/bin/Debug/net7.0/ea2.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.GeneratedMSBuildEditorConfig.editorconfig
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.AssemblyInfoInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.AssemblyInfo.cs
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.csproj.CoreCompileInputs.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/refint/ea2.dll
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.pdb
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ea2.genruntimeconfig.cache
+/home/astolfo/dev/UNI/ProgAlap/Code/EA/ea2/obj/Debug/net7.0/ref/ea2.dll

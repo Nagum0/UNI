@@ -1,0 +1,13 @@
+Specifikacio:
+    Be: n eleme N,
+        T eleme N[1..n],
+        Mag eleme N[1..n]
+    Ki: beallitasok eleme N
+    Ef: 2 <= n <= 100 es
+        1900 <= T[i] <= 2015 es
+        150 <= Mag[i] <= 250
+    Uf: beallitasok = DARAB(i = 1..n, Mag[i] = Mag[i - 1])
+
+Visszavezetes:
+    e..u ~ 1..n
+    T(i) ~ Mag[i] = Mag[i - 1]

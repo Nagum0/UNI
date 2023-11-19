@@ -1,0 +1,15 @@
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\bin\Debug\net7.0\gyak3.exe
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\bin\Debug\net7.0\gyak3.deps.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\bin\Debug\net7.0\gyak3.runtimeconfig.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\bin\Debug\net7.0\gyak3.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\bin\Debug\net7.0\gyak3.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.csproj.AssemblyReference.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.GeneratedMSBuildEditorConfig.editorconfig
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.AssemblyInfoInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.AssemblyInfo.cs
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.csproj.CoreCompileInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\refint\gyak3.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\gyak3.genruntimeconfig.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\ProgAlap\Code\gyak3\obj\Debug\net7.0\ref\gyak3.dll

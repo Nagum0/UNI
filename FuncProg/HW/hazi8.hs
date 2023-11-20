@@ -44,6 +44,7 @@ dropWhile' f xs = foldr g [] xs where
 
 splitOn' :: (a -> Bool) -> [a] -> [[a]]
 splitOn' delimiter = foldr f [[]] where
-    f x (a:acc)
-        | delimiter x = [] : a : acc
-        | otherwise = (x : a) : acc
+    f x acc
+        | delimiter x = [] : acc
+        | otherwise = (x : a) : as where
+            (a:as) = acc

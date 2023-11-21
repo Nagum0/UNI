@@ -214,3 +214,15 @@ module Test2 where
     flattenLists :: [[a]] -> [a]
     flattenLists = foldr (\xs acc -> xs ++ acc) []
 
+-- Problem 24: Pythagorean Triples:
+-- Write a function that generates all Pythagorean triples (a, b, c) where a, b, and c are integers and a^2 + b^2 = c^2.
+
+    pythagoreanTriples :: Int -> [(Int, Int, Int)]
+    pythagoreanTriples n = [(a, b, c) | a <- [1..n], b <- [1..n], c <- [1..n], (sqr c) == (sqr a) + (sqr b)] where
+        sqr x = x * x
+
+-- Problem 25: Duplicate Elements:
+
+    duplicateElements :: [a] -> [a]
+    duplicateElements [] = []
+    duplicateElements (x:xs) = x : x : duplicateElements xs

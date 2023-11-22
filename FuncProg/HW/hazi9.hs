@@ -33,3 +33,8 @@ isBetween (T h1 m1) (T h2 m2) (T h3 m3)
     | otherwise = False
 
 -- 6. Amerikai idő típus
+data USTime = AM Int Int| PM Int Int deriving Eq
+
+-- 7. Amerikai idő létrehozása jól
+ustime :: Int -> Int -> USTime
+ustime h m = 

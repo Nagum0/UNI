@@ -47,3 +47,11 @@ ustime p h m
 showUSTime :: USTime -> String
 showUSTime (USTime AM h m) = "AM " ++ (show h) ++ ":" ++ (show m)
 showUSTime (USTime PM h m) = "PM " ++ (show h) ++ ":" ++ (show m)
+
+-- 9a. Értelmezhető idő
+
+-- showTime (ustimeToTime (USTime AM 12 35))
+
+ustimeToTime :: USTime -> Time
+ustimeToTime (USTime AM 12 m) = t 0 m
+ustimeToTime (USTime )

@@ -42,3 +42,8 @@ ustime p h m
     |    1 <= h && h <= 12
       && 0 <= m && m <= 59 = USTime p h m
     | otherwise = error "Helytelen adatok!"
+
+-- 8. Amerikai idő megjelenítés
+showUSTime :: USTime -> String
+showUSTime (USTime AM h m) = "AM " ++ (show h) ++ ":" ++ (show m)
+showUSTime (USTime PM h m) = "PM " ++ (show h) ++ ":" ++ (show m)

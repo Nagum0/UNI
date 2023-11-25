@@ -1,4 +1,4 @@
-odule Hazi9 where
+module Hazi9 where
 
 import Control.Exception
 import System.IO.Unsafe
@@ -54,4 +54,14 @@ showUSTime (USTime PM h m) = "PM " ++ (show h) ++ ":" ++ (show m)
 
 ustimeToTime :: USTime -> Time
 ustimeToTime (USTime AM 12 m) = t 0 m
-ustimeToTime (USTime )
+ustimeToTime (USTime AM h m) = t h m
+ustimeToTime (USTime PM 12 m) = t 12 m
+ustimeToTime (USTime PM h m) = t (h + 12) m
+
+-- 9b. Amerikainak is
+timeToUSTime :: Time -> USTime
+timeToUSTime (T h m)
+    | h == 0 = USTime AM 12 m
+    | h < 12 = USTime AM h m
+    | h == 12 = USTime PM 12 m
+    | otherwise = USTime PM (h - 12) m

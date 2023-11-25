@@ -1,4 +1,4 @@
-module Hazi9 where
+odule Hazi9 where
 
 import Control.Exception
 import System.IO.Unsafe
@@ -33,14 +33,14 @@ isBetween (T h1 m1) (T h2 m2) (T h3 m3)
     | otherwise = False
 
 -- 6. Amerikai idő típus
-data TimePeriod = AM | PM deriving Eq
-data USTime = USTime TimePeriod Int Int deriving Eq
+data Period = AM | PM deriving Eq
+data USTime = USTime Period Int Int deriving Eq
 
 -- 7. Amerikai idő létrehozása jól
-ustime :: TimePeriod -> Int -> Int -> USTime
-ustime tp h m
-    |    1 <= h && h <= 12 
-      && 0 <= m && m <= 59 = USTime tp h m
+ustime :: Period -> Int -> Int -> USTime
+ustime p h m
+    |    1 <= h && h <= 12
+      && 0 <= m && m <= 59 = USTime p h m
     | otherwise = error "Helytelen adatok!"
 
 -- 8. Amerikai idő megjelenítés
@@ -49,7 +49,9 @@ showUSTime (USTime AM h m) = "AM " ++ (show h) ++ ":" ++ (show m)
 showUSTime (USTime PM h m) = "PM " ++ (show h) ++ ":" ++ (show m)
 
 -- 9a. Értelmezhető idő
--- 12,1,2,3,4,5,6,7,8,9,10,11
+
+-- showTime (ustimeToTime (USTime AM 12 35))
 
 ustimeToTime :: USTime -> Time
-ustimeToTime (USTime AM 12 m) = 
+ustimeToTime (USTime AM 12 m) = t 0 m
+ustimeToTime (USTime )

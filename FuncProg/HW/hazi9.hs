@@ -49,5 +49,7 @@ showUSTime (USTime AM h m) = "AM " ++ (show h) ++ ":" ++ (show m)
 showUSTime (USTime PM h m) = "PM " ++ (show h) ++ ":" ++ (show m)
 
 -- 9a. Értelmezhető idő
+-- 12,1,2,3,4,5,6,7,8,9,10,11
+
 ustimeToTime :: USTime -> Time
-ustimeToTime
+ustimeToTime (USTime AM 12 m) = 

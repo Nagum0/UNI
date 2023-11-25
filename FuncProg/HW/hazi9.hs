@@ -55,7 +55,7 @@ ustimeToTime (USTime PM h m) = t (h + 12) m
 -- 9b. Amerikainak is
 timeToUSTime :: Time -> USTime
 timeToUSTime (T h m)
-    | h == 0 = USTime AM 12 m
-    | h < 12 = USTime AM h m
-    | h == 12 = USTime PM 12 m
-    | otherwise = USTime PM (h - 12) m
+    | h == 0 = ustime AM 12 m
+    | h < 12 = ustime AM h m
+    | h == 12 = ustime PM 12 m
+    | otherwise = ustime PM (h - 12) m

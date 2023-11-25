@@ -11,7 +11,7 @@ t :: Int -> Int -> Time
 t hour min
     |    0 <= hour && hour <= 23
       && 0 <= min && min <= 59 = T hour min
-    | otherwise = error "Nem helyes adatok!"
+    | otherwise = error "Helytelen adatok!"
 
 -- 3. Idő megjelenítése; "it's show time!"
 showTime :: Time -> String
@@ -33,8 +33,12 @@ isBetween (T h1 m1) (T h2 m2) (T h3 m3)
     | otherwise = False
 
 -- 6. Amerikai idő típus
-data USTime = AM Int Int| PM Int Int deriving Eq
+data Period = AM | PM deriving Eq
+data USTime = USTime Period Int Int deriving Eq
 
 -- 7. Amerikai idő létrehozása jól
-ustime :: Int -> Int -> USTime
-ustime h m = 
+ustime :: Period -> Int -> Int -> USTime
+ustime p h m
+    |    1 <= h && h <= 12
+      && 0 <= m && m <= 59 = USTime p h m
+    | otherwise = error "Helytelen adatok!"

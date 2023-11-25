@@ -19,18 +19,19 @@ showTime (T h m) = (show h) ++ ":" ++ (show m)
 
 -- 4. Korábban, később
 isEarlier :: Time -> Time -> Bool
-isEarlier (T h1 m1) (T h2 m2)
-    | h1 < h2 = True
-    | h1 == h2 && m1 < m2 = True
-    | otherwise = False
+isEarlier (T h1 m1) (T h2 m2) = (h1 < h2) || (h1 == h2 && m1 < m2)
 
 -- 5. Két időpont között
-isBetween :: Time -> Time -> Time -> Bool
-isBetween (T h1 m1) (T h2 m2) (T h3 m3)
+isBetween' :: Time -> Time -> Time -> Bool
+isBetween' (T h1 m1) (T h2 m2) (T h3 m3)
     | h1 < h2 && h2 < h3 || h3 < h2 && h2 < h1 = True
     | h1 == h2 && h2 == h3 && 
       m1 < m2 && m2 < m3 || m3 < m2 && m2 < m1 = True
     | otherwise = False
+
+isBetween :: Time -> Time -> Time -> Bool
+isBetween (T h1 m1) (T h2 m2) (T h3 m3) = (h1 < h2 && h2 < h3 || h3 < h2 && h2 < h1) ||
+                                          (h1 == h2 && h2 == h3 && m1 < m2 && m2 < m3 || m3 < m2 && m2 < m1)
 
 -- 6. Amerikai idő típus
 data Period = AM | PM deriving Eq

@@ -1,0 +1,15 @@
+/home/zackb/UNI/ProgAlap/Code/Mintak/bin/Debug/net6.0/Mintak
+/home/zackb/UNI/ProgAlap/Code/Mintak/bin/Debug/net6.0/Mintak.deps.json
+/home/zackb/UNI/ProgAlap/Code/Mintak/bin/Debug/net6.0/Mintak.runtimeconfig.json
+/home/zackb/UNI/ProgAlap/Code/Mintak/bin/Debug/net6.0/Mintak.dll
+/home/zackb/UNI/ProgAlap/Code/Mintak/bin/Debug/net6.0/ref/Mintak.dll
+/home/zackb/UNI/ProgAlap/Code/Mintak/bin/Debug/net6.0/Mintak.pdb
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.csproj.AssemblyReference.cache
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.GeneratedMSBuildEditorConfig.editorconfig
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.AssemblyInfoInputs.cache
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.AssemblyInfo.cs
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.csproj.CoreCompileInputs.cache
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.dll
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/ref/Mintak.dll
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.pdb
+/home/zackb/UNI/ProgAlap/Code/Mintak/obj/Debug/net6.0/Mintak.genruntimeconfig.cache

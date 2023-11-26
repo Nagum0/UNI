@@ -226,3 +226,30 @@ module Test2 where
     duplicateElements :: [a] -> [a]
     duplicateElements [] = []
     duplicateElements (x:xs) = x : x : duplicateElements xs
+
+-- Problem 26:
+-- Meg kell számolnod a mágiád segítségével, hogy hány o vagy O betűt tartalmaznak a könyvek címei.
+
+    type Title = String
+
+    o_O_count :: Num count => Title -> count
+    o_O_count = foldr (\c acc -> f c acc) 0 where
+        f c acc
+            | c == 'o' = acc + 1
+            | c == 'O' = acc + 1
+            | otherwise = acc
+
+-- Problem 27:
+-- Megállapítani egy listáról, hogy hosszabb-e, mint az adott szám. A trükk pedig az, hogy nem feltétlen tudhatjuk, hogy mekkora a 
+-- listánk. A lista folyamatosan növekedhet, de minket csak az érdekel.
+
+    longerThan :: Integral count => [item] -> count -> Bool
+    longerThan [] count = count < 0
+    longerThan (_:xs) count = count == 0 || count < 0 || longerThan xs (count - 1)
+
+-- Problem 28: Merge lists.
+
+    merge :: [a] -> [a] -> [a]
+    merge [] ys = ys
+    merge xs [] = xs
+    merge (x:xs) (y:ys) = x : y : merge xs ys

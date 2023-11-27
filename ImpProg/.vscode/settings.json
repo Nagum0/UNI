@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "string.h": "c",
+        "features-time64.h": "c"
+    }
+}

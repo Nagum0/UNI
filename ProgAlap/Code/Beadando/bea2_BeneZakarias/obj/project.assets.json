@@ -8,24 +8,26 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/home/astolfo/.nuget/packages/": {}
+    "C:\\Users\\xptee\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bea2_BeneZakarias.csproj",
+      "projectUniqueName": "C:\\Users\\xptee\\Documents\\UNI\\ProgAlap\\Code\\Beadando\\bea2_BeneZakarias\\bea2_BeneZakarias.csproj",
       "projectName": "bea2_BeneZakarias",
-      "projectPath": "/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/bea2_BeneZakarias.csproj",
-      "packagesPath": "/home/astolfo/.nuget/packages/",
-      "outputPath": "/home/astolfo/dev/UNI/ProgAlap/Code/Beadando/bea2_BeneZakarias/obj/",
+      "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\ProgAlap\\Code\\Beadando\\bea2_BeneZakarias\\bea2_BeneZakarias.csproj",
+      "packagesPath": "C:\\Users\\xptee\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\xptee\\Documents\\UNI\\ProgAlap\\Code\\Beadando\\bea2_BeneZakarias\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/astolfo/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\xptee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -59,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

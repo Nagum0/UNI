@@ -1,0 +1,15 @@
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/bin/Debug/net6.0/EsosNapok
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/bin/Debug/net6.0/EsosNapok.deps.json
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/bin/Debug/net6.0/EsosNapok.runtimeconfig.json
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/bin/Debug/net6.0/EsosNapok.dll
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/bin/Debug/net6.0/ref/EsosNapok.dll
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/bin/Debug/net6.0/EsosNapok.pdb
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.csproj.AssemblyReference.cache
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.GeneratedMSBuildEditorConfig.editorconfig
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.AssemblyInfoInputs.cache
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.AssemblyInfo.cs
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.csproj.CoreCompileInputs.cache
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.dll
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/ref/EsosNapok.dll
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.pdb
+/home/zackb/UNI/ProgAlap/Code/HW/Biro/EsosNapok/obj/Debug/net6.0/EsosNapok.genruntimeconfig.cache

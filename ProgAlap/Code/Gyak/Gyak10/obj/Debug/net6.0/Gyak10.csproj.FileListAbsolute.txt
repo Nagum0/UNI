@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\bin\Debug\net6.0\Gyak10.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\bin\Debug\net6.0\Gyak10.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\bin\Debug\net6.0\Gyak10.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\bin\Debug\net6.0\Gyak10.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\bin\Debug\net6.0\Gyak10.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\refint\Gyak10.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\Gyak10.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\Gyak10\obj\Debug\net6.0\ref\Gyak10.dll

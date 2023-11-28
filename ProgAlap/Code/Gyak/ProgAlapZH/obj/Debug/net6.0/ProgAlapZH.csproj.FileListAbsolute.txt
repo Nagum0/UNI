@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\bin\Debug\net6.0\ProgAlapZH.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\bin\Debug\net6.0\ProgAlapZH.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\bin\Debug\net6.0\ProgAlapZH.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\bin\Debug\net6.0\ProgAlapZH.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\bin\Debug\net6.0\ProgAlapZH.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\refint\ProgAlapZH.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ProgAlapZH.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\ProgAlapZH\obj\Debug\net6.0\ref\ProgAlapZH.dll

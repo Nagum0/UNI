@@ -31,7 +31,7 @@ data Period = AM | PM deriving Eq
 data USTime = USTime Period Int Int deriving Eq
 
 -- 7. Amerikai idő létrehozása jól
-ustime :: Period -> Int -> Int -> USTime
+ustime :: Period -> Int -> Int -> USTimey
 ustime p h m
     |    1 <= h && h <= 12
       && 0 <= m && m <= 59 = USTime p h m

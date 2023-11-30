@@ -74,9 +74,33 @@ formationFix army = (filter (\x -> checkState x) army) ++ (filter (\x -> not (ch
 -- Harmadik feladat (Vége?)
 ---------------------------------------------------------------------------------------------------
 
+over :: Army -> Bool
+over [] = True
+over army = all (\x -> isDead x) army where
+    isDead (M (Alive _)) = False
+    isDead (M (Dead)) = True
+    isDead (E (Alive _)) = False
+    isDead (E (Dead)) = True
 
+potionMaster = 
+  let plx x
+        | x > 85  = x - plx (div x 2)
+        | x == 60 = 31
+        | x >= 51 = 1 + mod x 30
+        | otherwise = x - 7 
+  in Master "PotionMaster" 170 plx
 
+-- Negyedik feladat (Ütközet)
+---------------------------------------------------------------------------------------------------
 
-
-
-
+fight :: EnemyArmy -> Army -> Army
+fight [] army = army
+fight enemies [] = []
+fight enemies army = map (\(e, a) -> oneOnOne e a) (zip enemies army) ++ rest where
+    oneOnOne (E (Alive (HaskellElemental _))) (E (Alive (Golem hp))) = E (Alive (Golem (hp - 3)))
+    oneOnOne (E (Alive (Golem _))) (E (Alive (Golem hp))) = E (Alive (Golem (hp - 1)))
+    oneOnOne (M (Alive (Master _ _ spell))) (E (Alive (Golem hp))) = E (Alive (Golem (spell hp)))
+    rest = drop (min (length enemies) (length army)) (toDrop enemies army) where
+        toDrop enemies army
+            | length enemies > length army = enemies
+            | otherwise = army

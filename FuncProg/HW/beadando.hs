@@ -10,7 +10,7 @@ type Name = String
 type Health = Integer
 type Spell = (Integer -> Integer)
 type Army = [Unit]
---type EnemyArmy = Army
+type EnemyArmy = Army
 type Amount = Integer
 
 -- Első feladat (Felkészülés)
@@ -61,6 +61,17 @@ instance Show Unit where
     show (E se) = show se
 
 -- Második feladat (Elesettek)
+---------------------------------------------------------------------------------------------------
+
+formationFix :: Army -> Army
+formationFix [] = []
+formationFix army = (filter (\x -> checkState x) army) ++ (filter (\x -> not (checkState x)) army) where
+    checkState (M (Alive _)) = True
+    checkState (M (Dead)) = False
+    checkState (E (Alive _)) = True
+    checkState (E (Dead)) = False
+
+-- Harmadik feladat (Vége?)
 ---------------------------------------------------------------------------------------------------
 
 

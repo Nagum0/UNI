@@ -93,14 +93,20 @@ potionMaster =
 -- Negyedik feladat (Ütközet)
 ---------------------------------------------------------------------------------------------------
 
-fight :: EnemyArmy -> Army -> Army
-fight [] army = army
-fight enemies [] = []
-fight enemies army = map (\(e, a) -> oneOnOne e a) (zip enemies army) ++ rest where
+fight1 :: EnemyArmy -> Army -> Army
+fight1 [] army = army
+fight1 enemies [] = []
+fight1 enemies army = map (\(e, a) -> oneOnOne e a) (zip enemies army) ++ rest where
     oneOnOne (E (Alive (HaskellElemental _))) (E (Alive (Golem hp))) = E (Alive (Golem (hp - 3)))
     oneOnOne (E (Alive (Golem _))) (E (Alive (Golem hp))) = E (Alive (Golem (hp - 1)))
     oneOnOne (M (Alive (Master _ _ spell))) (E (Alive (Golem hp))) = E (Alive (Golem (spell hp)))
+
     rest = drop (min (length enemies) (length army)) (toDrop enemies army) where
         toDrop enemies army
             | length enemies > length army = enemies
             | otherwise = army
+
+fight2 :: EnemyArmy -> Army -> Army
+fight2 [] army = army
+fight2 enemies [] = []
+fight2 enemies army = 

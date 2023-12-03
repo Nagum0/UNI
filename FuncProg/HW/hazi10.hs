@@ -14,8 +14,11 @@ instance Num Lucas where
     (L a b) - (L c d) = L (a - c) (b - d)
     (L a1 b1) * (L a2 b2) = L (a1 * a2 + b1 * b2 * 5) (a1 * b2 + b1 * a2)
     
-    abs (L a b) = L (abs a) (abs b)
-    signum (L a b) = L (signum (a * b)) 0
+    abs (L a b)
+        | (a + b * (toRational $ sqrt 5)) > 0 = L a b
+        | otherwise = L ((-1) * a) ((-1) * b)
+
+    signum (L a b) = L (signum $ a + b * (toRational $ sqrt 5)) 0
     fromInteger n = L ((fromInteger n) % 1) 0
 
 -- 3. Aranymetszés / golden ratio

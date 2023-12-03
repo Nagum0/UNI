@@ -93,20 +93,20 @@ potionMaster =
 -- Negyedik feladat (Ütközet)
 ---------------------------------------------------------------------------------------------------
 
-fight1 :: EnemyArmy -> Army -> Army
-fight1 [] army = army
-fight1 enemies [] = []
-fight1 enemies army = map (\(e, a) -> oneOnOne e a) (zip enemies army) ++ rest where
-    oneOnOne (E (Alive (HaskellElemental _))) (E (Alive (Golem hp))) = E (Alive (Golem (hp - 3)))
-    oneOnOne (E (Alive (Golem _))) (E (Alive (Golem hp))) = E (Alive (Golem (hp - 1)))
-    oneOnOne (M (Alive (Master _ _ spell))) (E (Alive (Golem hp))) = E (Alive (Golem (spell hp)))
-
-    rest = drop (min (length enemies) (length army)) (toDrop enemies army) where
+{-
+rest = drop (min (length enemies) (length army)) (toDrop enemies army) where
         toDrop enemies army
             | length enemies > length army = enemies
             | otherwise = army
+-}
 
-fight2 :: EnemyArmy -> Army -> Army
-fight2 [] army = army
-fight2 enemies [] = []
-fight2 enemies army = 
+fight :: EnemyArmy -> Army -> Army
+fight [] army = army
+fight enemies [] = []
+fight enemies army = f enemies army where
+    f [] a = a
+    f e [] = []
+    f ((E (Alive (HaskellElemental _))):e_rest) ((E (Alive (Golem hp))):a_rest) = (E $ Alive $ Golem (hp - 3)) : f e_rest a_rest
+    f ((E (Alive (Golem _))):e_rest) ((E (Alive (Golem hp))):a_rest) = (E $ Alive $ Golem (hp - 1)) : f e_rest a_rest
+    f (m@(M (Alive (Master _ _ spell))):e_rest) a = map (\unit -> mageAttack spell unit) a where
+        mageAttack spell (E (Alive (Golem hp))) = (E $ Alive $ Golem (spell hp))

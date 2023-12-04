@@ -114,4 +114,5 @@ fight enemies army = f enemies army where
 -- Current otlet ugye az hogy ebben az esetben:
 -- [E (Alive (Golem 67)),E (Alive (Golem 11)),E (Alive (Golem 8)),E (Alive (Golem 11)),E (Alive (Golem 11))]
 -- Az tortenik hogy vegig megy a listan a mageAttack, de meg van egy HaskellElementalunk aki megtamadja a 
--- 3-dik golemet.
+-- 3-dik golemet es az mar ignoralva van.
+-- Otlet probald a mapet beleagyazni a `fight`-fuggvenybe megint.

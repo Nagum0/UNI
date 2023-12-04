@@ -110,3 +110,8 @@ fight enemies army = f enemies army where
     f ((E (Alive (Golem _))):e_rest) ((E (Alive (Golem hp))):a_rest) = (E $ Alive $ Golem (hp - 1)) : f e_rest a_rest
     f (m@(M (Alive (Master _ _ spell))):e_rest) a = map (\unit -> mageAttack spell unit) a where
         mageAttack spell (E (Alive (Golem hp))) = (E $ Alive $ Golem (spell hp))
+
+-- Current otlet ugye az hogy ebben az esetben:
+-- [E (Alive (Golem 67)),E (Alive (Golem 11)),E (Alive (Golem 8)),E (Alive (Golem 11)),E (Alive (Golem 11))]
+-- Az tortenik hogy vegig megy a listan a mageAttack, de meg van egy HaskellElementalunk aki megtamadja a 
+-- 3-dik golemet.

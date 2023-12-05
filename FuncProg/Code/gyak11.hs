@@ -52,7 +52,6 @@ module Gyak11 where
               | IntLit Integer 
               | Add Expr Expr 
               | Equ Expr Expr 
-              | IfThenElse Expr Expr Expr
     
     -- (2 + 3)
     -- Add (IntLit 2) (IntLit 3)
@@ -67,4 +66,3 @@ module Gyak11 where
         (Just (Right a), Just (Right b)) -> Just $ Left $ a == b
         (Just (Left a), Just (Left b)) -> Just $ Left $ a == b
         _ -> Nothing
-    -- evalExpr (IfThenElse b t f) = undefined

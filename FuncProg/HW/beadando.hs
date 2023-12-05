@@ -116,3 +116,4 @@ fight enemies army = f enemies army where
 -- Az tortenik hogy vegig megy a listan a mageAttack, de meg van egy HaskellElementalunk aki megtamadja a 
 -- 3-dik golemet es az mar ignoralva van.
 -- Otlet probald a mapet beleagyazni a `fight`-fuggvenybe megint.
+-- A magusok azt tamadjak meg akik veluk allnak es mindenkit elottuk.

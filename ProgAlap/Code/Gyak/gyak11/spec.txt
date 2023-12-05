@@ -1,0 +1,83 @@
+1. Iskola verseny: (Kivalogatas + Eldontes)
+
+Egy iskola tanulmányi versenyt rendezett 2 tárgyból, a helyezettek névsorai (külön tárolva) 
+a rendelkezésre állnak. Kirándulást szerveznek azoknak, akik mindkét tárgyból részt vettek a versenyen!
+
+    Specifikacio:
+        Be: n eleme N, m eleme N,
+            targy1 eleme S[1..n], targy2 eleme S[1..n]
+        Ki: kirandulok eleme S[1..db]
+        Fv: vanDiak: S -> L, vanDiak(nev) = VAN(j = 1..m, nev = targy2[j])
+        Ef: -
+        Uf: (db, kirandulok) = KIVALOGAT(i = 1..n, vanDiak(targy[i]), targy1[i])
+
+    Visszavezetes:
+        Eldontes:
+            van ~ vanDiak()
+            e..u ~ 1..m
+            T(i) ~ nev = targy2[i]
+
+        Kivalogatas:
+            db ~ db
+            y ~ kirandulok
+            e..u ~ 1..n
+            T(i) ~ vanDiak(targy1[i])
+            f(i) ~ targy1[i]
+
+2. Verseny eredmenyek:
+
+Egy N fordulós versenyen M diák vett részt. Tároljuk minden diáknál az egyes versenyeken elért pontszámukat.
+A: Adjuk meg hány diák ért el összesen több, mint K pontot?
+
+    Specifikacio(A): (Egymas utani osszetetellel)
+        Be: n eleme N, m eleme N,
+            verseny eleme N[1..n, 1..m],
+            k eleme N
+        Ki: db eleme N
+        Sa: osszegek eleme N[1..m]
+        Ef: -
+        Uf: minden i eleme [1..m] : osszegek[i] = 
+            SZUM(j = 1..n, verseny[j, i]) es
+            db = DARAB(i = 1..m, k < osszegek[i])  
+
+    Specifikacio(A): (Fuggvennyel)
+        Be: n eleme N, m eleme N,
+            verseny eleme N[1..n, 1..m],
+            k eleme N
+        Ki: db eleme N
+        Fv: sorOsszeg: N -> N, sorOsszeg(o) = SZUM(i = 1..n, verseny[i, o])
+        Ef: -
+        Uf: db = DARAB(i = 1..m, sorOsszeg(i) > k)
+
+    Visszavezetes: (Fuggvenny verzio)
+        Osszgzes:
+            s ~ sorOsszeg()
+            e..u ~ 1..n
+            f(i) ~ verseny[i, o]
+
+        Megszamlalas:
+            db ~ db
+            e..u ~ 1..m
+            T(i) ~ sorOsszeg(i) > k
+
+B: Listázzuk ki minden diák legynagyobb elért pontszámát.
+
+    Specifikacio(B): (Maximum, Masolas)
+        Be: n eleme N, m eleme N,
+            verseny eleme N[1..n, 1..m],
+            k eleme N
+        Ki: legnagyobbak eleme N[1..m]
+        Fv: sorMax: N -> N, sorMax(o) = MAX(i = 1..n, verseny[i, o])
+        Ef: -
+        Uf: legnagyobbak = MASOL(i = 1..m, sorMax(i))
+
+    Visszavezetes:
+        Maximum:
+            maxert ~ sorMax()
+            e..u ~ 1..n
+            f(i) ~ verseny[i, o]
+
+        Masolas:
+            y ~ legnagyobbak
+            e..u ~ 1..m
+            f(i) ~ sorMax(i)

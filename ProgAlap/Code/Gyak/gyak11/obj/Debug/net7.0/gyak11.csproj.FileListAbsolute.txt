@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\bin\Debug\net7.0\gyak11.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\bin\Debug\net7.0\gyak11.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\bin\Debug\net7.0\gyak11.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\bin\Debug\net7.0\gyak11.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\bin\Debug\net7.0\gyak11.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\refint\gyak11.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\gyak11.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Gyak\gyak11\obj\Debug\net7.0\ref\gyak11.dll

@@ -10,10 +10,13 @@ data Postfix = Constant Integer  (Maybe Postfix)
 evaluatePostfix :: Postfix -> Maybe Integer
 evaluatePostfix (Constant n Nothing) = Just n
 evaluatePostfix (Function _ Nothing) = Nothing
-evaluatePostfix (Constant n (Just (Constant k (Just (Function f Nothing))))) = Just $ f n k
-
-traversePostfix :: Postfix -> [Integer]
-traversePostfix (Constant x Nothing) = [x]
-traversePostfix (Constant x (Just rest)) = x : traversePostfix rest
-traversePostfix (Function f Nothing) = []
-traversePostfix (Function f (Just rest)) = traversePostfix rest
+evaluatePostfix (Constant n (Just rest)) = acc (n:[]) rest where
+    acc [x] (Function _ _) = Nothing
+    acc [x] (Constant _ Nothing) = Nothing
+    acc [x] (Constant n (Just rest)) = acc (n:[x]) rest
+    acc (x:y:ys) (Constant _ Nothing) = Nothing
+    acc (x:y:ys) (Constant n (Just rest)) = acc (n:x:y:ys) rest
+    acc [x,y] (Function f (Just rest)) = acc ((y `f` x):[]) rest
+    acc (x:y:ys) (Function f (Just rest)) = acc ((y `f` x):ys) rest
+    acc [x,y] (Function f Nothing) = Just $ y `f` x
+    acc (x:y:ys) (Function _ _) = Nothing

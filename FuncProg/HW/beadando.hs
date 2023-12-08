@@ -135,20 +135,21 @@ calcDead army = map (\g -> f g) army where
 ---------------------------------------------------------------------------------------------------
 haskellBlast :: Army -> Army
 haskellBlast [] = []
-haskellBlast (a : a_rest)
-    | sameHP a a_rest = calcDead $ explosion explCount (a : a_rest)
-    | otherwise = a : a_rest
+haskellBlast army
+    -- Check for same hp because then we can just start the explosions from the beginning.
+    | sameHP $ getHP army = calcDead $ explosion explCount army
+    | otherwise = army where
+        getHP [] = []
+        getHP ((E (Alive (Golem hp))) : a_rest) = hp : getHP a_rest
+        getHP ((E (Alive (HaskellElemental hp))) : a_rest) = hp : getHP a_rest
+        getHP ((M (Alive (Master _ hp _))) : a_rest) = hp : getHP a_rest
 
 explCount :: Integer
 explCount = 5
 
-sameHP :: Unit -> Army -> Bool
-sameHP (E (Alive (Golem hp))) a_rest = all (\g -> sameHPHelper hp g) a_rest where
-    sameHPHelper hp (E (Alive (Golem hp_c))) = hp == hp_c
-sameHP (E (Alive (HaskellElemental hp))) a_rest = all (\g -> sameHPHelper hp g) a_rest where
-    sameHPHelper hp (E (Alive (HaskellElemental hp_c))) = hp == hp_c
-sameHP (M (Alive (Master _ hp _))) a_rest = all (\g -> sameHPHelper hp g) a_rest where
-    sameHPHelper hp (M (Alive (Master _ hp_c _))) = hp == hp_c
+sameHP :: [Health] -> Bool
+sameHP [] = True
+sameHP (hp:hps) = all (== hp) hps
 
 explosion :: Integer -> Army -> Army
 explosion _ [] = []

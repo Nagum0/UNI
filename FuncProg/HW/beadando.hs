@@ -138,7 +138,19 @@ haskellBlast [] = []
 haskellBlast army
     -- Check for same hp because then we can just start the explosions from the beginning.
     | sameHP $ getHP army = calcDead $ explosion explCount army
-    | otherwise = army where
+    | otherwise = startAttack army where
+        -- Here we check where to start the attack from. 
+        -- If the hp after explosion is above 0 than thats where we start.
+        startAttack (g@(E (Alive (Golem hp))) : a_rest)
+            | (hp - 5) < 0 = g : startAttack a_rest
+            | otherwise = calcDead $ explosion explCount (g : a_rest)
+        startAttack (g@(E (Alive (HaskellElemental hp))) : a_rest)
+            | (hp - 5) < 0 = g : startAttack a_rest
+            | otherwise = calcDead $ explosion explCount (g : a_rest)
+        startAttack (g@(M (Alive (Master name hp spell))) : a_rest)
+            | (hp - 5) < 0 = g : startAttack a_rest
+            | otherwise = calcDead $ explosion explCount (g : a_rest)
+
         getHP [] = []
         getHP ((E (Alive (Golem hp))) : a_rest) = hp : getHP a_rest
         getHP ((E (Alive (HaskellElemental hp))) : a_rest) = hp : getHP a_rest

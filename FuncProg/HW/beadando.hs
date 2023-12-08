@@ -100,20 +100,36 @@ rest = drop (min (length enemies) (length army)) (toDrop enemies army) where
             | otherwise = army
 -}
 
-fight :: EnemyArmy -> Army -> Army
+{- fight :: EnemyArmy -> Army -> Army
 fight [] army = army
-fight enemies [] = []
-fight enemies army = f enemies army where
-    f [] a = a
-    f e [] = []
-    f ((E (Alive (HaskellElemental _))):e_rest) ((E (Alive (Golem hp))):a_rest) = (E $ Alive $ Golem (hp - 3)) : f e_rest a_rest
-    f ((E (Alive (Golem _))):e_rest) ((E (Alive (Golem hp))):a_rest) = (E $ Alive $ Golem (hp - 1)) : f e_rest a_rest
-    f (m@(M (Alive (Master _ _ spell))):e_rest) a = map (\unit -> mageAttack spell unit) a where
-        mageAttack spell (E (Alive (Golem hp))) = (E $ Alive $ Golem (spell hp))
+fight _ [] = []
+-- Basic attack cases.
+fight ((E (Alive (HaskellElemental _))) : e_rest) ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 71)) : fight e_rest a_rest
+fight ((E (Alive (Golem _))) : e_rest) ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 1)) : fight e_rest a_rest
+-- Case where only one mage is the enemy.
+fight [(M (Alive (Master _ _ spell)))] (g@(E (Alive (Golem hp))) : a_rest) = mageAttack spell (g : a_rest)
+-- Case where the enemy army starts with a mage and has more enemies afterwards.
+fight ((M (Alive (Master _ _ spell))) : e_rest) (g@(E (Alive (Golem hp))) : a_rest) = mageAttack spell [g] ++ (fight e_rest $ mageAttack spell a_rest) -}
 
--- Current otlet ugye az hogy ebben az esetben:
--- [E (Alive (Golem 67)),E (Alive (Golem 11)),E (Alive (Golem 8)),E (Alive (Golem 11)),E (Alive (Golem 11))]
--- Az tortenik hogy vegig megy a listan a mageAttack, de meg van egy HaskellElementalunk aki megtamadja a 
--- 3-dik golemet es az mar ignoralva van.
--- Otlet probald a mapet beleagyazni a `fight`-fuggvenybe megint.
--- A magusok azt tamadjak meg akik veluk allnak es mindenkit elottuk.
+fight :: EnemyArmy -> Army -> Army
+fight enemies army = calcDead $ f enemies army where
+    f [] army = army
+    f _ [] = []
+    -- Basic attack cases.
+    f ((E (Alive (HaskellElemental _))) : e_rest) ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 3)) : f e_rest a_rest
+    f ((E (Alive (Golem _))) : e_rest) ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 1)) : f e_rest a_rest
+    -- Case where only one mage is the enemy.
+    f [(M (Alive (Master _ _ spell)))] (g@(E (Alive (Golem hp))) : a_rest) = mageAttack spell (g : a_rest)
+    -- Case where the enemy army starts with a mage and has more enemies afterwards.
+    f ((M (Alive (Master _ _ spell))) : e_rest) (g@(E (Alive (Golem hp))) : a_rest) = mageAttack spell [g] ++ (f e_rest $ mageAttack spell a_rest)
+
+mageAttack :: Spell -> Army -> Army
+mageAttack spell army = map (\g -> f g) army where
+    f (E (Alive (Golem hp))) = (E $ Alive $ Golem $ spell hp)
+
+calcDead :: Army -> Army
+calcDead army = map (\g -> f g) army where
+    f (E Dead) = E Dead
+    f (E (Alive (Golem hp)))
+        | hp <= 0 = E Dead
+        | otherwise = (E $ Alive $ Golem hp)

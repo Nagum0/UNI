@@ -133,5 +133,26 @@ calcDead army = map (\g -> f g) army where
 
 -- Ötödik feladat (Robbanások)
 ---------------------------------------------------------------------------------------------------
-{- haskellBlast :: Army -> Army
-haskellBlast army = calcDead $ f army where -}
+haskellBlast :: Army -> Army
+haskellBlast [] = []
+haskellBlast (a : a_rest)
+    | sameHP a a_rest = calcDead $ explosion explCount (a : a_rest)
+    | otherwise = a : a_rest
+
+explCount :: Integer
+explCount = 5
+
+sameHP :: Unit -> Army -> Bool
+sameHP (E (Alive (Golem hp))) a_rest = all (\g -> sameHPHelper hp g) a_rest where
+    sameHPHelper hp (E (Alive (Golem hp_c))) = hp == hp_c
+sameHP (E (Alive (HaskellElemental hp))) a_rest = all (\g -> sameHPHelper hp g) a_rest where
+    sameHPHelper hp (E (Alive (HaskellElemental hp_c))) = hp == hp_c
+sameHP (M (Alive (Master _ hp _))) a_rest = all (\g -> sameHPHelper hp g) a_rest where
+    sameHPHelper hp (M (Alive (Master _ hp_c _))) = hp == hp_c
+
+explosion :: Integer -> Army -> Army
+explosion _ [] = []
+explosion 0 rest = rest
+explosion count (E (Alive (Golem hp)) : a_rest) = (E $ Alive $ Golem (hp - 5)) : explosion (count - 1) a_rest
+explosion count (E (Alive (HaskellElemental hp)) : a_rest) = (E $ Alive $ HaskellElemental (hp - 5)) : explosion (count - 1) a_rest
+explosion count (M (Alive (Master name hp spell)) : a_rest) = (M $ Alive $ Master name (hp - 5) spell) : explosion (count - 1) a_rest

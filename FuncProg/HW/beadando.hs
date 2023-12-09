@@ -95,9 +95,13 @@ fight enemies army = calcDead $ f enemies army where
     f _ [] = []
     f [E Dead] army = army
     f [M Dead] army = army
+    f _ a@[E Dead] = a
+    f _ a@[M Dead] = a
     -- Dead cases:
     f ((E Dead) : e_rest) (unit : a_rest) = unit : f e_rest a_rest
     f ((M Dead) : e_rest) (unit : a_rest) = unit : f e_rest a_rest
+    f (enemy : e_rest) (g@(E Dead) : a_rest) = g : f e_rest a_rest
+    f (enemy : e_rest) (g@(M Dead) : a_rest) = g : f e_rest a_rest
     -- Basic attack cases:
     -- Golem:
     f ((E (Alive (HaskellElemental _))) : e_rest) ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 3)) : f e_rest a_rest
@@ -148,6 +152,8 @@ haskellBlast army
     | allDead army = army
     -- Check for same hp because then we can just start the explosions from the beginning.
     | sameHP $ getHP army = calcDead $ explosion explCount army
+    -- If the length of the army is less than 5.
+    | fromIntegral (length army) <= explCount = calcDead $ explosion explCount army
     | otherwise = startAttack army where
         -- Here we check where to start the attack from. 
         -- If the hp after explosion is above 0 than thats where we start.

@@ -4,7 +4,7 @@ showState a = show a
 showMage a = show a
 eqMage a b =  a == b
 showUnit a = show a
-showOneVOne a = show a
+-- showOneVOne a = show a
 
 type Name = String
 type Health = Integer
@@ -93,6 +93,11 @@ fight :: EnemyArmy -> Army -> Army
 fight enemies army = calcDead $ f enemies army where
     f [] army = army
     f _ [] = []
+    f [E Dead] army = army
+    f [M Dead] army = army
+    -- Dead cases:
+    f ((E Dead) : e_rest) (unit : a_rest) = unit : f e_rest a_rest
+    f ((M Dead) : e_rest) (unit : a_rest) = unit : f e_rest a_rest
     -- Basic attack cases:
     -- Golem:
     f ((E (Alive (HaskellElemental _))) : e_rest) ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 3)) : f e_rest a_rest
@@ -121,6 +126,7 @@ mageAttack spell army = map (\g -> f g) army where
 calcDead :: Army -> Army
 calcDead army = map (\g -> f g) army where
     f (E Dead) = E Dead
+    f (M Dead) = M Dead
     f (E (Alive (Golem hp)))
         | hp <= 0 = E Dead
         | otherwise = (E $ Alive $ Golem hp)
@@ -135,7 +141,11 @@ calcDead army = map (\g -> f g) army where
 ---------------------------------------------------------------------------------------------------
 haskellBlast :: Army -> Army
 haskellBlast [] = []
+haskellBlast [E Dead] = [E Dead]
+haskellBlast [M Dead] = [M Dead]
 haskellBlast army
+    -- Check if all the units are dead.
+    | allDead army = army
     -- Check for same hp because then we can just start the explosions from the beginning.
     | sameHP $ getHP army = calcDead $ explosion explCount army
     | otherwise = startAttack army where
@@ -150,14 +160,26 @@ haskellBlast army
         startAttack (g@(M (Alive (Master name hp spell))) : a_rest)
             | (hp - 5) < 0 = g : startAttack a_rest
             | otherwise = calcDead $ explosion explCount (g : a_rest)
+        -- Case where the enemy is dead.
+        startAttack (g@(E Dead) : a_rest) = g : startAttack a_rest
+        startAttack (g@(M Dead) : a_rest) = g : startAttack a_rest
 
         getHP [] = []
+        getHP ((E Dead) : a_rest) = getHP a_rest
+        getHP ((M Dead) : a_rest) = getHP a_rest
         getHP ((E (Alive (Golem hp))) : a_rest) = hp : getHP a_rest
         getHP ((E (Alive (HaskellElemental hp))) : a_rest) = hp : getHP a_rest
         getHP ((M (Alive (Master _ hp _))) : a_rest) = hp : getHP a_rest
 
 explCount :: Integer
 explCount = 5
+
+allDead :: Army -> Bool
+allDead [] = True
+allDead army = all (\unit -> f unit) army where
+    f (E Dead) = True
+    f (M Dead) = True
+    f unit = False 
 
 sameHP :: [Health] -> Bool
 sameHP [] = True
@@ -166,6 +188,29 @@ sameHP (hp:hps) = all (== hp) hps
 explosion :: Integer -> Army -> Army
 explosion _ [] = []
 explosion 0 rest = rest
-explosion count (E (Alive (Golem hp)) : a_rest) = (E $ Alive $ Golem (hp - 5)) : explosion (count - 1) a_rest
-explosion count (E (Alive (HaskellElemental hp)) : a_rest) = (E $ Alive $ HaskellElemental (hp - 5)) : explosion (count - 1) a_rest
-explosion count (M (Alive (Master name hp spell)) : a_rest) = (M $ Alive $ Master name (hp - 5) spell) : explosion (count - 1) a_rest
+explosion count ((E Dead) : a_rest) = (E Dead) : explosion (count - 1) a_rest
+explosion count ((M Dead) : a_rest) = (M Dead) : explosion (count - 1) a_rest
+explosion count ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 5)) : explosion (count - 1) a_rest
+explosion count ((E (Alive (HaskellElemental hp))) : a_rest) = (E $ Alive $ HaskellElemental (hp - 5)) : explosion (count - 1) a_rest
+explosion count ((M (Alive (Master name hp spell))) : a_rest) = (M $ Alive $ Master name (hp - 5) spell) : explosion (count - 1) a_rest
+
+-- Hatodik feladat (Heal)
+---------------------------------------------------------------------------------------------------
+multiHeal :: Health -> Army -> Army
+multiHeal _ [] = []
+multiHeal _ [E Dead] = [E Dead]
+multiHeal _ [M Dead] = [M Dead]
+multiHeal n army
+    | n < 0 = army
+    | otherwise = f $ heal n army where
+        f (army, 0) = army
+        f (army, n) = f $ heal n army
+
+heal :: Health -> Army -> (Army, Health)
+heal 0 army = (army, 0)
+heal n [] = ([], n)
+heal n ((E Dead) : a_rest) = (E Dead : (fst $ heal n a_rest), snd $ heal n a_rest)
+heal n ((M Dead) : a_rest) = (M Dead : (fst $ heal n a_rest), snd $ heal n a_rest)
+heal n ((E (Alive (Golem hp))) : a_rest) = ((E $ Alive $ Golem (hp + 1)) : (fst $ heal (n - 1) a_rest), snd $ heal (n - 1) a_rest)
+heal n ((E (Alive (HaskellElemental hp))) : a_rest) = ((E $ Alive $ HaskellElemental (hp + 1)) : (fst $ heal (n - 1) a_rest), snd $ heal (n - 1) a_rest)
+heal n ((M (Alive (Master name hp spell))) : a_rest) = ((M $ Alive $ Master name (hp + 1) spell) : (fst $ heal (n - 1) a_rest), snd $ heal (n - 1) a_rest)

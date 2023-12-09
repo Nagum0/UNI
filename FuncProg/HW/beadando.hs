@@ -166,7 +166,7 @@ haskellBlast army
         startAttack (g@(M (Alive (Master name hp spell))) : a_rest)
             | (hp - 5) < 0 = g : startAttack a_rest
             | otherwise = calcDead $ explosion explCount (g : a_rest)
-        -- Case where the enemy is dead.
+        -- Case where the unit is dead.
         startAttack (g@(E Dead) : a_rest) = g : startAttack a_rest
         startAttack (g@(M Dead) : a_rest) = g : startAttack a_rest
 
@@ -194,8 +194,8 @@ sameHP (hp:hps) = all (== hp) hps
 explosion :: Integer -> Army -> Army
 explosion _ [] = []
 explosion 0 rest = rest
-explosion count ((E Dead) : a_rest) = (E Dead) : explosion (count - 1) a_rest
-explosion count ((M Dead) : a_rest) = (M Dead) : explosion (count - 1) a_rest
+explosion count ((E Dead) : a_rest) = (E Dead) : explosion count a_rest
+explosion count ((M Dead) : a_rest) = (M Dead) : explosion count a_rest
 explosion count ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 5)) : explosion (count - 1) a_rest
 explosion count ((E (Alive (HaskellElemental hp))) : a_rest) = (E $ Alive $ HaskellElemental (hp - 5)) : explosion (count - 1) a_rest
 explosion count ((M (Alive (Master name hp spell))) : a_rest) = (M $ Alive $ Master name (hp - 5) spell) : explosion (count - 1) a_rest

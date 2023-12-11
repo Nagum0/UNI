@@ -148,39 +148,44 @@ haskellBlast [] = []
 haskellBlast [E Dead] = [E Dead]
 haskellBlast [M Dead] = [M Dead]
 haskellBlast army
-    -- Check if all the units are dead.
     | allDead army = army
-    -- Check for same hp because then we can just start the explosions from the beginning.
+    | (length army) <= 5 = calcDead $ explosion explCount army
     | sameHP $ getHP army = calcDead $ explosion explCount army
-    -- If the length of the army is less than 5.
-    | fromIntegral (length army) <= explCount = calcDead $ explosion explCount army
-    | otherwise = startAttack army where
-        -- Here we check where to start the attack from. 
-        -- If the hp after explosion is above 0 than thats where we start.
-        -- SEARCH FOR MAXIMUM HERE!!!
-        startAttack (g@(E (Alive (Golem hp))) : a_rest)
-            | (hp - 5) < 0 = g : startAttack a_rest
-            | otherwise = calcDead $ explosion explCount (g : a_rest)
-        startAttack (g@(E (Alive (HaskellElemental hp))) : a_rest)
-            | (hp - 5) < 0 = g : startAttack a_rest
-            | otherwise = calcDead $ explosion explCount (g : a_rest)
-        startAttack (g@(M (Alive (Master name hp spell))) : a_rest)
-            | (hp - 5) < 0 = g : startAttack a_rest
-            | otherwise = calcDead $ explosion explCount (g : a_rest)
-        -- Case where the unit is dead.
-        startAttack (g@(E Dead) : a_rest) = calcDead $ explosion explCount (g : a_rest) -- g : startAttack a_rest
-        startAttack (g@(M Dead) : a_rest) = calcDead $ explosion explCount (g : a_rest)
+    | otherwise = startAttack (attackPatterns $ getHP army) army where
+        startAttack _ [] = []
+        startAttack ((hp, i) : rest) army
+            | hp - 25 == 0 = (take i army) ++ (calcDead $ explosion explCount $ drop i army)
+            | otherwise = startAttack rest army
+        startAttack [] army = startAttack' (attackPatterns $ getHP army) army where
+            startAttack' ((hp, i) : rest) army
+                | hp == maxHP = (take i army) ++ (calcDead $ explosion explCount $ drop i army)
+                | otherwise = startAttack' rest army where
+                    maxHP = maximum $ map (\(h, j) -> h) (attackPatterns $ getHP army)
 
-        getHP [] = []
-        getHP ((E Dead) : a_rest) = getHP a_rest
-        getHP ((M Dead) : a_rest) = getHP a_rest
-        getHP ((E (Alive (Golem hp))) : a_rest) = hp : getHP a_rest
-        getHP ((E (Alive (HaskellElemental hp))) : a_rest) = hp : getHP a_rest
-        getHP ((M (Alive (Master _ hp _))) : a_rest) = hp : getHP a_rest
+attackPatterns :: [Health] -> [(Health, Int)]
+attackPatterns hs = f hs 0 where
+    f [] _ = []
+    f xs index
+        | length xs < 5 = []
+        | otherwise = (sum5 $ take 5 xs, index) : f (tail xs) (index + 1) where
+            sum5 xs' = sum $ map (\x -> checkX x) xs' where
+                checkX x
+                    | x > 5 = 5
+                    | otherwise = x
+
+-- Returns a list of healths made up from the units.
+getHP :: Army -> [Health]
+getHP [] = []
+getHP ((E Dead) : a_rest) = 0 : getHP a_rest
+getHP ((M Dead) : a_rest) = 0 : getHP a_rest
+getHP ((E (Alive (Golem hp))) : a_rest) = hp : getHP a_rest
+getHP ((E (Alive (HaskellElemental hp))) : a_rest) = hp : getHP a_rest
+getHP ((M (Alive (Master _ hp _))) : a_rest) = hp : getHP a_rest
 
 explCount :: Integer
 explCount = 5
 
+-- Checks whether everyone is dead.
 allDead :: Army -> Bool
 allDead [] = True
 allDead army = all (\unit -> f unit) army where
@@ -188,6 +193,7 @@ allDead army = all (\unit -> f unit) army where
     f (M Dead) = True
     f unit = False 
 
+-- Checks whether everyone has the same HP.
 sameHP :: [Health] -> Bool
 sameHP [] = True
 sameHP (hp:hps) = all (== hp) hps
@@ -195,8 +201,8 @@ sameHP (hp:hps) = all (== hp) hps
 explosion :: Integer -> Army -> Army
 explosion _ [] = []
 explosion 0 rest = rest
-explosion count ((E Dead) : a_rest) = (E Dead) : explosion count a_rest
-explosion count ((M Dead) : a_rest) = (M Dead) : explosion count a_rest
+explosion count ((E Dead) : a_rest) = (E Dead) : explosion (count - 1) a_rest
+explosion count ((M Dead) : a_rest) = (M Dead) : explosion (count - 1) a_rest
 explosion count ((E (Alive (Golem hp))) : a_rest) = (E $ Alive $ Golem (hp - 5)) : explosion (count - 1) a_rest
 explosion count ((E (Alive (HaskellElemental hp))) : a_rest) = (E $ Alive $ HaskellElemental (hp - 5)) : explosion (count - 1) a_rest
 explosion count ((M (Alive (Master name hp spell))) : a_rest) = (M $ Alive $ Master name (hp - 5) spell) : explosion (count - 1) a_rest

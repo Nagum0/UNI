@@ -60,17 +60,23 @@ int main(void) {
                 continue;
             }
 
-            printf("Matrix info: %d %s %s\n", n, dir, spin_dir);
-
             // Creating matrix:
-            if (create_matrix(n, dir, spin_dir, &current_matrix) != 0) {
+            if (create_matrix(n, dir, spin_dir, &current_matrix) == false) {
                 printf("Error while creating matrix!\n");
                 continue;
             }
+
+            printf("Matrix created!\n");
         }
         // Print matrix:
         else if (cmd_buff == PRINT) {
-            print_matrix(n, current_matrix);
+            if (current_matrix != NULL) {
+                print_matrix(n, current_matrix);
+            }
+            else {
+                printf("No generated matrix was found!\nYou must generate a matrix first!\n");
+                continue;
+            }
         }
         else {
             printf("Unknown command!\n");

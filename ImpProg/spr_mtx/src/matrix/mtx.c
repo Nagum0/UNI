@@ -18,6 +18,29 @@ bool check_input(int n, char *dir, char *spin_dir) {
     }
 }
 
+bool allocate_matrix(int n, int ***matrix) {
+    *matrix = (int **) malloc(n * sizeof(int *));
+
+    if (*matrix == NULL) {
+        return false;
+    }
+
+    for (int i = 0; i < n; i++) {
+        (*matrix)[i] = (int *) malloc(n * sizeof(int));
+
+        if ((*matrix)[i] == NULL) {
+            for (int j = 0; j < i; j++) {
+                free((*matrix)[j]);
+            }
+            free(*matrix);
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
 bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx) {
     // Check incorrect input:
     if (check_input(n, dir, spin_dir) == false) {
@@ -25,24 +48,9 @@ bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx) {
         return false;
     }
 
-    // Allocating n space for current_mtx;
-    *current_mtx = (int **) malloc(n * sizeof(int *));
-
-    if (*current_mtx == NULL) {
+    // Allocating memory for matrix:
+    if (allocate_matrix(n, current_mtx) == false) {
         return false;
-    }
-
-    for (int i = 0; i < n; i++) {
-        (*current_mtx)[i] = (int *) malloc(n * sizeof(int));
-
-        if ((*current_mtx)[i] == NULL) {
-            for (int j = 0; j < i; j++) {
-                free((*current_mtx)[j]);
-            }
-            free(*current_mtx);
-
-            return false;
-        }
     }
 
     // Filling up the matrix with zeros (temporary):

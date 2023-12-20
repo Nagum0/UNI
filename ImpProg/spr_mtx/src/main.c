@@ -90,6 +90,26 @@ int main(void) {
                 continue;
             }
         }
+        // Load matrix:
+        else if (cmd_buff == LOAD) {
+            // Settings the current matrix to NULL:
+            if (current_matrix != NULL) {
+                free_matrix(n, &current_matrix);
+            }
+            current_matrix = NULL;
+
+            char input[BUFF_SIZE];
+            printf("Matrix name> ");
+            scanf("%s", input);
+            printf("Loading matrix: %s...\n", input);
+
+            if (load_matrix(&current_matrix, input, &n) == false) {
+                printf("Error while loading matrix!\n");
+                continue;
+            }
+
+            printf("Matrix loaded!\n");
+        }
         // Print matrix:
         else if (cmd_buff == PRINT) {
             if (current_matrix != NULL) {

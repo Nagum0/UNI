@@ -5,6 +5,7 @@
 // My includes:
 #include "menu/menu.h"
 #include "matrix/mtx.h"
+#include "file_manager/file_manager.h"
 
 #define BUFF_SIZE 100
 #define INPUT_SIZE 25
@@ -26,6 +27,7 @@ int main(void) {
             printf("Please enter a number...\n");
 
             int c;
+            // This clears the standard input:
             while ((c = getchar()) != '\n' && c != EOF);
             continue;
         }
@@ -67,6 +69,26 @@ int main(void) {
             }
 
             printf("Matrix created!\n");
+        }
+        // Save matrix:
+        else if (cmd_buff == SAVE) {
+            if (current_matrix != NULL) {
+                // Genrating file name:
+                char *file_path = generate_file_path(n, dir, spin_dir);
+                printf("File name: %s\n", file_path);
+
+                // Saving matrix:
+                if (save_matrix(n, current_matrix, file_path) == false) {
+                    printf("Something went wrong while saving the matrix!\n");
+                    continue;
+                }
+
+                free(file_path);
+            }
+            else {
+                printf("No generated matrix was found!\nYou must generate a matrix first!\n");
+                continue;
+            }
         }
         // Print matrix:
         else if (cmd_buff == PRINT) {

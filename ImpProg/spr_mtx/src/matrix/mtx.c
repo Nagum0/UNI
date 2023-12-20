@@ -72,8 +72,3 @@ void free_matrix(int n, int ***matrix) {
     }
     free((*matrix));
 }
-
-// |--- SAVE MATRIX TO FILE ---|
-void save_matrix(int n, int **matrix) {
-    
-}

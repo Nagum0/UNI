@@ -6,6 +6,5 @@
 bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx);
 void print_matrix(int n, int **matrix);
 void free_matrix(int n, int ***matrix);
-void save_matrix(int n, int **matrix);
 
 #endif

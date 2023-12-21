@@ -41,6 +41,44 @@ bool allocate_matrix(int n, int ***matrix) {
     return true;
 }
 
+// Fill the matrix with the spiral form:
+void fill_matrix(int n, char *dir, char *spin, int ***matrix) {
+    // Count length:
+    int count = n * n;
+
+    // Starting index position:
+    int x = n - 1;
+    int y = 0;
+    
+    int x_steps = n - 1;
+    int y_steps = n - 1;
+    
+    while (x_steps > 0 || y_steps > 0) {
+        for (int i = 0; i < x_steps; i++) {
+            (*matrix)[y][x--] = count--;
+        }
+        for (int i = 0; i < y_steps; i++) {
+            (*matrix)[y++][x] = count--;
+        }
+        for (int i = 0; i < x_steps; i++) {
+            (*matrix)[y][x++] = count--;
+        }
+        for (int i = 0; i < y_steps; i++) {
+            (*matrix)[y--][x] = count--;
+        }
+
+        x--;
+        y++;
+        x_steps -= 2;
+        y_steps -= 2;
+    }
+
+    // Handle remaining element for odd dimensions:
+    if (n % 2 == 1) {
+        (*matrix)[y][x] = count--;
+    }
+}
+
 bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx) {
     // Check incorrect input:
     if (check_input(n, dir, spin_dir) == false) {
@@ -54,11 +92,7 @@ bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx) {
     }
 
     // Filling up the matrix with zeros (temporary):
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            (*current_mtx)[i][j] = 0;
-        }
-    }
+    fill_matrix(n, dir, spin_dir, current_mtx);
 
     return true;
 }
@@ -67,7 +101,7 @@ bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx) {
 void print_matrix(int n, int **matrix) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%d ", matrix[i][j]);
+            printf("%3d ", matrix[i][j]);
         }
         printf("\n");
     }

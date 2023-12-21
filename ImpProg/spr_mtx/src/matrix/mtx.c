@@ -6,6 +6,7 @@
 #include <string.h>
 
 // |--- CREATE MATRIX ---|
+// Check input for matrix:
 bool check_input(int n, char *dir, char *spin_dir) {
     if ((n >= 1 && n <= 20) && 
         ((strcmp(dir, "jobbra") == 0 || strcmp(dir, "balra") == 0 || strcmp(dir, "fel") == 0) || strcmp(dir, "le") == 0 ||
@@ -18,6 +19,7 @@ bool check_input(int n, char *dir, char *spin_dir) {
     }
 }
 
+// Allocate memory for a matrix:
 bool allocate_matrix(int n, int ***matrix) {
     *matrix = (int **) malloc(n * sizeof(int *));
 
@@ -42,57 +44,344 @@ bool allocate_matrix(int n, int ***matrix) {
 }
 
 // Fill the matrix with the spiral form:
-void fill_matrix(int n, char *dir, char *spin, int ***matrix) {
-    // Count length:
+void fill_matrix(int n, Direction dir, Spin spin, int ***matrix) {
+    // Pointer to matrix:
+    int **mtx_ptr = (*matrix);
+    
+    // Number counter:
     int count = n * n;
 
-    // Starting index position:
-    int x = n - 1;
-    int y = 0;
-    
+    // Determining the starting coordinates and filling up the matrix:
     int x_steps = n - 1;
     int y_steps = n - 1;
-    
-    while (x_steps > 0 || y_steps > 0) {
-        for (int i = 0; i < x_steps; i++) {
-            (*matrix)[y][x--] = count--;
-        }
-        for (int i = 0; i < y_steps; i++) {
-            (*matrix)[y++][x] = count--;
-        }
-        for (int i = 0; i < x_steps; i++) {
-            (*matrix)[y][x++] = count--;
-        }
-        for (int i = 0; i < y_steps; i++) {
-            (*matrix)[y--][x] = count--;
-        }
+    int x, y = 0;
 
-        x--;
-        y++;
-        x_steps -= 2;
-        y_steps -= 2;
+
+    switch (dir) {
+    // UP:
+    case UP:
+        if (spin == CW && n % 2 == 0) {
+            x = n - 1;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y][x++] = count--;
+
+                x--;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CW && n % 2 != 0) {
+            x = 0;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+
+                x++;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        else if (spin == CCW && n % 2 == 0) {
+            x = 0;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+
+                x++;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CCW && n % 2 != 0) {
+            x = n - 1;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+
+                x--;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        break;
+    // RIGHT:
+    case RIGHT:
+        if (spin == CW && n % 2 == 0) {
+            x = 0;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+
+                x++;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CW && n % 2 != 0) {
+            x = n - 1;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+
+                x--;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        else if (spin == CCW && n % 2 == 0) {
+            x = 0;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+
+                x++;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CCW && n % 2 != 0) {
+            x = n - 1;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+
+                x--;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        break;
+    // LEFT:
+    case LEFT:
+        if (spin == CW && n % 2 == 0) {
+            x = n - 1;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+
+                x--;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CW && n % 2 != 0) {
+            x = 0;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+
+                x++;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        else if (spin == CCW && n % 2 == 0) {
+            x = n - 1;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+
+                x--;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CCW && n % 2 != 0) {
+            x = 0;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+
+                x++;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        break;
+    // DOWN:
+    case DOWN:
+        if (spin == CW && n % 2 == 0) {
+            x = 0;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y][x--] = count--;
+
+                x++;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CW && n % 2 != 0) {
+            x = n - 1;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+
+                x--;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        else if (spin == CCW && n % 2 == 0) {
+            x = n - 1;
+            y = 0;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+
+                x--;
+                y++;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+        }
+        else if (spin == CCW && n % 2 != 0) {
+            x = 0;
+            y = n - 1;
+
+            while (x_steps > 0 || y_steps > 0) {
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
+
+                x++;
+                y--;
+                x_steps -= 2;
+                y_steps -= 2;
+            }
+
+            mtx_ptr[y][x] = 1;
+        }
+        break;
+    default:
+        printf("Error while generating matrix!\n");
+        break;
     }
+}
 
-    // Handle remaining element for odd dimensions:
-    if (n % 2 == 1) {
-        (*matrix)[y][x] = count--;
+// Get direction:
+Direction get_direction(char *dir) {
+    if (strcmp(dir, "jobbra") == 0 || strcmp(dir, "j") == 0) {
+        return RIGHT;
+    }
+    else if (strcmp(dir, "balra") == 0, strcmp(dir, "b") == 0) {
+        return LEFT;
+    }
+    else if (strcmp(dir, "fel") == 0 || strcmp(dir, "f") == 0) {
+        return UP;
+    }
+    else if (strcmp(dir, "le") == 0 || strcmp(dir, "l") == 0) {
+        return DOWN;
+    }
+}
+
+// Get spin:
+Spin get_spin(char *spin) {
+    if (strcmp(spin, "cw") == 0) {
+        return CW;
+    }
+    else if (strcmp(spin, "ccw") == 0) {
+        return CCW;
     }
 }
 
 bool create_matrix(int n, char *dir, char *spin_dir, int ***current_mtx) {
-    // Check incorrect input:
-    if (check_input(n, dir, spin_dir) == false) {
-        printf("Incorrect input!\nCheck the guide for more information!\n");
-        return false;
-    }
-
     // Allocating memory for matrix:
     if (allocate_matrix(n, current_mtx) == false) {
         return false;
     }
 
-    // Filling up the matrix with zeros (temporary):
-    fill_matrix(n, dir, spin_dir, current_mtx);
+    // Filling up the matrix in a spiral form:
+    fill_matrix(n, get_direction(dir), get_spin(spin_dir), current_mtx);
 
     return true;
 }

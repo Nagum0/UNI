@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "file_manager.h": "c",
+        "stdbool.h": "c",
+        "stdio.h": "c"
+    }
+}

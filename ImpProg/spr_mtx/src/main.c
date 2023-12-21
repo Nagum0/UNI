@@ -62,8 +62,13 @@ int main(void) {
                 continue;
             }
 
+            // Checking input:
+            if (!check_input(n, dir, spin_dir)) {
+                printf("Incorrect input!\nCheck the guide for more information!\n");
+                continue;
+            }
             // Creating matrix:
-            if (create_matrix(n, dir, spin_dir, &current_matrix) == false) {
+            if (!create_matrix(n, dir, spin_dir, &current_matrix)) {
                 printf("Error while creating matrix!\n");
                 continue;
             }

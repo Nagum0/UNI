@@ -183,22 +183,25 @@ void fill_matrix(int n, Direction dir, Spin spin, int ***matrix) {
         }
 
         // Calculating where to indent the coordinate pointers:
-        if (dir == UP && spin == CW && n % 2 == 0) { x--; y--; }
-        else if (dir == UP && spin == CW && n % 2 != 0) { x++; y++; }
-        else if (dir == UP && spin == CCW && n % 2 == 0) { x++; y--; }
-        else if (dir == UP && spin == CCW && n % 2 != 0) { x--; y++; }
-        else if (dir == DOWN && spin == CW && n % 2 == 0) { x++; y++; }
-        else if (dir == DOWN && spin == CW && n % 2 != 0) { x--; y--; }
-        else if (dir == DOWN && spin == CCW && n % 2 == 0) { x--; y++; }
-        else if (dir == DOWN && spin == CCW && n % 2 != 0) { x++; y--; }
-        else if (dir == RIGHT && spin == CW && n % 2 == 0) { x++; y--; }
-        else if (dir == RIGHT && spin == CW && n % 2 != 0) { x--; y++; }
-        else if (dir == RIGHT && spin == CCW && n % 2 == 0) { x++; y++; }
-        else if (dir == RIGHT && spin == CCW && n % 2 != 0) { x--; y--; }
-        else if (dir == LEFT && spin == CW && n % 2 == 0) { x--; y++; }
-        else if (dir == LEFT && spin == CW && n % 2 != 0) { x++; y--; }
-        else if (dir == LEFT && spin == CCW && n % 2 == 0) { x--; y--; }
-        else if (dir == LEFT && spin == CCW && n % 2 != 0) { x++; y++; }
+        if ((dir == UP && spin == CW && n % 2 == 0) || (dir == DOWN && spin == CW && n % 2 != 0) ||
+            (dir == RIGHT && spin == CCW && n % 2 != 0) || (dir == LEFT && spin == CCW && n % 2 == 0)) {
+            x--;
+            y--;
+        }
+        else if ((dir == UP && spin == CW && n % 2 != 0) || (dir == DOWN && spin == CW && n % 2 == 0) ||
+                 (dir == RIGHT && spin == CCW && n % 2 == 0) || (dir == LEFT && spin == CCW && n % 2 != 0)) {
+            x++;
+            y++;
+        }
+        else if ((dir == UP && spin == CCW && n % 2 == 0) || (dir == DOWN && spin == CCW && n % 2 != 0) ||
+                 (dir == RIGHT && spin == CW && n % 2 == 0) || (dir == LEFT && spin == CW && n % 2 != 0)) {
+            x++;
+            y--;
+        }
+        else {
+            x--; 
+            y++;
+        }
 
         x_steps -= 2;
         y_steps -= 2;
@@ -215,7 +218,7 @@ Direction get_direction(char *dir) {
     if (strcmp(dir, "jobbra") == 0 || strcmp(dir, "j") == 0) {
         return RIGHT;
     }
-    else if (strcmp(dir, "balra") == 0, strcmp(dir, "b") == 0) {
+    else if (strcmp(dir, "balra") == 0 || strcmp(dir, "b") == 0) {
         return LEFT;
     }
     else if (strcmp(dir, "fel") == 0 || strcmp(dir, "f") == 0) {

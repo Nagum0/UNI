@@ -55,8 +55,7 @@ void fill_matrix(int n, Direction dir, Spin spin, int ***matrix) {
     int x_steps = n - 1;
     int y_steps = n - 1;
     int x, y = 0;
-
-
+    
     switch (dir) {
     // UP:
     case UP:
@@ -68,7 +67,7 @@ void fill_matrix(int n, Direction dir, Spin spin, int ***matrix) {
                 for (int i = 0; i < y_steps; i++) mtx_ptr[y--][x] = count--;
                 for (int i = 0; i < x_steps; i++) mtx_ptr[y][x--] = count--;
                 for (int i = 0; i < y_steps; i++) mtx_ptr[y++][x] = count--;
-                for (int i = 0; i < y_steps; i++) mtx_ptr[y][x++] = count--;
+                for (int i = 0; i < x_steps; i++) mtx_ptr[y][x++] = count--;
 
                 x--;
                 y--;

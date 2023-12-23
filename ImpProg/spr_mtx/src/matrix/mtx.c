@@ -56,7 +56,103 @@ void fill_matrix(int n, Direction dir, Spin spin, int ***matrix) {
     int y_steps = n - 1;
     int x, y = 0;
     
-    switch (dir) {
+    // Calculate the starting coords:
+    if ((dir == UP && spin == CW && n % 2 == 0) || (dir == RIGHT && spin == CCW && n % 2 != 0) ||
+        (dir == LEFT && spin == CCW && n % 2 == 0) || (dir == DOWN && spin == CW && n % 2 != 0)) {
+        x = n - 1;
+        y = n - 1;
+    }
+    else if ((dir == UP && spin == CCW && n % 2 == 0) || (dir == RIGHT && spin == CW && n % 2 == 0) ||
+             (dir == LEFT && spin == CW && n % 2 != 0) || (dir == DOWN && spin == CCW && n % 2 != 0)) {
+        x = 0;
+        y = n - 1;
+    }
+    else if ((dir == UP && spin == CW && n % 2 != 0) || (dir == RIGHT && spin == CCW && n % 2 == 0) ||
+             (dir == LEFT && spin == CCW && n % 2 != 0) || (dir == DOWN && spin == CW && n % 2 == 0)) {
+        x = 0;
+        y = 0;
+    }
+    else {
+        x = n - 1;
+        y = 0;
+    }
+
+    // Filling the matrix:
+    while (x_steps > 0 || y_steps > 0) { 
+        if (dir == UP || dir == DOWN) {
+            for (int i = 0; i < y_steps; i++) {
+                // UP
+                if (dir == UP && spin == CW && n % 2 == 0) mtx_ptr[y--][x] = count--;
+                else if (dir == UP && spin == CW && n % 2 != 0) mtx_ptr[y++][x] = count--;
+                else if (dir == UP && spin == CCW && n % 2 == 0) mtx_ptr[y--][x] = count--;
+                else if (dir == UP && spin == CCW && n % 2 != 0) mtx_ptr[y++][x] = count--;
+                // DOWN
+                else if (dir == DOWN && spin == CW && n % 2 == 0) mtx_ptr[y++][x] = count--;
+                else if (dir == DOWN && spin == CW && n % 2 != 0) mtx_ptr[y--][x] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 == 0) mtx_ptr[y++][x] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 != 0) mtx_ptr[y--][x] = count--;
+            }
+            for (int i = 0; i < x_steps; i++) {
+                // UP
+                if (dir == UP && spin == CW && n % 2 == 0) mtx_ptr[y][x--] = count--;
+                else if (dir == UP && spin == CW && n % 2 != 0) mtx_ptr[y][x++] = count--;
+                else if (dir == UP && spin == CCW && n % 2 == 0) mtx_ptr[y][x++] = count--;
+                else if (dir == UP && spin == CCW && n % 2 != 0) mtx_ptr[y][x--] = count--;
+                // DOWN
+                else if (dir == DOWN && spin == CW && n % 2 == 0) mtx_ptr[y][x++] = count--;
+                else if (dir == DOWN && spin == CW && n % 2 != 0) mtx_ptr[y][x--] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 == 0) mtx_ptr[y][x--] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 != 0) mtx_ptr[y][x++] = count--;
+            }
+            for (int i = 0; i < y_steps; i++) {
+                // UP
+                if (dir == UP && spin == CW && n % 2 == 0) mtx_ptr[y++][x] = count--;
+                else if (dir == UP && spin == CW && n % 2 != 0) mtx_ptr[y--][x] = count--;
+                else if (dir == UP && spin == CCW && n % 2 == 0) mtx_ptr[y++][x] = count--;
+                else if (dir == UP && spin == CCW && n % 2 != 0) mtx_ptr[y--][x] = count--;
+                // DOWN
+                else if (dir == DOWN && spin == CW && n % 2 == 0) mtx_ptr[y--][x] = count--;
+                else if (dir == DOWN && spin == CW && n % 2 != 0) mtx_ptr[y++][x] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 == 0) mtx_ptr[y--][x] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 != 0) mtx_ptr[y++][x] = count--;
+            }
+            for (int i = 0; i < x_steps; i++) {
+                // UP
+                if (dir == UP && spin == CW && n % 2 == 0) mtx_ptr[y][x++] = count--;
+                else if (dir == UP && spin == CW && n % 2 != 0) mtx_ptr[y][x--] = count--;
+                else if (dir == UP && spin == CCW && n % 2 == 0) mtx_ptr[y][x--] = count--;
+                else if (dir == UP && spin == CCW && n % 2 != 0) mtx_ptr[y][x++] = count--;
+                // DOWN
+                else if (dir == DOWN && spin == CW && n % 2 == 0) mtx_ptr[y][x--] = count--;
+                else if (dir == DOWN && spin == CW && n % 2 != 0) mtx_ptr[y][x++] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 == 0) mtx_ptr[y][x++] = count--;
+                else if (dir == DOWN && spin == CCW && n % 2 != 0) mtx_ptr[y][x--] = count--;
+            }
+        }
+        else if (dir == RIGHT || dir == LEFT) {
+            
+        }
+
+        // Calculating where to indent the coordinate pointers:
+        if (dir == UP && spin == CW && n % 2 == 0) { x--; y--; }
+        else if (dir == UP && spin == CW && n % 2 != 0) { x++; y++; }
+        else if (dir == UP && spin == CCW && n % 2 == 0) { x++; y--; }
+        else if (dir == UP && spin == CCW && n % 2 != 0) { x--; y++; }
+        else if (dir == DOWN && spin == CW && n % 2 == 0) { x++; y++; }
+        else if (dir == DOWN && spin == CW && n % 2 != 0) { x--; y--; }
+        else if (dir == DOWN && spin == CCW && n % 2 == 0) { x--; y++; }
+        else if (dir == DOWN && spin == CCW && n % 2 != 0) { x++; y--; }
+
+        x_steps -= 2;
+        y_steps -= 2;
+    }
+
+    // Place final element in the center if n is odd:
+    if (n % 2 != 0) {
+        mtx_ptr[y][x] = 1;
+    }
+
+    /* switch (dir) {
     // UP:
     case UP:
         if (spin == CW && n % 2 == 0) {
@@ -344,7 +440,7 @@ void fill_matrix(int n, Direction dir, Spin spin, int ***matrix) {
     default:
         printf("Error while generating matrix!\n");
         break;
-    }
+    }*/
 }
 
 // Get direction:

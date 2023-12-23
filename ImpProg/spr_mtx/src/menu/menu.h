@@ -2,7 +2,7 @@
 #define MENU_H
 
 typedef enum {
-    GUIDE,
+    MAN,
     GEN_MAT,
     SAVE,
     LOAD,
@@ -11,5 +11,6 @@ typedef enum {
 } Options;
 
 void print_menu();
+void print_guide();
 
 #endif

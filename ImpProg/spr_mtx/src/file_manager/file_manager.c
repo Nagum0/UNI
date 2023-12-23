@@ -7,12 +7,12 @@
 
 char *generate_file_path(int n, char *dir, char *spin_dir) {
     // Here I calculate the length of the string:
-    int length = snprintf(NULL, 0, "saved\\spr%d%s%s.txt", n, dir, spin_dir);
+    int length = snprintf(NULL, 0, "spr%d%s%s.txt", n, dir, spin_dir);
 
     char *file_name = (char *)malloc(length + 1);
 
     // Here I store the string into the file_name buffer:
-    snprintf(file_name, length + 1, "saved\\spr%d%s%s.txt", n, dir, spin_dir);
+    snprintf(file_name, length + 1, "spr%d%s%s.txt", n, dir, spin_dir);
     
     return file_name;
 }
@@ -77,8 +77,6 @@ bool load_matrix(int ***current_matrix, char *file_path, int *n) {
 
     // Set the n outside to row count so that when we use n with other functions the number is correct:
     *n = row;
-    
-    printf("Number of rows: %d\n", row);
 
     // Allocating memory for loaded matrix:
     if (allocate_matrix(row, current_matrix) == false) {

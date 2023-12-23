@@ -42,6 +42,10 @@ int main(void) {
 
             app_run = false;
         }
+        // Guide:
+        else if (cmd_buff == MAN) {
+            print_guide();
+        }
         // Generate matrix:
         else if (cmd_buff == GEN_MAT) {
             // Deleting the '\n' that remains in stdin:
@@ -50,7 +54,7 @@ int main(void) {
             char input[BUFF_SIZE];
 
             // Reading from stdin:
-            printf("Gen matrix> ");
+            printf("Matrix parameters> ");
             if (fgets(input, sizeof(input), stdin) == NULL) {
                 printf("Error while reading input!\n");
                 continue;
@@ -83,7 +87,7 @@ int main(void) {
                 printf("File name: %s\n", file_path);
 
                 // Saving matrix:
-                if (save_matrix(n, current_matrix, file_path) == false) {
+                if (!save_matrix(n, current_matrix, file_path)) {
                     printf("Something went wrong while saving the matrix!\n");
                     continue;
                 }
@@ -91,7 +95,7 @@ int main(void) {
                 free(file_path);
             }
             else {
-                printf("No generated matrix was found!\nYou must generate a matrix first!\n");
+                printf("No generated matrix was found!\nYou must generate or load matrix first!\n");
                 continue;
             }
         }
@@ -104,7 +108,7 @@ int main(void) {
             current_matrix = NULL;
 
             char input[BUFF_SIZE];
-            printf("Matrix name> ");
+            printf("Matrix name to be loaded> ");
             scanf("%s", input);
             printf("Loading matrix: %s...\n", input);
 
@@ -121,7 +125,7 @@ int main(void) {
                 print_matrix(n, current_matrix);
             }
             else {
-                printf("No generated matrix was found!\nYou must generate a matrix first!\n");
+                printf("No generated matrix was found!\nYou must generate or load matrix first!\n");
                 continue;
             }
         }

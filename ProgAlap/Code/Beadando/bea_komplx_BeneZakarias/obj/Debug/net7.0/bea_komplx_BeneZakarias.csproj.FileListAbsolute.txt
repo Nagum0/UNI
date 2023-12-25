@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\bin\Debug\net7.0\bea_komplx_BeneZakarias.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\bin\Debug\net7.0\bea_komplx_BeneZakarias.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\bin\Debug\net7.0\bea_komplx_BeneZakarias.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\bin\Debug\net7.0\bea_komplx_BeneZakarias.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\bin\Debug\net7.0\bea_komplx_BeneZakarias.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\refint\bea_komplx_BeneZakarias.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\bea_komplx_BeneZakarias.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias\obj\Debug\net7.0\ref\bea_komplx_BeneZakarias.dll

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "bea_komplx_BeneZakarias/1.0.0": {
+        "runtime": {
+          "bea_komplx_BeneZakarias.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "bea_komplx_BeneZakarias/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

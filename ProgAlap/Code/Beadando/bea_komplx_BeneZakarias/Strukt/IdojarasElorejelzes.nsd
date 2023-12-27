@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root text="IdojarasElorejelzes" comment="" type="program" style="nice">
+ <children>
+
+<while text="&#34;i = 1..n&#34;" comment="" color="FFFFFF">
+ <qWhile>
+
+<instruction text="&#34;sorban_eredmeny[i] := FindMaxIndex(eredmeny)&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+ </qWhile>
+</while>
+ </children>
+</root>

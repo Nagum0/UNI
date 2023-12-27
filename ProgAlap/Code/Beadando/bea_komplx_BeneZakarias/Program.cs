@@ -48,17 +48,6 @@ class IdojarasElorejelzes {
         return result;
     }
 
-    static List<int> SorbaAllitas(List<int> eredmenyek) {
-        List<int> result = new List<int>(eredmenyek.Count);
-
-        while (result.Count < eredmenyek.Count) {
-            int maxind = FindMaxIndex(eredmenyek);
-            result.Add(maxind + 1);
-        }
-
-        return result;
-    }
-
     static int FindMaxIndex(List<int> list) {
         int maxind = 0;
         int maxval = list[0];
@@ -85,8 +74,13 @@ class IdojarasElorejelzes {
         // Feldolgozas:
         List<int> eredmeny = MelegebbNapokSzama(telepulesek);
         Console.Error.WriteLine($"Eredmenyek: {string.Join(", ", eredmeny)}");
-        List<int> sorban_eredmeny = SorbaAllitas(eredmeny);
+        List<int> sorban_eredmeny = new List<int>();
         
+        for (int i = 0; i < eredmeny.Count; i++) {
+            int maxind = FindMaxIndex(eredmeny);
+            sorban_eredmeny.Add(maxind + 1);
+        }
+
         // Kiiratas:
         Console.WriteLine(string.Join(" ", sorban_eredmeny));
     }

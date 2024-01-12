@@ -9,21 +9,17 @@ using System;
 using System.Collections.Generic;
 
 class IdojarasElorejelzes {
-    static List<List<int>> Beolvas(int n, int m) {
-        List<List<int>> result = new List<List<int>>(); 
-
-        for (int i = 0; i < n; i++) {
-            string[] sor = Console.ReadLine().Split(' ');
-
-            // Uj sor kezdese:
-            result.Add(new List<int>());
-
-            for (int j = 0; j < m; j++) {
-                result[i].Add(int.Parse(sor[j]));
-            }
+    static List<List<int>> Beolvas() {
+        if (Console.IsInputRedirected) {
+            return BeolvasBiro();
         }
+        else {
+            return BeolvasKezi();
+        }
+    }
 
-        return result;
+    static List<List<int>> BeolvasBiro() {
+        
     }
 
     static double Atlag(List<int> telepules) {
@@ -72,11 +68,7 @@ class IdojarasElorejelzes {
 
     public static void Main(string[] args) {
         // Beolvasas:
-        int n, m;
-        string[] sor = Console.ReadLine().Split(' ');
-        int.TryParse(sor[0], out n);
-        int.TryParse(sor[1], out m);
-        List<List<int>> telepulesek = Beolvas(n, m);
+        List<List<int>> telepulesek = Beolvas();
 
         // Feldolgozas:
         List<int> eredmeny = MelegebbNapokSzama(telepulesek);

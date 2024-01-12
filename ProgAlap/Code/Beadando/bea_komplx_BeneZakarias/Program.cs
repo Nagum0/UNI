@@ -9,7 +9,21 @@ using System;
 using System.Collections.Generic;
 
 class IdojarasElorejelzes {
-    static List<List<int>> Beolvas(int n, int m) {
+    static List<List<int>> Beolvas() {
+        if (Console.IsInputRedirected) {
+            return BeolvasBiro();
+        }
+        else {
+            return BeolvasKezi();
+        }
+    }
+
+    static List<List<int>> BeolvasBiro() {
+        int n, m;
+        string[] elso_sor = Console.ReadLine().Split(' ');
+        int.TryParse(elso_sor[0], out n);
+        int.TryParse(elso_sor[1], out m);
+
         List<List<int>> result = new List<List<int>>(); 
 
         for (int i = 0; i < n; i++) {
@@ -20,6 +34,54 @@ class IdojarasElorejelzes {
 
             for (int j = 0; j < m; j++) {
                 result[i].Add(int.Parse(sor[j]));
+            }
+        }
+
+        return result;
+    }
+
+    static List<List<int>> BeolvasKezi() {
+        int n, m;
+        bool jo;
+
+        do {
+            Console.ResetColor();
+            Console.Write("Telepulesek szama: ");
+            jo = int.TryParse(Console.ReadLine(), out n);
+            if (!jo) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Termeszetes szam kell!");
+            }
+        } while (!jo);
+
+        do {
+            Console.ResetColor();
+            Console.Write("Napok szama: ");
+            jo = int.TryParse(Console.ReadLine(), out m);
+            if (!jo) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Termeszetes szam kell!");
+            }
+        } while (!jo);
+
+        List<List<int>> result = new List<List<int>>();
+
+        for (int i = 0; i < n; i++) {
+            result.Add(new List<int>());
+            for (int j = 0; j < m; j++) {
+                do {
+                    Console.ResetColor();
+                    Console.Write($"{i + 1}.telepules {j + 1}.nap: ");
+                    int h;
+                    jo = int.TryParse(Console.ReadLine(), out h);
+                    if (!jo) {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Termeszetes szam kell!");
+                    }
+                    else {
+                        result[i].Add(h);
+                    }
+                } while (!jo);
             }
         }
 
@@ -72,11 +134,7 @@ class IdojarasElorejelzes {
 
     public static void Main(string[] args) {
         // Beolvasas:
-        int n, m;
-        string[] sor = Console.ReadLine().Split(' ');
-        int.TryParse(sor[0], out n);
-        int.TryParse(sor[1], out m);
-        List<List<int>> telepulesek = Beolvas(n, m);
+        List<List<int>> telepulesek = Beolvas();
 
         // Feldolgozas:
         List<int> eredmeny = MelegebbNapokSzama(telepulesek);

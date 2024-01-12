@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+Bene Zakarias
+UAUYQF
+zackbene9gmail.com
+Biro feladat: Az átlagnál melegebb napok száma szerinti sorrend
+*/
+
+using System;
 using System.Collections.Generic;
 
 class IdojarasElorejelzes {
@@ -73,7 +80,6 @@ class IdojarasElorejelzes {
 
         // Feldolgozas:
         List<int> eredmeny = MelegebbNapokSzama(telepulesek);
-        Console.Error.WriteLine($"Eredmenyek: {string.Join(", ", eredmeny)}");
         List<int> sorban_eredmeny = new List<int>();
         
         for (int i = 0; i < eredmeny.Count; i++) {

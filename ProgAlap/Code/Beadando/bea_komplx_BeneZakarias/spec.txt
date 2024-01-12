@@ -3,12 +3,10 @@ Be: n eleme N, m eleme N,
 Ki: sorban_eredmeny eleme N[1..n]
 Fv: Atlag: N[1..m] -> R, Atlag(telepules) =
     SZUMMA(i = 1..m, telepules[i]) / m
-
-    MelegebbNapokSzama: N[1..n], MelegebbNapokSzama() =
+Fv: MelegebbNapokSzama: N[1..n], MelegebbNapokSzama() =
     minden i eleme 1..n : eredmeny[i] =
     DARAB(j = 1..m, telepulesek[i][j] > Atlag(telepulesek[i]))
-
-    FindMaxIndex: N, FindMaxIndex() =
+Fv: FindMaxIndex: N, FindMaxIndex() =
     MAX(i = 1..n, eredmeny[i], eredmeny[i] != -1) es eredmeny[maxind] = -1 
 Sa: eredmeny eleme N[1..n]
 Ef: -

@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\bin\Debug\net7.0\Sportnap.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\bin\Debug\net7.0\Sportnap.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\bin\Debug\net7.0\Sportnap.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\bin\Debug\net7.0\Sportnap.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\bin\Debug\net7.0\Sportnap.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\refint\Sportnap.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\Sportnap.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Sportnap\obj\Debug\net7.0\ref\Sportnap.dll

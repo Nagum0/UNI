@@ -88,6 +88,11 @@ class IdojarasElorejelzes {
         return result;
     }
 
+    public static void Main(string[] args) {
+        List<List<int>> telepulesek = Beolvas();
+    }
+}
+/* 
     static double Atlag(List<int> telepules) {
         double result = 0;
 
@@ -148,4 +153,4 @@ class IdojarasElorejelzes {
         // Kiiratas:
         Console.WriteLine(string.Join(" ", sorban_eredmeny));
     }
-}
+} */

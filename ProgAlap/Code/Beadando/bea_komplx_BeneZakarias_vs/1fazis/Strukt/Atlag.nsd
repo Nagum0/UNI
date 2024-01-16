@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<root text="&#34;Atlag(t[]:N, m:N):R&#34;" comment="" type="program" style="nice">
+<root text="Atlag(napok[]:N):N" comment="" type="program" style="nice">
  <children>
 
-<instruction text="&#34;result := 0&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
-<while text="&#34;i = 1..m&#34;" comment="" color="FFFFFF">
+<instruction text="&#34;s := 0&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<while text="&#34;i = 1..napok.hossz&#34;" comment="" color="FFFFFF">
  <qWhile>
 
-<instruction text="&#34;result := result + t[i]&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<instruction text="&#34;s := s + 1&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
  </qWhile>
 </while>
-<instruction text="&#34;result = result / m&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<instruction text="&#34;s := s / napok.hossz&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
  </children>
 </root>

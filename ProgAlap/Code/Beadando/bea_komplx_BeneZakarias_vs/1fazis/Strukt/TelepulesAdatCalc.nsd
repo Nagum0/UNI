@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root text="&#34;TelepulesAdatCalc(telepules:N, napok[]:N):TelepulesAdat&#34;" comment="" type="program" style="nice">
+ <children>
+
+<instruction text="&#34;n := Atlag(napok)&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<instruction text="&#34;db := 0&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<while text="&#34;i = 1..napok.hossz&#34;" comment="" color="FFFFFF">
+ <qWhile>
+
+<alternative text="&#34;napok[i] &#62; n&#34;" comment="" color="FFFFFF">
+ <qTrue>
+
+<instruction text="&#34;db := db + 1&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+ </qTrue>
+ <qFalse>
+
+ </qFalse>
+</alternative>
+ </qWhile>
+</while>
+<instruction text="&#34;TelepulesAdat.k := db&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<instruction text="&#34;TelepulesAdat.index := telepules&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+ </children>
+</root>

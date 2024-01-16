@@ -1,9 +1,0 @@
-Be: n eleme N, m eleme N,
-    telepulesek eleme N[1..n, 1..m]
-Ki: y eleme N[1..n]
-Fv: TelepAdatCalc: N[1..m] -> TelepAdat, TelepAdatCalc(telepules, napok) =
-    TelepAdat.Telep = telepules es TelepAdat.K = SZUMMA(i = 1..m, napok[i]) / 5
-Sa: adatok = MASOL(i = 1..n, TelepAdat(i, telepulesek[i])),
-    TelepAdat = Telep x K , Telep eleme N, K eleme N
-Ef: -
-Uf: (y,db) = RENDEZ(i = 1..n, y[i].x)

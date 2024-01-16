@@ -1,0 +1,29 @@
+Be: n eleme N, m eleme N,
+    telepulesek eleme N[1..n, 1..m]
+Ki: y eleme N[1..n]
+Fv: Atlag: N[1..m] -> N, Atlag(napok) =
+    SZUMMA(i = 1..m, napok[i]) / m
+Fv: TelepAdatCalc: N, N[1..m] -> TelepAdat, TelepAdatCalc(telepules, napok) =
+    (telepules, DARAB(i = 1..m, Atlag(napok) < napok[i]))
+Sa: adatok = MASOL(i = 1..n, TelepAdatCalc(i, telepulesek[i])),
+    TelepAdat = Telep x K, Telep eleme N, K eleme N
+Ef: -
+Uf: (y,db) = RENDEZ(i = 1..n, adatok[i].K)
+
+Összegzés:
+e..u ~ 1..m
+f(i) ~ napok[i]
+s ~ SZUMMA() / m
+
+Megszámlálás:
+e..u ~ 1..m
+T(i) ~ Atlag(napok) < napok[i]
+
+Másolás:
+e..u ~ 1..n
+f(i) ~ TelepAdatCalc(i, telepulesek[i])
+y ~ adatok
+
+Rendezés:
+e..u ~ 1..n
+f(i) ~ adatok[i].K

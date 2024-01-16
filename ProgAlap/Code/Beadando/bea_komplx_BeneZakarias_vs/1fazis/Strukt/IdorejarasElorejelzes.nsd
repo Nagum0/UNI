@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root text="IdorejarasElorejelzes" comment="" type="program" style="nice">
+ <children>
+
+<while text="&#34;i = 1..n&#34;" comment="" color="FFFFFF">
+ <qWhile>
+
+<instruction text="&#34;adatok[i] := TelepulesAdatCalc(i, telepulesek[i])&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+ </qWhile>
+</while>
+<instruction text="RendezettAdatok(adatok)" comment="" color="FFFFFF" rotated="0"></instruction>
+ </children>
+</root>

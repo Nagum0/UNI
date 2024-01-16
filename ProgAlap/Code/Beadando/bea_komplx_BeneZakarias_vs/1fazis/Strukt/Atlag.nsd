@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root text="Atlag(napok[]:N):N" comment="" type="program" style="nice">
+ <children>
+
+<instruction text="&#34;s := 0&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+<while text="&#34;i = 1..napok.hossz&#34;" comment="" color="FFFFFF">
+ <qWhile>
+
+<instruction text="&#34;s := s + 1&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+ </qWhile>
+</while>
+<instruction text="&#34;s := s / napok.hossz&#34;" comment="" color="FFFFFF" rotated="0"></instruction>
+ </children>
+</root>

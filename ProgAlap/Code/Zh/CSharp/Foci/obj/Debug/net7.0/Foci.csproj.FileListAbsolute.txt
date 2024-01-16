@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\bin\Debug\net7.0\Foci.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\bin\Debug\net7.0\Foci.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\bin\Debug\net7.0\Foci.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\bin\Debug\net7.0\Foci.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\bin\Debug\net7.0\Foci.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\refint\Foci.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\Foci.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Zh\CSharp\Foci\obj\Debug\net7.0\ref\Foci.dll

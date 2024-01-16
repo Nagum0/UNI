@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\bin\Debug\net6.0\bea_komplx_BeneZakarias_vs.exe
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\bin\Debug\net6.0\bea_komplx_BeneZakarias_vs.deps.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\bin\Debug\net6.0\bea_komplx_BeneZakarias_vs.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\bin\Debug\net6.0\bea_komplx_BeneZakarias_vs.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\bin\Debug\net6.0\bea_komplx_BeneZakarias_vs.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\refint\bea_komplx_BeneZakarias_vs.dll
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.pdb
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\bea_komplx_BeneZakarias_vs.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\ProgAlap\Code\Beadando\bea_komplx_BeneZakarias_vs\obj\Debug\net6.0\ref\bea_komplx_BeneZakarias_vs.dll

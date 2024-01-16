@@ -101,7 +101,7 @@ namespace IdojarasElorejelzes {
             return result;
         }
 
-        static int Atlag(List<int> napok) {
+        static double Atlag(List<int> napok) {
             int s = 0;
 
             // Szumma:
@@ -110,12 +110,12 @@ namespace IdojarasElorejelzes {
             }
 
             // Atlag szamitas:
-            return s / napok.Count;
+            return (double) s / napok.Count;
         }
 
         static TelepulesAdat TelepulesAdatCalc(int telepules, List<int> napok) {
             TelepulesAdat adat = new TelepulesAdat(telepules + 1);
-            int n = Atlag(napok);
+            double n = Atlag(napok);
 
             // Megszamlalas:
             for (int i = 0; i < napok.Count; i++) {

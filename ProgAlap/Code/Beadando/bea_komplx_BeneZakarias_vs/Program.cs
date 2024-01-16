@@ -132,7 +132,7 @@ namespace IdojarasElorejelzes {
         static void RendezettAdatok(ref List<TelepulesAdat> telepulesek) {
             for (int i = 1; i < telepulesek.Count; i++) {
                 for (int j = 0; j < telepulesek.Count - 1; j++) {
-                    if (telepulesek[j].k > telepulesek[j + 1].k) {
+                    if (telepulesek[j].k < telepulesek[j + 1].k) {
                         TelepulesAdat temp = telepulesek[j];
                         telepulesek[j] = telepulesek[j + 1];
                         telepulesek[j + 1] = temp;
@@ -153,7 +153,7 @@ namespace IdojarasElorejelzes {
             RendezettAdatok(ref adatok);
 
             // Kiiratas:
-            for (int i = adatok.Count - 1; i >= 0; i--) {
+            for (int i = 0; i < adatok.Count; i++) {
                 Console.Write($"{adatok[i].index} ");
             }
         }

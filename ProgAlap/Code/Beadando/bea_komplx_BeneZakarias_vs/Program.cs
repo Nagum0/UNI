@@ -101,9 +101,7 @@ namespace IdojarasElorejelzes {
             return result;
         }
 
-        // Rework later...
-        static TelepulesAdat TelepulesAdatCalc(int telepules, List<int> napok) {
-            TelepulesAdat adat = new TelepulesAdat(telepules + 1);
+        static int Atlag(List<int> napok) {
             int s = 0;
 
             // Szumma:
@@ -112,11 +110,16 @@ namespace IdojarasElorejelzes {
             }
 
             // Atlag szamitas:
-            s = s / napok.Count;
+            return s / napok.Count;
+        }
+
+        static TelepulesAdat TelepulesAdatCalc(int telepules, List<int> napok) {
+            TelepulesAdat adat = new TelepulesAdat(telepules + 1);
+            int n = Atlag(napok);
 
             // Megszamlalas:
             for (int i = 0; i < napok.Count; i++) {
-                if (napok[i] > s)
+                if (napok[i] > n)
                 {
                     adat.k++;
                 }
@@ -126,41 +129,33 @@ namespace IdojarasElorejelzes {
         }
 
         // Sorting (bubble sort):
-        static void BubbleSort(ref List<int> xs) {
-            for (int i = 1; i < xs.Count; i++)
-            {
-                for (int j = 0; j < xs.Count - 1; j++)
-                {
-                    if (xs[j] > xs[j + 1])
-                    {
-                        int temp = xs[j];
-                        xs[j] = xs[j + 1];
-                        xs[j + 1] = temp;
+        static void RendezettAdatok(ref List<TelepulesAdat> telepulesek) {
+            for (int i = 1; i < telepulesek.Count; i++) {
+                for (int j = 0; j < telepulesek.Count - 1; j++) {
+                    if (telepulesek[j].k > telepulesek[j + 1].k) {
+                        TelepulesAdat temp = telepulesek[j];
+                        telepulesek[j] = telepulesek[j + 1];
+                        telepulesek[j + 1] = temp;
                     }
                 }
             }
         }
 
         public static void Main(string[] args) {
+            // Beolvasas:
             List<List<int>> telepulesek = Beolvas();
-            List<TelepulesAdat> adatok = new List<TelepulesAdat>();
 
+            // Feldolgozas:
+            List<TelepulesAdat> adatok = new List<TelepulesAdat>();
             for (int i = 0; i < telepulesek.Count; i++) {
                 adatok.Add(TelepulesAdatCalc(i, telepulesek[i]));
             }
+            RendezettAdatok(ref adatok);
 
-            foreach (TelepulesAdat adat in adatok) {
-                Console.WriteLine($"{adat.index} {adat.k}");
+            // Kiiratas:
+            for (int i = adatok.Count - 1; i >= 0; i--) {
+                Console.Write($"{adatok[i].index} ");
             }
-
-            List<int> xs = new List<int> { 5, 1, 4 };
-            Console.WriteLine(string.Join(", ", xs));
-            BubbleSort(ref xs);
-
-            for (int i = xs.Count - 1; i >= 0; i--) {
-                Console.Write($"{xs[i]} ");
-            }
-            Console.WriteLine();
         }
     }
 }

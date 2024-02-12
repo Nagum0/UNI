@@ -1,0 +1,15 @@
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\bin\Debug\net6.0\ProcedureManager.exe
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\bin\Debug\net6.0\ProcedureManager.deps.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\bin\Debug\net6.0\ProcedureManager.runtimeconfig.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\bin\Debug\net6.0\ProcedureManager.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\bin\Debug\net6.0\ProcedureManager.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.csproj.AssemblyReference.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.GeneratedMSBuildEditorConfig.editorconfig
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.AssemblyInfoInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.AssemblyInfo.cs
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.csproj.CoreCompileInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\refint\ProcedureManager.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ProcedureManager.genruntimeconfig.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\SzamRend\beadando\ProcedureManager\obj\Debug\net6.0\ref\ProcedureManager.dll

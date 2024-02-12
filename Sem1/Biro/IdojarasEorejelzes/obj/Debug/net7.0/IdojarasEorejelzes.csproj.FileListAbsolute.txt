@@ -1,0 +1,15 @@
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\bin\Debug\net7.0\IdojarasEorejelzes.exe
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\bin\Debug\net7.0\IdojarasEorejelzes.deps.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\bin\Debug\net7.0\IdojarasEorejelzes.runtimeconfig.json
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\bin\Debug\net7.0\IdojarasEorejelzes.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\bin\Debug\net7.0\IdojarasEorejelzes.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.csproj.AssemblyReference.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.GeneratedMSBuildEditorConfig.editorconfig
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.AssemblyInfoInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.AssemblyInfo.cs
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.csproj.CoreCompileInputs.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\refint\IdojarasEorejelzes.dll
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.pdb
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\IdojarasEorejelzes.genruntimeconfig.cache
+\\wsl.localhost\Debian\home\astolfo\dev\UNI\Biro\IdojarasEorejelzes\obj\Debug\net7.0\ref\IdojarasEorejelzes.dll

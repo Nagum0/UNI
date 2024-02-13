@@ -1,5 +1,7 @@
+*.gitignore
 *.exe
 *.json
 *.o
 *.rmeta
 *.pdb
+*.d

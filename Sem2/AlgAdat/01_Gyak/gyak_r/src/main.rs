@@ -41,13 +41,16 @@ fn log_ker(t: &[i32], b: i32) -> Option<usize> {
 
 // Time complexity: O(n^2)
 fn max_val_rend(t: &mut [i32]) {
+    println!("{:?}", t);
+
     let mut max_ind: usize = 0;
     let mut n: usize = t.len();
 
     for i in 0..n {
         max_ind = i;
+        println!("{:?}", t);
 
-        for j in i..n - 1 {
+        for j in i + 1..n  {
             if t[j] > t[max_ind] {
                 max_ind = j;
             }
@@ -55,10 +58,9 @@ fn max_val_rend(t: &mut [i32]) {
 
         if max_ind != i {
             t.swap(i, max_ind);
+            println!("{}", max_ind);
         }
     }
-
-    t.reverse()
 }
 
 fn main() {

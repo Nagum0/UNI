@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\bin\Debug\net6.0\Gyak01.exe
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\bin\Debug\net6.0\Gyak01.deps.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\bin\Debug\net6.0\Gyak01.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\bin\Debug\net6.0\Gyak01.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\bin\Debug\net6.0\Gyak01.pdb
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.csproj.AssemblyReference.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\refint\Gyak01.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.pdb
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\Gyak01.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak01\obj\Debug\net6.0\ref\Gyak01.dll

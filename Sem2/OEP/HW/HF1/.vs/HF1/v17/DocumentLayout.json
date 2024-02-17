@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf1\\labirynth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|solutionrelative:labirynth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf1\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|solutionrelative:content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf1\\direction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{298525F4-8EB9-4F1B-9F59-59783E6565A5}|HF1.csproj|solutionrelative:direction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAgwBEAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-17T10:35:04.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Labirynth.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Labirynth.cs",
+              "RelativeDocumentMoniker": "Labirynth.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Labirynth.cs",
+              "RelativeToolTip": "Labirynth.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-17T10:52:32.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Direction.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Direction.cs",
+              "RelativeDocumentMoniker": "Direction.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Direction.cs",
+              "RelativeToolTip": "Direction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-17T10:59:08.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Content.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Content.cs",
+              "RelativeDocumentMoniker": "Content.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF1\\Content.cs",
+              "RelativeToolTip": "Content.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-17T10:36:36.664Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

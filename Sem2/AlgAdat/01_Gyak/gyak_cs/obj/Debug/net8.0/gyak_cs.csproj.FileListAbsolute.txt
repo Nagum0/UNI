@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\bin\Debug\net8.0\gyak_cs.exe
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\bin\Debug\net8.0\gyak_cs.deps.json
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\bin\Debug\net8.0\gyak_cs.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\bin\Debug\net8.0\gyak_cs.dll
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\bin\Debug\net8.0\gyak_cs.pdb
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.dll
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\refint\gyak_cs.dll
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.pdb
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\gyak_cs.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\01_Gyak\gyak_cs\obj\Debug\net8.0\ref\gyak_cs.dll

@@ -1,2 +1,0 @@
-- Logaritmikus kereses
-- Maximum kivalasztasos rendezes

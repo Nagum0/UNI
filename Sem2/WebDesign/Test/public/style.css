@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.btn {
+    margin-top: 1rem;
+}
+
+.counter {
+    margin-top: 10px;
+    font-size: 45px;
+}
+
+.img-game {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
+    width: 60%;
+    height: 60%;
+}
+
+.cont {
+    display: flex;
+}
+
+.artist {
+    font-size: 500px;
+}

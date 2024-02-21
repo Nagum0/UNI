@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\bin\Debug\net8.0\Gyak02.exe
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\bin\Debug\net8.0\Gyak02.deps.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\bin\Debug\net8.0\Gyak02.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\bin\Debug\net8.0\Gyak02.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\bin\Debug\net8.0\Gyak02.pdb
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\refint\Gyak02.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.pdb
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\Gyak02.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\Gyak02\obj\Debug\net8.0\ref\Gyak02.dll

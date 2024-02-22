@@ -24,8 +24,8 @@
         public static Complex Mult(Complex a, Complex b)
         {
             return new Complex(
-                (a.x * b.x - a.y * b.y),
-                (a.x * b.y + a.y * b.x)
+                a.x * b.x - a.y * b.y,
+                a.x * b.y + a.y * b.x
             );
         }
 

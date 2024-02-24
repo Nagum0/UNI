@@ -40,7 +40,7 @@
 
         public override string ToString()
         {
-            return $"{n} / {d}";  
+            return $"{n}/{d}";  
         }
     }
 }

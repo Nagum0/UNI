@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\bin\Debug\net8.0\HF3.exe
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\bin\Debug\net8.0\HF3.deps.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\bin\Debug\net8.0\HF3.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\bin\Debug\net8.0\HF3.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\bin\Debug\net8.0\HF3.pdb
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\refint\HF3.dll
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.pdb
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\HF3.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem2\OEP\HW\HF3\obj\Debug\net8.0\ref\HF3.dll

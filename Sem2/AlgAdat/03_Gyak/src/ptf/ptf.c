@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "ptf.h"
 #include "C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\03_Gyak\src\stack\stack.h"
 
-typedef struct Postfix {
-    char *expr;
-} Postfix;
-
+/* --- PRIVATE --- */
 enum Operator {
     PLUS,
     MINUS,
@@ -19,6 +17,20 @@ enum Operator {
     CLOSING_PAREN
 };
 
+int is_number(char *str) {
+    for (int i = 0; i < strlen(str); i++)
+        if (isdigit(str[i]) == 0)
+            return 1;
+
+    return 0; 
+}
+
+/* --- PUBLIC --- */
+
+typedef struct Postfix {
+    char *expr;
+} Postfix;
+
 Postfix *parse_to_postfix(const char *infix_expr) {
     Postfix *new_ptf = (Postfix *) malloc(sizeof(Postfix));
     if (new_ptf == NULL) {
@@ -27,17 +39,20 @@ Postfix *parse_to_postfix(const char *infix_expr) {
         return NULL;
     }
     
-    // WRITE THE INFIX TO POSTFIX ALGORYTHM:
-    new_ptf->expr = strdup(infix_expr);
+    new_ptf->expr = (char *) malloc(sizeof(char) * (strlen(infix_expr) + 1));
+    if (new_ptf->expr == NULL) {
+        fprintf(stderr, "Error while allocating memory for postfix expression.");
+        free(new_ptf);
+        return NULL;
+    }
 
+    // WRITE THE INFIX TO POSTFIX ALGORYTHM:
     Stack *op_stack = new_stack();
     char *input = strdup(infix_expr);
     char *token = strtok(input, " ");
-
+    
     while (token != NULL) {
-        if (strcmp(token, "+") == 0)      push(&op_stack, PLUS);
-        else if (strcmp(token, "-") == 0) push(&op_stack, MINUS);
-
+        printf("%s\n", token);
         token = strtok(NULL, " ");
     }
 
@@ -52,5 +67,5 @@ void ptf_display(Postfix *ptf) {
 
 void ptf_free(Postfix *ptf) {
     free(ptf->expr);
-    ptf = NULL;
+    free(ptf);
 }

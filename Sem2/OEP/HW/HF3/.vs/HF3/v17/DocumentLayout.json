@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9464B5F8-644F-4EC2-B41B-B452FA6AFD6D}|HF3.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9464B5F8-644F-4EC2-B41B-B452FA6AFD6D}|HF3.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A8836B05-815E-43AB-97EE-786BCE3ED7D0}|HF3.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8836B05-815E-43AB-97EE-786BCE3ED7D0}|HF3.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8836B05-815E-43AB-97EE-786BCE3ED7D0}|HF3.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf3\\diag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8836B05-815E-43AB-97EE-786BCE3ED7D0}|HF3.csproj|solutionrelative:diag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,9 +28,22 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF3\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAvAAAA",
+              "ViewState": "AQIAAH4AAAAAAAAAAAArwI8AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T19:19:03.113Z",
+              "WhenOpened": "2024-03-01T12:06:38.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Diag.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF3\\Diag.cs",
+              "RelativeDocumentMoniker": "Diag.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF3\\Diag.cs",
+              "RelativeToolTip": "Diag.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAQwDkAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T12:08:32.883Z",
               "EditorCaption": ""
             }
           ]

@@ -60,6 +60,13 @@ int pop(Stack **top) {
     return top_data;
 }
 
+int top(Stack *stack) {
+    if (!isempty(stack)) {
+        return stack->data;
+    }
+    return -1;
+}
+
 void delete_stack(Stack **stack) {
     Stack *current = *stack;
     while (current != NULL) {

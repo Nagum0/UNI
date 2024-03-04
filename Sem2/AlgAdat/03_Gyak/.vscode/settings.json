@@ -1,7 +1,7 @@
 {
     "files.associations": {
-        "stdio.h": "c",
         "ctype.h": "c",
-        "stack.h": "c"
+        "stack.h": "c",
+        "ptf.h": "c"
     }
 }

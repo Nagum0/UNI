@@ -7,7 +7,7 @@
 #include "C:\Users\xptee\Documents\UNI\Sem2\AlgAdat\03_Gyak\src\stack\stack.h"
 
 /* --- PRIVATE --- */
-enum Operator {
+typedef enum Operator {
     PLUS,
     MINUS,
     MULT,
@@ -15,7 +15,25 @@ enum Operator {
     HAT,
     OPEN_PAREN,
     CLOSING_PAREN
-};
+} Operator;
+
+char parse_op(Operator op) {
+    switch (op)
+    {
+    case PLUS:
+        return '+';
+    case MINUS:
+        return '-';
+    case MULT:
+        return '*';
+    case DIV:
+        return '/';
+    case HAT:
+        return '^';
+    default:
+        return 'a';
+    }
+}
 
 int is_number(char *str) {
     for (int i = 0; i < strlen(str); i++)
@@ -38,10 +56,11 @@ Postfix *parse_to_postfix(const char *infix_expr) {
         free(new_ptf);
         return NULL;
     }
-    
+
     new_ptf->expr = (char *) malloc(sizeof(char) * (strlen(infix_expr) + 1));
     if (new_ptf->expr == NULL) {
         fprintf(stderr, "Error while allocating memory for postfix expression.");
+        free(new_ptf->expr);
         free(new_ptf);
         return NULL;
     }
@@ -52,7 +71,14 @@ Postfix *parse_to_postfix(const char *infix_expr) {
     char *token = strtok(input, " ");
     
     while (token != NULL) {
-        printf("%s\n", token);
+        if (strcmp(token, "(") == 0)
+            push(&op_stack, OPEN_PAREN);
+        else if (strcmp(token, ")") == 0) {
+            while (top(op_stack) != OPEN_PAREN) {
+                strcat(new_ptf->expr, parse_op(pop(&op_stack)));
+            }
+            pop(&op_stack);
+        }
         token = strtok(NULL, " ");
     }
 

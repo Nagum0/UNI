@@ -30,7 +30,18 @@ namespace HF4Test
             prq.Add(new Element(1, "Zeki"));
             prq.Add(new Element(100, "Astolfo"));
             prq.Add(new Element(23, "Sheeesh"));
-            
+            Assert.AreEqual<string>("Astolfo", prq.GetMax().data);
+        }
+
+        [TestMethod]
+        public void RemMaxTest()
+        {
+            PrQueue prq = new PrQueue();
+            prq.Add(new Element(1, "Zeki"));
+            prq.Add(new Element(100, "Astolfo"));
+            prq.Add(new Element(23, "Sheeesh"));
+            prq.RemMax();
+            Assert.AreEqual<string>("Sheeesh", prq.GetMax().data);
         }
     }
 }

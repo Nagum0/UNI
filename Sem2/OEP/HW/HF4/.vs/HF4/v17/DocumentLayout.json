@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF4\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4E00017D-81EB-4941-B53F-E1BA65BCC832}|..\\HWTests\\HF4Test\\HF4Test.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hwtests\\hf4test\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08513953-166A-4EB6-A7DC-3066D11DAD24}|HF4.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf4\\prqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08513953-166A-4EB6-A7DC-3066D11DAD24}|HF4.csproj|solutionrelative:prqueue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08513953-166A-4EB6-A7DC-3066D11DAD24}|HF4.csproj|c:\\users\\xptee\\documents\\uni\\sem2\\oep\\hw\\hf4\\element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08513953-166A-4EB6-A7DC-3066D11DAD24}|HF4.csproj|solutionrelative:element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HWTests\\HF4Test\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "..\\HWTests\\HF4Test\\UnitTest1.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HWTests\\HF4Test\\UnitTest1.cs",
+              "RelativeToolTip": "..\\HWTests\\HF4Test\\UnitTest1.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAgwCAAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-07T12:39:08.336Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PrQueue.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF4\\PrQueue.cs",
+              "RelativeDocumentMoniker": "PrQueue.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF4\\PrQueue.cs",
+              "RelativeToolTip": "PrQueue.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAowCcAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-07T12:15:43.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Element.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF4\\Element.cs",
+              "RelativeDocumentMoniker": "Element.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\HW\\HF4\\Element.cs",
+              "RelativeToolTip": "Element.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-07T12:16:22.67Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

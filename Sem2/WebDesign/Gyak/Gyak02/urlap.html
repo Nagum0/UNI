@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../1_html_alapok/css/alap.css">
+    <title>Legjobb internetes filmek</title>
+</head>
+<body>
+    <nav id="tartalomugras"> <h2>Ugrás az oldalon belül</h2>
+        <p><a href="#tartalom">Ugrás a tartalomra</a></p>
+        </nav>
+        <header>
+        <h1>A legjobb &lt;internetes/webes&gt; témájú filmek</h1>
+        <nav id="fomenu">
+        <h2 class="rejtett">Főmenü</h2>
+        <b>Kezdőlap</b> <a href="index.html">Új film beküldése</a>
+    </nav>
+    <h2 class="rejtett">Főmenü</h2>
+    </header>
+    <main id="tartalom">
+        <form action="mailto:valaki@valahol.hu" method="post" id="ff">
+            <fieldset>
+                <legend>Adatok elkuldese</legend>
+                <strong>A film cime (magyarul)</strong><br>
+                <input type="text" id="cm" size="50" maxlength="100" required><br>
+                <strong>A film cime (angolul)</strong><br>
+                <input type="text" id="ca" size="50" maxlength="100"><br>
+                <strong>IMDb weboldal</strong> <br>
+                <input type="url" id="wc" size="50" maxlength="100" value="http://imdb.com/"> <br>
+                <strong>A film cselekmenye</strong> <br>
+                <textarea id="ta" cols="50" rows="10" placeholder="Ne spoilerezz!" style="resize: none;"></textarea>
+            </fieldset>
+            <fieldset>
+                <legend>A film ertekelese</legend>
+                <input type="radio" name="rb" id="rb1" value="rb1"> <label for="rb1">1</label>
+                <input type="radio" name="rb" id="rb2" value="rb2"> <label for="rb2">2</label>
+                <input type="radio" name="rb" id="rb3" value="rb3"> <label for="rb3">3</label>
+                <input type="radio" name="rb" id="rb4" value="rb4"> <label for="rb4">4</label>
+                <input type="radio" name="rb" id="rb5" value="rb5"> <label for="rb5">5</label>
+            </fieldset>
+            <fieldset>
+                <legend>A te adataid</legend>
+                <strong>Nev</strong> <br>
+                <input type="text" id="cn" size="50" maxlength="100" required><br>
+                <strong>Email</strong><br>
+                <input type="email" id="em" size="50" maxlength="100" required><br>
+                <input type="checkbox" id="cb" name="cb" value="cb1"> Feliratkozom ... <br>
+            </fieldset>
+            <fieldset>
+                <input type="submit" id="sm" value="Elkuld">
+                <input type="reset" id="rm" value="Megsem">
+            </fieldset>
+        </form>
+    </main>
+    <footer>
+        <address>
+    <p>Készítette: Gipsz Jakab <br>(<a href="mailto:gipszjakab@mailinator.com">gipszjakab@mailinator.com</a>)<br>1117 Budapest, Nevenincs u. 17</p>
+    </address>
+    </footer>
+</body></html>

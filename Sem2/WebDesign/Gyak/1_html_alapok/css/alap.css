@@ -1,6 +1,6 @@
 /* egyedi bet�t�pus */ 
- @import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz');
- @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
  
 /* kit�ltend� defin�ci�k */
 
@@ -8,10 +8,10 @@
 h1, footer p, figcaption, figure, video {
     /* sz�veg k�z�pre igaz�t�sa */
     text-align: center;
-}
+    }
 
 p {
-   /* sz�veg sorkiz�rt igaz�t�sa */
+    /* sz�veg sorkiz�rt igaz�t�sa */
     text-align: justify;
 }
 
@@ -35,68 +35,83 @@ figcaption  {
 /* ============= bet�m�retek ============= */
 
 h1 {
-		/* legyen h�romszoros */
+	/* legyen h�romszoros */
+    font-size: 3em;
 }
+
 h2,h3,header nav#fomenu {
-		/* legyen m�sf�lszeres */
-	}	
- 
+	/* legyen m�sf�lszeres */
+    font-size: 1.5em;
+}	
+
  
 /* ============= bet� form�z�s ============= */
 aside h2, q {
-		/* legyen d�lt */
-	}
+	/* legyen d�lt */
+    font-style: italic;
+}
  
  
 figcaption {
     /* legyen f�lk�v�r */
+    font-weight: bold;
 }
  
- h1 {
-	 		/* legyen kiskapit�lis */
-	 	    /* 2px-es ritk�tott bet�k�z legyen */
- }
-
-
- p {
-		/* m�sfeles sort�vols�g legyen */
+h1 {
+	/* legyen kiskapit�lis */
+	font-variant: small-caps;
+    /* 2px-es ritk�tott bet�k�z legyen */
+    letter-spacing: 2px;
 }
 
- a {
-			/* legyen csupa nagybet�s */
- }
+
+p {
+	/* m�sfeles sort�vols�g legyen */
+    line-height: 1.5;
+}
+
+a {
+	/* legyen csupa nagybet�s */
+    text-transform: uppercase;
+}
  
- h1 {
- 	/* legyen sz�rke �rny�k eltolva jobbra 5px, lefele 7px, elmos�s legyen 3px */
- }
+h1 {
+    /* legyen sz�rke �rny�k eltolva jobbra 5px, lefele 7px, elmos�s legyen 3px */
+    text-shadow: #aaa, 5px, 7px, 3px;
+}
  
- p {
-	 	/* legyen egyszeres a beh�z�s */
-	 }
-	 
- p:first-of-type {
-	 	/* ne legyen beh�z�s */
-	 }
+p {
+    /* legyen egyszeres a beh�z�s */
+    text-indent: 1em;
+}
+
+p:first-of-type {
+    /* ne legyen beh�z�s */
+    text-align: 0;
+}
 	 
 /* ============== sz�nek =============== */
 
 h3 {
-			/* legyen a #786f61 sz�nk�d */
-  }
+	/* legyen a #786f61 sz�nk�d */
+    color: #786f61;
+}   
  
 pre {
-		/* h�tt�rsz�n legyen fekete */
-		/* sz�vegsz�n legyen feh�r */
-	}
+    /* h�tt�rsz�n legyen fekete */
+    /* sz�vegsz�n legyen feh�r */
+    background-color: #000;
+    color: #fff;
+}
 	
 figure, video {
-		/* h�tt�rsz�n legyen fekete */
-
-
+    /* h�tt�rsz�n legyen fekete */
+    background-color: #000;
 }	
 
 figcaption {
-				/* legyen feh�r a sz�veg sz�ne*/
+    /* legyen feh�r a sz�veg sz�ne*/
+    color: #fff;
 }
 
  
@@ -149,7 +164,7 @@ main>article>h2 {
 	padding:10px 20px 10px 60px;
 }
 
-main>article>h2:last-of-type {
+main>article:last-of-type>h2 {
 	background:none;
 	padding:10px;
 }

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyak04", "Gyak04.csproj", "{99D5C880-637B-4D24-A4CC-6E83891E29C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyak04Test", "..\Gyak04Test\Gyak04Test.csproj", "{335C5665-95E8-4B80-A75B-AB62143AD16C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99D5C880-637B-4D24-A4CC-6E83891E29C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D5C880-637B-4D24-A4CC-6E83891E29C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D5C880-637B-4D24-A4CC-6E83891E29C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D5C880-637B-4D24-A4CC-6E83891E29C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335C5665-95E8-4B80-A75B-AB62143AD16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335C5665-95E8-4B80-A75B-AB62143AD16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335C5665-95E8-4B80-A75B-AB62143AD16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335C5665-95E8-4B80-A75B-AB62143AD16C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {271F0E19-2A1D-42ED-82DC-30690E7B0E12}
+	EndGlobalSection
+EndGlobal

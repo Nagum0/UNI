@@ -1,9 +1,5 @@
 {
     "files.associations": {
-        "que.h": "c",
-        "stdio.h": "c",
-        "array": "c",
-        "string": "c",
-        "string_view": "c"
+        "que.h": "c"
     }
 }

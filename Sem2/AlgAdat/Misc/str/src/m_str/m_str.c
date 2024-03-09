@@ -8,6 +8,8 @@ typedef struct String {
     char *content;
 } String;
 
+/* Constructor and destructors */
+/* --------------------------- */
 String *new_string(const char *input) {
     String *str = (String *) malloc(sizeof(String));
     if (str == NULL) goto err;
@@ -36,6 +38,8 @@ void free_arr_string(String **arr, size_t size) {
     }
 }
 
+/* String concatting and character pushing */
+/* --------------------------------------- */
 void push_const_string(String *str, const char *input) {
     size_t new_str_len = strlen(str->content) + strlen(input) + 1;
     size_t old_len = strlen(str->content);
@@ -84,10 +88,14 @@ void push_char_string(String *str, const char c) {
     str->content[new_size + 1] = '\0';
 }
 
+/* Print */
+/* ----- */
 void print_string(String *str) {
     printf("%s\n", str->content);
 }
 
+/* Getters */
+/* ------- */
 size_t len_string(String *str) {
     return strlen(str->content);
 }

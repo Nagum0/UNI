@@ -35,12 +35,16 @@ if [ "$flag_q" = true ]; then
 fi
 
 # Running gcc:
-gcc -c $mods
-gcc -o a main.c ${os[@]} 
+gcc -c $mods LinkedList/hsls/hsls.c LinkedList/node.c
+gcc -o a main.c ${os[@]} hsls.o node.o
 
 for o in ${os[@]}; do
     rm $o
 done
 
 ./a
-echo $?
+if [ $? -eq 0 ]; then
+    echo "True"
+else
+    echo "False"
+fi

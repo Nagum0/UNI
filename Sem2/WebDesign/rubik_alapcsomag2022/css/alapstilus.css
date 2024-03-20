@@ -1,0 +1,151 @@
+/* alap stílus */
+
+/*betűtípus importálás*/
+@import 'https://fonts.googleapis.com/css?family=Oswald';
+
+body {
+    background-color: #000;
+    background-image: url("../kepek/hatter_felso.jpg"), url("../kepek/hatter_also.jpg");
+    background-repeat: no-repeat, repeat-x;
+    background-position: 10px 0, left bottom;
+    padding-bottom: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    text-align: justify;
+}
+
+main, footer, header {
+    width: 70%;
+    min-width: 400px;
+    max-width: 1000px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+footer, header {
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    opacity: 0.9;
+}
+
+header {
+    border-radius: 10px 10px 0 0;
+}
+
+footer {
+    border-radius: 0 0 10px 10px;
+}
+
+footer p {
+    text-align: center;
+}
+
+article {
+    padding: 10px 5px;
+}
+
+h1,h2 {
+    font-family: 'Oswald', sans-serif;
+    text-shadow: #ccc 7px 7px 3px;
+}
+
+article#leiras aside {
+    background-color: #fdd295;
+    border: #555 solid 2px;
+    padding: 7px;
+    border-radius: 10px;
+    text-align: justify;
+    width: 35%;
+    float: right;
+    margin-left: 10px;
+}
+
+aside q {
+    font-style: italic;
+}
+
+aside p {
+    text-align: right;
+    font-weight: bold;
+}
+
+main nav {
+    clear: both;
+    text-align: right;
+    margin: 20px 0;
+    border-top: #555 dotted 2px;
+}
+
+article#kirakas {
+    column-count: 2;
+    column-gap: 15px;
+}
+
+article#kirakas h2 {
+    float: left;
+    margin-right: 10px;
+}
+
+article#kirakas p {
+    margin-top: 0;
+}
+
+article#kirakas p:first-of-type {
+    margin-top: 0;
+}
+
+article#valtozatai figure {
+    background-color: #fdd295;
+    border: #555 solid 1px;
+    border-radius: 10px;
+    width: 140px;
+    text-align: center;
+    padding: 10px;
+}
+
+article#valtozatai figure img {
+    background-color: #fff;
+    border: #555 dotted 1px;
+}
+
+article#valtozatai figure:nth-of-type(1) {
+    transform: rotate(0deg);
+}
+
+article#valtozatai figure:nth-of-type(2) {
+    transform: rotate(-7deg);
+}
+
+article#valtozatai figure:nth-of-type(3) {
+    transform: rotate(7deg);
+}
+
+article#valtozatai figure:nth-of-type(4) {
+    transform: rotate(-10deg);
+}
+
+table {
+    border: #555 double 5px;
+    border-collapse: collapse;
+    margin: auto;
+    caption-side: bottom;
+}
+
+td, th {
+    border: #555 solid 1px;
+}
+
+th {
+    background-color: #fdd295;
+}
+
+.kipozicional {
+    position: relative;
+    left: -9999px;
+}
+
+.kipozicional:focus {
+    position: relative;
+}

@@ -1,4 +1,4 @@
-import static check.CheckThat.*;
+iport static check.CheckThat.*;
 import static check.CheckThat.Condition.*;
 import org.junit.jupiter.api.*;
 import check.CheckThat;

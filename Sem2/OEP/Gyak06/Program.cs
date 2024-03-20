@@ -11,12 +11,13 @@
         public int id;
         public int price;
     }
+
     public class Program
     {
         static void Main(string[] args)
         {
             // 1.Feladat
-            /* IntEnum test = new IntEnum(args[0]);
+            IntEnum test = new IntEnum(args[0]);
             int db_pos = 0;
             int db_neg = 0;
             bool neg = false;
@@ -33,7 +34,7 @@
             }
 
             Console.WriteLine(db_pos);
-            Console.WriteLine(db_neg); */
+            Console.WriteLine(db_neg);
 
 
         }

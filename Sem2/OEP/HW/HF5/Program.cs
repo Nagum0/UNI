@@ -20,13 +20,14 @@
             while (!x.EndOfStream) {
                 l = l && e < 0;
 
-                if (e < kicsi) {
+                if (e < kicsi)
                     kicsi = e;
-                }
 
                 e = double.Parse(x.ReadLine());
             }
-
+            
+            if (e < kicsi)
+                kicsi = e;
             l = l && e < 0;
 
             Console.WriteLine(a);

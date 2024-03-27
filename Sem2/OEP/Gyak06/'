@@ -4,15 +4,6 @@
     {
         public string cName;
         public List<Item> items;
-
-        public static int Sum(List<Item> xs) {
-            int s = 0;
-
-            foreach (Item e in xs)
-                s += e.price;
-
-            return s;
-        }
     }
 
     public struct Item
@@ -25,15 +16,14 @@
     {
         static void Main(string[] args)
         {
-            IntEnum test = new IntEnum(args[0]);
-            int bevetel = 0;
-
-            foreach (Receipt r in test) {
-                bevetel += Receipt.Sum(r.items);
+            int s = 0;
+            IntEnum x = new IntEnum(args[0]);
+            foreach (Item e in x) {
+                sum += e.price;
             }
 
-            Console.WriteLine(bevetel);
-            
+            Console.WriteLine(s);
+
             // 1.Feladat
             // IntEnum test = new IntEnum(args[0]);
             // int db_pos = 0;
@@ -53,6 +43,8 @@
             //
             // Console.WriteLine(db_pos);
             // Console.WriteLine(db_neg);
+            //
+
         }
     }
 }

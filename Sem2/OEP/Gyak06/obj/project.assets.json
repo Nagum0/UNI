@@ -8,26 +8,24 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\xptee\\.nuget\\packages\\": {}
+    "/home/zack/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\Gyak06\\Gyak06.csproj",
+      "projectUniqueName": "/home/zack/UNI/Sem2/OEP/Gyak06/Gyak06.csproj",
       "projectName": "Gyak06",
-      "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\Gyak06\\Gyak06.csproj",
-      "packagesPath": "C:\\Users\\xptee\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem2\\OEP\\Gyak06\\obj\\",
+      "projectPath": "/home/zack/UNI/Sem2/OEP/Gyak06/Gyak06.csproj",
+      "packagesPath": "/home/zack/.nuget/packages/",
+      "outputPath": "/home/zack/UNI/Sem2/OEP/Gyak06/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\xptee\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/zack/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -40,11 +38,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -66,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

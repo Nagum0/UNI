@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 
 namespace Gyak06
 {
@@ -13,17 +12,19 @@ namespace Gyak06
         public IntEnumerator(string path)
         {
             this.path = path;
+            curr.items = new List<Item>();
             inFile = new StreamReader(path);
         }
 
         public bool MoveNext()
         {
+            curr.items = new List<Item>();
             string[] input;
             Item item;    
-
+            
             if (!inFile.EndOfStream)
             {
-                input = Console.ReadLine().Split();
+                input = inFile.ReadLine().Split();
                 curr.cName = input[0];
 
                 for (int i = 1; i < input.Length; i+=2)

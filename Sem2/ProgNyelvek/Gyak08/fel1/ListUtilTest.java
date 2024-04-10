@@ -27,4 +27,57 @@ public class ListUtilTest {
         assertEquals(sixtyfour, ListUtil.divisors(64));
     }
 
+    @Test
+    public void testWithSameStartEnd() {
+        ArrayList<String> output = new ArrayList<String>();
+        ArrayList<String> xs = new ArrayList<String>();
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+
+        xs.add(null);
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+
+        xs.add(" ");
+        output.add(" ");
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+
+        xs.add("x");
+        output.add("x");
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+
+        xs.add("");
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+
+        xs.add("different start and end?");
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+
+        xs.add("ends and starts the same");
+        output.add("ends and starts the same");
+        assertEquals(output, ListUtil.withSameStartEnd(xs));
+    }
+
+    @Test
+    public void testMaxToFront() {
+        ArrayList<String> xs = new ArrayList<String>();
+        ArrayList<String> output = new ArrayList<String>();
+
+        ListUtil.maxToFront(xs);
+        assertEquals(output, xs);
+
+        xs.add("astolfo");
+        output.add("astolfo");
+        ListUtil.maxToFront(xs);
+        assertEquals(output, xs);
+
+        xs.clear();
+        output.clear();
+
+        xs.add("can");
+        xs.add("you");
+        xs.add("succeed");
+        output.add("you");
+        output.add("can");
+        output.add("succeed");
+        ListUtil.maxToFront(xs);
+        assertEquals(output, xs);
+    }
 }

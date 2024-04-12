@@ -1,0 +1,15 @@
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.GeneratedMSBuildEditorConfig.editorconfig
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.AssemblyInfoInputs.cache
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.AssemblyInfo.cs
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.csproj.CoreCompileInputs.cache
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.sourcelink.json
+/home/zack/UNI/Sem2/OEP/HW/HF7/bin/Debug/net8.0/HF7
+/home/zack/UNI/Sem2/OEP/HW/HF7/bin/Debug/net8.0/HF7.deps.json
+/home/zack/UNI/Sem2/OEP/HW/HF7/bin/Debug/net8.0/HF7.runtimeconfig.json
+/home/zack/UNI/Sem2/OEP/HW/HF7/bin/Debug/net8.0/HF7.dll
+/home/zack/UNI/Sem2/OEP/HW/HF7/bin/Debug/net8.0/HF7.pdb
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.dll
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/refint/HF7.dll
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.pdb
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/HF7.genruntimeconfig.cache
+/home/zack/UNI/Sem2/OEP/HW/HF7/obj/Debug/net8.0/ref/HF7.dll

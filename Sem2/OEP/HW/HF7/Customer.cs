@@ -12,6 +12,7 @@ public class Customer {
     }
 
     public void Withdrawal(ATM atm) {
+        /* Console.WriteLine("\t-- Processing -> Customer.Withdrawal()"); */
         atm.Process(this);
     }
 
@@ -20,6 +21,7 @@ public class Customer {
     }
 
     public Card ProvidesCard() {
+        /* Console.WriteLine($"\t-- Card count: {accounts[0].cards.Count} -> Customer.ProvidesCard()"); */
         return accounts[0].cards[0];
     }
 

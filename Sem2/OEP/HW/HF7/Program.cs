@@ -145,18 +145,23 @@ namespace HF7
                 Console.WriteLine("Result - Process - Unsuccessful - With exception");
             }
         }
+
         public static void TestCustomer()
         {
             Console.WriteLine("Unittesting Customer class");
+
             List<Bank> testBanks = new List<Bank>();
             Bank testBank = new Bank();
             testBanks.Add(testBank);
             Center testCenter = new Center(testBanks);
             ATM testATM = new ATM("Miami", testCenter);
+
             Customer tested;
             string PIN;
             int withdraw;
+
             Console.WriteLine("Testing - Constructor");
+
             try
             {
                 Console.WriteLine("Input - PIN of customer");
@@ -169,12 +174,15 @@ namespace HF7
             {
                 Console.WriteLine("Result - Constructor - Unsuccessful");
             }
+
             Console.WriteLine("Testing - Withdrawal");
+
             Console.WriteLine("Input - PIN of customer");
             PIN = Console.ReadLine();
             Console.WriteLine("Input - Amount customer withdraws");
             withdraw = int.Parse(Console.ReadLine());
             tested = new Customer(PIN, withdraw);
+
             try
             {
                 testBank.OpenAccount("12345", tested);
@@ -202,6 +210,7 @@ namespace HF7
             {
                 Console.WriteLine("Result - Withdrawal - Unsuccessful");
             }
+
             Console.WriteLine("Tesing - ProvidesPIN");
             try
             {

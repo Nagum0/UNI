@@ -17,5 +17,6 @@ public class Account {
 
     public void Change(int a) {
         balance += a;
+        /* Console.WriteLine($"\t-- accNum: {this.accNum}; balance: {this.balance} -> Account.Change()"); */
     }
 }

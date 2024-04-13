@@ -12,6 +12,8 @@ public class ATM {
     public void Process(Customer c) {
         Card card = c.ProvidesCard();
 
+        /* Console.WriteLine($"\t-- card: {card.cNum} -> ATM.Process()"); */
+
         if (card.CheckPIN(c.ProvidesPIN())) {
             int a = c.RequestMoney();
             if (center.GetBalance(card.cNum) >= a) {

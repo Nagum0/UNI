@@ -8,16 +8,19 @@ public class Bank {
     }
 
     public void OpenAccount(string cNum, Customer c) {
-        accounts.Add(new Account(cNum));
-        c.AddAccount(new Account(cNum));
+        Account acc = new Account(cNum);
+        accounts.Add(acc);
+        c.AddAccount(acc);
     }
 
     public void ProvidesCard(string cNum) {
         (bool l, Account acc) = FindAccount(cNum);
         
         if (l) {
-            Card card = new Card(cNum, "0000");
+            Card card = new Card(cNum, "1234");
             acc.cards.Add(card);
+            /* Console.WriteLine("\t-- Account found! -> Bank.ProvidesCard()");
+            Console.WriteLine($"\t-- accNum: {cNum} cards1: {acc.cards[0].cNum} -> Bank.ProvidesCard()"); */
         }
     }
 
@@ -31,8 +34,10 @@ public class Bank {
 
     public void Transaction(string cNum, int amount) {
         (bool l, Account acc) = FindAccount(cNum);
-        if (l)
+        if (l) {
             acc.Change(amount);
+            /* Console.WriteLine("\t-- Account found! -> Bank.Transaction()"); */
+        }
     } 
 
     public bool CheckAccount(string cNum) {

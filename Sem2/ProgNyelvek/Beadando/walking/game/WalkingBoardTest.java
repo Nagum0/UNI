@@ -15,4 +15,10 @@ public class WalkingBoardTest {
         WalkingBoard board = new WalkingBoard(5);
         assertEquals(true, board.isValidPosition(4, 4));
     }
+
+    @Test
+    public void testGetTile() {
+        WalkingBoard board = new WalkingBoard(5);
+        assertEquals(WalkingBoard.BASE_TILE_SCORE, board.getTile(3,3));
+    }
 }

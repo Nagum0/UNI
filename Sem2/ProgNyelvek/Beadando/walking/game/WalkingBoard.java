@@ -1,6 +1,7 @@
 package walking.game;
 
 import java.util.*;
+import walking.game.util.*;
 
 public class WalkingBoard {
     private int[][] tiles;
@@ -33,6 +34,46 @@ public class WalkingBoard {
     }
 
     public int getTile(int x, int y) {
+        if (!isValidPosition(x, y)) {
+            throw new IllegalArgumentException("Invalid position!");
+        }
+
+        return this.tiles[y][x];
+    }
+
+    public int[][] getTiles() {
+        int[][] copyOfTiles = new int[this.tiles.length][];
+
+        for (int i = 0; i < this.tiles.length; i++) {
+            copyOfTiles[i] = Arrays.copyOf(this.tiles[i], this.tiles[i].length);
+        }
+
+        return copyOfTiles;
+    }
+
+    public static int getXStep(Direction direction) {
+        switch (direction) {
+            case RIGHT:
+                return 1;
+            case LEFT:
+                return -1;
+            default:
+                return 0;
+        }
+    }
+
+    public static int getYStep(Direction direction) {
+        switch (direction) {
+            case UP:
+                return -1;
+            case DOWN:
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+    public int moveAndSet(Direction dir, int value) {
         return 0;
     }
 }

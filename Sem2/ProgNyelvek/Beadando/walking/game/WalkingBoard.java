@@ -30,7 +30,8 @@ public class WalkingBoard {
     }
 
     public boolean isValidPosition(int x, int y) {
-        return y < this.tiles.length && x < this.tiles[y].length;
+        return (0 <= y && y < this.tiles.length) &&
+               (0 <= x && x < this.tiles[y].length);
     }
 
     public int getTile(int x, int y) {
@@ -74,6 +75,17 @@ public class WalkingBoard {
     }
 
     public int moveAndSet(Direction dir, int value) {
-        return 0;
+        int result = 0;
+        int newXCor = this.x + getXStep(dir);
+        int newYCor = this.y + getYStep(dir);
+
+        if (isValidPosition(newXCor, newYCor)) {
+            this.x = newXCor;
+            this.y = newYCor;
+            result = this.getTile(this.x, this.y);
+            this.tiles[this.y][this.x] = value;
+        }
+
+        return result;
     }
 }

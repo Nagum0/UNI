@@ -14,7 +14,7 @@
             return false; 
         }
 
-        public virtual bool IsFlower() 
+        public virtual bool IsFlower()
         {
             return false;
         }

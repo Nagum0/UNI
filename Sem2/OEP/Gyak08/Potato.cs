@@ -3,7 +3,7 @@
     // Ez egy 'singleton';
     // singleton = a program alatt csak 1 peldany letezik belole;
     // Ezert private a kons.;
-    // A instance static, mert osztalyszintu es csak egy van belole;
+    // Az instance static, mert osztalyszintu es csak egy van belole;
     public class Potato : Vegetable
     {
         private static Potato? instance = null;

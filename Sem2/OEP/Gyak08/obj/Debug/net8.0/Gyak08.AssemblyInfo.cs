@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gyak08")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55d30a55e4b0ba27fc9a45d7937c1de1778f415d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29c7c27140efef3061067e17cd0cdb1a255fdcaf")]
 [assembly: System.Reflection.AssemblyProductAttribute("Gyak08")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Gyak08")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

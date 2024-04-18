@@ -28,6 +28,7 @@ public class WalkingBoardWithPlayers extends WalkingBoard {
             players[i] = new Player();
     }
 
+    /* ITT TARTASZ */
     public int[] walk(int... stepCounts) {
         return new int[0];
     }

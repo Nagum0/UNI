@@ -30,6 +30,21 @@ public class WalkingBoardWithPlayers extends WalkingBoard {
 
     /* ITT TARTASZ */
     public int[] walk(int... stepCounts) {
+        int i = 0;
+        int playerIndex = 0;
+
+        while (i < stepCounts.length) {        
+            if (playerIndex == players.length)
+                playerIndex = 0;
+
+            System.out.println("step: " + i + " playerIndex: " + playerIndex + " stepsToTake: " + stepCounts[i]);
+
+            players[playerIndex].turn();
+
+            playerIndex++;
+            i++;
+        }
+
         return new int[0];
     }
 }

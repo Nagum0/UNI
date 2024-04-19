@@ -1,4 +1,5 @@
 * {
+    box-sizing: border-box;
     --color-1: #244855;
     --color-1-darker: #1e2f35;
     --color-2: #E64833;
@@ -12,6 +13,7 @@ body {
     background-image: url("../imgs/bg.png"), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     background-blend-mode: multiply;
     background-size: cover;
+    background-repeat: repeat;
 }
 
 /* ------------------------------------- NAVBAR ------------------------------------- */
@@ -61,6 +63,7 @@ nav.navbar.bg-body-tertiary {
 
 .home-page-cont {
     text-align: center;
+    color: var(--color-5);
 }
 
 .welcome-info {
@@ -103,9 +106,19 @@ nav.navbar.bg-body-tertiary {
     margin-bottom: 2em;
 }
 
+.title {
+    color: var(--color-5);
+}
+
+.news-p {
+    color: var(--color-5);
+    font-size: larger;
+}
+
 /* ------------------------------------- FOOTER ------------------------------------- */
 footer {
-    height: 10em;
+    height: 8em;
+    width: 100%;
     background-color: var(--color-1);
     border-top: 3px solid var(--color-1-darker);
     color: var(--color-3);
@@ -114,6 +127,8 @@ footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    margin-top: 2em;
 }
 
 .footer-content {

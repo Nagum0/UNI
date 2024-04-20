@@ -13,6 +13,10 @@ body {
     background-image: url("../imgs/bg.png"), linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
     background-blend-mode: multiply;
     background-repeat: repeat;
+    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* ------------------------------------- NAVBAR ------------------------------------- */
@@ -127,7 +131,7 @@ footer {
     justify-content: center;
     align-items: center;
 
-    margin-top: 2em;
+    margin-top: auto;
 }
 
 .footer-content {

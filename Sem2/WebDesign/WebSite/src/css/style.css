@@ -1,5 +1,4 @@
-* {
-    box-sizing: border-box;
+:root {
     --color-1: #244855;
     --color-1-darker: #1e2f35;
     --color-2: #E64833;
@@ -206,4 +205,34 @@ caption {
 
 td, th {
     padding-left: 2em;
+}
+
+/* ------------------------------------- POST ------------------------------------- */
+.post-page-cont {
+    background-color: var(--color-1);
+
+    padding: 2em;
+    margin-bottom: 2em;
+}
+
+form {
+    text-align: left;
+    font-size: 120%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+form aside {
+    color: var(--color-2);
+}
+
+.form-control {
+    background-color: var(--color-1-darker);
+}
+
+.form-control:focus {
+    background-color: var(--color-1-darker);
+    color: var(--color-5);
 }

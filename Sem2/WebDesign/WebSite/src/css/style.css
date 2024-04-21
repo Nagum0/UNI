@@ -166,6 +166,10 @@ footer {
     color: var(--color-5);
 }
 
+.social-link:visited {
+    color: var(--color-3-darker);
+}
+
 /* ------------------------------------- ABOUT US ------------------------------------- */
 main {
     margin-bottom: 2em;
@@ -277,8 +281,7 @@ header .row .col {
 }
 
 .card {
-    height: auto;
-    width: 60%;
+    width: 13rem;
 }
 
 .card-body {

@@ -167,7 +167,14 @@ footer {
 }
 
 /* ------------------------------------- ABOUT US ------------------------------------- */
+main {
+    margin-bottom: 2em;
+}
+
 article {
+    background-color: var(--color-1-darker);
+    padding: 1em;
+
     margin-top: 2em;
     
     display: flex;
@@ -191,11 +198,15 @@ details {
 }
 
 table {
+    background-color: var(--color-1-darker);
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     color: var(--color-5);
+
+    padding: 1em;
 }
 
 caption {
@@ -236,3 +247,5 @@ form aside {
     background-color: var(--color-1-darker);
     color: var(--color-5);
 }
+
+/* ------------------------------------- REVIEWS ------------------------------------- */

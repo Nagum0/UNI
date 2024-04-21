@@ -95,4 +95,19 @@ public class WalkingBoard {
 
         return result;
     }
+
+    /* --- FOR TESTING ONLY --- */
+    @Override
+    public String toString() {
+        StringBuilder sbr = new StringBuilder();
+        
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                sbr.append(tiles[i][j] + " ");
+            }
+            sbr.append("\n");
+        }
+
+        return sbr.toString();
+    }
 }

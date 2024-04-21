@@ -249,3 +249,38 @@ form aside {
 }
 
 /* ------------------------------------- REVIEWS ------------------------------------- */
+.skip-header-link {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+header h5 {
+    text-align: center;
+    color: var(--color-5);
+    background-color: var(--color-1);
+    padding: 5px;
+    padding-bottom: 7px;
+    border-bottom: 3px solid var(--color-1-darker);
+    margin-bottom: 0;
+}
+
+header .row {
+    padding: 1em;
+    background-color: var(--color-4);
+}
+
+header .row .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    height: auto;
+    width: 60%;
+}
+
+.card-body {
+    text-align: center;
+}

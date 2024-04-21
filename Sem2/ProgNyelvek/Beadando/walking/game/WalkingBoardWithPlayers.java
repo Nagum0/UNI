@@ -28,7 +28,6 @@ public class WalkingBoardWithPlayers extends WalkingBoard {
             players[i] = new Player();
     }
 
-    /* ITT TARTASZ */
     public int[] walk(int... stepCounts) {
         int i = 0;
         int playerIndex = 0;
@@ -37,14 +36,29 @@ public class WalkingBoardWithPlayers extends WalkingBoard {
             if (playerIndex == players.length)
                 playerIndex = 0;
 
-            System.out.println("step: " + i + " playerIndex: " + playerIndex + " stepsToTake: " + stepCounts[i]);
-
             players[playerIndex].turn();
+            int moveAndSetValue = i > SCORE_EACH_STEP ? SCORE_EACH_STEP : i;
+            
+            System.out.println("step: " + i + "; playerIndex: " + playerIndex + "; playerDir: " + players[playerIndex].getDirection() + "; stepsToTake: " + stepCounts[i]);
+
+            for (int j = 0; j < stepCounts[i]; j++) {
+                int scoreToAdd = super.moveAndSet(players[playerIndex].getDirection(), moveAndSetValue);
+                players[playerIndex].addToScore(scoreToAdd);
+
+                int[] coords = super.getPosition();
+                System.out.println("x: " + coords[0] + " y: " + coords[1]);
+            }
 
             playerIndex++;
             i++;
         }
 
-        return new int[0];
+        int[] playerScores = new int[players.length];
+
+        for (int k = 0; k < players.length; k++) {
+            playerScores[k] = players[k].getScore();
+        }
+        
+        return playerScores;
     }
 }

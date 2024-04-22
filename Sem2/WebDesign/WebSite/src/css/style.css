@@ -18,6 +18,10 @@ body {
     min-height: 100vh;
 }
 
+.hidden {
+    display: none;
+}
+
 /* ------------------------------------- NAVBAR ------------------------------------- */
 nav {
     border-bottom: 3px solid var(--color-3-darker);
@@ -325,4 +329,14 @@ section h2 {
 .review-p {
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.load-more-btn {
+    margin: 2em;
+    color: var(--color-5);
+    background-color: var(--color-3-darker);
+}
+
+.load-more-btn:hover {
+    background-color: var(--color-2);
 }

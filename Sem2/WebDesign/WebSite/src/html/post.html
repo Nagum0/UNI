@@ -12,15 +12,15 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="../imgs/Logo.png" alt="Bootstrap" class="logo-img rounded">
-                <strong class="logo-current-page">MangaCave | POST</strong>
+                <img src="../imgs/Logo.png" alt="Logo image" class="logo-img rounded">
+                <strong class="logo-current-page">MangaCave | HOME</strong>
             </a>
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link" href="reviews.html">Reviews</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="post.html">Post</a>
+                    <a class="nav-link page-current" href="post.html">Post</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about_us.html">About us</a>
@@ -36,7 +36,7 @@
         <form>
             <div class="form-group">
                 <label for="nameInput"><strong>Name:</strong></label>
-                <input type="text" id="nameInput" class="form-control">
+                <input type="text" id="nameInput" class="form-control" maxlength="100">
             </div>
             <div class="form-group">
                 <label for="imageInput"><strong>Image:</strong></label>
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="reviewTextArea"><strong>Review:</strong></label>
-                <textarea id="reviewTextArea" cols="30" rows="20" class="form-control"></textarea>
+                <textarea id="reviewTextArea" cols="30" rows="20" class="form-control" maxlength="15000"></textarea>
             </div>
             <div class="form-group">
                 <strong>Gender:</strong> <br>

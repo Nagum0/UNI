@@ -11,7 +11,7 @@ public class DirectionStructureTest {
     public void testEnum() {
         CheckThat.theEnum("walking.game.util.Direction")
             .thatIs(FULLY_IMPLEMENTED, INSTANCE_LEVEL, VISIBLE_TO_ALL)
-            .hasEnumElements("UP", "DOWN", "LEFT", "RIGHT");
+            .hasEnumElements("UP", "RIGHT", "DOWN", "LEFT");
     }
 }
 

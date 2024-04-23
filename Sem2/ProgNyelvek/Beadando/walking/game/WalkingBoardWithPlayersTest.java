@@ -39,6 +39,28 @@ public class WalkingBoardWithPlayersTest {
 
     @Test
     public void walk2() {
+        int[][] boardEndState = {
+            {13, 1, 1, 2, 2, 3, 4},
+            {13, 3, 3, 3, 3, 3, 5},
+            {13, 3, 3, 3, 3, 3, 5},
+            {13, 3, 3, 3, 3, 3, 5},
+            {13, 3, 3, 3, 3, 3, 6},
+            {13, 3, 3, 3, 3, 3, 6},
+            {9, 9, 9, 8, 8, 8, 6}
+        };  
 
+        int[] finalScores = {12, 42, 15, 3};
+
+        WalkingBoardWithPlayers wbs = new WalkingBoardWithPlayers(7, 4);
+        int[] scores = wbs.walk(
+            1, 2, 2, 1,
+            4, 3, 4, 7,
+            3, 5, 1, 6,
+            4, 6, 3, 1
+        );
+        int[][] wbsTiles = wbs.getTiles();
+
+        assertArrayEquals(boardEndState, wbsTiles);
+        assertArrayEquals(finalScores, scores);
     }
 }

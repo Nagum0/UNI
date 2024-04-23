@@ -38,20 +38,11 @@ public class WalkingBoardWithPlayers extends WalkingBoard {
 
             players[playerIndex].turn();
             int moveAndSetValue = i > SCORE_EACH_STEP ? SCORE_EACH_STEP : i;
-            
-            /* FOR TESTING */
-            // System.out.println("step: " + i + "; playerIndex: " + playerIndex + "; playerDir: " + players[playerIndex].getDirection() + "; stepsToTake: " + stepCounts[i]);
 
             for (int j = 0; j < stepCounts[i]; j++) {
                 int scoreToAdd = super.moveAndSet(players[playerIndex].getDirection(), moveAndSetValue);
                 players[playerIndex].addToScore(scoreToAdd);
             }
-
-            /* FOR TESTING */
-            /* int[] coords = super.getPosition();
-            System.out.println("x: " + coords[0] + " y: " + coords[1]);
-            System.out.println(players[playerIndex].getScore());
-            System.out.println(this.toString()); */
 
             playerIndex++;
             i++;

@@ -5,18 +5,18 @@ import org.junit.platform.suite.api.Suite;
 import walking.game.WalkingBoardTest;
 
 @SelectClasses({
-    WalkingBoardBasicTestSuite.StructuralTests.class
-    ,WalkingBoardBasicTestSuite.FunctionalTests.class
+      WalkingBoardBasicTestSuite.StructuralTests.class
+    , WalkingBoardBasicTestSuite.FunctionalTests.class
 })
 @Suite public class WalkingBoardBasicTestSuite {
     @SelectClasses({
-        DirectionStructureTest.class
-        ,WalkingBoardStructureTest.class
+          DirectionStructureTest.class
+        , WalkingBoardStructureTest.class
     })
     @Suite public static class StructuralTests {}
 
     @SelectClasses({
-        WalkingBoardTest.class
+          WalkingBoardTest.class
     })
     @Suite public static class FunctionalTests {}
 }

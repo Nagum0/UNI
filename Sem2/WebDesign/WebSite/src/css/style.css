@@ -107,6 +107,12 @@ nav.navbar.bg-body-tertiary {
     border-radius: 0;
     background-color: var(--color-3);
     border: 3px solid var(--color-3-darker);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin: auto;
     margin-bottom: 4em;
 }
 

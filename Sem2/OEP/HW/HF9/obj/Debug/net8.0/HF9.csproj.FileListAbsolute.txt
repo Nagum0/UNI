@@ -1,0 +1,15 @@
+/home/zack/UNI/Sem2/OEP/HW/HF9/bin/Debug/net8.0/HF9
+/home/zack/UNI/Sem2/OEP/HW/HF9/bin/Debug/net8.0/HF9.deps.json
+/home/zack/UNI/Sem2/OEP/HW/HF9/bin/Debug/net8.0/HF9.runtimeconfig.json
+/home/zack/UNI/Sem2/OEP/HW/HF9/bin/Debug/net8.0/HF9.dll
+/home/zack/UNI/Sem2/OEP/HW/HF9/bin/Debug/net8.0/HF9.pdb
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.GeneratedMSBuildEditorConfig.editorconfig
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.AssemblyInfoInputs.cache
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.AssemblyInfo.cs
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.csproj.CoreCompileInputs.cache
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.sourcelink.json
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.dll
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/refint/HF9.dll
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.pdb
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/HF9.genruntimeconfig.cache
+/home/zack/UNI/Sem2/OEP/HW/HF9/obj/Debug/net8.0/ref/HF9.dll

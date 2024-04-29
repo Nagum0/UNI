@@ -1,0 +1,79 @@
+/* PHONES */
+@media only screen and (max-width: 768px) {
+    .phone-hidden {
+        display: none;
+    }
+
+    /* NAVBAR */
+    nav .container-fluid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-brand {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* MAIN */
+    .welcome-info {
+        padding: 10px;
+        width: 80%;
+        height: auto;
+    }
+    
+    video {
+        width: 90%;
+        height: auto;
+    }
+
+    /* FOOTER */
+    footer {
+        flex-direction: column;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .social-icons {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+/* TABLETS */
+@media only screen and (min-width: 768px) and (max-width: 1250px) {
+    /* NAVBAR */
+    nav {
+        display: flex;
+        text-align: center;
+    }
+
+    .navbar-brand {
+        margin: auto;
+    }
+
+    nav ul {
+        margin: auto;
+    }
+
+    .logo-img {
+        width: 10%;
+        height: auto;
+    }
+
+    /* MAIN */
+    .tablet-welcome-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

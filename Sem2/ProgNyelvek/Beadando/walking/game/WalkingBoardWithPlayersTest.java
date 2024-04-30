@@ -63,4 +63,9 @@ public class WalkingBoardWithPlayersTest {
         assertArrayEquals(boardEndState, wbsTiles);
         assertArrayEquals(finalScores, scores);
     }
+
+    @Test
+    public void walk3() {
+        
+    }
 }

@@ -1,0 +1,15 @@
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/bin/Debug/net8.0/Hashing
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/bin/Debug/net8.0/Hashing.deps.json
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/bin/Debug/net8.0/Hashing.runtimeconfig.json
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/bin/Debug/net8.0/Hashing.dll
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/bin/Debug/net8.0/Hashing.pdb
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.GeneratedMSBuildEditorConfig.editorconfig
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.AssemblyInfoInputs.cache
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.AssemblyInfo.cs
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.csproj.CoreCompileInputs.cache
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.sourcelink.json
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.dll
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/refint/Hashing.dll
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.pdb
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/Hashing.genruntimeconfig.cache
+/home/zack/UNI/Sem2/AlgAdat/10_gyak/Hashing/obj/Debug/net8.0/ref/Hashing.dll

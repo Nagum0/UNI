@@ -1,0 +1,15 @@
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\bin\Debug\net8.0\Gyak11.exe
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\bin\Debug\net8.0\Gyak11.deps.json
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\bin\Debug\net8.0\Gyak11.runtimeconfig.json
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\bin\Debug\net8.0\Gyak11.dll
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\bin\Debug\net8.0\Gyak11.pdb
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.GeneratedMSBuildEditorConfig.editorconfig
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.AssemblyInfoInputs.cache
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.AssemblyInfo.cs
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.csproj.CoreCompileInputs.cache
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.sourcelink.json
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.dll
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\refint\Gyak11.dll
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.pdb
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\Gyak11.genruntimeconfig.cache
+\\wsl.localhost\Ubuntu\home\zack\UNI\Sem2\OEP\Gyak11\obj\Debug\net8.0\ref\Gyak11.dll

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NagyBeaTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fde3a54994de56a0de2a7875543c14c78ac0b06b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ad38db7998ed23833e39ff765d4e8bda3cd69ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("NagyBeaTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NagyBeaTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

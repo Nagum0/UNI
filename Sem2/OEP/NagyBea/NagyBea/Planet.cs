@@ -13,9 +13,13 @@ public class Planet {
 
     public void Day() {
         foreach (Plant plant in plants) {
-            Console.WriteLine(plant.ToString());
-            plant.Requests(this);
+            Console.WriteLine($"{plant.ToString()}; [{radiation}] alpha: {alpha} delta: {delta}");
+
+            if (plant.IsAlive())
+                plant.Requests(this);
         }
+
+        ChangeRadiation();
     }
 
     public Radiation GetRadiation() {
@@ -30,7 +34,7 @@ public class Planet {
         delta += n;
     }
 
-    public void ChangeSugar() {
+    public void ChangeRadiation() {
         if (alpha - delta >= 3)
             radiation = new Alpha();
         else if (delta - alpha >= 3)

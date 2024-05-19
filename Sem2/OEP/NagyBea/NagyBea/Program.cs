@@ -1,17 +1,37 @@
 ﻿namespace NagyBea {
     public class Program {
-        static void Main(string[] args) {
-            Planet creek = new Planet(new List<Plant> {
-                new Puffancs("pufi1", 10),
-                new Deltafa("delti1", 8),
-                new Parabokor("pari1", 5)
-            });
+        static (Planet, int) ReadFile(string path) {
+            List<Plant> plants = new List<Plant>();
+            int days = 0;
 
-            int n = 3;
+            using (StreamReader infile = new StreamReader(path)) {
+                string line = infile.ReadLine();
+                days = int.Parse(line);
 
-            for (int i = 0; i < n; i++) {
-                creek.Day();
+                while ((line = infile.ReadLine()) != null) {
+                    string[] data = line.Split(" ");
+                    
+                    switch (data[1]) {
+                        case "p":
+                            plants.Add(new Puffancs(data[0], int.Parse(data[2])));
+                            break;
+                        case "d":
+                            plants.Add(new Deltafa(data[0], int.Parse(data[2])));
+                            break;
+                        case "b":
+                            plants.Add(new Parabokor(data[0], int.Parse(data[2])));
+                            break;
+                    }
+                }
             }
+
+            return (new Planet(plants), days);
+        }
+
+        static void Main(string[] args) {
+            (Planet p, int days) = ReadFile("input.txt");
+
+            p.Day();
         }
     }
 }

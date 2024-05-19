@@ -11,15 +11,27 @@ public class Planet {
         radiation = new None();
     }
 
+    public int Alpha {
+        get => alpha;
+    }
+
+    public int Delta {
+        get => delta;
+    }
+
     public void Day() {
         foreach (Plant plant in plants) {
-            Console.WriteLine($"{plant.ToString()}; [{radiation}] alpha: {alpha} delta: {delta}");
+            Console.WriteLine($"{plant}; [{radiation}] alpha: {alpha} delta: {delta}");
 
             if (plant.IsAlive())
                 plant.Requests(this);
         }
 
         ChangeRadiation();
+    }
+
+    public List<Plant> GetPlants() {
+        return plants.Select(p => p).ToList();
     }
 
     public Radiation GetRadiation() {
@@ -41,5 +53,9 @@ public class Planet {
             radiation = new Delta();
         else
             radiation = new None();
+    }
+
+    public Plant StrongestPlant() {
+        return plants.MaxBy(p => p.IsAlive());
     }
 }

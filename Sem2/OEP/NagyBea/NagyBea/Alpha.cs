@@ -12,4 +12,8 @@ public class Alpha : Radiation {
     public void Effect(Deltafa p) {
         p.EditSustenance(-3);
     }
+
+    public override string ToString() {
+        return "Alpha";
+    }
 }

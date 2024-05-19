@@ -31,7 +31,12 @@
         static void Main(string[] args) {
             (Planet p, int days) = ReadFile("input.txt");
 
-            p.Day();
+            for (int i = 0; i < days; i++) {
+                p.Day();
+                Console.WriteLine();
+            }
+
+            Console.WriteLine(p.StrongestPlant());
         }
     }
 }

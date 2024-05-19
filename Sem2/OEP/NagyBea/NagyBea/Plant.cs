@@ -8,6 +8,10 @@ public class Plant {
         this.name = name;
         this.sustenance = sustenance;
     }
+    
+    public int Sustenance {
+        get => sustenance;
+    }
 
     public virtual void Requests(Planet p) { }
 

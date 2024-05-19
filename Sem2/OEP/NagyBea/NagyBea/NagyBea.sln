@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NagyBea", "NagyBea.csproj", "{F9E2C378-6D3B-44DB-BA0F-1E3CDCB20DD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NagyBeaTests", "..\NagyBeaTests\NagyBeaTests.csproj", "{C62735D7-76F9-4E6C-93C6-CF406E7D5AF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9E2C378-6D3B-44DB-BA0F-1E3CDCB20DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E2C378-6D3B-44DB-BA0F-1E3CDCB20DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E2C378-6D3B-44DB-BA0F-1E3CDCB20DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E2C378-6D3B-44DB-BA0F-1E3CDCB20DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62735D7-76F9-4E6C-93C6-CF406E7D5AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62735D7-76F9-4E6C-93C6-CF406E7D5AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62735D7-76F9-4E6C-93C6-CF406E7D5AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62735D7-76F9-4E6C-93C6-CF406E7D5AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92AB39A9-E67A-4DAF-B4C8-48AFDB07717C}
+	EndGlobalSection
+EndGlobal

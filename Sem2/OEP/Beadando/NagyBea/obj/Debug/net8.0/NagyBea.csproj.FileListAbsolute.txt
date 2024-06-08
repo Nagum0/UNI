@@ -1,0 +1,15 @@
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/bin/Debug/net8.0/NagyBea
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/bin/Debug/net8.0/NagyBea.deps.json
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/bin/Debug/net8.0/NagyBea.runtimeconfig.json
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/bin/Debug/net8.0/NagyBea.dll
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/bin/Debug/net8.0/NagyBea.pdb
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.GeneratedMSBuildEditorConfig.editorconfig
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.AssemblyInfoInputs.cache
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.AssemblyInfo.cs
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.csproj.CoreCompileInputs.cache
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.sourcelink.json
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.dll
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/refint/NagyBea.dll
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.pdb
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/NagyBea.genruntimeconfig.cache
+/home/zack/UNI/Sem2/OEP/Beadando/NagyBea/obj/Debug/net8.0/ref/NagyBea.dll

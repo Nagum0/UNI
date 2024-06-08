@@ -1,0 +1,15 @@
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/bin/Debug/net8.0/src
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/bin/Debug/net8.0/src.deps.json
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/bin/Debug/net8.0/src.runtimeconfig.json
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/bin/Debug/net8.0/src.dll
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/bin/Debug/net8.0/src.pdb
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.GeneratedMSBuildEditorConfig.editorconfig
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.AssemblyInfoInputs.cache
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.AssemblyInfo.cs
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.csproj.CoreCompileInputs.cache
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.sourcelink.json
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.dll
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/refint/src.dll
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.pdb
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/src.genruntimeconfig.cache
+/home/zack/UNI/Sem2/AlgAdat/vizsga/05_chapter/src/obj/Debug/net8.0/ref/src.dll

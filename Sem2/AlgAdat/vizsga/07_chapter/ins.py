@@ -271,4 +271,3 @@ if __name__ == "__main__":
 	print(ys)
 	s1l_merge_sort(ys)
 	print(ys)
-	print("test")

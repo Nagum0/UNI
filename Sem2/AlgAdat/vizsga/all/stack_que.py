@@ -50,9 +50,14 @@ class Stack:
         
         self.n = 0
 
-def doubleFullQueueArray(A: List[Any]) -> None:
+def doubleFullQueueArray(A: List[Any], k: int) -> None:
+    n0: int = len(A)
     n: int = 2 * len(A)
     A.extend([None for _ in range(n - len(A))])
+    A[n0:n0 + k] = A[0:k]
+    
+    for i in range(0, k):
+        A[i] = None
 
 class QueueUnderflow(Exception):
     def __init__(self, *args: object) -> None:
@@ -65,17 +70,80 @@ class Queue:
         self.k = 0
         self.n = 0
 
-    
+    def __str__(self) -> str:
+        return f"k: {self.k} n: {self.n}\t{self.Z}"
+
+    def add(self, x: Any) -> None:
+        if self.n == len(self.Z):
+            doubleFullQueueArray(self.Z, self.k)
+
+        self.Z[(self.k + self.n) % len(self.Z)] = x
+        self.n += 1
+
+    def rem(self) -> Any:
+        if self.n <= 0:
+            raise QueueUnderflow
+
+        self.n -= 1
+        i: int = self.k
+        self.k = (self.k + 1) % len(self.Z)
+        x = self.Z[i]
+        self.Z[i] = None
+        return x
+
+    def first(self) -> Any:
+        if self.n <= 0:
+            raise QueueUnderflow
+        
+        return self.Z[self.k]
 
 if __name__ == "__main__":
-    s: Stack = Stack(8)
-    s.push(69)
-    s.push(120)
-    s.push(420)
-    print(s)
-    s.pop()
-    print(s)
-    print(s.top())
-    s.push(180)
-    print(s)
     
+
+    """ q: Queue = Queue(4)
+    print(q)
+
+    q.add(5)
+    print(q)
+    
+    q.add(3)
+    print(q)
+
+    q.rem()
+    print(q)
+
+    q.rem()
+    print(q)
+
+    q.add(7)
+    print(q)
+
+    q.add(2)
+    print(q)
+
+    q.add(4)
+    print(q)
+
+    q.add(1)
+    print(q)
+
+    q.add(6)
+    print(q)
+
+    q.add(8)
+    print(q)
+
+    q.add(11)
+    print(q)
+
+    q.add(13)
+    print(q)
+
+    q.add(69)
+    print(q)
+
+    print(q.rem())
+    print(q)
+
+    q.add(420)
+    print(q) """

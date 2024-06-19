@@ -141,12 +141,97 @@ def merge(B: List[int], A: List[int], u: int, m: int, v: int) -> None:
     else:
         A[k:v] = B[j:v]
 
+""" ----------------------------- STACK & QUEUE (Array) ----------------------------- """
+class StackUnderflow(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class Stack:
+    def __init__(self, m: int) -> None:
+        self.m0: int = m
+        self.A: List[Any] = [None for _ in range(m)]
+        self.n = 0
+
+    def __str__(self) -> str:
+        return f"Top: {self.A[self.n]}\tSize: {self.n}\t\t{self.A}"
+    
+    def push(self, x: Any) -> None:
+        if self.n == len(self.A):
+            doubleFullArray(self.A)
+
+        self.A[self.n] = x
+        self.n += 1
+
+    def pop(self) -> Any:
+        if self.n > 0:
+            self.n -= 1
+            return self.A[self.n]
+        else:
+            raise StackUnderflow
+        
+    def top(self) -> Any:
+        if self.n > 0:
+            return self.A[self.n - 1]
+        else:
+            raise StackUnderflow
+        
+    def isEmpty(self) -> bool:
+        return self.n == 0
+    
+    def setEmpty(self) -> None:
+        self.A = [None for _ in range(self.m0)]
+        self.n = 0
+
+def doubleFullQueueArray(A: List[Any], k: int) -> None:
+    n0: int = len(A)
+    n: int = 2 * len(A)
+    A.extend([None for _ in range(n - n0)])
+    A[n0:n0 + k] = A[0:k]
+
+    for i in range(0, k):
+        A[i] = None
+
+class QueueUnderflow(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class Queue:
+    def __init__(self, m: int) -> None:
+        self.m0: int = m
+        self.Z: List[Any] = [None for _ in range(m)]
+        self.n: int = 0
+        self.k: int = 0
+
+    def __str__(self) -> str:
+        return f"k: {self.k} n: {self.n}\t{self.Z}"
+    
+    def add(self, x: Any) -> None:
+        if self.n == len(self.Z):
+            doubleFullQueueArray(self.Z, self.k)
+
+        self.Z[(self.k + self.n) % len(self.Z)] = x
+        self.n += 1
+
+    def rem(self) -> Any:
+        if self.n > 0:
+            self.n -= 1
+            i: int = self.k
+            k = (k + 1) % len(self.Z)
+            return self.Z[i]
+        else:
+            raise QueueUnderflow
+        
+    def first(self) -> Any:
+        if self.n > 0:
+            return self.Z[self.k]
+        else:
+            raise QueueUnderflow
+
 if __name__ == "__main__":
-    xs: List[int] = [9, 8, 7, 6, 4, 5]
-    ys: List[int] = xs.copy()
-    print(f"Unsorted xs:\t{xs}")
-    quickSort(xs)
-    print(f"Quicksorted xs:\t{xs}")
-    print(f"Unsorted ys:\t{ys}")
-    mergeSort(ys)
-    print(f"Mergesorted ys:\t{ys}")
+    s: Stack = Stack(8)
+    s.push(10)
+    s.push(69)
+    s.push(420)
+    print(s)
+    print(s.pop())
+    print(s)

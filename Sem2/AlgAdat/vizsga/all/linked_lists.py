@@ -130,17 +130,128 @@ class Stack:
         else:
             raise StackUnderflow
 
-if __name__ == "__main__":
-    q: Queue = Queue()
-    q.add(E1(10))
-    q.add(E1(69))
-    q.add(E1(42))
-    print(q)
+def H1L_insertionSort(H: E1) -> None:
+    r = H.next
+
+    if r:
+        s = r.next
+
+        while s is not None:
+            if r.key <= s.key:
+                r = s
+            else:
+                r.next = s.next
+                p = H
+                q = p.next
+
+                while q.key <= s.key:
+                    p = q
+                    q = p.next
+                
+                s.next = q
+                p.next = s
+
+            s = r.next
+    else:
+        return
+
+from math import floor
+
+def S1L_mergeSort(L: E1) -> None:
+    S1L_ms(L, S1L_length(L))
+
+def S1L_ms(L: E1, n: int) -> None:
+    if n > 1:
+        n1: int = floor(n / 2)
+        L2: E1 = cut(L, n1)
+        S1L_ms(L, n1)
+        S1L_ms(L2, n - n1)
+        L = S1L_merge(L, L2)
+    else:
+        return
     
-    s: Stack = Stack()
-    s.push(85)
-    s.push(69)
-    s.push(420)
-    S1L_print(s.top)
-    print(s.pop())
-    S1L_print(s.top)
+def S1L_merge(L1: E1, L2: E1) -> None:
+    if L1.key <= L2.key:
+        t: E1 = L1
+        L: E1 = t
+        L1 = L1.next
+    else:
+        t: E1 = L2
+        L: E1 = t
+        L2 = L2.next
+
+    while L1 is not None and L2 is not None:
+        if L1.key <= L2.key:
+            t.next = L1
+            t = t.next
+            L1 = L1.next
+        else:
+            t.next = L2
+            t = t.next
+            L2 = L2.next
+
+    if L1 is not None:
+        t.next = L1
+    else:
+        t.next = L2
+
+    return L
+
+class E2:
+    def __init__(self, key: Any = None) -> None:
+        self.next: 'E2' = self
+        self.prev: 'E2' = self
+        self.key = key
+    
+    def __str__(self) -> str:
+        out: str = f"<- {self.key} <-> "
+        p = self.next
+
+        while p is not self.prev:
+            out += f"{p.key} <-> "
+            p = p.next
+
+        out += f"{p.key} -> "
+        return out
+
+def precede(q: E2, r: E2) -> None:
+    p: E2 = r.prev
+    q.prev = p
+    q.next = r
+    r.prev = q
+    p.next = q
+
+def follow(p: E2, q: E2) -> None:
+    r: E2 = p.next
+    q.next = r
+    q.prev = p
+    p.next = q
+    r.prev = q
+
+def unlink(q: E2) -> None:
+    p: E2 = q.prev
+    r: E2 = q.next
+    q.prev = q
+    q.next = q
+    p.next = r
+    r.prev = p
+
+if __name__ == "__main__":
+    c1 = E2(10)
+    c2 = E2(12)
+    c3 = E2(69)
+
+    c1.next = c2
+    c2.prev = c1
+    c2.next = c3
+    c3.prev = c2
+    c1.prev = c3
+    c3.next = c1
+
+    print(c1)
+    precede(E2(420), c2)
+    print(c1)
+    follow(c2, E2(100))
+    print(c1)
+    unlink(c2)
+    print(c1)

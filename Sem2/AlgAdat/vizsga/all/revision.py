@@ -227,11 +227,85 @@ class Queue:
         else:
             raise QueueUnderflow
 
+""" ----------------------------- Insertion Sort (O(n)) ----------------------------- """
+def naiveInsertionSort(A: List[Any]) -> None:
+    for i in range(len(A)):
+        j = i
+
+        while j > 0 and A[j - 1] > A[j]:
+            A[j - 1], A[j] = A[j], A[j - 1]
+            j -= 1
+
+def insertionSort(A: List[Any]) -> None:
+    for i in range(1, len(A)):
+        if A[i - 1] > A[i]:
+            j = i - 2
+            x = A[i]
+            A[i] = A[i - 1]
+
+            while j >= 0 and A[j] > x:
+                A[j + 1], A[j] = A[j], A[j + 1]
+                j -= 1
+
+            A[j + 1] = x
+
+""" ----------------------------- Linked Lists ----------------------------- """
+class E1:
+    def __init__(self, key: Any = None) -> None:
+        self.key = key
+        self.next = None
+
+def S1L_print(L: E1) -> None:
+    p = L
+
+    while p is not None:
+        print(f"{p.key} -> ", end="")
+        p = p.next
+
+    print("∅")
+
+def H1L_print(H: E1) -> None:
+    print("∅ -> ", end="")
+    S1L_print(H.next)
+
+def H1L_insertionSort(H: E1) -> None:
+    r = H.next
+
+    if r:
+        s = r.next
+
+        while s is not None:
+            if r.key <= s.key:
+                r = s
+            else:
+                r.next = s.next
+                p = H
+                q = H.next
+
+                while q.key <= s.key:
+                    p = q
+                    q = p.next
+
+                s.next = q
+                p.next = s
+
+            s = r.next
+    else:
+        return
+
 if __name__ == "__main__":
-    s: Stack = Stack(8)
-    s.push(10)
-    s.push(69)
-    s.push(420)
-    print(s)
-    print(s.pop())
-    print(s)
+    h0: E1 = E1()
+    h1: E1 = E1(2)
+    h0.next = h1
+
+    h2: E1 = E1(1)
+    h1.next = h2
+
+    h3: E1 = E1(10)
+    h2.next = h3
+
+    h4 = E1(3)
+    h3.next = h4
+    H1L_print(h0)
+    H1L_insertionSort(h0)
+    H1L_print(h0)

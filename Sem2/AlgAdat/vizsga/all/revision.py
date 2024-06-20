@@ -293,19 +293,121 @@ def H1L_insertionSort(H: E1) -> None:
     else:
         return
 
+def cut(L: E1, n: int) -> E1:
+    p: E1 = L
+
+    while p is not None and n > 1:
+        p = p.next
+        n -= 1
+        
+    L2: E1 = p.next
+    p.next = None
+    return L2
+
+def S1L_length(L: E1) -> int:
+    p: E1 = L
+    n: int = 0
+
+    while p is not None:
+        p = p.next
+        n += 1
+
+    return n
+
+def S1L_mergeSort(L: E1) -> None:
+    n: int = S1L_length(L)
+    S1L_ms(L, n)
+
+def S1L_ms(L, n: int) -> None:
+    if n > 1:
+        n1: int = floor(n / 2)
+        L2: E1 = cut(L, n1)
+        S1L_ms(L, n1)
+        S1L_ms(L2, n - n1)
+        L = S1L_merge(L, L2)
+    else:
+        return
+
+def S1L_merge(L1: E1, L2: E1) -> E1:
+    if L1.key <= L2.key:
+        t: E1 = L1
+        L = t
+        L1 = L1.next
+    else:
+        t: E1 = L2
+        L = t
+        L2 = L2.next
+
+    while L1 is not None and L2 is not None:
+        if L1.key <= L2.key:
+            t.next = L1
+            t = t.next
+            L1 = L1.next
+        else:
+            t.next = L2
+            t = t.next
+            L2 = L2.next
+
+    if L1 is not None:
+        t.next = L1
+    else:
+        t.next = L2
+    
+    return L
+
+class E2:
+    def __init__(self, key: Any = None) -> None:
+        self.next: 'E2' = None
+        self.prev: 'E2' = None
+        self.key: Any = key
+
+    def __str__(self) -> str:
+        out: str = f"<- {self.key} <-> "
+        p: E2 = self.next
+
+        while p is not self.prev:
+            out += f"{p.key} <-> "
+            p = p.next
+
+        return f"{out} {p.key} ->"
+
+def precede(q: E2, r: E2) -> None:
+    p: E2 = r.prev
+    q.next = r
+    q.prev = p
+    r.prev = q
+    p.next = q
+
+def follow(p: E2, q: E2) -> None:
+    r: E2 = p.next
+    q.next = r
+    q.prev = p
+    p.next = q
+    r.prev = q
+
+def unlink(q: E2) -> None:
+    p: E2 = q.prev
+    r: E2 = q.next
+    q.next = q
+    q.prev = q
+    p.next = r
+    r.prev = p
+
 if __name__ == "__main__":
-    h0: E1 = E1()
-    h1: E1 = E1(2)
-    h0.next = h1
+    c1 = E2(10)
+    c2 = E2(12)
+    c3 = E2(69)
 
-    h2: E1 = E1(1)
-    h1.next = h2
-
-    h3: E1 = E1(10)
-    h2.next = h3
-
-    h4 = E1(3)
-    h3.next = h4
-    H1L_print(h0)
-    H1L_insertionSort(h0)
-    H1L_print(h0)
+    c1.next = c2
+    c2.prev = c1
+    c2.next = c3
+    c3.prev = c2
+    c1.prev = c3
+    c3.next = c1
+    print(c1)
+    precede(E2(42), c2)
+    print(c1)
+    follow(c2, E2(6969))
+    print(c1)
+    unlink(c2)
+    print(c1)

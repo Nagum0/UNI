@@ -236,6 +236,41 @@ def unlink(q: E2) -> None:
     p.next = r
     r.prev = p
 
+def splice(p: E2, q: E2, r: E2) -> None:
+    p1: E2 = p.prev
+    q2: E2 = q.next
+    p1.next = q2
+    q2.prev = p1
+    p1 = r.prev
+    p.prev = p1
+    q.next = r
+    p1.next = p
+    r.prev = q
+
+def append(L: E2, H: E2) -> None:
+    if H.next is not H:
+        splice(H.next, H.prev, L)
+    else:
+        return
+
+def H2L_insertionSort(H: E2) -> None:
+    r: E2 = H.next
+    s: E2 = r.next
+
+    while s is not H:
+        if r.key <= s.key:
+            r = s
+        else:
+            unlink(s)
+            p: E2 = r.prev
+
+            while p is not H and p.key > s.key:
+                p = p.prev
+
+            follow(p, s)
+
+        s = r.next
+
 if __name__ == "__main__":
     c1 = E2(10)
     c2 = E2(12)
@@ -247,11 +282,8 @@ if __name__ == "__main__":
     c3.prev = c2
     c1.prev = c3
     c3.next = c1
-
-    print(c1)
     precede(E2(420), c2)
-    print(c1)
     follow(c2, E2(100))
     print(c1)
-    unlink(c2)
+    H2L_insertionSort(c1)
     print(c1)

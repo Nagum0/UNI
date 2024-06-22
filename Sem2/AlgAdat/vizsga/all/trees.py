@@ -101,6 +101,39 @@ def min(t: Node) -> Node:
     
     return t
 
+def remMin(t: Node, minp: Node) -> None:
+    if t.left is None:
+        minp = t
+        t = minp.right
+        minp.right = None
+    else:
+        remMin(t.left, minp)
+
+def delete(t: Node, k: Any) -> None:
+    if t is not None:
+        if k < t.key:
+            delete(t.left, k)
+        elif k > t.key:
+            delete(t.right, k)
+        elif k == t.key:
+            delRoot(t)
+    else:
+        return
+
+def delRoot(t: Node) -> None:
+    p: Node = t
+    if t.left is None:
+        t = p.left
+    elif t.right is None:
+        t = p.right
+    elif t.left is not None and t.right is not None:
+        q: Node = None
+        remMin(t, q)
+        q.left = p.left
+        q.right = p.right
+        t = q
+    del p
+
 if __name__ == "__main__":
     root: Node = Node(10)
     root.left = Node(5)

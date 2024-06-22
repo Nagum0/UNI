@@ -393,21 +393,133 @@ def unlink(q: E2) -> None:
     p.next = r
     r.prev = p
 
-if __name__ == "__main__":
-    c1 = E2(10)
-    c2 = E2(12)
-    c3 = E2(69)
+def splice(p: E2, q: E2, r: E2) -> None:
+    p1: E2 = p.prev
+    q2: E2 = q.next
+    p1.next = q2
+    q2.prev = p1
+    p1 = r.prev
+    q.next = r
+    p.prev = p1
+    p1.next = p
+    r.prev = q
 
-    c1.next = c2
-    c2.prev = c1
-    c2.next = c3
-    c3.prev = c2
-    c1.prev = c3
-    c3.next = c1
-    print(c1)
-    precede(E2(42), c2)
-    print(c1)
-    follow(c2, E2(6969))
-    print(c1)
-    unlink(c2)
-    print(c1)
+def append(L: E2, H: E2) -> None:
+    if H is not H.next:
+        splice(H.prev, H.next, L)
+    else:
+        return
+
+def H2L_insertionSort(H: E2) -> None:
+    r: E2 = H.next
+    s: E2 = r.next
+
+    while s is not H:
+        if r.key <= s.key:
+            r = s
+        else:
+            unlink(s)
+            p: E2 = r.prev
+
+            while p is not H and p.key > s.key:
+                p = p.prev
+
+            follow(p, s)
+        s = r.next
+
+""" ----------------------------- Binary Trees ----------------------------- """
+class Node:
+    def __init__(self, key: Any) -> None:
+        self.left: 'Node' = None
+        self.right: 'Node' = None
+        self.key: Any = key
+
+    def __str__(self) -> str:
+        if self.left and self.right:
+            return f"({self.left.key}) {self.key} ({self.right.key})"
+        elif self.left:
+            return f"({self.left.key}) {self.key} ()"
+        elif self.right:
+            return f"() {self.key} ({self.right.key})"
+        else:
+            return f"() {self.key} ()"
+
+def h(t: Node) -> int:
+    if t.left and t.right:
+        return 1 + max(h(t.left), h(t.right))
+    elif t.left:
+        return 1 + h(t.left)
+    elif t.right:
+        return 1 + h(t.right)
+    else:
+        return 0
+
+def search(t: Node, k: Any) -> Node:
+    while t is not None and t.key != k:
+        if t.key < k:
+            t = t.right
+        else:
+            t = t.left
+    
+    return t
+
+def min(t: Node) -> Node:
+    while t.left is not None:
+        t = t.left
+    
+    return t
+
+def insert(t: Node, k: Any) -> None:
+    if t is None:
+        t = Node(k)
+    else:
+        if t.key < k:
+            insert(t.right, k)
+        elif t.key > k:
+            insert(t.left, k)
+        elif t.key == k:
+            return
+
+def remMin(t: Node, minp: Node) -> None:
+    if t.left is None:
+        minp = t
+        t = minp.right
+        minp.right = None
+    else:
+        remMin(t.left, minp)
+
+def delete(t: Node, k: Any) -> None:
+    if t is not None:
+        if k < t.key:
+            delete(t.left, k)
+        elif k > t.key:
+            delete(t.right, k)
+        elif k == t.key:
+            delRoot(t)
+    else:
+        return
+
+def delRoot(t: Node) -> None:
+    p: Node = t
+
+    if t.left is None:
+        t = p.right
+    elif t.right is None:
+        t = p.left
+    elif t.left is not None and t.right is not None:
+        q: Node = None
+        remMin(t, q)
+        q.left = p.left
+        q.right = p.right
+        t = q
+    del p
+
+if __name__ == "__main__":
+    root = Node(10)
+    root.left = Node(9)
+    root.right = Node(12)
+    root.left.left = Node(7)
+    root.right.left = Node(11)
+    print(h(root))
+    print(search(root, 12))
+    print(min(root))

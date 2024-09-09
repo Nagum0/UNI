@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\bin\Debug\net8.0\Tombola.exe
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\bin\Debug\net8.0\Tombola.deps.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\bin\Debug\net8.0\Tombola.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\bin\Debug\net8.0\Tombola.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\bin\Debug\net8.0\Tombola.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\refint\Tombola.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\Tombola.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\obj\Debug\net8.0\ref\Tombola.dll

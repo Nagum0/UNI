@@ -1,0 +1,1 @@
+C:\Users\xptee\Documents\UNI\Sem3\AlgAdat2\01Gyak\gyak01\target\debug\main.exe: C:\Users\xptee\Documents\UNI\Sem3\AlgAdat2\01Gyak\gyak01\src\bin\main.rs C:\Users\xptee\Documents\UNI\Sem3\AlgAdat2\01Gyak\gyak01\src\lib.rs

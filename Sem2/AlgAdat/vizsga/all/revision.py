@@ -514,12 +514,44 @@ def delRoot(t: Node) -> None:
         t = q
     del p
 
+""" ----------------------------- Linear sorting algorithms ----------------------------- """
+def counting_sort(A: List[Any], B: List[Any], r: int, f: Callable[[Any], int]) -> None:
+    C: List[int] = [None] * r
+
+    for k in range(r):
+        C[k] = 0
+    
+    for i in range(len(A)):
+        C[f(A[i])] += 1
+
+    for k in range(1, r):
+        C[k] += C[k - 1]
+
+    for i in range(len(A), -1, -1):
+        k = f(A[i])
+        C[k] -= 1
+        B[C[k]] = A[i]
+
+def countingSort(A: List[Any], B: List[Any], r: int, f: Callable[[Any], int]) -> None:
+    C: List[int] = [None] * r
+
+    for k in range(r):
+        C[k] = 0
+
+    for i in range(len(A)):
+        C[f(A[i])] += 1
+
+    for k in range(1, r):
+        C[k] += C[k - 1]
+    
+    for i in range(len(A), -1, -1):
+        k = f(A[i])
+        C[k] -= 1
+        B[C[k]] = A[i]
+
 if __name__ == "__main__":
-    root = Node(10)
-    root.left = Node(9)
-    root.right = Node(12)
-    root.left.left = Node(7)
-    root.right.left = Node(11)
-    print(h(root))
-    print(search(root, 12))
-    print(min(root))
+    xs: List[int] = [4, 1, 5, 3, 9]
+    ys: List[int] = []
+    print(xs)
+    counting_sort(xs, ys, len(xs), lambda x: x)
+    print(ys)

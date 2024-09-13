@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ELTE.Tombola
-build_property.ProjectDir = C:\Users\xptee\Documents\UNI\Sem3\EVA\01Gyak\Tombola.Buggy\
+build_property.ProjectDir = /home/zackdesktop/UNI/Sem3/EVA/01Gyak/Tombola.Buggy/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

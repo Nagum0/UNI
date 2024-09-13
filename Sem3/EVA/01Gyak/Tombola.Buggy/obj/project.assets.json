@@ -8,26 +8,24 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\xptee\\.nuget\\packages\\": {}
+    "/home/zackdesktop/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\Tombola.csproj",
+      "projectUniqueName": "/home/zackdesktop/UNI/Sem3/EVA/01Gyak/Tombola.Buggy/Tombola.csproj",
       "projectName": "Tombola",
-      "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\Tombola.csproj",
-      "packagesPath": "C:\\Users\\xptee\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\obj\\",
+      "projectPath": "/home/zackdesktop/UNI/Sem3/EVA/01Gyak/Tombola.Buggy/Tombola.csproj",
+      "packagesPath": "/home/zackdesktop/.nuget/packages/",
+      "outputPath": "/home/zackdesktop/UNI/Sem3/EVA/01Gyak/Tombola.Buggy/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\xptee\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/zackdesktop/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -40,11 +38,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -66,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

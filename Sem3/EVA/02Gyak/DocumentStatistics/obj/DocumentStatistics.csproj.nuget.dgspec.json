@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\Tombola.csproj": {}
+    "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\02Gyak\\DocumentStatistics\\DocumentStatistics.csproj": {}
   },
   "projects": {
-    "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\Tombola.csproj": {
+    "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\02Gyak\\DocumentStatistics\\DocumentStatistics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\Tombola.csproj",
-        "projectName": "Tombola",
-        "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\Tombola.csproj",
+        "projectUniqueName": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\02Gyak\\DocumentStatistics\\DocumentStatistics.csproj",
+        "projectName": "DocumentStatistics",
+        "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\02Gyak\\DocumentStatistics\\DocumentStatistics.csproj",
         "packagesPath": "C:\\Users\\xptee\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\01Gyak\\Tombola.Buggy\\obj\\",
+        "outputPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\02Gyak\\DocumentStatistics\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\xptee\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,0 +1,15 @@
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\bin\Debug\net8.0\DocumentStatistics.exe
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\bin\Debug\net8.0\DocumentStatistics.deps.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\bin\Debug\net8.0\DocumentStatistics.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\bin\Debug\net8.0\DocumentStatistics.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\bin\Debug\net8.0\DocumentStatistics.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\refint\DocumentStatistics.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\DocumentStatistics.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\02Gyak\DocumentStatistics\obj\Debug\net8.0\ref\DocumentStatistics.dll

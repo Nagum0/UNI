@@ -1,0 +1,17 @@
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\bin\Debug\net8.0-windows\Gombvadászat.exe
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\bin\Debug\net8.0-windows\Gombvadászat.deps.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\bin\Debug\net8.0-windows\Gombvadászat.runtimeconfig.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\bin\Debug\net8.0-windows\Gombvadászat.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\bin\Debug\net8.0-windows\Gombvadászat.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.Form1.resources
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.csproj.GenerateResource.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\refint\Gombvadászat.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\Gombvadászat.genruntimeconfig.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\03Gyak\Gombvadászat\obj\Debug\net8.0-windows\ref\Gombvadászat.dll

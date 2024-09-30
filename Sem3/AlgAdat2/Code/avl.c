@@ -194,10 +194,83 @@ void balancePP0(Node **t, Node** r) {
 	*t = *r;
 }
 
+void AVLdel(Node** t, int k, bool* d) {
+	if (*t != NULL) {
+		if (k < (*t)->key) {
+			AVLdel(&(*t)->left, k, d);
 
-void print(Node* t) {
+			if (*d) {
+				leftSubTreeShrunk(t, d);
+			}
+		}
+		else if (k > (*t)->key) {
+			AVLdel(&(*t)->right, k, d);
+
+			if (*d) {
+				rightSubTreeShrunk(t, d);
+			}
+		}
+		else if (k == (*t)->key) {
+			AVLdelRoot(t, d);
+		}
+	}
+	else {
+		*d = false;
+	}
+}
+
+void AVLdelRoot(Node** t, bool* d) {
+	if ((*t)->left == NULL) {
+		Node* p = *t;
+		*t = p->right;
+		free(p);
+		*d = false;
+	}
+	else if ((*t)->right == NULL) {
+		Node* p = *t;
+		*t = p->left;
+		free(p);
+		*d = false;
+	}
+	else if ((*t)->left != NULL && (*t)->right != NULL) {
+		rightSubTreeMinToRoot(t, d);
+
+		if (*d) {
+			rightSubTreeShrunk(t, d);
+		}
+	}
+}
+
+void rightSubTreeShrunk(Node** t, bool* d) {
+	printf("not implemented\n");
+	exit(1);	
+}
+
+void balanceMM(Node** t, bool* d) {
+	printf("not implemented\n");
+	exit(1);	
+}
+
+void balanceMM0(Node** t, Node** l) {
+	printf("not implemented\n");
+	exit(1);	
+}
+
+void rightSubTreeMinToRoot(Node** t, bool* d) {
+	Node* p = NULL;
+	AVLremMin(t, &p, d);
+	p->left = (*t)->left;
+	p->right = (*t)->right;
+	p->b = (*t)->b;
+	free(t);
+	t = &p;
+}
+
+
+void print(const char* msg, Node* t) {
+	printf("%s\n   { ", msg);
 	inorder_print(t, 0);
-	printf("\n");
+	printf(" }\n");
 }
 
 void delete_nodes(Node* t) {

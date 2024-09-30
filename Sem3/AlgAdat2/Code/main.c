@@ -1,8 +1,10 @@
+
 #include <stdio.h>
 
 #include "avl.h"
 
 int main() {
+	// remMin example:
 	Node* x = new_node(15);	
 	bool d = false;
 
@@ -15,11 +17,11 @@ int main() {
 	AVLinsert(&x, 22, &d);
 	AVLinsert(&x, 30, &d);
 	AVLinsert(&x, 21, &d);
-	print(x);
+	print("Before AVLremMin(...): ", x);
 
 	Node* minp = NULL;
 	AVLremMin(&x, &minp, &d);
-	print(x);
+	print("After AVLremMin(...): ", x);
 
 	delete_nodes(x);
 	return 0;

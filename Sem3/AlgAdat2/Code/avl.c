@@ -242,13 +242,18 @@ void AVLdelRoot(Node** t, bool* d) {
 }
 
 void rightSubTreeShrunk(Node** t, bool* d) {
-	printf("not implemented\n");
-	exit(1);	
+	if ((*t)->b == - 1) {
+		balanceMM(t, d);
+	}
+	else {
+		(*t)->b -= 1;
+		*d = ((*t)->b == 0);
+	}
 }
 
 void balanceMM(Node** t, bool* d) {
 	printf("not implemented\n");
-	exit(1);	
+	exit(1);
 }
 
 void balanceMM0(Node** t, Node** l) {

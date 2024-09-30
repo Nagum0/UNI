@@ -1,8 +1,11 @@
 ﻿namespace DocumentStatistics
 {
-	internal class DocumentStatistics
+	public class DocuStats
 	{
-		private string _filePath;
+        public event EventHandler? FileContentReady;
+        public event EventHandler? TextStatisticsReady;
+
+        private string _filePath;
 		public string FileContent { get; private set; }
 		public Dictionary<string, int> DistinctWordCount { get; private set; }
 		public int CharacterCount { get; private set; }
@@ -12,7 +15,7 @@
 		public int ColemanLieuIndex { get; private set; }
 		public int FleschReadingEase { get; private set; }
 
-		public DocumentStatistics(string _filePath)
+		public DocuStats(string _filePath)
 		{
 			this._filePath = _filePath;
 		}
@@ -21,6 +24,9 @@
 		public void Load()
 		{
 			FileContent = File.ReadAllText(_filePath);
+			// Reading complete event:
+			OnFileContentReady();
+
 			ComputeDistinctWords();
 			CharacterCount = FileContent.Length;
 			int wsChars = FileContent.Count(c => char.IsWhiteSpace(c));
@@ -29,6 +35,9 @@
 			ProperNounCount = ComputeProperNounCount();
 			ColemanLieuIndex = ComputeColemanLieuIndex();
 			FleschReadingEase = ComputeFleschReadingEase();
+
+			// Text statistics ready:
+			OnTextStatisticsReady();
 		}
 
 		public void ComputeDistinctWords()
@@ -123,6 +132,16 @@
 		private bool IsVowel(char c)
 		{
 			return "aeiouyAEIOUY".IndexOf(c) != -1;
+		}
+
+		private void OnFileContentReady()
+		{
+			FileContentReady?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void OnTextStatisticsReady()
+		{
+			TextStatisticsReady?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

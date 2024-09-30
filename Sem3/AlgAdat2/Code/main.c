@@ -3,10 +3,9 @@
 #include "avl.h"
 
 int main() {
-	Node* x = new_node(15);
-	print(x);
-	
+	Node* x = new_node(15);	
 	bool d = false;
+
 	AVLinsert(&x, 10, &d);
 	AVLinsert(&x, 20, &d);
 	AVLinsert(&x, 3, &d);
@@ -16,6 +15,10 @@ int main() {
 	AVLinsert(&x, 22, &d);
 	AVLinsert(&x, 30, &d);
 	AVLinsert(&x, 21, &d);
+	print(x);
+
+	Node* minp = NULL;
+	AVLremMin(&x, &minp, &d);
 	print(x);
 
 	delete_nodes(x);

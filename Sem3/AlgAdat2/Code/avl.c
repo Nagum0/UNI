@@ -145,6 +145,56 @@ void inorder_print(Node* t, int n) {
 	}
 }
 
+void AVLremMin(Node** t, Node** minp, bool* d) {
+	if ((*t)->left == NULL) {
+		*minp = *t;
+		*t = (*minp)->right;
+		(*minp)->right = NULL;
+		*d = true;
+	}
+	else {
+		AVLremMin(&(*t)->left, minp, d);
+
+		if (*d) {
+			leftSubTreeShrunk(t, d);
+		}
+	}
+}
+
+void leftSubTreeShrunk(Node** t, bool* d) {
+	if ((*t)->b == 1) {
+		balancePP(t, d);
+	}
+	else {
+		(*t)->b += 1;
+		*d = ((*t)->b == 0);
+	}
+}
+
+void balancePP(Node** t, bool* d) {
+	Node* r = (*t)->right;
+
+	if (r->b == -1) {
+		balancePPm(t, &r);
+	}
+	else if (r->b == 0) {
+		balancePP0(t, &r);
+		*d = false;
+	}
+	else if (r->b == 1) {
+		balancePPp(t, &r);
+	}
+}
+
+void balancePP0(Node **t, Node** r) {
+	(*t)->right = (*r)->left;
+	(*r)->left = *t;
+	(*t)->b = 1;
+	(*r)->b = -1;
+	*t = *r;
+}
+
+
 void print(Node* t) {
 	inorder_print(t, 0);
 	printf("\n");

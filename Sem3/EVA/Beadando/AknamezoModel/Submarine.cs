@@ -1,9 +1,12 @@
 ﻿namespace AknamezoModel
 {
-    public class Submarine
+    public class Submarine 
     {
-		public static void Foo() {
-			Console.WriteLine("foo");
-		}
+        public int Speed { get; private set; }
+
+        public Submarine(int speed)
+        {
+            Speed = speed;
+        }
     }
 }

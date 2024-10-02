@@ -1,0 +1,99 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "AknamezoModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/AknamezoModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AknamezoModel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AknamezoModel/1.0.0": {
+      "type": "project",
+      "path": "../AknamezoModel/AknamezoModel.csproj",
+      "msbuildProject": "../AknamezoModel/AknamezoModel.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "AknamezoModel >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\xptee\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\AknamezoWinForms.csproj",
+      "projectName": "AknamezoWinForms",
+      "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\AknamezoWinForms.csproj",
+      "packagesPath": "C:\\Users\\xptee\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\xptee\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {
+            "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\AknamezoModel.csproj": {
+              "projectPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\AknamezoModel.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

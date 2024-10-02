@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AknamezoModel", "AknamezoModel.csproj", "{5596A77A-D49A-4C26-A500-7C56C6DC618F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AknamezoModel", "AknamezoModel.csproj", "{A21C3F02-9F01-4219-8653-DD25130FBEAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5596A77A-D49A-4C26-A500-7C56C6DC618F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5596A77A-D49A-4C26-A500-7C56C6DC618F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5596A77A-D49A-4C26-A500-7C56C6DC618F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5596A77A-D49A-4C26-A500-7C56C6DC618F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A21C3F02-9F01-4219-8653-DD25130FBEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A21C3F02-9F01-4219-8653-DD25130FBEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A21C3F02-9F01-4219-8653-DD25130FBEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A21C3F02-9F01-4219-8653-DD25130FBEAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {42BAC6A3-E7ED-4F2A-AADD-5205093A93A9}
+		SolutionGuid = {A02A49E0-0562-4C7C-98C4-1CE28E9A09E0}
 	EndGlobalSection
 EndGlobal

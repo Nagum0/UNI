@@ -1,0 +1,12 @@
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\bin\Debug\net8.0\AknamezoModel.deps.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\bin\Debug\net8.0\AknamezoModel.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\bin\Debug\net8.0\AknamezoModel.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.AssemblyInfoInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.AssemblyInfo.cs
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.csproj.CoreCompileInputs.cache
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.sourcelink.json
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\refint\AknamezoModel.dll
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\AknamezoModel.pdb
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoModel\obj\Debug\net8.0\ref\AknamezoModel.dll

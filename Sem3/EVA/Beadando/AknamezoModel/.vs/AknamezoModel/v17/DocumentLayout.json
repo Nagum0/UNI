@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5596A77A-D49A-4C26-A500-7C56C6DC618F}|AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\submarine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5596A77A-D49A-4C26-A500-7C56C6DC618F}|AknamezoModel.csproj|solutionrelative:submarine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A21C3F02-9F01-4219-8653-DD25130FBEAD}|AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A21C3F02-9F01-4219-8653-DD25130FBEAD}|AknamezoModel.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Submarine.cs",
-              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Submarine.cs",
-              "RelativeDocumentMoniker": "Submarine.cs",
-              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Submarine.cs",
-              "RelativeToolTip": "Submarine.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAACAAAA",
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Class1.cs",
+              "RelativeDocumentMoniker": "Class1.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Class1.cs",
+              "RelativeToolTip": "Class1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T21:19:27.623Z",
+              "WhenOpened": "2024-10-02T20:03:37.039Z",
               "EditorCaption": ""
             }
           ]

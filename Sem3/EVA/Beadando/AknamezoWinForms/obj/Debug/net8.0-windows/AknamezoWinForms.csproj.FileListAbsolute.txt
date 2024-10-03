@@ -18,4 +18,4 @@ C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoWinForms\bin\Debug\net8.0
 C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoWinForms\bin\Debug\net8.0-windows\AknamezoModel.pdb
 C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoWinForms\obj\Debug\net8.0-windows\AknamezoWinForms.csproj.AssemblyReference.cache
 C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoWinForms\obj\Debug\net8.0-windows\Aknamezo.D747959D.Up2Date
-C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoWinForms\obj\Debug\net8.0-windows\AknamezoWinForms.MineBox.resources
+C:\Users\xptee\Documents\UNI\Sem3\EVA\Beadando\AknamezoWinForms\obj\Debug\net8.0-windows\AknamezoWinForms.GameForm.resources

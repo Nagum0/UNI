@@ -2,11 +2,11 @@
 {
     public class Mine
     {
-        public int Speed { get; private set; }
+        public int Weight { get; private set; }
         
-        public Mine(int speed)
+        public Mine(int weight)
         {
-            Speed = speed;
+            Weight = weight;
         }
     }
 }

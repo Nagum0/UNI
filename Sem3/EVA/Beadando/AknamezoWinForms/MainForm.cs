@@ -1,53 +1,98 @@
 using AknamezoModel;
+using Timer = System.Windows.Forms.Timer;
 
 namespace AknamezoWinForms 
 {
+    public class MineBox : PictureBox
+    {
+        public Timer timer;
+        public Mine model;
+
+        public MineBox(int weight)
+        {
+            timer = new Timer();
+            model = new Mine(weight);
+        }
+    }
+
     public partial class MainForm : Form 
     {
-        // Initialize submarine model
-        private Submarine submarineModel = new Submarine(10);
-        // Initializing a mine model
-        private Mine mineModel = new Mine(25);
+        private Game game = new Game(); // Game state
+        private Submarine submarineModel = new Submarine(50); // Submarine model
+        private List<MineBox> mines = new List<MineBox>();
 
         public MainForm() 
         {
             InitializeComponent();
 
+            // Starting the game timer
+            Timer gameTimer = new Timer();
+            gameTimer.Interval = 1000;
+            gameTimer.Tick += new EventHandler(UpdateGameState);
+            gameTimer.Start();
+
             // Key down event
             KeyDown += new KeyEventHandler(MoveSubmarine);
 
-            // Setting up ship1
-            mine1Timer.Tick += new EventHandler(MoveMineDown);
-            mine1Timer.Interval = 200;
-            mine1Timer.Start();
+            // Initializing mines
+            for (int i = 0; i < 3; i++)
+            {
+                MineBox mine = new MineBox(i * 50 + 10);
+                
+                // Body setup
+                mine.Location = new Point(i * 100 + 100 + mine.Size.Width, 25);
+                mine.BackColor = Color.Red;
+                mine.Size = new Size(50, 50);
+
+                // Timer setup
+                mine.timer.Interval = mine.model.Weight;
+                mine.timer.Tick += new EventHandler((sender, e) => MoveMineDown(sender, e, mine));
+                mine.timer.Start();
+
+                Controls.Add(mine);
+                mines.Add(mine);
+             }
         }
 
-        private void MoveMineDown(object? sender, EventArgs e)
+        private void UpdateGameState(object? sender, EventArgs e)
         {
-            int newYPos = mine1.Location.Y + mineModel.Speed;
+            game.Time += 1;
 
-            if (ClientSize.Height < newYPos + mine1.Height)
+            if (game.Time >= 10)
             {
-                mine1.Dispose();
+                foreach (MineBox mine in mines)
+                {
+                    mine.timer.Stop();
+                    MessageBox.Show("Game timer stopped!");
+                }
             }
-            else
-            {
-                mine1.Location = new Point(mine1.Location.X, newYPos);
-            }
+        }
 
-            if (submarine.Bounds.IntersectsWith(mine1.Bounds))
+        private void MoveMineDown(object? sender, EventArgs e, MineBox mine)
+        {
+            int newYPos = mine.Location.Y + 25;
+            mine.Location = new Point(mine.Location.X, newYPos);
+
+            if (mine.Location.Y >= ClientSize.Height - 150)
             {
-                mine1Timer.Stop();
-                MessageBox.Show("YOU DIED");
-            } 
+                mine.Dispose();
+            }
         }
 
         private void MoveSubmarine(object? sender, KeyEventArgs e)
         {
-            // Get current submarine position
             Point submarineLocation = submarine.Location;
 
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            {
+                int newYPos = submarineLocation.Y - submarineModel.Speed;
+
+                if (100 <= newYPos)
+                {
+                    submarine.Location = new Point(submarineLocation.X, newYPos);
+                }
+            }
+            else if (e.KeyCode == Keys.A)
             {
                 int newXPos = submarineLocation.X - submarineModel.Speed;
 
@@ -63,6 +108,15 @@ namespace AknamezoWinForms
                 if (newXPos + submarine.Width <= ClientSize.Width)
                 {
                     submarine.Location = new Point(newXPos, submarineLocation.Y);
+                }
+            }
+            else if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            {
+                int newYPos = submarineLocation.Y + submarineModel.Speed;
+
+                if (ClientSize.Height >= newYPos + submarine.Height)
+                {
+                    submarine.Location = new Point(submarineLocation.X, newYPos);
                 }
             }
         }

@@ -3,18 +3,6 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace AknamezoWinForms 
 {
-    public class MineBox : PictureBox
-    {
-        public Timer timer;
-        public Mine model;
-
-        public MineBox(int weight)
-        {
-            timer = new Timer();
-            model = new Mine(weight);
-        }
-    }
-
     public partial class MainForm : Form 
     {
         private Game game = new Game(); // Game state

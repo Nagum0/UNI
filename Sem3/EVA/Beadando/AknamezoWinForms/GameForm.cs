@@ -6,14 +6,17 @@ namespace AknamezoWinForms
     public partial class GameForm : Form
     {
         private GameState gameState; // Game state
+        private PictureBox mineBody;
 
         public GameForm()
         {
             InitializeComponent();
 
             // Initializing model
-            Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 25);
-            gameState = new GameState(playerModel);
+            Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
+            // -- TESTING MINE
+            Mine mine = new Mine(100, 100, 1, 50, 50);
+            gameState = new GameState(playerModel, mine);
 
             // Subscribing buttons event handler methods
             startButton.Click += startButton_Click;
@@ -33,6 +36,14 @@ namespace AknamezoWinForms
             // Subscribing to keypress event
             KeyPreview = true;
             KeyDown += MovePlayer;
+
+            // -- TESTING MINE
+            // Drawing a mine PictureBox to gamePanel
+            mineBody = new PictureBox();
+            mineBody.Location = new Point(100, 100);
+            mineBody.Size = new Size(gameState.Mine.Height, gameState.Mine.Width);
+            mineBody.BackColor = Color.Red;
+            gamePanel.Controls.Add(mineBody);
         }
 
         // Main game loop. (60 fps)
@@ -41,6 +52,19 @@ namespace AknamezoWinForms
         {
             // Drawing the player
             player.Location = new Point(gameState.Player.X, gameState.Player.Y);
+
+            // -- TESTING MINE
+            // Moving mine down
+            gameState.Mine.Sink();
+            mineBody.Location = new Point(gameState.Mine.X, gameState.Mine.Y);
+
+            // Check player collision with mine
+            if (gameState.MineHit())
+            {
+                gameTimer.Stop();
+                gameLoopTimer.Stop();
+                MessageBox.Show("A MINE HIT YOU!");
+            }
         }
 
         // Game timer tick event handler.
@@ -82,7 +106,24 @@ namespace AknamezoWinForms
 
         private void MovePlayer(object? sender, KeyEventArgs e) 
         {
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) gameState.Player.MoveRight();
+            if (gameLoopTimer.Enabled)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.W:
+                        gameState.Player.MoveUp();
+                        break;
+                    case Keys.S:
+                        gameState.Player.MoveDown();
+                        break;
+                    case Keys.A:
+                        gameState.Player.MoveLeft();
+                        break;
+                    case Keys.D:
+                        gameState.Player.MoveRight();
+                        break;
+                }
+            }
         }
     }
 }

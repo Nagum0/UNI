@@ -1,7 +1,13 @@
 ﻿namespace AknamezoModel
 {
-    public class Game
+    public class GameState
     {
-        public int Time { get; set; }
+        public Submarine Player { get; private set; }
+        public int ElpasedTime { get; set; }
+    
+        public GameState(Submarine player)
+        {
+            Player = player;
+        }
     }
 }

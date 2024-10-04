@@ -16,7 +16,10 @@
       },
       "AknamezoModel/1.0.0": {
         "runtime": {
-          "AknamezoModel.dll": {}
+          "AknamezoModel.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

@@ -1,3 +1,8 @@
+/**
+ * TODOs:
+ *      - Bounds checking in MovePlayer(...) method.
+ */
+
 using AknamezoModel;
 using Timer = System.Windows.Forms.Timer;
 
@@ -19,18 +24,18 @@ namespace AknamezoWinForms
             gameState = new GameState(playerModel, mine);
 
             // Subscribing buttons event handler methods
-            startButton.Click += startButton_Click;
-            stopButton.Click += stopButton_Click;
-            saveButton.Click += saveButton_Click;
-            loadButton.Click += loadButton_Click;
+            startButton.Click += StartButton_Click;
+            stopButton.Click += StopButton_Click;
+            saveButton.Click += SaveButton_Click;
+            loadButton.Click += LoadButton_Click;
 
-            // Subsribing the game timer to the tick event
-            gameTimer.Tick += gameTimer_Tick;
+            // Subscribing the game timer to the tick event
+            gameTimer.Tick += GameTimer_Tick;
             gameTimer.Interval = 1000;
 
             // Subscribing the game loop timer to the tick event
-            gameLoopTimer.Tick += gameLoopTimer_Tick;
-            // I set the gameLoop to update every 16 seconds because that's roughly 60 fps (1000 / 60)
+            gameLoopTimer.Tick += GameLoopTimer_Tick;
+            // I set the gameLoop to update every 16 miliseconds because that's roughly 60 fps (1000 / 60)
             gameLoopTimer.Interval = 16;
 
             // Subscribing to keypress event
@@ -48,7 +53,7 @@ namespace AknamezoWinForms
 
         // Main game loop. (60 fps)
         // Game loop timer tick event handler.
-        private void gameLoopTimer_Tick(object? sender, EventArgs e)
+        private void GameLoopTimer_Tick(object? sender, EventArgs e)
         {
             // Drawing the player
             player.Location = new Point(gameState.Player.X, gameState.Player.Y);
@@ -68,7 +73,7 @@ namespace AknamezoWinForms
         }
 
         // Game timer tick event handler.
-        private void gameTimer_Tick(object? sender, EventArgs e)
+        private void GameTimer_Tick(object? sender, EventArgs e)
         {
             gameState.ElpasedTime++;
             gameTimeLabel.Text = $"Game time: {gameState.ElpasedTime}";
@@ -76,7 +81,7 @@ namespace AknamezoWinForms
 
         // Start button event handler.
         // Starts the game loop (by starting the game timer).
-        private void startButton_Click(object? sender, EventArgs e)
+        private void StartButton_Click(object? sender, EventArgs e)
         {
             gameTimer.Start();
             gameLoopTimer.Start();
@@ -84,7 +89,7 @@ namespace AknamezoWinForms
 
         // Stop button event handler.
         // Stops the game loop (by stopping the game timer).
-        private void stopButton_Click(object? sender, EventArgs e)
+        private void StopButton_Click(object? sender, EventArgs e)
         {
             gameTimer.Stop();
             gameLoopTimer.Stop();
@@ -92,18 +97,20 @@ namespace AknamezoWinForms
 
         // Save button event handler.
         // Saves the current game state to a json file.
-        private void saveButton_Click(object? sender, EventArgs e)
+        private void SaveButton_Click(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
 
         // Load button event handler.
         // Loads a game from a json file.
-        private void loadButton_Click(object? sender, EventArgs e)
+        private void LoadButton_Click(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
-
+         
+        // Method to move the player on specific key presses.
+        // Handles the KeyPress event.
         private void MovePlayer(object? sender, KeyEventArgs e) 
         {
             if (gameLoopTimer.Enabled)

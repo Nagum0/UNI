@@ -4,16 +4,13 @@
     {
         public Submarine Player { get; private set; }
         public int ElpasedTime { get; set; }
-        
-        // -- TESTING MINE
-        public Mine Mine { get; private set; }
     
-        public GameState(Submarine player, Mine mine)
+        public GameState(Submarine player)
         {
             Player = player;
-            Mine = mine;
         }
 
+        /*
         public bool MineHit()
         {
             int playerXWidth = Player.X + Player.Width;
@@ -24,5 +21,6 @@
             return (Player.X < mineXWidth && Mine.X < playerXWidth) &&
                    (Player.Y < mineYHeight && Mine.Y < playerYHeight);
         }
+        */
     }
 }

@@ -1,8 +1,3 @@
-/**
- * TODOs:
- *      - Bounds checking in MovePlayer(...) method.
- */
-
 using AknamezoModel;
 using Timer = System.Windows.Forms.Timer;
 
@@ -11,7 +6,6 @@ namespace AknamezoWinForms
     public partial class GameForm : Form
     {
         private GameState gameState; // Game state
-        private PictureBox mineBody;
 
         public GameForm()
         {
@@ -19,9 +13,7 @@ namespace AknamezoWinForms
 
             // Initializing model
             Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
-            // -- TESTING MINE
-            Mine mine = new Mine(100, 100, 1, 50, 50);
-            gameState = new GameState(playerModel, mine);
+            gameState = new GameState(playerModel);
 
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;
@@ -41,14 +33,6 @@ namespace AknamezoWinForms
             // Subscribing to keypress event
             KeyPreview = true;
             KeyDown += MovePlayer;
-
-            // -- TESTING MINE
-            // Drawing a mine PictureBox to gamePanel
-            mineBody = new PictureBox();
-            mineBody.Location = new Point(100, 100);
-            mineBody.Size = new Size(gameState.Mine.Height, gameState.Mine.Width);
-            mineBody.BackColor = Color.Red;
-            gamePanel.Controls.Add(mineBody);
         }
 
         // Main game loop. (60 fps)
@@ -58,18 +42,15 @@ namespace AknamezoWinForms
             // Drawing the player
             player.Location = new Point(gameState.Player.X, gameState.Player.Y);
 
-            // -- TESTING MINE
-            // Moving mine down
-            gameState.Mine.Sink();
-            mineBody.Location = new Point(gameState.Mine.X, gameState.Mine.Y);
-
-            // Check player collision with mine
+            // -- DISABLED: Check if the player was hit
+            /*
             if (gameState.MineHit())
             {
                 gameTimer.Stop();
                 gameLoopTimer.Stop();
                 MessageBox.Show("A MINE HIT YOU!");
             }
+            */
         }
 
         // Game timer tick event handler.
@@ -118,16 +99,32 @@ namespace AknamezoWinForms
                 switch (e.KeyCode)
                 {
                     case Keys.W:
-                        gameState.Player.MoveUp();
+                    case Keys.Up:
+                        if (gameState.Player.Y >= 150)
+                        {
+                            gameState.Player.MoveUp();
+                        }
                         break;
                     case Keys.S:
-                        gameState.Player.MoveDown();
+                    case Keys.Down:
+                        if (gameState.Player.Y + gameState.Player.Height <= gamePanel.Height - gameState.Player.Height)
+                        {
+                            gameState.Player.MoveDown();
+                        }
                         break;
                     case Keys.A:
-                        gameState.Player.MoveLeft();
+                    case Keys.Left:
+                        if (gameState.Player.X >= 0)
+                        {
+                            gameState.Player.MoveLeft();
+                        }
                         break;
                     case Keys.D:
-                        gameState.Player.MoveRight();
+                    case Keys.Right:
+                        if (gameState.Player.X <= gamePanel.Width - gameState.Player.Width)
+                        {
+                            gameState.Player.MoveRight();
+                        }
                         break;
                 }
             }

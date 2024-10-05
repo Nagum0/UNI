@@ -30,6 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             gamePanel = new Panel();
+            shipBody3 = new PictureBox();
+            shipBody2 = new PictureBox();
+            shipBody1 = new PictureBox();
             player = new PictureBox();
             startButton = new Button();
             stopButton = new Button();
@@ -40,18 +43,51 @@
             gameLoopTimer = new System.Windows.Forms.Timer(components);
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             gamePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)shipBody3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)shipBody2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)shipBody1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)player).BeginInit();
             SuspendLayout();
             // 
             // gamePanel
             // 
             gamePanel.BackColor = Color.RoyalBlue;
+            gamePanel.Controls.Add(shipBody3);
+            gamePanel.Controls.Add(shipBody2);
+            gamePanel.Controls.Add(shipBody1);
             gamePanel.Controls.Add(player);
             gamePanel.Location = new Point(61, 49);
             gamePanel.Margin = new Padding(3, 2, 3, 2);
             gamePanel.Name = "gamePanel";
             gamePanel.Size = new Size(998, 535);
             gamePanel.TabIndex = 1;
+            // 
+            // shipBody3
+            // 
+            shipBody3.BackColor = Color.Maroon;
+            shipBody3.Location = new Point(330, 134);
+            shipBody3.Name = "shipBody3";
+            shipBody3.Size = new Size(182, 50);
+            shipBody3.TabIndex = 3;
+            shipBody3.TabStop = false;
+            // 
+            // shipBody2
+            // 
+            shipBody2.BackColor = Color.Maroon;
+            shipBody2.Location = new Point(533, 74);
+            shipBody2.Name = "shipBody2";
+            shipBody2.Size = new Size(182, 50);
+            shipBody2.TabIndex = 2;
+            shipBody2.TabStop = false;
+            // 
+            // shipBody1
+            // 
+            shipBody1.BackColor = Color.Maroon;
+            shipBody1.Location = new Point(752, 19);
+            shipBody1.Name = "shipBody1";
+            shipBody1.Size = new Size(182, 50);
+            shipBody1.TabIndex = 1;
+            shipBody1.TabStop = false;
             // 
             // player
             // 
@@ -137,6 +173,9 @@
             Name = "GameForm";
             Text = "Aknamező";
             gamePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)shipBody3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)shipBody2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)shipBody1).EndInit();
             ((System.ComponentModel.ISupportInitialize)player).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -153,5 +192,8 @@
         private Label gameTimeLabel;
         private System.Windows.Forms.Timer gameLoopTimer;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private PictureBox shipBody1;
+        private PictureBox shipBody2;
+        private PictureBox shipBody3;
     }
 }

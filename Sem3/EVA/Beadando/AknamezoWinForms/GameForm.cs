@@ -14,6 +14,9 @@ namespace AknamezoWinForms
             // Initializing model
             Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
             gameState = new GameState(playerModel);
+            gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, 200));
+            gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, 200));
+            gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, 200));
 
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;
@@ -41,6 +44,11 @@ namespace AknamezoWinForms
         {
             // Drawing the player
             player.Location = new Point(gameState.Player.X, gameState.Player.Y);
+
+            // Moving the enemy ships
+            MoveShip(shipBody1, 0);
+            MoveShip(shipBody2, 1);
+            MoveShip(shipBody3, 2);
 
             // -- DISABLED: Check if the player was hit
             /*
@@ -89,7 +97,14 @@ namespace AknamezoWinForms
         {
             throw new NotImplementedException();
         }
-         
+        
+        // Updates the ship position and moves the shipBody.
+        private void MoveShip(PictureBox shipBody, int shipIndex)
+        {
+            gameState.Ships[shipIndex].MoveLeft();
+            shipBody.Location = new Point(gameState.Ships[shipIndex].X, shipBody.Location.Y);
+        }
+
         // Method to move the player on specific key presses.
         // Handles the KeyPress event.
         private void MovePlayer(object? sender, KeyEventArgs e) 
@@ -100,7 +115,7 @@ namespace AknamezoWinForms
                 {
                     case Keys.W:
                     case Keys.Up:
-                        if (gameState.Player.Y >= 150)
+                        if (gameState.Player.Y >= 200)
                         {
                             gameState.Player.MoveUp();
                         }

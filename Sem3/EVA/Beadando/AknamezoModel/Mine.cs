@@ -1,9 +1,4 @@
-﻿/**
- * TODOs:
- *      - Different mine types.
- */
-
-namespace AknamezoModel
+﻿namespace AknamezoModel
 {
     public abstract class Mine
     {

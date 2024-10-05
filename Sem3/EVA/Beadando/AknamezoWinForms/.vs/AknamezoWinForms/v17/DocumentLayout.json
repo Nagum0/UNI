@@ -13,11 +13,20 @@
       "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\submarine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|solutionrelative:gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\lightmine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\mediummine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\heavymine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|solutionrelative:gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,7 +40,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "GameForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\GameForm.cs",
               "RelativeDocumentMoniker": "GameForm.cs",
@@ -49,7 +58,7 @@
               "RelativeDocumentMoniker": "GameForm.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\GameForm.cs",
               "RelativeToolTip": "GameForm.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAQwCoAAABQAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAgwCkAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T20:30:03.368Z",
               "EditorCaption": ""
@@ -75,22 +84,62 @@
               "RelativeDocumentMoniker": "..\\AknamezoModel\\Submarine.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Submarine.cs",
               "RelativeToolTip": "..\\AknamezoModel\\Submarine.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T20:30:01.03Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Mine.cs",
               "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Mine.cs",
               "RelativeDocumentMoniker": "..\\AknamezoModel\\Mine.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Mine.cs",
               "RelativeToolTip": "..\\AknamezoModel\\Mine.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAfAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T21:04:01.065Z"
+              "WhenOpened": "2024-10-02T21:04:01.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LightMine.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\LightMine.cs",
+              "RelativeDocumentMoniker": "..\\AknamezoModel\\LightMine.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\LightMine.cs",
+              "RelativeToolTip": "..\\AknamezoModel\\LightMine.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T10:04:03.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MediumMine.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\MediumMine.cs",
+              "RelativeDocumentMoniker": "..\\AknamezoModel\\MediumMine.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\MediumMine.cs",
+              "RelativeToolTip": "..\\AknamezoModel\\MediumMine.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAQAAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T10:18:56.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HeavyMine.cs",
+              "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\HeavyMine.cs",
+              "RelativeDocumentMoniker": "..\\AknamezoModel\\HeavyMine.cs",
+              "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\HeavyMine.cs",
+              "RelativeToolTip": "..\\AknamezoModel\\HeavyMine.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T10:19:54.096Z",
+              "EditorCaption": ""
             }
           ]
         }

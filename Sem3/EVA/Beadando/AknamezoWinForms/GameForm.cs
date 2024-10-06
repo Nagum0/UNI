@@ -1,3 +1,8 @@
+/**
+ * NOTES:
+ *      - Bug: Cannot move submarines with arrow keys
+ */
+
 using AknamezoModel;
 using Timer = System.Windows.Forms.Timer;
 
@@ -101,8 +106,15 @@ namespace AknamezoWinForms
         // Updates the ship position and moves the shipBody.
         private void MoveShip(PictureBox shipBody, int shipIndex)
         {
-            gameState.Ships[shipIndex].MoveLeft();
-            shipBody.Location = new Point(gameState.Ships[shipIndex].X, shipBody.Location.Y);
+            Ship ship = gameState.Ships[shipIndex];
+            ship.Move();
+
+            if (ship.X + ship.Width >= gamePanel.Width || ship.X < 0)
+            {
+                ship.ReverseDirection();
+            }
+
+            shipBody.Location = new Point(ship.X, shipBody.Location.Y);
         }
 
         // Method to move the player on specific key presses.

@@ -8,7 +8,7 @@
         public int Width { get; private set; }
         public int Speed { get; private set; }
         public int MineIntervalSpeed { get; private set; }
-        
+
         public Ship(int x, int y, int height, int width, int speed, int mineIntervalSpeed)
         {
             X = x;
@@ -19,14 +19,14 @@
             MineIntervalSpeed = mineIntervalSpeed;
         }
 
-        public void MoveRight()
+        public void ReverseDirection()
         {
-            X += Speed;
+            Speed = -Speed;
         }
 
-        public void MoveLeft()
+        public void Move()
         {
-            X -= Speed;
+            X += Speed;
         }
     }
 }

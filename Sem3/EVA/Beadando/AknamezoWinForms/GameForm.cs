@@ -11,6 +11,8 @@ namespace AknamezoWinForms
     public partial class GameForm : Form
     {
         private GameState gameState; // Game state
+        // -- TESTING: Mine dropping
+        private bool dropMine = true; 
 
         public GameForm()
         {
@@ -54,6 +56,23 @@ namespace AknamezoWinForms
             MoveShip(shipBody1, 0);
             MoveShip(shipBody2, 1);
             MoveShip(shipBody3, 2);
+
+            // Ships dropping mines
+            // -- TESTING: Creating a mine for each ship at second 5
+            if (gameState.ElpasedTime >= 5 && dropMine)
+            {
+                dropMine = false;
+
+                foreach (Ship ship in gameState.Ships)
+                {
+                    Mine mine = ship.DropMine();
+                    PictureBox mineBody = new PictureBox();
+                    mineBody.Location = new Point(mine.X, mine.Y);
+                    mineBody.Size = new Size(mine.Width, mine.Height);
+                    mineBody.BackColor = Color.Black;
+                    gamePanel.Controls.Add(mineBody);
+                }
+            }
 
             // -- DISABLED: Check if the player was hit
             /*

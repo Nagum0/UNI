@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AknamezoWinForms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b54592f5dec1e352c633c4cec960a375866b4c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ffabffa98db17da34235b02215c2718c2cfa4bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("AknamezoWinForms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AknamezoWinForms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

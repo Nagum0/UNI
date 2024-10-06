@@ -8,6 +8,7 @@
         public int Width { get; private set; }
         public int Speed { get; private set; }
         public int MineIntervalSpeed { get; private set; }
+        private Random randomMineTypeGenerator;
 
         public Ship(int x, int y, int height, int width, int speed, int mineIntervalSpeed)
         {
@@ -17,6 +18,7 @@
             Width = width;
             Speed = speed;
             MineIntervalSpeed = mineIntervalSpeed;
+            randomMineTypeGenerator = new Random();
         }
 
         public void ReverseDirection()
@@ -27,6 +29,23 @@
         public void Move()
         {
             X += Speed;
+        }
+
+        public Mine DropMine()
+        {
+            int mineType = randomMineTypeGenerator.Next(0, 3);
+
+            switch (mineType)
+            {
+                case 0:
+                    return new LightMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
+                case 1:
+                    return new MediumMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
+                case 2:
+                    return new HeavyMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
+                default:
+                    return new LightMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
+            }
         }
     }
 }

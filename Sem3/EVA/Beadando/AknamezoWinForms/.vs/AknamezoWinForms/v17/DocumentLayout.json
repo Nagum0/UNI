@@ -3,6 +3,9 @@
   "WorkspaceRootPath": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezowinforms\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|solutionrelative:gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -10,14 +13,11 @@
       "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\ship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\submarine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{26625136-94D0-460A-B766-385E9BB37F63}|AknamezoWinForms.csproj|solutionrelative:gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\gamestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\submarine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{50356AA7-8E92-41E3-AD90-B549E5F34135}|..\\AknamezoModel\\AknamezoModel.csproj|c:\\users\\xptee\\documents\\uni\\sem3\\eva\\beadando\\aknamezomodel\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -39,7 +39,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -55,33 +55,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "GameForm.cs",
               "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\GameForm.cs",
               "RelativeDocumentMoniker": "GameForm.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoWinForms\\GameForm.cs",
               "RelativeToolTip": "GameForm.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAAwDwAAABEAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAAAFkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T20:30:03.368Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "GameState.cs",
               "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\GameState.cs",
               "RelativeDocumentMoniker": "..\\AknamezoModel\\GameState.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\GameState.cs",
               "RelativeToolTip": "..\\AknamezoModel\\GameState.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
+              "ViewState": "AQIAABQAAAAAAAAAAAAAABsAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-03T15:02:35.852Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Submarine.cs",
               "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Submarine.cs",
               "RelativeDocumentMoniker": "..\\AknamezoModel\\Submarine.cs",
@@ -89,18 +89,17 @@
               "RelativeToolTip": "..\\AknamezoModel\\Submarine.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T20:30:01.03Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T20:30:01.03Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Ship.cs",
               "DocumentMoniker": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Ship.cs",
               "RelativeDocumentMoniker": "..\\AknamezoModel\\Ship.cs",
               "ToolTip": "C:\\Users\\xptee\\Documents\\UNI\\Sem3\\EVA\\Beadando\\AknamezoModel\\Ship.cs",
               "RelativeToolTip": "..\\AknamezoModel\\Ship.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAxwC4AAABVAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAuwCcAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-05T11:12:51.523Z",
               "EditorCaption": ""
@@ -115,8 +114,7 @@
               "RelativeToolTip": "..\\AknamezoModel\\Mine.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T21:04:01.065Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T21:04:01.065Z"
             },
             {
               "$type": "Document",

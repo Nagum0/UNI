@@ -37,8 +37,6 @@
 
             switch (mineType)
             {
-                case 0:
-                    return new LightMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
                 case 1:
                     return new MediumMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
                 case 2:

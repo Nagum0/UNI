@@ -96,7 +96,7 @@
             player.BackColor = Color.FromArgb(64, 64, 64);
             player.Location = new Point(504, 580);
             player.Name = "player";
-            player.Size = new Size(125, 61);
+            player.Size = new Size(65, 61);
             player.TabIndex = 0;
             player.TabStop = false;
             // 

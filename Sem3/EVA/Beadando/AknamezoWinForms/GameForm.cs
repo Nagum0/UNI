@@ -12,7 +12,8 @@ namespace AknamezoWinForms
     {
         private GameState gameState; // Game state
         // -- TESTING: Mine dropping
-        private bool dropMine = true; 
+        private bool dropMine = true;
+        private List<PictureBox> mineBodies;
 
         public GameForm()
         {
@@ -24,6 +25,7 @@ namespace AknamezoWinForms
             gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, 200));
             gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, 200));
             gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, 200));
+            mineBodies = new List<PictureBox>();
 
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;
@@ -57,9 +59,12 @@ namespace AknamezoWinForms
             MoveShip(shipBody2, 1);
             MoveShip(shipBody3, 2);
 
+            // Sinking the mines
+            SinkMines();
+
             // Ships dropping mines
             // -- TESTING: Creating a mine for each ship at second 5
-            if (gameState.ElpasedTime >= 5 && dropMine)
+            if (gameState.ElpasedTime >= 3 && dropMine)
             {
                 dropMine = false;
 
@@ -70,19 +75,19 @@ namespace AknamezoWinForms
                     mineBody.Location = new Point(mine.X, mine.Y);
                     mineBody.Size = new Size(mine.Width, mine.Height);
                     mineBody.BackColor = Color.Black;
+                    gameState.AddMine(mine);
+                    mineBodies.Add(mineBody);
                     gamePanel.Controls.Add(mineBody);
                 }
             }
 
-            // -- DISABLED: Check if the player was hit
-            /*
+            // Check if mine collision happened
             if (gameState.MineHit())
             {
                 gameTimer.Stop();
                 gameLoopTimer.Stop();
                 MessageBox.Show("A MINE HIT YOU!");
             }
-            */
         }
 
         // Game timer tick event handler.
@@ -120,6 +125,16 @@ namespace AknamezoWinForms
         private void LoadButton_Click(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        // Goes through each mine model and mineBody and sinks it.
+        private void SinkMines()
+        {
+            for (int i = 0; i < gameState.Mines.Count; i++)
+            {
+                gameState.Mines[i].Sink();
+                mineBodies[i].Location = new Point(gameState.Mines[i].X, gameState.Mines[i].Y);
+            }
         }
         
         // Updates the ship position and moves the shipBody.

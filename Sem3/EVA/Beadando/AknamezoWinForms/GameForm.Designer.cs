@@ -42,6 +42,9 @@
             gameTimeLabel = new Label();
             gameLoopTimer = new System.Windows.Forms.Timer(components);
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            ship1MineTimer = new System.Windows.Forms.Timer(components);
+            ship2MineTimer = new System.Windows.Forms.Timer(components);
+            ship3MineTimer = new System.Windows.Forms.Timer(components);
             gamePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)shipBody3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)shipBody2).BeginInit();
@@ -191,5 +194,8 @@
         private PictureBox shipBody1;
         private PictureBox shipBody2;
         private PictureBox shipBody3;
+        private System.Windows.Forms.Timer ship1MineTimer;
+        private System.Windows.Forms.Timer ship2MineTimer;
+        private System.Windows.Forms.Timer ship3MineTimer;
     }
 }

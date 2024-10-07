@@ -1,4 +1,14 @@
-﻿namespace AknamezoModel
+﻿/**
+ * 1. ship1 setup
+ * 2. ship1_Tick(...)
+ * 3. Throw mine
+ * 4. get random ship1 mine interval
+ * 5. ship1_Tick(...)
+ * 6. Throw mine
+ * 7. ...
+ */
+
+namespace AknamezoModel
 {
     public class GameState
     {
@@ -23,6 +33,7 @@
         {
             Mines.Add(mine);
         }
+
         public bool MineHit()
         {
             int playerXWidth = Player.X + Player.Width;

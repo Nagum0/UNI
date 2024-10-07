@@ -1,6 +1,7 @@
 /**
  * NOTES:
  *      - Bug: Cannot move submarines with arrow keys
+ *      - Bug: Ship can move out of bounds at the top
  */
 
 using AknamezoModel;
@@ -11,20 +12,19 @@ namespace AknamezoWinForms
     public partial class GameForm : Form
     {
         private GameState gameState; // Game state
-        // -- TESTING: Mine dropping
-        private bool dropMine = true;
         private List<PictureBox> mineBodies;
 
         public GameForm()
         {
             InitializeComponent();
 
-            // Initializing model
+            // -- INITIALIZING MODEL
+            // Setting up submarine
             Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
             gameState = new GameState(playerModel);
-            gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, 200));
-            gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, 200));
-            gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, 200));
+            // Setting up the ships
+            SetupShips();
+            // Initializing mineBodies
             mineBodies = new List<PictureBox>();
 
             // Subscribing buttons event handler methods
@@ -62,25 +62,6 @@ namespace AknamezoWinForms
             // Sinking the mines
             SinkMines();
 
-            // Ships dropping mines
-            // -- TESTING: Creating a mine for each ship at second 5
-            if (gameState.ElpasedTime >= 3 && dropMine)
-            {
-                dropMine = false;
-
-                foreach (Ship ship in gameState.Ships)
-                {
-                    Mine mine = ship.DropMine();
-                    PictureBox mineBody = new PictureBox();
-                    mineBody.Location = new Point(mine.X, mine.Y);
-                    mineBody.Size = new Size(mine.Width, mine.Height);
-                    mineBody.BackColor = Color.Black;
-                    gameState.AddMine(mine);
-                    mineBodies.Add(mineBody);
-                    gamePanel.Controls.Add(mineBody);
-                }
-            }
-
             // Check if mine collision happened
             if (gameState.MineHit())
             {
@@ -103,6 +84,9 @@ namespace AknamezoWinForms
         {
             gameTimer.Start();
             gameLoopTimer.Start();
+            ship1MineTimer.Start();
+            ship2MineTimer.Start();
+            ship3MineTimer.Start();
         }
 
         // Stop button event handler.
@@ -111,6 +95,9 @@ namespace AknamezoWinForms
         {
             gameTimer.Stop();
             gameLoopTimer.Stop();
+            ship1MineTimer.Stop();
+            ship2MineTimer.Stop();
+            ship3MineTimer.Stop();
         }
 
         // Save button event handler.
@@ -189,6 +176,63 @@ namespace AknamezoWinForms
                         break;
                 }
             }
+        }
+
+        // ----------------- SHIP METHODS -----------------
+        private void SetupShips()
+        {
+            // Setting up the ship models
+            gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, 2000));
+            gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, 2000));
+            gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, 2000));
+
+            // Setting up the ship timers
+            ship1MineTimer.Interval = gameState.Ships[0].MineIntervalSpeed;
+            ship2MineTimer.Interval = gameState.Ships[1].MineIntervalSpeed;
+            ship3MineTimer.Interval = gameState.Ships[2].MineIntervalSpeed;
+
+            // Setting up the ship timer tick events
+            ship1MineTimer.Tick += Ship1MineTimer_Tick;
+            ship2MineTimer.Tick += Ship2MineTimer_Tick;
+            ship3MineTimer.Tick += Ship3MineTimer_Tick;
+        }
+
+        private void Ship1MineTimer_Tick(object? sender, EventArgs e)
+        {
+            Mine mine = gameState.Ships[0].DropMine();
+            PictureBox mineBody = CreateMineBody(mine);
+            AddMineToGame(mine, mineBody);
+        }
+
+        private void Ship2MineTimer_Tick(object? sender, EventArgs e)
+        {
+            Mine mine = gameState.Ships[1].DropMine();
+            PictureBox mineBody = CreateMineBody(mine);
+            AddMineToGame(mine, mineBody);
+        }
+
+        private void Ship3MineTimer_Tick(object? sender, EventArgs e)
+        {
+            Mine mine = gameState.Ships[2].DropMine();
+            PictureBox mineBody = CreateMineBody(mine);
+            AddMineToGame(mine, mineBody);
+        }
+
+        // ----------------- MINE METHODS -----------------
+        private PictureBox CreateMineBody(Mine mine)
+        {
+            PictureBox mineBody = new PictureBox();
+            mineBody.Location = new Point(mine.X, mine.Y);
+            mineBody.Size = new Size(mine.Width, mine.Height);
+            mineBody.BackColor = Color.Black;
+            return mineBody;
+        }
+
+        private void AddMineToGame(Mine mine, PictureBox body)
+        {
+            gameState.AddMine(mine);
+            mineBodies.Add(body);
+            gamePanel.Controls.Add(body);
         }
     }
 }

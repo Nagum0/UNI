@@ -8,7 +8,7 @@
  * 7. ...
  */
 
-namespace AknamezoModel
+namespace AknamezoModel.Model
 {
     public class GameState
     {

@@ -1,4 +1,4 @@
-﻿namespace AknamezoModel
+﻿namespace AknamezoModel.Model
 {
     public class HeavyMine : Mine
     {

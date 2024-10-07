@@ -4,8 +4,7 @@
  *      - Bug: Ship can move out of bounds at the top
  */
 
-using AknamezoModel;
-using Timer = System.Windows.Forms.Timer;
+using AknamezoModel.Model;
 
 namespace AknamezoWinForms 
 {
@@ -152,7 +151,7 @@ namespace AknamezoWinForms
                 {
                     case Keys.W:
                     case Keys.Up:
-                        if (gameState.Player.Y >= 200)
+                        if (gameState.Player.Y >= 300)
                         {
                             gameState.Player.MoveUp();
                         }

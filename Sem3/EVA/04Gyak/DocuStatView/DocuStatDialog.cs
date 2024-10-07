@@ -1,4 +1,5 @@
 using DocumentStatistics;
+using Persistance;
 
 namespace DocuStatView
 {
@@ -15,22 +16,31 @@ namespace DocuStatView
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                dialog.InitialDirectory = "C:\\";
-                dialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+                dialog.InitialDirectory = "C:\\Users\\xptee\\Documents\\";
+                //dialog.Filter = "Text files (*.txt)|*.txt|PDF files (*.pdf)|*.pdf";
                 dialog.RestoreDirectory = true;
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        _documentStatistics = new DocuStats(dialog.FileName);
+                        IFileManager? fileManager = FileManagerFactory.CreateForPath(dialog.FileName);
+                        
+                        if (fileManager == null)
+                        {
+                            MessageBox.Show("File reading is unsuccessful!\nUnsupported file format.",
+                                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        
+                        _documentStatistics = new DocuStats(fileManager);
                         _documentStatistics.FileContentReady += UpdateFileContent;
                         _documentStatistics.TextStatisticsReady += UpdateTextStatistics;
                         _documentStatistics.Load();
                     }
                     catch (IOException ex)
                     {
-                        MessageBox.Show("File reading is unsuccessful!\n" + ex.Message,
+                        MessageBox.Show($"File reading ({dialog.FileName}) is unsuccessful!\n" + ex.Message,
                                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }

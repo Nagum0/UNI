@@ -1,11 +1,13 @@
-﻿namespace DocumentStatistics
+﻿using Persistance;
+
+namespace DocumentStatistics
 {
 	public class DocuStats
 	{
         public event EventHandler? FileContentReady;
         public event EventHandler? TextStatisticsReady;
-
         private string _filePath;
+		private readonly IFileManager _fileManager;
 		public string FileContent { get; private set; }
 		public Dictionary<string, int> DistinctWordCount { get; private set; }
 		public int CharacterCount { get; private set; }
@@ -15,15 +17,16 @@
 		public int ColemanLieuIndex { get; private set; }
 		public int FleschReadingEase { get; private set; }
 
-		public DocuStats(string _filePath)
+		public DocuStats(IFileManager fileManager)
 		{
-			this._filePath = _filePath;
+			_fileManager = fileManager;
 		}
 
 		// Throws System.IO.IOException
 		public void Load()
 		{
-			FileContent = File.ReadAllText(_filePath);
+			FileContent = _fileManager.Load();
+			
 			// Reading complete event:
 			OnFileContentReady();
 

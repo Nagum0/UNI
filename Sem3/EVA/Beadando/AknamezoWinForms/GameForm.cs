@@ -1,8 +1,3 @@
-/**
- * NOTES:
- *      - Bug: Cannot move submarines with arrow keys
- */
-
 using AknamezoModel.Model;
 
 namespace AknamezoWinForms 
@@ -109,6 +104,7 @@ namespace AknamezoWinForms
             throw new NotImplementedException();
         }
 
+        // Stops all the active timers for the game.
         private void StopGame()
         {
             gameLoopTimer.Stop();
@@ -151,28 +147,24 @@ namespace AknamezoWinForms
                 switch (e.KeyCode)
                 {
                     case Keys.W:
-                    case Keys.Up:
                         if (gameState.Player.Y >= 300)
                         {
                             gameState.Player.MoveUp();
                         }
                         break;
                     case Keys.S:
-                    case Keys.Down:
                         if (gameState.Player.Y + gameState.Player.Height <= gamePanel.Height - gameState.Player.Height)
                         {
                             gameState.Player.MoveDown();
                         }
                         break;
                     case Keys.A:
-                    case Keys.Left:
                         if (gameState.Player.X >= 0)
                         {
                             gameState.Player.MoveLeft();
                         }
                         break;
                     case Keys.D:
-                    case Keys.Right:
                         if (gameState.Player.X <= gamePanel.Width - gameState.Player.Width)
                         {
                             gameState.Player.MoveRight();

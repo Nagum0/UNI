@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AknamezoModel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1f4ea0329fe7f82279acbcc120be8e675275c9b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08c82b3d426316cd1f8ddf3f56120b461fa47afa")]
 [assembly: System.Reflection.AssemblyProductAttribute("AknamezoModel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AknamezoModel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

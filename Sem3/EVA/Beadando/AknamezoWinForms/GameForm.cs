@@ -1,7 +1,6 @@
 /**
  * NOTES:
  *      - Bug: Cannot move submarines with arrow keys
- *      - Bug: Ship can move out of bounds at the top
  */
 
 using AknamezoModel.Model;
@@ -17,7 +16,7 @@ namespace AknamezoWinForms
         {
             InitializeComponent();
 
-            // -- INITIALIZING MODEL
+            // -- INITIALIZING MODEL --
             // Setting up submarine
             Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
             gameState = new GameState(playerModel);
@@ -26,6 +25,7 @@ namespace AknamezoWinForms
             // Initializing mineBodies
             mineBodies = new List<PictureBox>();
 
+            // -- SUBSRCIBING HANDLERS TO WINFORMS EVENTS --
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;
             stopButton.Click += StopButton_Click;
@@ -47,6 +47,7 @@ namespace AknamezoWinForms
         }
 
         // Main game loop. (60 fps)
+        // Updates the movement, checks for collision, drwas the positions of the ships and the mines.
         // Game loop timer tick event handler.
         private void GameLoopTimer_Tick(object? sender, EventArgs e)
         {

@@ -1,14 +1,4 @@
-﻿/**
- * 1. ship1 setup
- * 2. ship1_Tick(...)
- * 3. Throw mine
- * 4. get random ship1 mine interval
- * 5. ship1_Tick(...)
- * 6. Throw mine
- * 7. ...
- */
-
-namespace AknamezoModel.Model
+﻿namespace AknamezoModel.Model
 {
     public class GameState
     {

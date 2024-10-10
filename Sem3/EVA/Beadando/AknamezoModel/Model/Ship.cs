@@ -63,5 +63,17 @@
             MineIntervalSpeed = newMineDropInterval;
             return newMineDropInterval;
         }
+
+        public void UpdateMineDropRate(Difficulty diff)
+        {
+            mineIntervalMinimum = diff.MineIntervalMin();
+            mineIntervalMaximum = diff.MineIntervalMax();
+        }
+
+        // -- DEBUGGING
+        public override string ToString()
+        {
+            return $"mineIntervalMin: {mineIntervalMinimum}; mineIntervalMax: {mineIntervalMaximum}";
+        }
     }
 }

@@ -61,7 +61,7 @@
             gamePanel.Controls.Add(player);
             gamePanel.Location = new Point(70, 65);
             gamePanel.Name = "gamePanel";
-            gamePanel.Size = new Size(1141, 713);
+            gamePanel.Size = new Size(1135, 713);
             gamePanel.TabIndex = 1;
             // 
             // shipBody3

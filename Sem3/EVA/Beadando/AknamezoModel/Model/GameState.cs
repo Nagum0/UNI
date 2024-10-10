@@ -6,12 +6,25 @@
         public List<Ship> Ships { get; private set; }
         public List<Mine> Mines { get; private set; }
         public int ElpasedTime { get; set; }
-        
-        public GameState(Submarine player)
+        public Difficulty Difficulty { get; private set; }
+
+        public GameState(Submarine player, Difficulty difficulty)
         {
             Player = player;
             Ships = new List<Ship>();
             Mines = new List<Mine>();
+            Difficulty = difficulty;
+        }
+
+        public void ChangeDifficulty(Difficulty diff)
+        {
+            Difficulty = diff;
+
+            // Update the mine drop rate for each ship after difficulty change!
+            foreach (Ship ship in Ships)
+            {
+                ship.UpdateMineDropRate(diff);
+            }
         }
 
         public void AddShip(Ship ship)

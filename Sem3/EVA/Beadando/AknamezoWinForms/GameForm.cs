@@ -14,7 +14,7 @@ namespace AknamezoWinForms
             // -- INITIALIZING MODEL --
             // Setting up submarine
             Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
-            gameState = new GameState(playerModel);
+            gameState = new GameState(playerModel, new Easy());
             // Setting up the ships
             SetupShips();
             // Initializing mineBodies
@@ -68,8 +68,28 @@ namespace AknamezoWinForms
         // Game timer tick event handler.
         private void GameTimer_Tick(object? sender, EventArgs e)
         {
+            // Update gameTime label
             gameState.ElpasedTime++;
             gameTimeLabel.Text = $"Game time: {gameState.ElpasedTime}";
+        
+            // Up the difficulty
+            switch (gameState.ElpasedTime)
+            {
+                case 15:
+                    gameState.ChangeDifficulty(new Normal());
+                    break;
+                case 25:
+                    gameState.ChangeDifficulty(new Hard());
+                    break;
+                case 35:
+                    gameState.ChangeDifficulty(new Death());
+                    break;
+                default:
+                    break;
+            }
+
+            // -- DEBUGGING
+            Console.WriteLine($"{string.Join(",", gameState.Ships)}");
         }
 
         // Start button event handler.
@@ -159,13 +179,13 @@ namespace AknamezoWinForms
                         }
                         break;
                     case Keys.A:
-                        if (gameState.Player.X >= 0)
+                        if (gameState.Player.X > gameState.Player.Width)
                         {
                             gameState.Player.MoveLeft();
                         }
                         break;
                     case Keys.D:
-                        if (gameState.Player.X <= gamePanel.Width - gameState.Player.Width)
+                        if (gameState.Player.X + gameState.Player.Width < gamePanel.Width - gameState.Player.Width)
                         {
                             gameState.Player.MoveRight();
                         }
@@ -178,9 +198,9 @@ namespace AknamezoWinForms
         private void SetupShips()
         {
             // Setting up the ship models
-            gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, 2000, 6000));
-            gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, 2000, 6000));
-            gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, 2000, 6000));
+            gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, gameState.Difficulty.MineIntervalMin(), gameState.Difficulty.MineIntervalMax()));
+            gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, gameState.Difficulty.MineIntervalMin(), gameState.Difficulty.MineIntervalMax()));
+            gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, gameState.Difficulty.MineIntervalMin(), gameState.Difficulty.MineIntervalMax()));
 
             // Setting up the ship timers
             ship1MineTimer.Interval = gameState.Ships[0].MineIntervalSpeed;

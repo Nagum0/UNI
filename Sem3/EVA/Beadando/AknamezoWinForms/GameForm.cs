@@ -6,7 +6,7 @@ namespace AknamezoWinForms
     {
         private GameState gameState; // Game state
         private List<PictureBox> mineBodies;
-
+    
         public GameForm()
         {
             InitializeComponent();

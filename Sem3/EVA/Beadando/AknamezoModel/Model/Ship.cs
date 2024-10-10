@@ -13,7 +13,7 @@
         private int mineIntervalMaximum;
         private Random mineIntervalGenerator;
         private Random randomMineTypeGenerator;
-
+                                       
         public Ship(int x, int y, int height, int width, int speed, int mineIntervalMinimum, int mineIntervalMaximum)
         {
             X = x;
@@ -63,7 +63,7 @@
             MineIntervalSpeed = newMineDropInterval;
             return newMineDropInterval;
         }
-
+        
         public void UpdateMineDropRate(Difficulty diff)
         {
             mineIntervalMinimum = diff.MineIntervalMin();

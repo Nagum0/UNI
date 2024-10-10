@@ -15,7 +15,7 @@
             Mines = new List<Mine>();
             Difficulty = difficulty;
         }
-
+        
         public void ChangeDifficulty(Difficulty diff)
         {
             Difficulty = diff;

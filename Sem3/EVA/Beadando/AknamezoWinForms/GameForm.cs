@@ -19,7 +19,7 @@ namespace AknamezoWinForms
             SetupShips();
             // Initializing mineBodies
             mineBodies = new List<PictureBox>();
-
+            
             // -- SUBSRCIBING HANDLERS TO WINFORMS EVENTS --
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;

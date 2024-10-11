@@ -8,7 +8,7 @@
         public int Width { get; private set; }
         public int Speed { get; private set; }
         public int MineIntervalSpeed { get; private set; }
-        
+               
         private int mineIntervalMinimum;
         private int mineIntervalMaximum;
         private Random mineIntervalGenerator;
@@ -52,7 +52,7 @@
                     return new LightMine(X + Width / 2, Y + Height / 2 + 30, 50, 50);
             }
         }
-
+        
         /// <summary>
         /// Randomly generates a new interval for dropping mines and sets MineIntervalSpeed to it.
         /// </summary>
@@ -63,7 +63,7 @@
             MineIntervalSpeed = newMineDropInterval;
             return newMineDropInterval;
         }
-        
+              
         public void UpdateMineDropRate(Difficulty diff)
         {
             mineIntervalMinimum = diff.MineIntervalMin();

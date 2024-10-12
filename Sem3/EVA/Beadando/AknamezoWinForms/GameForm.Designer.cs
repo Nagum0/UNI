@@ -62,22 +62,24 @@
             gamePanel.Location = new Point(61, 49);
             gamePanel.Margin = new Padding(3, 2, 3, 2);
             gamePanel.Name = "gamePanel";
-            gamePanel.Size = new Size(969, 535);
+            gamePanel.Size = new Size(970, 535);
             gamePanel.TabIndex = 1;
             // 
             // shipBody3
             // 
-            shipBody3.BackColor = Color.Maroon;
-            shipBody3.Location = new Point(330, 134);
+            shipBody3.BackColor = Color.RoyalBlue;
+            shipBody3.Image = Properties.Resources.ship;
+            shipBody3.Location = new Point(330, 126);
             shipBody3.Name = "shipBody3";
-            shipBody3.Size = new Size(182, 50);
+            shipBody3.Size = new Size(180, 50);
             shipBody3.TabIndex = 3;
             shipBody3.TabStop = false;
             // 
             // shipBody2
             // 
-            shipBody2.BackColor = Color.Maroon;
-            shipBody2.Location = new Point(533, 74);
+            shipBody2.BackColor = Color.RoyalBlue;
+            shipBody2.Image = Properties.Resources.ship;
+            shipBody2.Location = new Point(533, 68);
             shipBody2.Name = "shipBody2";
             shipBody2.Size = new Size(182, 50);
             shipBody2.TabIndex = 2;
@@ -85,8 +87,9 @@
             // 
             // shipBody1
             // 
-            shipBody1.BackColor = Color.Maroon;
-            shipBody1.Location = new Point(752, 19);
+            shipBody1.BackColor = Color.RoyalBlue;
+            shipBody1.Image = Properties.Resources.ship;
+            shipBody1.Location = new Point(752, 14);
             shipBody1.Name = "shipBody1";
             shipBody1.Size = new Size(182, 50);
             shipBody1.TabIndex = 1;
@@ -95,6 +98,7 @@
             // player
             // 
             player.BackColor = Color.FromArgb(64, 64, 64);
+            player.Image = Properties.Resources.submarine;
             player.Location = new Point(441, 435);
             player.Margin = new Padding(3, 2, 3, 2);
             player.Name = "player";
@@ -153,7 +157,7 @@
             gameTimeLabel.BackColor = Color.FromArgb(64, 64, 64);
             gameTimeLabel.Font = new Font("Segoe UI", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gameTimeLabel.ForeColor = SystemColors.ButtonHighlight;
-            gameTimeLabel.Location = new Point(487, 7);
+            gameTimeLabel.Location = new Point(460, 6);
             gameTimeLabel.Name = "gameTimeLabel";
             gameTimeLabel.Size = new Size(170, 41);
             gameTimeLabel.TabIndex = 6;

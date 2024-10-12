@@ -5,16 +5,17 @@ namespace AknamezoWinForms
     public partial class GameForm : Form
     {
         private GameState gameState; // Game state
-        private List<PictureBox> mineBodies;
+        private List<PictureBox> mineBodies; // Mine bodies
     
         public GameForm()
         {
             InitializeComponent();
 
             // -- INITIALIZING MODEL --
-            // Setting up submarine
-            Submarine playerModel = new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width);
-            gameState = new GameState(playerModel, new Easy());
+            gameState = new GameState(
+                    new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width), 
+                    new Easy()
+            );
             // Setting up the ships
             SetupShips();
             // Initializing mineBodies
@@ -133,16 +134,6 @@ namespace AknamezoWinForms
             ship2MineTimer.Stop();
             ship3MineTimer.Stop();
         }
-
-        // Goes through each mine model and mineBody and sinks it.
-        private void SinkMines()
-        {
-            for (int i = 0; i < gameState.Mines.Count; i++)
-            {
-                gameState.Mines[i].Sink();
-                mineBodies[i].Location = new Point(gameState.Mines[i].X, gameState.Mines[i].Y);
-            }
-        }
         
         // Updates the ship position and moves the shipBody.
         private void MoveShip(PictureBox shipBody, int shipIndex)
@@ -153,6 +144,12 @@ namespace AknamezoWinForms
             if (ship.X + ship.Width >= gamePanel.Width || ship.X < 0)
             {
                 ship.ReverseDirection();
+
+                if (shipBody.Image != null) 
+                {
+                    shipBody.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
+                    shipBody.Invalidate();
+                }
             }
 
             shipBody.Location = new Point(ship.X, shipBody.Location.Y);
@@ -203,7 +200,7 @@ namespace AknamezoWinForms
                         shipBody1.Location.Y, 
                         shipBody1.Height, 
                         shipBody1.Width, 
-                        5, 
+                        3, 
                         gameState.Difficulty.MineIntervalMin(), 
                         gameState.Difficulty.MineIntervalMax())
             );
@@ -212,7 +209,7 @@ namespace AknamezoWinForms
                         shipBody2.Location.Y, 
                         shipBody2.Height, 
                         shipBody2.Width, 
-                        5, 
+                        3, 
                         gameState.Difficulty.MineIntervalMin(), 
                         gameState.Difficulty.MineIntervalMax())
             );
@@ -221,7 +218,7 @@ namespace AknamezoWinForms
                         shipBody3.Location.Y, 
                         shipBody3.Height, 
                         shipBody3.Width, 
-                        5, 
+                        3, 
                         gameState.Difficulty.MineIntervalMin(), 
                         gameState.Difficulty.MineIntervalMax())
             );
@@ -240,9 +237,7 @@ namespace AknamezoWinForms
         private void Ship1MineTimer_Tick(object? sender, EventArgs e)
         {
             // Dropping the mine
-            Mine mine = gameState.Ships[0].DropMine();
-            PictureBox mineBody = CreateMineBody(mine);
-            AddMineToGame(mine, mineBody);
+            DropMine(0);
 
             // Randomly setting a new mine drop interval
             ship1MineTimer.Interval = gameState.Ships[0].ChangeMineDropInterval();
@@ -251,23 +246,25 @@ namespace AknamezoWinForms
         private void Ship2MineTimer_Tick(object? sender, EventArgs e)
         {
             // Dropping the mine
-            Mine mine = gameState.Ships[1].DropMine();
-            PictureBox mineBody = CreateMineBody(mine);
-            AddMineToGame(mine, mineBody);
+            DropMine(1);    
 
             // Randomly setting a new mine drop interval
-            ship1MineTimer.Interval = gameState.Ships[1].ChangeMineDropInterval();
+            ship2MineTimer.Interval = gameState.Ships[1].ChangeMineDropInterval();
         }
 
         private void Ship3MineTimer_Tick(object? sender, EventArgs e)
         {
             // Dropping the mine
-            Mine mine = gameState.Ships[2].DropMine();
-            PictureBox mineBody = CreateMineBody(mine);
-            AddMineToGame(mine, mineBody);
+            DropMine(2);
 
             // Randomly setting a new mine drop interval
-            ship1MineTimer.Interval = gameState.Ships[2].ChangeMineDropInterval();
+            ship3MineTimer.Interval = gameState.Ships[2].ChangeMineDropInterval();
+        }
+
+        private void DropMine(int shipIndex) {
+            Mine mine = gameState.Ships[shipIndex].DropMine();
+            PictureBox mineBody = CreateMineBody(mine);
+            AddMineToGame(mine, mineBody);
         }
 
         // ----------------- MINE METHODS -----------------
@@ -276,7 +273,7 @@ namespace AknamezoWinForms
             PictureBox mineBody = new PictureBox();
             mineBody.Location = new Point(mine.X, mine.Y);
             mineBody.Size = new Size(mine.Width, mine.Height);
-            mineBody.BackColor = Color.Black;
+            mineBody.Image = Properties.Resources.mine;
             return mineBody;
         }
 
@@ -286,5 +283,16 @@ namespace AknamezoWinForms
             mineBodies.Add(body);
             gamePanel.Controls.Add(body);
         }
+
+        // Goes through each mine model and mineBody and sinks it.
+        private void SinkMines()
+        {
+            for (int i = 0; i < gameState.Mines.Count; i++)
+            {
+                gameState.Mines[i].Sink();
+                mineBodies[i].Location = new Point(gameState.Mines[i].X, gameState.Mines[i].Y);
+            }
+        }
+
     }
 }

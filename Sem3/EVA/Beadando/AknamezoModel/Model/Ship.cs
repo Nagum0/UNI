@@ -13,7 +13,7 @@
         private int mineIntervalMaximum;
         private Random mineIntervalGenerator;
         private Random randomMineTypeGenerator;
-                                       
+                                              
         public Ship(int x, int y, int height, int width, int speed, int mineIntervalMinimum, int mineIntervalMaximum)
         {
             X = x;
@@ -53,13 +53,9 @@
             }
         }
         
-        /// <summary>
-        /// Randomly generates a new interval for dropping mines and sets MineIntervalSpeed to it.
-        /// </summary>
-        /// <returns>The new mine interval speed.</returns>
         public int ChangeMineDropInterval()
         {
-            int newMineDropInterval = randomMineTypeGenerator.Next(mineIntervalMinimum, mineIntervalMaximum);
+            int newMineDropInterval = mineIntervalGenerator.Next(mineIntervalMinimum, mineIntervalMaximum);
             MineIntervalSpeed = newMineDropInterval;
             return newMineDropInterval;
         }

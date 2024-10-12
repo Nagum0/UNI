@@ -45,6 +45,7 @@
             ship1MineTimer = new System.Windows.Forms.Timer(components);
             ship2MineTimer = new System.Windows.Forms.Timer(components);
             ship3MineTimer = new System.Windows.Forms.Timer(components);
+            restartButton = new Button();
             gamePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)shipBody3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)shipBody2).BeginInit();
@@ -108,10 +109,10 @@
             // 
             // startButton
             // 
-            startButton.Location = new Point(233, 600);
+            startButton.Location = new Point(439, 629);
             startButton.Margin = new Padding(3, 2, 3, 2);
             startButton.Name = "startButton";
-            startButton.Size = new Size(129, 51);
+            startButton.Size = new Size(191, 108);
             startButton.TabIndex = 2;
             startButton.Text = "START";
             startButton.UseVisualStyleBackColor = true;
@@ -119,7 +120,7 @@
             // 
             // stopButton
             // 
-            stopButton.Location = new Point(402, 600);
+            stopButton.Location = new Point(304, 686);
             stopButton.Margin = new Padding(3, 2, 3, 2);
             stopButton.Name = "stopButton";
             stopButton.Size = new Size(129, 51);
@@ -131,7 +132,7 @@
             // saveButton
             // 
             saveButton.Enabled = false;
-            saveButton.Location = new Point(576, 600);
+            saveButton.Location = new Point(636, 631);
             saveButton.Margin = new Padding(3, 2, 3, 2);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(129, 51);
@@ -142,7 +143,7 @@
             // 
             // loadButton
             // 
-            loadButton.Location = new Point(752, 600);
+            loadButton.Location = new Point(636, 686);
             loadButton.Margin = new Padding(3, 2, 3, 2);
             loadButton.Name = "loadButton";
             loadButton.Size = new Size(129, 51);
@@ -163,12 +164,22 @@
             gameTimeLabel.TabIndex = 6;
             gameTimeLabel.Text = "Game time:";
             // 
+            // restartButton
+            // 
+            restartButton.Location = new Point(304, 631);
+            restartButton.Name = "restartButton";
+            restartButton.Size = new Size(129, 51);
+            restartButton.TabIndex = 7;
+            restartButton.Text = "RESTART";
+            restartButton.UseVisualStyleBackColor = true;
+            // 
             // GameForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1096, 685);
+            ClientSize = new Size(1096, 761);
+            Controls.Add(restartButton);
             Controls.Add(gameTimeLabel);
             Controls.Add(loadButton);
             Controls.Add(saveButton);
@@ -205,5 +216,6 @@
         private System.Windows.Forms.Timer ship1MineTimer;
         private System.Windows.Forms.Timer ship2MineTimer;
         private System.Windows.Forms.Timer ship3MineTimer;
+        private Button restartButton;
     }
 }

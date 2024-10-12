@@ -18,9 +18,11 @@
         
         public void ChangeDifficulty(Difficulty diff)
         {
-            Difficulty = diff;
+            Console.WriteLine($"Difficulty changed: {diff}");
 
-            // Update the mine drop rate for each ship after difficulty change!
+            Difficulty = diff;
+            
+            // Update the mine drop rate for each ship after difficulty change
             foreach (Ship ship in Ships)
             {
                 ship.UpdateMineDropRate(diff);
@@ -55,6 +57,55 @@
             }
 
             return false;
+        }
+
+        public void RestartGame()
+        {
+            // Resetting player position
+            Player.X = OriginalGameState.PLAYER_START_X;
+            Player.Y = OriginalGameState.PLAYER_START_Y;
+            
+            // Resetting the ships locations
+            Ships[0].ResetLocation(
+                OriginalGameState.SHIP1_STARTING_X, 
+                OriginalGameState.SHIP1_STARTING_Y
+            );
+            Ships[1].ResetLocation(
+                OriginalGameState.SHIP2_START_X,
+                OriginalGameState.SHIP2_START_Y
+            );
+            Ships[2].ResetLocation(
+                OriginalGameState.SHIP3_START_X,
+                OriginalGameState.SHIP3_START_Y
+            );
+             
+            // Removing mines
+            Mines = new List<Mine>();
+            
+            // Changing the difficulty back to easy
+            ChangeDifficulty(new Easy());
+
+            // Reset the elapsed time
+            ElpasedTime = 0;
+        }
+        
+        // -- FOR DEBUGGING
+        public override string ToString()
+        {
+            System.Text.StringBuilder sbr = new();
+
+            sbr.Append($"GAME STATE ({ElpasedTime}):\n");
+
+            sbr.Append("  SHIPS:\n");
+            for (int i = 0; i < Ships.Count; i++)
+            {
+                sbr.Append($"    Ship[{i}] {Ships[i]}");
+            }
+            
+            sbr.Append("\n  MINES:\n");
+            sbr.Append($"    {string.Join(", ", Mines)}");
+
+            return sbr.ToString();
         }
     }
 }

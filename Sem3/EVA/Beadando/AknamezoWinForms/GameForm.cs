@@ -1,3 +1,18 @@
+/*
+ * ISSUES:
+ *      - After restaring the game the mine intervals correctly
+ *      reset for the ships but their current interval doesn't 
+ *      LOGS:
+            RESTARTING GAME:
+            Difficulty changed: AknamezoModel.Model.Easy
+            GAME STATE (1):
+            SHIPS:
+            Ship[0] [4000, 8000] (1600)    Ship[1] [4000, 8000] (1286)    Ship[2] [4000, 8000] (2739)
+            MINES:
+*
+ * 
+ * */
+
 using AknamezoModel.Model;
 
 namespace AknamezoWinForms 
@@ -6,7 +21,7 @@ namespace AknamezoWinForms
     {
         private GameState gameState; // Game state
         private List<PictureBox> mineBodies; // Mine bodies
-    
+                         
         public GameForm()
         {
             InitializeComponent();
@@ -20,13 +35,14 @@ namespace AknamezoWinForms
             SetupShips();
             // Initializing mineBodies
             mineBodies = new List<PictureBox>();
-            
+               
             // -- SUBSRCIBING HANDLERS TO WINFORMS EVENTS --
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;
             stopButton.Click += StopButton_Click;
             saveButton.Click += SaveButton_Click;
             loadButton.Click += LoadButton_Click;
+            restartButton.Click += RestartButton_Click;
 
             // Subscribing the game timer to the tick event
             gameTimer.Tick += GameTimer_Tick;
@@ -88,23 +104,16 @@ namespace AknamezoWinForms
                 default:
                     break;
             }
-
+                
             // -- DEBUGGING
-            for (int i = 0; i < gameState.Ships.Count; i++)
-            {
-                Console.WriteLine($"Ship[{i}] {gameState.Ships[i]}");
-            }
+            Console.WriteLine($"{gameState}");
         }
 
         // Start button event handler.
         // Starts the game loop (by starting the game timer).
         private void StartButton_Click(object? sender, EventArgs e)
         {
-            gameTimer.Start();
-            gameLoopTimer.Start();
-            ship1MineTimer.Start();
-            ship2MineTimer.Start();
-            ship3MineTimer.Start();
+            StartGame();
         }
 
         // Stop button event handler.
@@ -126,6 +135,44 @@ namespace AknamezoWinForms
         private void LoadButton_Click(object? sender, EventArgs e)
         {
             throw new NotImplementedException();
+        }
+        
+        // Set everything to its original state and restart all of the timers.
+        private void RestartButton_Click(object? sender, EventArgs e)
+        {
+            Console.WriteLine("RESTARTING GAME: ");
+
+            // Stopping the game
+            StopGame();
+
+            // Reset ship and player body positions
+            player.Location = new Point(OriginalGameState.PLAYER_START_X, OriginalGameState.PLAYER_START_Y);
+            shipBody1.Location = new Point(OriginalGameState.SHIP1_STARTING_X, OriginalGameState.SHIP1_STARTING_Y);                      
+            shipBody2.Location = new Point(OriginalGameState.SHIP2_START_X, OriginalGameState.SHIP2_START_Y);                      
+            shipBody3.Location = new Point(OriginalGameState.SHIP3_START_X, OriginalGameState.SHIP3_START_Y);
+            
+            // Empty mine bodies
+            foreach(PictureBox mineBody in mineBodies)
+            {
+                mineBody.Dispose();
+            }
+            mineBodies = new List<PictureBox>();
+
+            // Reset the model
+            gameState.RestartGame();
+
+            // Restarting the game
+            StartGame();
+        }
+        
+        // Start all of the timers needed for the game.
+        private void StartGame()
+        {
+            gameLoopTimer.Start();
+            gameTimer.Start();
+            ship1MineTimer.Start();
+            ship2MineTimer.Start();
+            ship3MineTimer.Start();
         }
 
         // Stops all the active timers for the game.
@@ -269,6 +316,8 @@ namespace AknamezoWinForms
             Mine mine = gameState.Ships[shipIndex].DropMine();
             PictureBox mineBody = CreateMineBody(mine);
             AddMineToGame(mine, mineBody);
+
+            Console.WriteLine($"Ship[{shipIndex}] dropped a mine [{mine}]");
         }
 
         // ----------------- MINE METHODS -----------------

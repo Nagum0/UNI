@@ -66,6 +66,12 @@
             mineIntervalMinimum = diff.MineIntervalMin();
             mineIntervalMaximum = diff.MineIntervalMax();
         }
+        
+        public void ResetLocation(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
 
         // -- FOR DEBUGGING ONLY
         public override string ToString()

@@ -15,26 +15,43 @@ void balanceMMp(Node** t, Node** l);
 void balancePPp(Node** t, Node** r);
 void balancePPm(Node** t, Node** r);
 
+// AVL Remove Minimum:
+void AVLremMin(Node** t, Node** minp, bool* d);
+void leftSubTreeShrunk(Node** t, bool* d);
+void balancePP(Node** t, bool* d);
+void balancePP0(Node **t, Node** r);
+
+// AVL Deletion:
+void AVLdel(Node** t, int k, bool* d);
+void AVLdelRoot(Node** t, bool* d);
+void rightSubTreeShrunk(Node** t, bool* d);
+void balanceMM(Node** t, bool* d);
+void balanceMM0(Node** t, Node** l);
+void rightSubTreeMinToRoot(Node** t, bool* d);
+
 // AVL Tools:
 void print(const char* msg, Node* t);
 void delete_nodes(Node* t);
 
 int main() {
-    Node* x = new_node(15);	
-	bool d = false;
+    Node* y = new_node(15);	
+    bool d = false;
 
-	AVLinsert(&x, 10, &d);
-	AVLinsert(&x, 20, &d);
-	AVLinsert(&x, 3, &d);
-	AVLinsert(&x, 18, &d);
-	AVLinsert(&x, 25, &d);
-	AVLinsert(&x, 17, &d);
-	AVLinsert(&x, 22, &d);
-	AVLinsert(&x, 30, &d);
-	AVLinsert(&x, 21, &d);
-    
-    print("AVL Tree: ", x);
-    delete_nodes(x);
+	AVLinsert(&y, 10, &d);
+	AVLinsert(&y, 20, &d);
+	AVLinsert(&y, 3, &d);
+	AVLinsert(&y, 18, &d);
+	AVLinsert(&y, 25, &d);
+	AVLinsert(&y, 17, &d);
+	AVLinsert(&y, 22, &d);
+	AVLinsert(&y, 30, &d);
+	AVLinsert(&y, 21, &d);
+	print("Before AVLdel(...): ", y);
+
+	AVLdel(&y, 20, &d);
+	print("After AVLdel(...)", y);
+
+	delete_nodes(y);
 
     return EXIT_SUCCESS;
 }
@@ -192,6 +209,145 @@ void inorder_print(Node* t, int n) {
 
 		printf("%c", get_bracket_for_depth(n, false));
 	}
+}
+
+void AVLremMin(Node** t, Node** minp, bool* d) {
+	if ((*t)->left == NULL) {
+		*minp = *t;
+		*t = (*minp)->right;
+		(*minp)->right = NULL;
+		*d = true;
+	}
+	else {
+		AVLremMin(&(*t)->left, minp, d);
+
+		if (*d) {
+			leftSubTreeShrunk(t, d);
+		}
+	}
+}
+
+void leftSubTreeShrunk(Node** t, bool* d) {
+	if ((*t)->b == 1) {
+		balancePP(t, d);
+	}
+	else {
+		(*t)->b += 1;
+		*d = ((*t)->b == 0);
+	}
+}
+
+void balancePP(Node** t, bool* d) {
+	Node* r = (*t)->right;
+
+	if (r->b == -1) {
+		balancePPm(t, &r);
+	}
+	else if (r->b == 0) {
+		balancePP0(t, &r);
+		*d = false;
+	}
+	else if (r->b == 1) {
+		balancePPp(t, &r);
+	}
+}
+
+void balancePP0(Node **t, Node** r) {
+	(*t)->right = (*r)->left;
+	(*r)->left = *t;
+	(*t)->b = 1;
+	(*r)->b = -1;
+	*t = *r;
+}
+
+void AVLdel(Node** t, int k, bool* d) {
+	if (*t != NULL) {
+		if (k < (*t)->key) {
+			AVLdel(&(*t)->left, k, d);
+
+			if (*d) {
+				leftSubTreeShrunk(t, d);
+			}
+		}
+		else if (k > (*t)->key) {
+			AVLdel(&(*t)->right, k, d);
+
+			if (*d) {
+				rightSubTreeShrunk(t, d);
+			}
+		}
+		else if (k == (*t)->key) {
+			AVLdelRoot(t, d);
+		}
+	}
+	else {
+		*d = false;
+	}
+}
+
+void AVLdelRoot(Node** t, bool* d) {
+	if ((*t)->left == NULL) {
+		Node* p = *t;
+		*t = p->right;
+		free(p);
+		*d = false;
+	}
+	else if ((*t)->right == NULL) {
+		Node* p = *t;
+		*t = p->left;
+		free(p);
+		*d = false;
+	}
+	else if ((*t)->left != NULL && (*t)->right != NULL) {
+		rightSubTreeMinToRoot(t, d);
+
+		if (*d) {
+			rightSubTreeShrunk(t, d);
+		}
+	}
+}
+
+void rightSubTreeShrunk(Node** t, bool* d) {
+	if ((*t)->b == -1) {
+		balanceMM(t, d);
+	}
+	else {
+		(*t)->b -= 1;
+		*d = ((*t)->b == 0);
+	}
+}
+
+void balanceMM(Node** t, bool* d) {
+	Node* l = (*t)->left;
+	
+	if ((*t)->b == -1) {
+		balanceMMm(t, &l);
+	}
+	else if ((*t)->b == 0) {
+		balanceMM0(t, &l);
+		*d = false;
+	}
+	else if ((*t)->b == 1) {
+		balanceMMp(t, &l);
+	}
+}
+
+void balanceMM0(Node** t, Node** l) {
+	(*t)->left = (*l)->right;
+	(*l)->right = *t;
+	(*t)->b = 0;
+	(*l)->b = 1;
+	*t = *l;
+}
+
+void rightSubTreeMinToRoot(Node** t, bool* d) {
+	Node* p = NULL;
+	AVLremMin(&(*t)->right, &p, d);
+	p->left = (*t)->left;
+	p->right = (*t)->right;
+	p->b = (*t)->b;
+	free(*t);
+	*t = p;
 }
 
 void print(const char* msg, Node* t) {

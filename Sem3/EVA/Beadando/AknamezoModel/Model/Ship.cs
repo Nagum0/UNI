@@ -57,6 +57,7 @@
         {
             int newMineDropInterval = mineIntervalGenerator.Next(mineIntervalMinimum, mineIntervalMaximum);
             MineIntervalSpeed = newMineDropInterval;
+            Console.WriteLine($"New mine interval speed: {MineIntervalSpeed}");
             return newMineDropInterval;
         }
               
@@ -66,10 +67,10 @@
             mineIntervalMaximum = diff.MineIntervalMax();
         }
 
-        // -- DEBUGGING
+        // -- FOR DEBUGGING ONLY
         public override string ToString()
         {
-            return $"mineIntervalMin: {mineIntervalMinimum}; mineIntervalMax: {mineIntervalMaximum}";
+            return $"[{mineIntervalMinimum}, {mineIntervalMaximum}] ({MineIntervalSpeed})";
         }
     }
 }

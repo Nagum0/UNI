@@ -90,7 +90,10 @@ namespace AknamezoWinForms
             }
 
             // -- DEBUGGING
-            Console.WriteLine($"{string.Join(",", gameState.Ships)}");
+            for (int i = 0; i < gameState.Ships.Count; i++)
+            {
+                Console.WriteLine($"Ship[{i}] {gameState.Ships[i]}");
+            }
         }
 
         // Start button event handler.
@@ -144,7 +147,8 @@ namespace AknamezoWinForms
             if (ship.X + ship.Width >= gamePanel.Width || ship.X < 0)
             {
                 ship.ReverseDirection();
-
+                
+                // Rotate the ship after it changes direction
                 if (shipBody.Image != null) 
                 {
                     shipBody.Image.RotateFlip(RotateFlipType.Rotate180FlipY);

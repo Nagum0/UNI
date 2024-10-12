@@ -59,55 +59,55 @@
             gamePanel.Controls.Add(shipBody2);
             gamePanel.Controls.Add(shipBody1);
             gamePanel.Controls.Add(player);
-            gamePanel.Location = new Point(70, 65);
+            gamePanel.Location = new Point(61, 49);
+            gamePanel.Margin = new Padding(3, 2, 3, 2);
             gamePanel.Name = "gamePanel";
-            gamePanel.Size = new Size(1135, 713);
+            gamePanel.Size = new Size(969, 535);
             gamePanel.TabIndex = 1;
             // 
             // shipBody3
             // 
             shipBody3.BackColor = Color.Maroon;
-            shipBody3.Location = new Point(377, 179);
-            shipBody3.Margin = new Padding(3, 4, 3, 4);
+            shipBody3.Location = new Point(330, 134);
             shipBody3.Name = "shipBody3";
-            shipBody3.Size = new Size(208, 67);
+            shipBody3.Size = new Size(182, 50);
             shipBody3.TabIndex = 3;
             shipBody3.TabStop = false;
             // 
             // shipBody2
             // 
             shipBody2.BackColor = Color.Maroon;
-            shipBody2.Location = new Point(609, 99);
-            shipBody2.Margin = new Padding(3, 4, 3, 4);
+            shipBody2.Location = new Point(533, 74);
             shipBody2.Name = "shipBody2";
-            shipBody2.Size = new Size(208, 67);
+            shipBody2.Size = new Size(182, 50);
             shipBody2.TabIndex = 2;
             shipBody2.TabStop = false;
             // 
             // shipBody1
             // 
             shipBody1.BackColor = Color.Maroon;
-            shipBody1.Location = new Point(859, 25);
-            shipBody1.Margin = new Padding(3, 4, 3, 4);
+            shipBody1.Location = new Point(752, 19);
             shipBody1.Name = "shipBody1";
-            shipBody1.Size = new Size(208, 67);
+            shipBody1.Size = new Size(182, 50);
             shipBody1.TabIndex = 1;
             shipBody1.TabStop = false;
             // 
             // player
             // 
             player.BackColor = Color.FromArgb(64, 64, 64);
-            player.Location = new Point(504, 580);
+            player.Location = new Point(441, 435);
+            player.Margin = new Padding(3, 2, 3, 2);
             player.Name = "player";
-            player.Size = new Size(65, 61);
+            player.Size = new Size(45, 45);
             player.TabIndex = 0;
             player.TabStop = false;
             // 
             // startButton
             // 
-            startButton.Location = new Point(266, 800);
+            startButton.Location = new Point(233, 600);
+            startButton.Margin = new Padding(3, 2, 3, 2);
             startButton.Name = "startButton";
-            startButton.Size = new Size(147, 68);
+            startButton.Size = new Size(129, 51);
             startButton.TabIndex = 2;
             startButton.Text = "START";
             startButton.UseVisualStyleBackColor = true;
@@ -115,9 +115,10 @@
             // 
             // stopButton
             // 
-            stopButton.Location = new Point(459, 800);
+            stopButton.Location = new Point(402, 600);
+            stopButton.Margin = new Padding(3, 2, 3, 2);
             stopButton.Name = "stopButton";
-            stopButton.Size = new Size(147, 68);
+            stopButton.Size = new Size(129, 51);
             stopButton.TabIndex = 3;
             stopButton.Text = "STOP";
             stopButton.UseVisualStyleBackColor = true;
@@ -126,9 +127,10 @@
             // saveButton
             // 
             saveButton.Enabled = false;
-            saveButton.Location = new Point(658, 800);
+            saveButton.Location = new Point(576, 600);
+            saveButton.Margin = new Padding(3, 2, 3, 2);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(147, 68);
+            saveButton.Size = new Size(129, 51);
             saveButton.TabIndex = 4;
             saveButton.Text = "SAVE";
             saveButton.UseVisualStyleBackColor = true;
@@ -136,9 +138,10 @@
             // 
             // loadButton
             // 
-            loadButton.Location = new Point(859, 800);
+            loadButton.Location = new Point(752, 600);
+            loadButton.Margin = new Padding(3, 2, 3, 2);
             loadButton.Name = "loadButton";
-            loadButton.Size = new Size(147, 68);
+            loadButton.Size = new Size(129, 51);
             loadButton.TabIndex = 5;
             loadButton.Text = "LOAD";
             loadButton.UseVisualStyleBackColor = true;
@@ -150,18 +153,18 @@
             gameTimeLabel.BackColor = Color.FromArgb(64, 64, 64);
             gameTimeLabel.Font = new Font("Segoe UI", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gameTimeLabel.ForeColor = SystemColors.ButtonHighlight;
-            gameTimeLabel.Location = new Point(557, 9);
+            gameTimeLabel.Location = new Point(487, 7);
             gameTimeLabel.Name = "gameTimeLabel";
-            gameTimeLabel.Size = new Size(208, 50);
+            gameTimeLabel.Size = new Size(170, 41);
             gameTimeLabel.TabIndex = 6;
             gameTimeLabel.Text = "Game time:";
             // 
             // GameForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1282, 913);
+            ClientSize = new Size(1096, 685);
             Controls.Add(gameTimeLabel);
             Controls.Add(loadButton);
             Controls.Add(saveButton);
@@ -169,6 +172,7 @@
             Controls.Add(startButton);
             Controls.Add(gamePanel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "GameForm";
             Text = "Aknamező";
             gamePanel.ResumeLayout(false);

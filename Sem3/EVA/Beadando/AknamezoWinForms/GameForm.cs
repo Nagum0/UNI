@@ -40,7 +40,7 @@ namespace AknamezoWinForms
             KeyPreview = true;
             KeyDown += MovePlayer;
         }
-
+    
         // Main game loop. (60 fps)
         // Updates the movement, checks for collision, drwas the positions of the ships and the mines.
         // Game loop timer tick event handler.
@@ -167,7 +167,7 @@ namespace AknamezoWinForms
                 switch (e.KeyCode)
                 {
                     case Keys.W:
-                        if (gameState.Player.Y >= 300)
+                        if (gameState.Player.Y >= (shipBody3.Location.Y + shipBody3.Height) + 75)
                         {
                             gameState.Player.MoveUp();
                         }
@@ -198,9 +198,33 @@ namespace AknamezoWinForms
         private void SetupShips()
         {
             // Setting up the ship models
-            gameState.AddShip(new Ship(shipBody1.Location.X, shipBody1.Location.Y, shipBody1.Height, shipBody1.Width, 5, gameState.Difficulty.MineIntervalMin(), gameState.Difficulty.MineIntervalMax()));
-            gameState.AddShip(new Ship(shipBody2.Location.X, shipBody2.Location.Y, shipBody2.Height, shipBody2.Width, 5, gameState.Difficulty.MineIntervalMin(), gameState.Difficulty.MineIntervalMax()));
-            gameState.AddShip(new Ship(shipBody3.Location.X, shipBody3.Location.Y, shipBody3.Height, shipBody3.Width, 5, gameState.Difficulty.MineIntervalMin(), gameState.Difficulty.MineIntervalMax()));
+            gameState.AddShip(new Ship(
+                        shipBody1.Location.X, 
+                        shipBody1.Location.Y, 
+                        shipBody1.Height, 
+                        shipBody1.Width, 
+                        5, 
+                        gameState.Difficulty.MineIntervalMin(), 
+                        gameState.Difficulty.MineIntervalMax())
+            );
+            gameState.AddShip(new Ship(
+                        shipBody2.Location.X, 
+                        shipBody2.Location.Y, 
+                        shipBody2.Height, 
+                        shipBody2.Width, 
+                        5, 
+                        gameState.Difficulty.MineIntervalMin(), 
+                        gameState.Difficulty.MineIntervalMax())
+            );
+            gameState.AddShip(new Ship(
+                        shipBody3.Location.X, 
+                        shipBody3.Location.Y, 
+                        shipBody3.Height, 
+                        shipBody3.Width, 
+                        5, 
+                        gameState.Difficulty.MineIntervalMin(), 
+                        gameState.Difficulty.MineIntervalMax())
+            );
 
             // Setting up the ship timers
             ship1MineTimer.Interval = gameState.Ships[0].MineIntervalSpeed;

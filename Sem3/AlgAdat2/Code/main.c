@@ -1,46 +1,22 @@
-
-#include <stdio.h>
-
+#include <stdbool.h>
 #include "avl.h"
 
 int main() {
-	// remMin example:
-	Node* x = new_node(15);	
-	bool d = false;
+    Node* t = new_node(12);
+    bool d = true;
 
-	AVLinsert(&x, 10, &d);
-	AVLinsert(&x, 20, &d);
-	AVLinsert(&x, 3, &d);
-	AVLinsert(&x, 18, &d);
-	AVLinsert(&x, 25, &d);
-	AVLinsert(&x, 17, &d);
-	AVLinsert(&x, 22, &d);
-	AVLinsert(&x, 30, &d);
-	AVLinsert(&x, 21, &d);
-	print("Before AVLremMin(...): ", x);
+    AVLinsert(&t, 20, &d);
+    AVLinsert(&t, 22, &d);
+    AVLinsert(&t, 8, &d);
+    AVLinsert(&t, 5, &d);
+    AVLinsert(&t, 10, &d);
+    AVLinsert(&t, 25, &d);
+    print("AVL Tree after insertions:", t);
 
-	Node* minp = NULL;
-	AVLremMin(&x, &minp, &d);
-	print("After AVLremMin(...): ", x);
+    AVLdel(&t, 12, &d);
+    print("AVL Tree after deleting 12:", t);
 
-	// del example:
-	Node* y = new_node(15);	
+    delete_nodes(t);
 
-	AVLinsert(&y, 10, &d);
-	AVLinsert(&y, 20, &d);
-	AVLinsert(&y, 3, &d);
-	AVLinsert(&y, 18, &d);
-	AVLinsert(&y, 25, &d);
-	AVLinsert(&y, 17, &d);
-	AVLinsert(&y, 22, &d);
-	AVLinsert(&y, 30, &d);
-	AVLinsert(&y, 21, &d);
-	print("Before AVLdel(...): ", y);
-
-	AVLdel(&y, 20, &d);
-	print("After AVLdel(...)", y);
-
-	delete_nodes(x);
-	delete_nodes(y);
 	return 0;
 }

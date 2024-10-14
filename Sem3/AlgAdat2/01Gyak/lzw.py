@@ -3,9 +3,8 @@ def lzw_compress(input: str) -> list[int]:
 	dict = {
 		"A": 1,
 		"B": 2,
-		"C": 3,
 	}
-	dict_count = 3
+	dict_count = 2
 
 	i = 0
 	while i < len(input):
@@ -26,5 +25,5 @@ def lzw_compress(input: str) -> list[int]:
 	return output
 
 if __name__ == "__main__":
-	compressed = lzw_compress("ABABABAACAACCBBAAAAAAAAA")
+	compressed = lzw_compress("ABABBAABB")
 	print(compressed)

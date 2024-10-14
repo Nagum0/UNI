@@ -67,8 +67,8 @@
             
             // Resetting the ships locations
             Ships[0].ResetLocation(
-                OriginalGameState.SHIP1_STARTING_X, 
-                OriginalGameState.SHIP1_STARTING_Y
+                OriginalGameState.SHIP1_START_X, 
+                OriginalGameState.SHIP1_START_Y
             );
             Ships[1].ResetLocation(
                 OriginalGameState.SHIP2_START_X,
@@ -95,6 +95,10 @@
             System.Text.StringBuilder sbr = new();
 
             sbr.Append($"GAME STATE ({ElpasedTime}):\n");
+            
+            sbr.Append($"DIFFICULTY:\n  {Difficulty}\n");
+
+            sbr.Append($"PLAYER:\n  X: {Player.X} Y: {Player.Y}\n");
 
             sbr.Append("  SHIPS:\n");
             for (int i = 0; i < Ships.Count; i++)

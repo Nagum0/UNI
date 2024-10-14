@@ -2,8 +2,8 @@
 {
     public abstract class Mine
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public int Height { get; private set; }
         public int Width { get; private set; }
 
@@ -16,6 +16,7 @@
         }
 
         public abstract int Weight();
+        public abstract int GetIdentifier();
 
         public void Sink()
         {

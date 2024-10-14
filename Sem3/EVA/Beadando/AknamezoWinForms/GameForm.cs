@@ -1,19 +1,5 @@
-/*
- * ISSUES:
- *      - After restaring the game the mine intervals correctly
- *      reset for the ships but their current interval doesn't 
- *      LOGS:
-            RESTARTING GAME:
-            Difficulty changed: AknamezoModel.Model.Easy
-            GAME STATE (1):
-            SHIPS:
-            Ship[0] [4000, 8000] (1600)    Ship[1] [4000, 8000] (1286)    Ship[2] [4000, 8000] (2739)
-            MINES:
-*
- * 
- * */
-
 using AknamezoModel.Model;
+using AknamezoModel.Persistance;
 
 namespace AknamezoWinForms 
 {
@@ -21,21 +7,21 @@ namespace AknamezoWinForms
     {
         private GameState gameState; // Game state
         private List<PictureBox> mineBodies; // Mine bodies
-                         
+
         public GameForm()
         {
             InitializeComponent();
 
             // -- INITIALIZING MODEL --
             gameState = new GameState(
-                    new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width), 
+                    new Submarine(player.Location.X, player.Location.Y, 50, player.Height, player.Width),
                     new Easy()
             );
             // Setting up the ships
             SetupShips();
             // Initializing mineBodies
             mineBodies = new List<PictureBox>();
-               
+
             // -- SUBSRCIBING HANDLERS TO WINFORMS EVENTS --
             // Subscribing buttons event handler methods
             startButton.Click += StartButton_Click;
@@ -57,7 +43,7 @@ namespace AknamezoWinForms
             KeyPreview = true;
             KeyDown += MovePlayer;
         }
-    
+
         // Main game loop. (60 fps)
         // Updates the movement, checks for collision, drwas the positions of the ships and the mines.
         // Game loop timer tick event handler.
@@ -88,7 +74,7 @@ namespace AknamezoWinForms
             // Update gameTime label
             gameState.ElpasedTime++;
             gameTimeLabel.Text = $"Game time: {gameState.ElpasedTime}";
-        
+
             // Up the difficulty
             switch (gameState.ElpasedTime)
             {
@@ -104,7 +90,7 @@ namespace AknamezoWinForms
                 default:
                     break;
             }
-                
+
             // -- DEBUGGING
             Console.WriteLine($"{gameState}");
         }
@@ -127,16 +113,20 @@ namespace AknamezoWinForms
         // Saves the current game state to a json file.
         private void SaveButton_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            JsonFileManager jsonFileManager = new JsonFileManager();
+            jsonFileManager.Save(gameState, "test.json");
+            Console.WriteLine("GAME SAVED");
         }
 
         // Load button event handler.
         // Loads a game from a json file.
         private void LoadButton_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            JsonFileManager jsonFileManager = new JsonFileManager();
+            GameState readGameState = jsonFileManager.Load("test.json");
+            Console.WriteLine($"{readGameState}");
         }
-        
+
         // Set everything to its original state and restart all of the timers.
         private void RestartButton_Click(object? sender, EventArgs e)
         {
@@ -147,12 +137,12 @@ namespace AknamezoWinForms
 
             // Reset ship and player body positions
             player.Location = new Point(OriginalGameState.PLAYER_START_X, OriginalGameState.PLAYER_START_Y);
-            shipBody1.Location = new Point(OriginalGameState.SHIP1_STARTING_X, OriginalGameState.SHIP1_STARTING_Y);                      
-            shipBody2.Location = new Point(OriginalGameState.SHIP2_START_X, OriginalGameState.SHIP2_START_Y);                      
+            shipBody1.Location = new Point(OriginalGameState.SHIP1_START_X, OriginalGameState.SHIP1_START_Y);
+            shipBody2.Location = new Point(OriginalGameState.SHIP2_START_X, OriginalGameState.SHIP2_START_Y);
             shipBody3.Location = new Point(OriginalGameState.SHIP3_START_X, OriginalGameState.SHIP3_START_Y);
-            
+
             // Empty mine bodies
-            foreach(PictureBox mineBody in mineBodies)
+            foreach (PictureBox mineBody in mineBodies)
             {
                 mineBody.Dispose();
             }
@@ -160,11 +150,8 @@ namespace AknamezoWinForms
 
             // Reset the model
             gameState.RestartGame();
-
-            // Restarting the game
-            StartGame();
         }
-        
+
         // Start all of the timers needed for the game.
         private void StartGame()
         {
@@ -184,7 +171,7 @@ namespace AknamezoWinForms
             ship2MineTimer.Stop();
             ship3MineTimer.Stop();
         }
-        
+
         // Updates the ship position and moves the shipBody.
         private void MoveShip(PictureBox shipBody, int shipIndex)
         {
@@ -194,9 +181,9 @@ namespace AknamezoWinForms
             if (ship.X + ship.Width >= gamePanel.Width || ship.X < 0)
             {
                 ship.ReverseDirection();
-                
+
                 // Rotate the ship after it changes direction
-                if (shipBody.Image != null) 
+                if (shipBody.Image != null)
                 {
                     shipBody.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
                     shipBody.Invalidate();
@@ -208,7 +195,7 @@ namespace AknamezoWinForms
 
         // Method to move the player on specific key presses.
         // Handles the KeyPress event.
-        private void MovePlayer(object? sender, KeyEventArgs e) 
+        private void MovePlayer(object? sender, KeyEventArgs e)
         {
             if (gameLoopTimer.Enabled)
             {
@@ -247,30 +234,30 @@ namespace AknamezoWinForms
         {
             // Setting up the ship models
             gameState.AddShip(new Ship(
-                        shipBody1.Location.X, 
-                        shipBody1.Location.Y, 
-                        shipBody1.Height, 
-                        shipBody1.Width, 
-                        3, 
-                        gameState.Difficulty.MineIntervalMin(), 
+                        shipBody1.Location.X,
+                        shipBody1.Location.Y,
+                        shipBody1.Height,
+                        shipBody1.Width,
+                        3,
+                        gameState.Difficulty.MineIntervalMin(),
                         gameState.Difficulty.MineIntervalMax())
             );
             gameState.AddShip(new Ship(
-                        shipBody2.Location.X, 
-                        shipBody2.Location.Y, 
-                        shipBody2.Height, 
-                        shipBody2.Width, 
-                        3, 
-                        gameState.Difficulty.MineIntervalMin(), 
+                        shipBody2.Location.X,
+                        shipBody2.Location.Y,
+                        shipBody2.Height,
+                        shipBody2.Width,
+                        3,
+                        gameState.Difficulty.MineIntervalMin(),
                         gameState.Difficulty.MineIntervalMax())
             );
             gameState.AddShip(new Ship(
-                        shipBody3.Location.X, 
-                        shipBody3.Location.Y, 
-                        shipBody3.Height, 
-                        shipBody3.Width, 
-                        3, 
-                        gameState.Difficulty.MineIntervalMin(), 
+                        shipBody3.Location.X,
+                        shipBody3.Location.Y,
+                        shipBody3.Height,
+                        shipBody3.Width,
+                        3,
+                        gameState.Difficulty.MineIntervalMin(),
                         gameState.Difficulty.MineIntervalMax())
             );
 
@@ -297,7 +284,7 @@ namespace AknamezoWinForms
         private void Ship2MineTimer_Tick(object? sender, EventArgs e)
         {
             // Dropping the mine
-            DropMine(1);    
+            DropMine(1);
 
             // Randomly setting a new mine drop interval
             ship2MineTimer.Interval = gameState.Ships[1].ChangeMineDropInterval();
@@ -312,7 +299,8 @@ namespace AknamezoWinForms
             ship3MineTimer.Interval = gameState.Ships[2].ChangeMineDropInterval();
         }
 
-        private void DropMine(int shipIndex) {
+        private void DropMine(int shipIndex)
+        {
             Mine mine = gameState.Ships[shipIndex].DropMine();
             PictureBox mineBody = CreateMineBody(mine);
             AddMineToGame(mine, mineBody);
@@ -347,5 +335,9 @@ namespace AknamezoWinForms
             }
         }
 
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

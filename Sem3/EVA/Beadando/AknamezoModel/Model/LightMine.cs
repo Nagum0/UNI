@@ -8,5 +8,10 @@
         {
             return 1;
         }
+
+        public override int GetIdentifier()
+        {
+            return 0;
+        }
     }
 }

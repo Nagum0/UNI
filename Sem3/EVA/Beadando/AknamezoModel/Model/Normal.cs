@@ -11,5 +11,10 @@
         {
             return 7000;
         }
+
+        public override int GetIdentifier()
+        {
+            return 1;
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace AknamezoWinForms
 {
     public partial class GameForm : Form
     {
+        private JsonFileManager jsonFileManager = new JsonFileManager();
         private GameState gameState; // Game state
         private List<PictureBox> mineBodies; // Mine bodies
 
@@ -64,7 +65,7 @@ namespace AknamezoWinForms
             if (gameState.MineHit())
             {
                 StopGame();
-                MessageBox.Show("A MINE HIT YOU!");
+                MessageBox.Show($"YOU DIED\nTOTAL REACHED GAME TIME: {gameState.ElpasedTime}");
             }
         }
 
@@ -113,7 +114,6 @@ namespace AknamezoWinForms
         // Saves the current game state to a json file.
         private void SaveButton_Click(object? sender, EventArgs e)
         {
-            JsonFileManager jsonFileManager = new JsonFileManager();
             jsonFileManager.Save(gameState, "test.json");
             Console.WriteLine("GAME SAVED");
         }
@@ -122,13 +122,31 @@ namespace AknamezoWinForms
         // Loads a game from a json file.
         private void LoadButton_Click(object? sender, EventArgs e)
         {
-            JsonFileManager jsonFileManager = new JsonFileManager();
+            Console.WriteLine("GAME LOADED FROM FILE");
+            
+            // Restart the game
+            RestartGame();
+            
+            // Load the game from a save file
             GameState readGameState = jsonFileManager.Load("test.json");
-            Console.WriteLine($"{readGameState}");
+            gameState = readGameState;
+
+            // Create the mine bodies for all the loaded mines
+            foreach (Mine mine in gameState.Mines) 
+            {
+                PictureBox mineBody = CreateMineBody(mine);
+                mineBodies.Add(mineBody);
+                gamePanel.Controls.Add(mineBody);
+            }
         }
 
         // Set everything to its original state and restart all of the timers.
         private void RestartButton_Click(object? sender, EventArgs e)
+        {
+            RestartGame();
+        }
+
+        private void RestartGame()
         {
             Console.WriteLine("RESTARTING GAME: ");
 
@@ -141,6 +159,12 @@ namespace AknamezoWinForms
             shipBody2.Location = new Point(OriginalGameState.SHIP2_START_X, OriginalGameState.SHIP2_START_Y);
             shipBody3.Location = new Point(OriginalGameState.SHIP3_START_X, OriginalGameState.SHIP3_START_Y);
 
+            // Reset the ship direction
+            for (int i = 0; i < gameState.Ships.Count; i++)
+            {
+                gameState.Ships[i].Speed = Math.Abs(gameState.Ships[i].Speed);
+            }
+
             // Empty mine bodies
             foreach (PictureBox mineBody in mineBodies)
             {
@@ -150,6 +174,7 @@ namespace AknamezoWinForms
 
             // Reset the model
             gameState.RestartGame();
+
         }
 
         // Start all of the timers needed for the game.
@@ -181,13 +206,6 @@ namespace AknamezoWinForms
             if (ship.X + ship.Width >= gamePanel.Width || ship.X < 0)
             {
                 ship.ReverseDirection();
-
-                // Rotate the ship after it changes direction
-                if (shipBody.Image != null)
-                {
-                    shipBody.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
-                    shipBody.Invalidate();
-                }
             }
 
             shipBody.Location = new Point(ship.X, shipBody.Location.Y);
@@ -333,11 +351,6 @@ namespace AknamezoWinForms
                 gameState.Mines[i].Sink();
                 mineBodies[i].Location = new Point(gameState.Mines[i].X, gameState.Mines[i].Y);
             }
-        }
-
-        private void GameForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

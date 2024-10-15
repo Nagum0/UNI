@@ -5,6 +5,8 @@ namespace AknamezoModel.Persistance
 {
     public class JsonFileManager : IFileManager
     {
+        private JsonSerializerOptions jsonOptions = new  JsonSerializerOptions { WriteIndented = true };
+
         public void Save(GameState gameState, string filePath)
         {
             var serializedGameState = new
@@ -32,7 +34,7 @@ namespace AknamezoModel.Persistance
             
             
 
-            string jsonString = JsonSerializer.Serialize(serializedGameState, new JsonSerializerOptions { WriteIndented = true });
+            string jsonString = JsonSerializer.Serialize(serializedGameState, jsonOptions); 
 
             File.WriteAllText(filePath, jsonString);
         }

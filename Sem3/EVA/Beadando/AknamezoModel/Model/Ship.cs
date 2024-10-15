@@ -6,7 +6,7 @@
         public int Y { get; private set; }
         public int Height { get; private set; }
         public int Width { get; private set; }
-        public int Speed { get; private set; }
+        public int Speed { get; set; }
         public int MineIntervalSpeed { get; private set; }
                
         private int mineIntervalMinimum;

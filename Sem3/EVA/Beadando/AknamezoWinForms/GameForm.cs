@@ -114,8 +114,22 @@ namespace AknamezoWinForms
         // Saves the current game state to a json file.
         private void SaveButton_Click(object? sender, EventArgs e)
         {
-            jsonFileManager.Save(gameState, "test.json");
-            Console.WriteLine("GAME SAVED");
+            try
+            {
+                using SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                saveFileDialog.Title = "SAVE GAME";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = saveFileDialog.FileName;
+                    jsonFileManager.Save(gameState, fileName);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("UNABLE TO SAVE GAME");
+            }
         }
 
         // Load button event handler.
@@ -123,20 +137,34 @@ namespace AknamezoWinForms
         private void LoadButton_Click(object? sender, EventArgs e)
         {
             Console.WriteLine("GAME LOADED FROM FILE");
-            
+
             // Restart the game
             RestartGame();
-            
-            // Load the game from a save file
-            GameState readGameState = jsonFileManager.Load("test.json");
-            gameState = readGameState;
 
-            // Create the mine bodies for all the loaded mines
-            foreach (Mine mine in gameState.Mines) 
+            try
             {
-                PictureBox mineBody = CreateMineBody(mine);
-                mineBodies.Add(mineBody);
-                gamePanel.Controls.Add(mineBody);
+                using OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                openFileDialog.Title = "LOAD GAME SAVE";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = openFileDialog.FileName;
+                    GameState readGameState = jsonFileManager.Load(fileName);
+                    gameState = readGameState;
+
+                    // Create the mine bodies for all the loaded mines
+                    foreach (Mine mine in gameState.Mines) 
+                    {
+                        PictureBox mineBody = CreateMineBody(mine);
+                        mineBodies.Add(mineBody);
+                        gamePanel.Controls.Add(mineBody);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to read save file.");
             }
         }
 

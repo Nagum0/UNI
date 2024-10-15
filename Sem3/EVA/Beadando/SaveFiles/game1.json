@@ -1,0 +1,36 @@
+{
+  "elapsed_time": 5,
+  "difficulty": 0,
+  "player": {
+    "x": 651,
+    "y": 394,
+    "speed": 50
+  },
+  "ships": [
+    {
+      "x": 358,
+      "y": 18,
+      "mine_interval": 7589,
+      "speed": -3
+    },
+    {
+      "x": 630,
+      "y": 85,
+      "mine_interval": 7486,
+      "speed": -3
+    },
+    {
+      "x": 892,
+      "y": 158,
+      "mine_interval": 5854,
+      "speed": -3
+    }
+  ],
+  "mines": [
+    {
+      "x": 936,
+      "y": 210,
+      "type": 0
+    }
+  ]
+}

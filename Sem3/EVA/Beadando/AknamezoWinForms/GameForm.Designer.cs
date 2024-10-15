@@ -141,7 +141,6 @@
             saveButton.TabIndex = 4;
             saveButton.Text = "SAVE";
             saveButton.UseVisualStyleBackColor = true;
-            saveButton.Click += SaveButton_Click;
             // 
             // loadButton
             // 
@@ -152,7 +151,6 @@
             loadButton.TabIndex = 5;
             loadButton.Text = "LOAD";
             loadButton.UseVisualStyleBackColor = true;
-            loadButton.Click += LoadButton_Click;
             // 
             // gameTimeLabel
             // 

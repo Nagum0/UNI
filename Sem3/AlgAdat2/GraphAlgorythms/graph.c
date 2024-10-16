@@ -4,55 +4,57 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int main() {
-    int n = 3;
+bool are_equal(bool A[N][N], Edge** Adj, int n);
 
-    bool vertexMatrix[3][3] = {
-        {false, true, false},
-        {true, false, true},
-        {false, true, false}
+int main() {
+    bool A[N][N] = {
+        {false, false, true},
+        {false, false, true},
+        {false, false, false}
     };
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%d ", vertexMatrix[i][j]);
-        }
-        printf("\n");
-    }
+    Edge* Adj[N];
+    Adj[0] = new_edge(3);
+    Adj[1] = new_edge(3);
+    Adj[2] = NULL;
 
-    Edge* A[n];
-
-    fromVertexMatrixToEdgeList(vertexMatrix, A, n);
+    bool l = are_equal(A, Adj, N);
+    printf("Are equal: %d\n", l);
     
-    for (int i = 0; i < n; i++) {
-        printf("[%d] -> ", i);
-        print_edge(A[i]);
-    }
-
-    int ins[] = {0,0,0};
-    int outs[] = {0,0,0};
-    in_amount_out_amount(A, ins, outs, n);
-
-    for (int i = 0; i < n; i++) {
-        printf("[%d] in: %d; out: %d\n", i, ins[i], outs[i]);
-    }
-
-    Edge* AT[n];
-    
-    transponent_edge_list(A, AT, n);
-
-    for (int i = 0; i < n; i++) {
-        printf("[%d] -> ", i);
-        print_edge(AT[i]);
-    }
-
-
-    for (int i = 0; i < n; i++) {
-        free_edges(A[i]);
-        free_edges(AT[i]);
+    for (int i = 0; i < N; i++) {
+        free(Adj[i]);
     }
 
     return 0;
+}
+
+bool are_equal(bool A[N][N], Edge** Adj, int n) {
+    for (int i = 0; i < n; i++) {
+        Edge* p = Adj[i];
+        
+        if (p == NULL) {
+            for (int j = 0; j < n; j++) {
+                if (A[i][j] == true) {
+                    return false;
+                }
+            }
+        } 
+        else {
+            for (int j = 0; j < n; j++) {
+                if (A[i][j] == true && p != NULL && p->v == j) {
+                    p = p->next;
+                }
+                else if (A[i][j] == false && p != NULL && p->v != j) {
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
 }
 
 void transponent_edge_list(Edge **A, Edge **AT, int n) {

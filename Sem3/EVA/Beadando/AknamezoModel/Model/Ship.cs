@@ -28,6 +28,15 @@
             MineIntervalSpeed = mineIntervalGenerator.Next(mineIntervalMinimum, mineIntervalMaximum);
         }
 
+        public int MineIntervalMinimum {
+            get => mineIntervalMinimum;
+        }
+
+        public int MineIntervalMaximum {
+            get => mineIntervalMaximum;
+        }
+
+
         public void ReverseDirection()
         {
             Speed = -Speed;

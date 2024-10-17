@@ -1,4 +1,5 @@
 using AknamezoModel.Model;
+using AknamezoModel.Persistance;
 
 namespace AknamezoModelTest
 {
@@ -127,6 +128,62 @@ namespace AknamezoModelTest
             Assert.AreEqual(gameState.Ships[0].Y, OriginalGameState.SHIP1_START_Y);
             Assert.AreEqual(gameState.Ships[1].Y, OriginalGameState.SHIP2_START_Y);
             Assert.AreEqual(gameState.Ships[2].Y, OriginalGameState.SHIP3_START_Y);
+        }
+
+        [TestMethod]
+        public void SaveAndLoadGameTest()
+        {
+            GameState gameState = new GameState(
+                new Submarine(50, 50, 500, 50, 50),
+                new Death()
+            );
+
+            gameState.AddMine(new LightMine(150, 150, 50, 50));
+            gameState.AddMine(new MediumMine(50, 50, 50, 50));
+
+            gameState.AddShip(
+                new Ship(5, 5, 50, 50, 10, 4000, 8000)
+            );
+
+            gameState.AddShip(
+                new Ship(5, 5, 50, 50, 10, 4000, 8000)
+            );
+
+            gameState.AddShip(
+                new Ship(5, 5, 50, 50, 10, 4000, 8000)
+            );
+            
+            // Saving the game
+            JsonFileManager jfm = new JsonFileManager();
+
+            try 
+            {
+                jfm.Save(gameState, "save_test.json");
+            }
+            catch (Exception) 
+            {
+                Console.Error.WriteLine("Error while saving file.");
+                Assert.Fail();
+            }
+
+            // Loading up the file that was saved
+            try
+            {
+                GameState loadedState = jfm.Load("save_test.json");
+                
+                for (int i = 0; i < gameState.Ships.Count; i++)
+                {
+                    Assert.AreEqual(gameState.Ships[i].X, loadedState.Ships[i].X);
+                    Assert.AreEqual(gameState.Ships[i].Y, loadedState.Ships[i].Y);
+                    Assert.AreEqual(gameState.Ships[i].Speed, loadedState.Ships[i].Speed);
+                    Assert.AreEqual(gameState.Ships[i].MineIntervalSpeed, loadedState.Ships[i].MineIntervalSpeed);
+                }
+            }
+            catch (Exception)
+            {
+                Console.Error.WriteLine("Error while reading file.");
+                Assert.Fail();
+            }
         }
     }
 }

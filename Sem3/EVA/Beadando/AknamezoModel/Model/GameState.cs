@@ -7,6 +7,7 @@
         public List<Mine> Mines { get; private set; }
         public int ElpasedTime { get; set; }
         public Difficulty Difficulty { get; private set; }
+        public event EventHandler? MineCollison;
 
         public GameState(Submarine player, Difficulty difficulty)
         {
@@ -39,7 +40,7 @@
             Mines.Add(mine);
         }
 
-        public bool MineHit()
+        public void MineHit()
         {
             int playerXWidth = Player.X + Player.Width;
             int playerYHeight = Player.Y + Player.Height;
@@ -52,11 +53,9 @@
                 if ((Player.X < mineXWidth && mine.X < playerXWidth) &&
                     (Player.Y < mineYHeight && mine.Y < playerYHeight))
                 {
-                    return true;
+                    MineCollison?.Invoke(this, EventArgs.Empty);
                 }
             }
-
-            return false;
         }
 
         public void RestartGame()

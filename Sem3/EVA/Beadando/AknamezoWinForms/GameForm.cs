@@ -5,7 +5,7 @@ namespace AknamezoWinForms
 {
     public partial class GameForm : Form
     {
-        private JsonFileManager jsonFileManager = new JsonFileManager();
+        private JsonFileManager jsonFileManager = new JsonFileManager(); // File manager
         private GameState gameState; // Game state
         private List<PictureBox> mineBodies; // Mine bodies
 
@@ -22,6 +22,8 @@ namespace AknamezoWinForms
             SetupShips();
             // Initializing mineBodies
             mineBodies = new List<PictureBox>();
+            // Subscribing to the MineCollision event
+            gameState.MineCollison += GameState_MineCollison;
 
             // -- SUBSRCIBING HANDLERS TO WINFORMS EVENTS --
             // Subscribing buttons event handler methods
@@ -45,6 +47,12 @@ namespace AknamezoWinForms
             KeyDown += MovePlayer;
         }
 
+        private void GameState_MineCollison(object? sender, EventArgs e)
+        {
+            StopGame();
+            MessageBox.Show($"YOU DIED\nTOTAL GAME TIME: {gameState.ElpasedTime}");
+        }
+
         // Main game loop. (60 fps)
         // Updates the movement, checks for collision, drwas the positions of the ships and the mines.
         // Game loop timer tick event handler.
@@ -62,11 +70,7 @@ namespace AknamezoWinForms
             SinkMines();
 
             // Check if mine collision happened
-            if (gameState.MineHit())
-            {
-                StopGame();
-                MessageBox.Show($"YOU DIED\nTOTAL REACHED GAME TIME: {gameState.ElpasedTime}");
-            }
+            gameState.MineHit();
         }
 
         // Game timer tick event handler.
@@ -152,6 +156,7 @@ namespace AknamezoWinForms
                     string fileName = openFileDialog.FileName;
                     GameState readGameState = jsonFileManager.Load(fileName);
                     gameState = readGameState;
+                    gameState.MineCollison += GameState_MineCollison;
 
                     // Create the mine bodies for all the loaded mines
                     foreach (Mine mine in gameState.Mines) 

@@ -97,7 +97,7 @@ namespace AknamezoWinForms
             }
 
             // -- DEBUGGING
-            Console.WriteLine($"{gameState}");
+            //Console.WriteLine($"{gameState}");
         }
 
         // Start button event handler.
@@ -140,7 +140,7 @@ namespace AknamezoWinForms
         // Loads a game from a json file.
         private void LoadButton_Click(object? sender, EventArgs e)
         {
-            Console.WriteLine("GAME LOADED FROM FILE");
+            //Console.WriteLine("GAME LOADED FROM FILE");
 
             // Restart the game
             RestartGame();
@@ -181,7 +181,7 @@ namespace AknamezoWinForms
 
         private void RestartGame()
         {
-            Console.WriteLine("RESTARTING GAME: ");
+            //Console.WriteLine("RESTARTING GAME: ");
 
             // Stopping the game
             StopGame();
@@ -356,7 +356,7 @@ namespace AknamezoWinForms
             PictureBox mineBody = CreateMineBody(mine);
             AddMineToGame(mine, mineBody);
 
-            Console.WriteLine($"Ship[{shipIndex}] dropped a mine [{mine}]");
+            //Console.WriteLine($"Ship[{shipIndex}] dropped a mine [{mine}]");
         }
 
         // ----------------- MINE METHODS -----------------

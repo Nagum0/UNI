@@ -19,7 +19,7 @@
         
         public void ChangeDifficulty(Difficulty diff)
         {
-            Console.WriteLine($"Difficulty changed: {diff}");
+            //Console.WriteLine($"Difficulty changed: {diff}");
 
             Difficulty = diff;
             

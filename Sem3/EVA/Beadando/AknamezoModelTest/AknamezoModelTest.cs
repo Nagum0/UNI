@@ -129,7 +129,7 @@ namespace AknamezoModelTest
             Assert.AreEqual(gameState.Ships[1].Y, OriginalGameState.SHIP2_START_Y);
             Assert.AreEqual(gameState.Ships[2].Y, OriginalGameState.SHIP3_START_Y);
         }
-
+        
         [TestMethod]
         public void SaveAndLoadGameTest()
         {
@@ -146,43 +146,63 @@ namespace AknamezoModelTest
             );
 
             gameState.AddShip(
-                new Ship(5, 5, 50, 50, 10, 4000, 8000)
+                    new Ship(5, 5, 50, 50, 10, 4000, 8000)
             );
-
             gameState.AddShip(
-                new Ship(5, 5, 50, 50, 10, 4000, 8000)
+                    new Ship(5, 5, 50, 50, 10, 4000, 8000)
             );
-            
-            // Saving the game
+
             JsonFileManager jfm = new JsonFileManager();
-
-            try 
-            {
-                jfm.Save(gameState, "save_test.json");
-            }
-            catch (Exception) 
-            {
-                Console.Error.WriteLine("Error while saving file.");
-                Assert.Fail();
-            }
-
-            // Loading up the file that was saved
+            string filePath = "game.json";
+            
+            // Saving this game state
             try
             {
-                GameState loadedState = jfm.Load("save_test.json");
+                jfm.Save(gameState, filePath);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine($"Error while saving to file: {e.Message}");
+                Assert.Fail();
+            }
+
+            // Loading game.json
+            try
+            {
+                GameState loadedState = jfm.Load(filePath);
+
+                Assert.AreEqual(gameState.ElpasedTime, loadedState.ElpasedTime);
+                Assert.AreEqual(gameState.Difficulty.GetIdentifier(), loadedState.Difficulty.GetIdentifier());
+                Assert.AreEqual(gameState.Player.X, loadedState.Player.X);
+                Assert.AreEqual(gameState.Player.Y, loadedState.Player.Y);
                 
-                for (int i = 0; i < gameState.Ships.Count; i++)
+                // Checking the ships
+                foreach (var (ship1, ship2) in gameState.Ships.Zip(loadedState.Ships, (a, b) => (a, b)))
                 {
-                    Assert.AreEqual(gameState.Ships[i].X, loadedState.Ships[i].X);
-                    Assert.AreEqual(gameState.Ships[i].Y, loadedState.Ships[i].Y);
-                    Assert.AreEqual(gameState.Ships[i].Speed, loadedState.Ships[i].Speed);
-                    Assert.AreEqual(gameState.Ships[i].MineIntervalSpeed, loadedState.Ships[i].MineIntervalSpeed);
+                    Assert.AreEqual(ship1.X, ship2.X);
+                    Assert.AreEqual(ship1.Y, ship2.Y);
+                    Assert.AreEqual(ship1.Speed, ship2.Speed);
+                }
+
+                // Checking the mines
+                Assert.AreEqual(gameState.Mines.Count, loadedState.Mines.Count);
+                
+                foreach (var (mine1, mine2) in gameState.Mines.Zip(loadedState.Mines, (a, b) => (a, b)))
+                {
+                    Assert.AreEqual(mine1.X, mine2.X);
+                    Assert.AreEqual(mine1.Y, mine2.Y);
+                    Assert.AreEqual(mine1.GetIdentifier(), mine2.GetIdentifier());
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.Error.WriteLine("Error while reading file.");
+                Console.Error.WriteLine($"Error while reading file: {e.Message}");
                 Assert.Fail();
+            }
+            
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
             }
         }
     }

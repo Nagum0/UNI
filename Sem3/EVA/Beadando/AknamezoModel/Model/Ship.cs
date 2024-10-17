@@ -66,7 +66,7 @@
         {
             int newMineDropInterval = mineIntervalGenerator.Next(mineIntervalMinimum, mineIntervalMaximum);
             MineIntervalSpeed = newMineDropInterval;
-            Console.WriteLine($"New mine interval speed: {MineIntervalSpeed}");
+            //Console.WriteLine($"New mine interval speed: {MineIntervalSpeed}");
             return newMineDropInterval;
         }
               

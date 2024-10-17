@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AknamezoWinForms", "Aknamez
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AknamezoModel", "..\AknamezoModel\AknamezoModel.csproj", "{50356AA7-8E92-41E3-AD90-B549E5F34135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AknamezoModelTest", "..\AknamezoModelTest\AknamezoModelTest.csproj", "{F8C54A8E-8D54-4525-B6DF-11F009AD3120}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AknamezoModelTest", "..\AknamezoModelTest\AknamezoModelTest.csproj", "{F8C54A8E-8D54-4525-B6DF-11F009AD3120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
 ﻿using ImageDownloader.Model;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,12 +41,21 @@ namespace ImageDownloader
 
         private void _model_LoadProgress(object? sender, int e)
         {
-            throw new NotImplementedException();
+            ImageProgressBar.Value = e;
         }
 
         private void _model_ImageLoaded(object? sender, WebImage e)
         {
-            throw new NotImplementedException();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = new MemoryStream(e.Data);
+            bitmap.EndInit();
+            
+            Image img = new Image();
+            img.Width = 100;
+            img.Height = 100;
+            img.Source = bitmap;
+            ImgWrapPanel.Children.Add(img);
         }
     }
 }

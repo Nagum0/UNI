@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ImageDownloader.Model;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,35 @@ namespace ImageDownloader
     /// </summary>
     public partial class MainWindow : Window
     {
+        private WebPage _model;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void LoadImagesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ImageCounterTextBlock.Text = "Number of images: 0";
+            ImageProgressBar.Visibility = Visibility.Visible;
+            LoadImagesBtn.IsEnabled = false;
+            ImgWrapPanel.Children.Clear();
+            _model = new WebPage(new Uri(UrlTextBox.Text));
+            _model.ImageLoaded += _model_ImageLoaded;
+            _model.LoadProgress += _model_LoadProgress;
+            await _model.LoadImageAsync();
+            LoadImagesBtn.IsEnabled = true;
+            ImageProgressBar.Visibility = Visibility.Hidden;
+        }
+
+        private void _model_LoadProgress(object? sender, int e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void _model_ImageLoaded(object? sender, WebImage e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

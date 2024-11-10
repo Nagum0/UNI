@@ -22,16 +22,15 @@ namespace ImageDownloader.Model
         }
 
         public async Task LoadImageAsync()
-        { 
+        {
             HttpClient client = new HttpClient();
             HttpResponseMessage res = await client.GetAsync(_baseUrl);
             string content = await res.Content.ReadAsStringAsync();
-            
+
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(content);
 
             var imgNodes = doc.DocumentNode.SelectNodes("//img");
-            //int loadProgress = 0;
 
             foreach (var img in imgNodes)
             {
@@ -42,7 +41,7 @@ namespace ImageDownloader.Model
                 if (!imgUrl.IsAbsoluteUri)
                     imgUrl = new Uri(_baseUrl, imgUrl);
 
-                try 
+                try
                 {
                     WebImage image = await WebImage.DownloadAsync(imgUrl);
                     _images.Add(image);
@@ -53,11 +52,11 @@ namespace ImageDownloader.Model
                     continue;
                 }
 
-                LoadProgress?.Invoke(this, (_images.Count / imgNodes.Count) * 100);
+                LoadProgress?.Invoke(this, (int)((_images.Count / (double)imgNodes.Count) * 100));
             }
         }
 
-        public Uri BaseUrl 
+        public Uri BaseUrl
         {
             get => _baseUrl;
         }
@@ -68,7 +67,7 @@ namespace ImageDownloader.Model
         }
 
         public int ImageCount
-        { 
+        {
             get => _images.Count;
         }
     }

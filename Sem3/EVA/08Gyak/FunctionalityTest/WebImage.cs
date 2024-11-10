@@ -13,7 +13,7 @@ namespace ImageDownloader.Model
             _url = url;
         }
 
-        public static async Task<WebImage> DownloadAsync(Uri url) 
+        public static async Task<WebImage> DownloadAsync(Uri url)
         {
             if (url == null)
                 throw new Exception("URL must be not be null");
@@ -28,13 +28,13 @@ namespace ImageDownloader.Model
         }
 
         public byte[] Data
-        { 
+        {
             get => _data;
         }
 
-        public Uri Url 
-        { 
-            get => _url; 
+        public Uri Url
+        {
+            get => _url;
         }
     }
 }

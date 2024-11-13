@@ -40,10 +40,15 @@ namespace Rectangles.ViewModel
         }
     }
 
+    public class GameState
+    {
+        public int Time { get; set; }
+    }
+
     public class MainViewModel : INotifyPropertyChanged
     {
-        const int WIDTH = 800;
-        const int HEIGHT = 450;
+        public const int WIDTH = 800;
+        public const int HEIGHT = 350;
 
         /// <summary>
         /// Signals the change of a property.
@@ -57,9 +62,14 @@ namespace Rectangles.ViewModel
 
         private DispatcherTimer? _gameLoopTimer;
         private DelegateCommand _gameLoopTimerCmd;
+        
+        public GameState GameState { get; set; }
 
         public MainViewModel()
         {
+            GameState = new GameState();
+            GameState.Time = 10;
+
             // -- Mines setup
             _mines = new ObservableCollection<Mine>();
             _mineRandonXGenerator = new Random();

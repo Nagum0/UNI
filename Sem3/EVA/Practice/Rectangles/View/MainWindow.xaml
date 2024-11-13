@@ -9,7 +9,7 @@
     <Grid>
         <Canvas 
             Name="gameCanvas"
-            Height="450"
+            Height="350"
             Width="800">
             <ItemsControl 
                 ItemsSource="{Binding Mines}">
@@ -37,5 +37,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Canvas>
+        <TextBlock 
+            Text="{Binding GameState.Time}"/>
     </Grid>
 </Window>

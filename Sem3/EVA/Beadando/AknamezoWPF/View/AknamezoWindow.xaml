@@ -10,9 +10,11 @@
         Width="1100"
         Height="650">
     <Grid>
+        <!--- GAME CANVAS -->
         <Canvas
             Margin="60,30,60,102"
             Background="Aqua">
+            <!-- MINES -->
             <ItemsControl ItemsSource="{Binding GameState.Mines}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -31,7 +33,15 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <!-- PLAYER -->
+            <Rectangle 
+                Canvas.Left="{Binding GameState.Player.X}"
+                Canvas.Top="{Binding GameState.Player.Y}"
+                Height="{Binding GameState.Player.Height}"
+                Width="{Binding GameState.Player.Width}"
+                Fill="Black"/>
         </Canvas>
+        <!-- BUTTONS -->
         <Button
             HorizontalAlignment="Center" 
             Margin="0,543,0,0" 

@@ -1,7 +1,11 @@
-﻿namespace AknamezoModel.Model
+﻿using System.ComponentModel;
+
+namespace AknamezoModel.Model
 {
-    public abstract class Mine
+    public abstract class Mine : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int X { get; set; }
         public int Y { get; set; }
         public int Height { get; private set; }
@@ -21,6 +25,7 @@
         public void Sink()
         {
             Y += Weight();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Y)));
         }
     }
 }

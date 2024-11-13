@@ -1,4 +1,6 @@
-﻿namespace AknamezoModel.Model
+﻿using System.ComponentModel;
+
+namespace AknamezoModel.Model
 {
     public class LightMine : Mine
     {

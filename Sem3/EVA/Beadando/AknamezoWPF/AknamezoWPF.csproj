@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AknamezoViewModel\AknamezoViewModel.csproj" />
+    <ProjectReference Include="..\AknamezoModel\AknamezoModel.csproj" />
   </ItemGroup>
 
 </Project>

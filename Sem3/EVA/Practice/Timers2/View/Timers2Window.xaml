@@ -1,0 +1,29 @@
+﻿<Window x:Class="Timers2.View.Timers2Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Timers2.View"
+        mc:Ignorable="d"
+        Title="Timers2Window" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"
+                   Name="textBlock1"
+                   Text="{Binding Id}" Height="15" Width="51"/>
+        <ListView ItemsSource="{Binding Names}" Margin="0,47,0,299">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Content="Click me!" HorizontalAlignment="Center" Margin="0,324,0,0" VerticalAlignment="Top"
+                Command="{Binding ClickMeCmd}"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Name="textBox1"
+                 Text="{Binding TextBox1Value}"/>
+        <Rectangle HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="50"
+                   Name="mineRect"
+                   Margin="{Binding MinePosition}"/>
+    </Grid>
+</Window>

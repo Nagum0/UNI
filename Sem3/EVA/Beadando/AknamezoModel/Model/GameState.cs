@@ -1,10 +1,12 @@
-﻿namespace AknamezoModel.Model
+﻿using System.Collections.ObjectModel;
+
+namespace AknamezoModel.Model
 {
     public class GameState
     {
         public Submarine Player { get; private set; }
-        public List<Ship> Ships { get; private set; }
-        public List<Mine> Mines { get; private set; }
+        public ObservableCollection<Ship> Ships { get; private set; }
+        public ObservableCollection<Mine> Mines { get; private set; }
         public int ElpasedTime { get; set; }
         public Difficulty Difficulty { get; private set; }
         public event EventHandler? MineCollison;
@@ -12,8 +14,8 @@
         public GameState(Submarine player, Difficulty difficulty)
         {
             Player = player;
-            Ships = new List<Ship>();
-            Mines = new List<Mine>();
+            Ships = new ObservableCollection<Ship>();
+            Mines = new ObservableCollection<Mine>();
             Difficulty = difficulty;
         }
         
@@ -79,7 +81,7 @@
             );
              
             // Removing mines
-            Mines = new List<Mine>();
+            Mines = new ObservableCollection<Mine>();
             
             // Changing the difficulty back to easy
             ChangeDifficulty(new Easy());

@@ -13,7 +13,9 @@
         <!--- GAME CANVAS -->
         <Canvas
             Margin="60,30,60,102"
-            Background="Aqua">
+            Background="Aqua" 
+            Width="{Binding CanvasWidth}"
+            Height="{Binding CanvasHeight}">
             <!-- MINES -->
             <ItemsControl ItemsSource="{Binding GameState.Mines}">
                 <ItemsControl.ItemsPanel>
@@ -29,7 +31,10 @@
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Red"/>
+                        <Rectangle 
+                            Width="{Binding Width}" 
+                            Height="{Binding Height}" 
+                            Fill="Red"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

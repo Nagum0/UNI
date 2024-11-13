@@ -12,10 +12,11 @@ namespace AknamezoViewModel
 {
     public class AknamezoViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public int CanvasHeight { get; set; } = 500;
+        public int CanvasWidth { get; set; } = 980;
+        public event PropertyChangedEventHandler? PropertyChanged; // Propertychanged event
 
         private GameState _gameState; // Holds the model.
-
         private DispatcherTimer? _gameLoopTimer; // Main game loop that ticks every 16 milliseconds (roughly 60 fps).
 
         public GameState GameState
@@ -62,9 +63,15 @@ namespace AknamezoViewModel
         /// </summary>
         private void GameLoopTimerTick()
         {
-            foreach (Mine mine in _gameState.Mines)
+            // -- MOVING THE MINES
+            for (int i = _gameState.Mines.Count - 1; i >= 0; i--)
             {
+                Mine mine = _gameState.Mines[i];
                 mine.Sink();
+                
+                // Removing the mines that are outside of bounds.
+                if (mine.Y >= CanvasHeight - mine.Height)
+                    _gameState.Mines.RemoveAt(i);
             }
         }
 

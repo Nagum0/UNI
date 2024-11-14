@@ -131,6 +131,10 @@ namespace AknamezoViewModel
             _gameTimer?.Stop();
         }
 
+        /// <summary>
+        /// Method that moves the player.
+        /// </summary>
+        /// <param name="key"></param>
         private void MovePlayer(string key)
         {
             switch (key)
@@ -139,13 +143,13 @@ namespace AknamezoViewModel
                     _gameState.Player.MoveUp();
                     break;
                 case "S":
-                    _gameState.Player.MoveDown();
+                    _gameState.Player.MoveUp();
                     break;
                 case "D":
-                    _gameState.Player.MoveRight();
+                    _gameState.Player.MoveUp();
                     break;
                 case "A":
-                    _gameState.Player.MoveLeft();
+                    _gameState.Player.MoveUp();
                     break;
                 default:
                     break;

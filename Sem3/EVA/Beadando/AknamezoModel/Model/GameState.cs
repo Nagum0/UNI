@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace AknamezoModel.Model
 {
@@ -9,6 +10,7 @@ namespace AknamezoModel.Model
         public ObservableCollection<Mine> Mines { get; private set; }
         public int ElpasedTime { get; set; }
         public Difficulty Difficulty { get; private set; }
+        
         public event EventHandler? MineCollison;
 
         public GameState(Submarine player, Difficulty difficulty)

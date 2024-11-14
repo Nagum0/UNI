@@ -9,6 +9,12 @@
         ResizeMode="NoResize"
         Width="1100"
         Height="650">
+    <Window.InputBindings>
+        <KeyBinding Key="W" Command="{Binding MovePlayerCmd}" CommandParameter="W"/>
+        <KeyBinding Key="S" Command="{Binding MovePlayerCmd}" CommandParameter="S"/>
+        <KeyBinding Key="D" Command="{Binding MovePlayerCmd}" CommandParameter="D"/>
+        <KeyBinding Key="A" Command="{Binding MovePlayerCmd}" CommandParameter="A"/>
+    </Window.InputBindings>
     <Grid>
         <!--- GAME CANVAS -->
         <Canvas

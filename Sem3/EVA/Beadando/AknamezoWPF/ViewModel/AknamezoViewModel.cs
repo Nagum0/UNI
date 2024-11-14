@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace AknamezoViewModel
 {
@@ -18,7 +19,7 @@ namespace AknamezoViewModel
         public int CanvasWidth { get; set; } = 980; // Widht of the game canvas.
 
         private GameState _gameState; // Holds the model.
-        private string _gameTimeText;
+        private string _gameTimeText; // Shows the game time.
 
         private DispatcherTimer? _gameTimer; // Timer that ticks every 1 second for keeping track of gametime.
         private DispatcherTimer? _gameLoopTimer; // Main game loop that ticks every 16 milliseconds (roughly 60 fps).
@@ -28,6 +29,7 @@ namespace AknamezoViewModel
         public DelegateCommand RestartBtnClicked { get; private set; }
         public DelegateCommand SaveBtnClicked { get; private set; }
         public DelegateCommand LoadBtnClicked { get; private set; }
+        public DelegateCommand MovePlayerCmd { get; private set; } // Used as the window keyboard binding.
 
         public event PropertyChangedEventHandler? PropertyChanged; // Propertychanged event.
 
@@ -95,33 +97,59 @@ namespace AknamezoViewModel
                 _ => { },
                 _ => true
             );
-
-            // -- INITIALIZING SOME MINES FOR TESTING
-            _gameState.AddMine(new LightMine(50, 50, 50, 50));
-            _gameState.AddMine(new MediumMine(150, 50, 50, 50));
-            _gameState.AddMine(new HeavyMine(250, 50, 50, 50));
+            MovePlayerCmd = new DelegateCommand(
+                key =>
+                {
+                    if (key is string k)
+                        MovePlayer(k);
+                },
+                _ => false
+            );
         }
 
         /// <summary>
-        /// Starts the game by starting all of the neccessary timers.
+        /// Starts the game by starting all of the neccessary timers and changes the predicate on buttons.
         /// </summary>
         private void StartGame()
         {
             StartBtnClicked.Predicate = _ => false;
             StopBtnClicked.Predicate = _ => true;
+            MovePlayerCmd.Predicate = _ => true;
             _gameLoopTimer?.Start();
             _gameTimer?.Start();
         }
 
         /// <summary>
-        /// Stops the game by stopping all of the neccessary timers.
+        /// Stops the game by stopping all of the neccessary timers and changes the predicate on buttons.
         /// </summary>
         private void StopGame()
         {
             StartBtnClicked.Predicate = _ => true;
             StopBtnClicked.Predicate = _ => false;
+            MovePlayerCmd.Predicate = _ => false;
             _gameLoopTimer?.Stop();
             _gameTimer?.Stop();
+        }
+
+        private void MovePlayer(string key)
+        {
+            switch (key)
+            {
+                case "W":
+                    _gameState.Player.MoveUp();
+                    break;
+                case "S":
+                    _gameState.Player.MoveDown();
+                    break;
+                case "D":
+                    _gameState.Player.MoveRight();
+                    break;
+                case "A":
+                    _gameState.Player.MoveLeft();
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>

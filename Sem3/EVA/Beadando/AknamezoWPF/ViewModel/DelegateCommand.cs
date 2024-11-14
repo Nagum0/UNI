@@ -14,6 +14,16 @@ namespace AknamezoViewModel
 
         public event EventHandler? CanExecuteChanged;
 
+        public Predicate<object?> Predicate
+        {
+            get => _predicate;
+            set
+            {
+                _predicate = value;
+                RaiseCanExecuteChanged();
+            }
+        }
+
         public DelegateCommand(Action<object?> execute, Predicate<object?> predicate)
         {
             _execute = execute;
@@ -29,6 +39,11 @@ namespace AknamezoViewModel
         public bool CanExecute(object? param)
         {
             return _predicate(param);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

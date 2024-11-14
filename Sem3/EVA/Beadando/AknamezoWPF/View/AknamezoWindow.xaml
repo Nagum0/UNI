@@ -32,8 +32,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Rectangle 
-                            Width="{Binding Width}" 
-                            Height="{Binding Height}" 
+                            Width="{Binding Width}"
+                            Height="{Binding Height}"
                             Fill="Red"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -53,14 +53,16 @@
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
-            Content="START"/>
+            Content="START"
+            Command="{Binding StartBtnClicked}"/>
         <Button
             HorizontalAlignment="Left" 
             Margin="624,543,0,0" 
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
-            Content="STOP"/>
+            Content="STOP"
+            Command="{Binding StopBtnClicked}"/>
         <Button
             HorizontalAlignment="Left" 
             Margin="356,543,0,0" 
@@ -82,5 +84,14 @@
             Height="61" 
             Width="120"
             Content="LOAD"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="516,0,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="188" 
+            Height="26"
+            FontSize="20"
+            Text="{Binding GameTimeText}"/>
     </Grid>
 </Window>

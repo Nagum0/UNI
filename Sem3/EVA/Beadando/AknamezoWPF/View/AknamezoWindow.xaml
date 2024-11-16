@@ -105,14 +105,17 @@
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
-            Content="SAVE" RenderTransformOrigin="0.496,0.484"/>
+            Content="SAVE" 
+            RenderTransformOrigin="0.496,0.484"
+            Command="{Binding SaveBtnClicked}"/>
         <Button
             HorizontalAlignment="Left" 
             Margin="766,543,0,0" 
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
-            Content="LOAD"/>
+            Content="LOAD"
+            Command="{Binding LoadBtnClicked}"/>
         <TextBlock 
             HorizontalAlignment="Left" 
             Margin="516,0,0,0" 

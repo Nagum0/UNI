@@ -70,8 +70,8 @@ namespace AknamezoModel.Persistance
                 gameState.AddShip(new Ship(
                     ship.GetProperty("x").GetInt32(),
                     ship.GetProperty("y").GetInt32(),
-                    62,
-                    228,
+                    50,
+                    180,
                     ship.GetProperty("speed").GetInt32(),
                     difficulty.MineIntervalMin(),
                     difficulty.MineIntervalMax()

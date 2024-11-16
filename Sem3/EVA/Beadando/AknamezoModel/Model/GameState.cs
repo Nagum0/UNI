@@ -4,22 +4,63 @@ using System.Runtime.CompilerServices;
 
 namespace AknamezoModel.Model
 {
-    public class GameState
+    public class GameState : INotifyPropertyChanged
     {
-        public Submarine Player { get; private set; }
-        public ObservableCollection<Ship> Ships { get; private set; }
-        public ObservableCollection<Mine> Mines { get; private set; }
-        public int ElpasedTime { get; set; }
+        public Submarine _player;
+        public ObservableCollection<Ship> _ships;
+        public ObservableCollection<Mine> _mines;
+        public int _elpased_time;
         public Difficulty Difficulty { get; private set; }
         
+        public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler? MineCollison;
 
         public GameState(Submarine player, Difficulty difficulty)
         {
-            Player = player;
-            Ships = new ObservableCollection<Ship>();
-            Mines = new ObservableCollection<Mine>();
+            _player = player;
+            _ships = new ObservableCollection<Ship>();
+            _mines = new ObservableCollection<Mine>();
             Difficulty = difficulty;
+        }
+
+        public Submarine Player
+        {
+            get => _player;
+            set
+            {
+                _player = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Ship> Ships
+        {
+            get => _ships;
+            set
+            {
+                _ships = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Mine> Mines
+        {
+            get => _mines;
+            set
+            {
+                _mines = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int ElpasedTime
+        {
+            get => _elpased_time;
+            set
+            {
+                _elpased_time = value;
+                OnPropertyChanged();
+            }
         }
         
         public void ChangeDifficulty(Difficulty diff)
@@ -97,6 +138,11 @@ namespace AknamezoModel.Model
 
             // Reset the elapsed time
             ElpasedTime = 0;
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string? property = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         // -- FOR DEBUGGING

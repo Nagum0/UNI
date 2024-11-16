@@ -10,6 +10,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows;
+using AknamezoModel.Persistance;
+using Microsoft.Win32;
 
 namespace AknamezoViewModel
 {
@@ -21,6 +23,7 @@ namespace AknamezoViewModel
         public int PlayerStartY { get; set; } = 400;
 
         private GameState _gameState; // Holds the model.
+        private JsonFileManager _jsonFileManager;
         private string _gameTimeText; // Shows the game time.
 
         private DispatcherTimer? _gameTimer; // Timer that ticks every 1 second for keeping track of gametime.
@@ -56,6 +59,7 @@ namespace AknamezoViewModel
         public AknamezoViewModel()
         {
             // -- INITIALIZING GAMESTATE
+            _jsonFileManager = new JsonFileManager();
             _gameState = new GameState(
                 new Submarine(PlayerStartX, PlayerStartY, 50, 50, 50),
                 new Easy()
@@ -97,11 +101,11 @@ namespace AknamezoViewModel
                 _ => true
             );
             SaveBtnClicked = new DelegateCommand(
-                _ => { },
+                _ => SaveGame(),
                 _ => true
             );
             LoadBtnClicked = new DelegateCommand(
-                _ => { },
+                _ => LoadGame(),
                 _ => true
             );
             MovePlayerCmd = new DelegateCommand(
@@ -122,6 +126,8 @@ namespace AknamezoViewModel
             StartBtnClicked.Predicate = _ => false;
             StopBtnClicked.Predicate = _ => true;
             RestartBtnClicked.Predicate = _ => false;
+            SaveBtnClicked.Predicate = _ => false;
+            LoadBtnClicked.Predicate = _ => false;
             MovePlayerCmd.Predicate = _ => true;
             _gameLoopTimer?.Start();
             _gameTimer?.Start();
@@ -138,6 +144,8 @@ namespace AknamezoViewModel
             StartBtnClicked.Predicate = _ => true;
             StopBtnClicked.Predicate = _ => false;
             RestartBtnClicked.Predicate = _ => true;
+            SaveBtnClicked.Predicate = _ => true;
+            LoadBtnClicked.Predicate = _ => true;
             MovePlayerCmd.Predicate = _ => false;
             _gameLoopTimer?.Stop();
             _gameTimer?.Stop();
@@ -155,6 +163,59 @@ namespace AknamezoViewModel
         {
             StopGame();
             MessageBox.Show($"YOU DIED\nTOTAL GAME TIME: {_gameState.ElpasedTime}");
+        }
+
+        /// <summary>
+        /// Saves the game state in a json format.
+        /// </summary>
+        private void SaveGame()
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                saveFileDialog.Title = "SAVE GAME";
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    string fileName = saveFileDialog.FileName;
+                    _jsonFileManager.Save(_gameState, fileName);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("UNABLE TO SAVE GAME");
+            }
+        }
+
+        /// <summary>
+        /// Restarts the game and then loads a gamestate from the selected json save file.
+        /// </summary>
+        private void LoadGame()
+        {
+            _gameState.RestartGame();
+
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                openFileDialog.Title = "LOAD GAME SAVE";
+
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string fileName = openFileDialog.FileName;
+                    GameState readGameState = _jsonFileManager.Load(fileName);
+                    _gameState.MineCollison += GameState_MineCollision;
+                    _gameState.Player = readGameState.Player;
+                    _gameState.Ships = readGameState.Ships;
+                    _gameState.Mines = readGameState.Mines;
+                    _gameState.ElpasedTime = readGameState.ElpasedTime;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to read save file.");
+            }
         }
 
         /// <summary>

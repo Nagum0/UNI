@@ -62,6 +62,8 @@ namespace AknamezoViewModel
             );
             _gameState.ElpasedTime = 0;
             _gameTimeText = $"Game time: {_gameState.ElpasedTime}";
+            SetupShips();
+            _gameState.MineCollison += GameState_MineCollision;
 
             // -- INITIALIZING THE TIMERS
             SetupTimer(
@@ -80,7 +82,6 @@ namespace AknamezoViewModel
                     _ => true
                 )
             );
-            SetupShips();
 
             // -- INITIALIZING THE BUTTON COMMANDS
             StartBtnClicked = new DelegateCommand(
@@ -144,6 +145,17 @@ namespace AknamezoViewModel
         }
 
         /// <summary>
+        /// Handles the MineCollition event for GameState.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GameState_MineCollision(object? sender, EventArgs e)
+        {
+            StopGame();
+            MessageBox.Show($"YOU DIED\nTOTAL GAME TIME: {_gameState.ElpasedTime}");
+        }
+
+        /// <summary>
         /// Method that moves the player.
         /// </summary>
         /// <param name="key"></param>
@@ -196,6 +208,9 @@ namespace AknamezoViewModel
                 if (mine.Y >= CanvasHeight - mine.Height)
                     _gameState.Mines.RemoveAt(i);
             }
+
+            // -- CHECKING FOR MINE COLLISION
+            _gameState.MineHit();
         }
 
         /// <summary>

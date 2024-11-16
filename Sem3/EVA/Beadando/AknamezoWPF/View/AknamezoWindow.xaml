@@ -16,6 +16,7 @@
         <KeyBinding Key="A" Command="{Binding MovePlayerCmd}" CommandParameter="A"/>
     </Window.InputBindings>
     <Grid>
+        
         <!--- GAME CANVAS -->
         <Canvas
             Margin="51,32,69,100"
@@ -39,11 +40,15 @@
                     <DataTemplate>
                         <Rectangle 
                             Width="{Binding Width}"
-                            Height="{Binding Height}"
-                            Fill="Yellow"/>
+                            Height="{Binding Height}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/images/ship.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            
             <!-- MINES -->
             <ItemsControl ItemsSource="{Binding GameState.Mines}">
                 <ItemsControl.ItemsPanel>
@@ -61,19 +66,27 @@
                     <DataTemplate>
                         <Rectangle 
                             Width="{Binding Width}"
-                            Height="{Binding Height}"
-                            Fill="Red"/>
+                            Height="{Binding Height}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/images/mine.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            
             <!-- PLAYER -->
             <Rectangle 
                 Canvas.Left="{Binding GameState.Player.X}"
                 Canvas.Top="{Binding GameState.Player.Y}"
                 Height="{Binding GameState.Player.Height}"
-                Width="{Binding GameState.Player.Width}"
-                Fill="Black"/>
+                Width="{Binding GameState.Player.Width}">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/images/submarine.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
         </Canvas>
+        
         <!-- BUTTONS -->
         <Button
             HorizontalAlignment="Center" 

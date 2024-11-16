@@ -16,7 +16,9 @@ namespace AknamezoViewModel
     public class AknamezoViewModel : INotifyPropertyChanged
     {
         public int CanvasHeight { get; set; } = 500; // Height of the game canvas.
-        public int CanvasWidth { get; set; } = 980; // Widht of the game canvas.
+        public int CanvasWidth { get; set; } = 1000; // Widht of the game canvas.
+        public int PlayerStartX { get; set; } = 400;
+        public int PlayerStartY { get; set; } = 400;
 
         private GameState _gameState; // Holds the model.
         private string _gameTimeText; // Shows the game time.
@@ -52,11 +54,44 @@ namespace AknamezoViewModel
         {
             // -- INITIALIZING GAMESTATE
             _gameState = new GameState(
-                new Submarine(400, 400, 50, 50, 50),
+                new Submarine(PlayerStartX, PlayerStartY, 50, 50, 50),
                 new Easy()
             );
             _gameState.ElpasedTime = 0;
             _gameTimeText = $"Game time: {_gameState.ElpasedTime}";
+            _gameState.AddShip(
+                new Ship(
+                    OriginalGameState.SHIP1_START_X, 
+                    OriginalGameState.SHIP1_START_Y, 
+                    50, 
+                    180, 
+                    3, 
+                    _gameState.Difficulty.MineIntervalMin(), 
+                    _gameState.Difficulty.MineIntervalMax()
+                )
+            );
+            _gameState.AddShip(
+                new Ship(
+                    OriginalGameState.SHIP2_START_X, 
+                    OriginalGameState.SHIP2_START_Y, 
+                    50, 
+                    180, 
+                    3, 
+                    _gameState.Difficulty.MineIntervalMin(), 
+                    _gameState.Difficulty.MineIntervalMax()
+                )
+            );
+            _gameState.AddShip(
+                new Ship(
+                    OriginalGameState.SHIP3_START_X, 
+                    OriginalGameState.SHIP3_START_Y,
+                    50, 
+                    180, 
+                    3, 
+                    _gameState.Difficulty.MineIntervalMin(), 
+                    _gameState.Difficulty.MineIntervalMax()
+                )
+            );
 
             // -- INITIALIZING THE TIMERS
             SetupTimer(
@@ -140,16 +175,20 @@ namespace AknamezoViewModel
             switch (key)
             {
                 case "W":
-                    _gameState.Player.MoveUp();
+                    if (_gameState.Player.Y > OriginalGameState.SHIP3_START_Y + _gameState.Ships[2].Height + _gameState.Player.Height)
+                        _gameState.Player.MoveUp();
                     break;
                 case "S":
-                    _gameState.Player.MoveUp();
+                    if (_gameState.Player.Y < CanvasHeight - _gameState.Player.Height)
+                        _gameState.Player.MoveDown();
                     break;
                 case "D":
-                    _gameState.Player.MoveUp();
+                    if (_gameState.Player.X < CanvasWidth - _gameState.Player.Width) 
+                        _gameState.Player.MoveRight();
                     break;
                 case "A":
-                    _gameState.Player.MoveUp();
+                    if (_gameState.Player.X > 0)
+                        _gameState.Player.MoveLeft();
                     break;
                 default:
                     break;

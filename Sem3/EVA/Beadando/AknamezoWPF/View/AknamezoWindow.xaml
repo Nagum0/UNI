@@ -18,10 +18,32 @@
     <Grid>
         <!--- GAME CANVAS -->
         <Canvas
-            Margin="60,30,60,102"
+            Margin="51,32,69,100"
             Background="Aqua" 
             Width="{Binding CanvasWidth}"
             Height="{Binding CanvasHeight}">
+            <!-- SHIPS -->
+            <ItemsControl ItemsSource="{Binding GameState.Ships}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle 
+                            Width="{Binding Width}"
+                            Height="{Binding Height}"
+                            Fill="Yellow"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <!-- MINES -->
             <ItemsControl ItemsSource="{Binding GameState.Mines}">
                 <ItemsControl.ItemsPanel>
@@ -63,7 +85,7 @@
             Command="{Binding StartBtnClicked}"/>
         <Button
             HorizontalAlignment="Left" 
-            Margin="624,543,0,0" 
+            Margin="629,543,0,0" 
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
@@ -71,21 +93,21 @@
             Command="{Binding StopBtnClicked}"/>
         <Button
             HorizontalAlignment="Left" 
-            Margin="356,543,0,0" 
+            Margin="348,543,0,0" 
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
             Content="RESTART"/>
         <Button
             HorizontalAlignment="Left" 
-            Margin="222,543,0,0" 
+            Margin="212,543,0,0" 
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
-            Content="SAVE"/>
+            Content="SAVE" RenderTransformOrigin="0.496,0.484"/>
         <Button
             HorizontalAlignment="Left" 
-            Margin="762,543,0,0" 
+            Margin="766,543,0,0" 
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"

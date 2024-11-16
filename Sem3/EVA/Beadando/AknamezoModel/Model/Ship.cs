@@ -1,7 +1,13 @@
-﻿namespace AknamezoModel.Model
+﻿using System.ComponentModel;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+
+namespace AknamezoModel.Model
 {
-    public class Ship
+    public class Ship : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int X { get; private set; }
         public int Y { get; private set; }
         public int Height { get; private set; }
@@ -45,6 +51,7 @@
         public void Move()
         {
             X += Speed;
+            OnPropertyChanged(nameof(X));
         }
 
         public Mine DropMine()
@@ -80,6 +87,13 @@
         {
             X = x;
             Y = y;
+            OnPropertyChanged(nameof(X));
+            OnPropertyChanged(nameof(Y));
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string? property = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         // -- FOR DEBUGGING ONLY

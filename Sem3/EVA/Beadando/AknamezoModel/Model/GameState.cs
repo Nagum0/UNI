@@ -1,20 +1,66 @@
-﻿namespace AknamezoModel.Model
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace AknamezoModel.Model
 {
-    public class GameState
+    public class GameState : INotifyPropertyChanged
     {
-        public Submarine Player { get; private set; }
-        public List<Ship> Ships { get; private set; }
-        public List<Mine> Mines { get; private set; }
-        public int ElpasedTime { get; set; }
+        public Submarine _player;
+        public ObservableCollection<Ship> _ships;
+        public ObservableCollection<Mine> _mines;
+        public int _elpased_time;
         public Difficulty Difficulty { get; private set; }
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler? MineCollison;
 
         public GameState(Submarine player, Difficulty difficulty)
         {
-            Player = player;
-            Ships = new List<Ship>();
-            Mines = new List<Mine>();
+            _player = player;
+            _ships = new ObservableCollection<Ship>();
+            _mines = new ObservableCollection<Mine>();
             Difficulty = difficulty;
+        }
+
+        public Submarine Player
+        {
+            get => _player;
+            set
+            {
+                _player = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Ship> Ships
+        {
+            get => _ships;
+            set
+            {
+                _ships = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Mine> Mines
+        {
+            get => _mines;
+            set
+            {
+                _mines = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int ElpasedTime
+        {
+            get => _elpased_time;
+            set
+            {
+                _elpased_time = value;
+                OnPropertyChanged();
+            }
         }
         
         public void ChangeDifficulty(Difficulty diff)
@@ -79,15 +125,26 @@
             );
              
             // Removing mines
-            Mines = new List<Mine>();
+            Mines.Clear();
             
             // Changing the difficulty back to easy
             ChangeDifficulty(new Easy());
 
+            // Reset the ship directions
+            foreach (Ship ship in Ships)
+            {
+                ship.Speed = Math.Abs(ship.Speed);
+            }
+
             // Reset the elapsed time
             ElpasedTime = 0;
         }
-        
+
+        private void OnPropertyChanged([CallerMemberName] string? property = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
         // -- FOR DEBUGGING
         public override string ToString()
         {

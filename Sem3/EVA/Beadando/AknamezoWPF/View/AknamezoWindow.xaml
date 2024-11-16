@@ -1,0 +1,142 @@
+﻿<Window x:Class="AknamezoWPF.View.AknamezoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AknamezoWPF.View"
+        mc:Ignorable="d"
+        Title="Aknamező"
+        ResizeMode="NoResize"
+        Width="1100"
+        Height="650">
+    <Window.InputBindings>
+        <KeyBinding Key="W" Command="{Binding MovePlayerCmd}" CommandParameter="W"/>
+        <KeyBinding Key="S" Command="{Binding MovePlayerCmd}" CommandParameter="S"/>
+        <KeyBinding Key="D" Command="{Binding MovePlayerCmd}" CommandParameter="D"/>
+        <KeyBinding Key="A" Command="{Binding MovePlayerCmd}" CommandParameter="A"/>
+    </Window.InputBindings>
+    <Grid>
+        
+        <!--- GAME CANVAS -->
+        <Canvas
+            Margin="51,32,69,100"
+            Background="Aqua" 
+            Width="{Binding CanvasWidth}"
+            Height="{Binding CanvasHeight}">
+            <!-- SHIPS -->
+            <ItemsControl ItemsSource="{Binding GameState.Ships}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle 
+                            Width="{Binding Width}"
+                            Height="{Binding Height}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/images/ship.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+            <!-- MINES -->
+            <ItemsControl ItemsSource="{Binding GameState.Mines}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle 
+                            Width="{Binding Width}"
+                            Height="{Binding Height}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="pack://application:,,,/images/mine.png"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+            <!-- PLAYER -->
+            <Rectangle 
+                Canvas.Left="{Binding GameState.Player.X}"
+                Canvas.Top="{Binding GameState.Player.Y}"
+                Height="{Binding GameState.Player.Height}"
+                Width="{Binding GameState.Player.Width}">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/images/submarine.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+        
+        <!-- BUTTONS -->
+        <Button
+            HorizontalAlignment="Center" 
+            Margin="0,543,0,0" 
+            VerticalAlignment="Top" 
+            Height="61" 
+            Width="120"
+            Content="START"
+            Command="{Binding StartBtnClicked}"/>
+        <Button
+            HorizontalAlignment="Left" 
+            Margin="629,543,0,0" 
+            VerticalAlignment="Top" 
+            Height="61" 
+            Width="120"
+            Content="STOP"
+            Command="{Binding StopBtnClicked}"/>
+        <Button
+            HorizontalAlignment="Left" 
+            Margin="348,543,0,0" 
+            VerticalAlignment="Top" 
+            Height="61" 
+            Width="120"
+            Content="RESTART"
+            Command="{Binding RestartBtnClicked}"/>
+        <Button
+            HorizontalAlignment="Left" 
+            Margin="212,543,0,0" 
+            VerticalAlignment="Top" 
+            Height="61" 
+            Width="120"
+            Content="SAVE" 
+            RenderTransformOrigin="0.496,0.484"
+            Command="{Binding SaveBtnClicked}"/>
+        <Button
+            HorizontalAlignment="Left" 
+            Margin="766,543,0,0" 
+            VerticalAlignment="Top" 
+            Height="61" 
+            Width="120"
+            Content="LOAD"
+            Command="{Binding LoadBtnClicked}"/>
+        <TextBlock 
+            HorizontalAlignment="Left" 
+            Margin="516,0,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="188" 
+            Height="26"
+            FontSize="20"
+            Text="{Binding GameTimeText}"/>
+    </Grid>
+</Window>

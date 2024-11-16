@@ -50,8 +50,8 @@ namespace AknamezoModel.Persistance
                 player.GetProperty("x").GetInt32(),
                 player.GetProperty("y").GetInt32(),
                 player.GetProperty("speed").GetInt32(),
-                56,
-                56
+                50,
+                50
             );
 
             Difficulty difficulty = root.GetProperty("difficulty").GetInt32() switch
@@ -70,8 +70,8 @@ namespace AknamezoModel.Persistance
                 gameState.AddShip(new Ship(
                     ship.GetProperty("x").GetInt32(),
                     ship.GetProperty("y").GetInt32(),
-                    62,
-                    228,
+                    50,
+                    180,
                     ship.GetProperty("speed").GetInt32(),
                     difficulty.MineIntervalMin(),
                     difficulty.MineIntervalMax()

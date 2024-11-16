@@ -93,7 +93,7 @@ namespace AknamezoViewModel
                 _ => false
             );
             RestartBtnClicked = new DelegateCommand(
-                _ => { },
+                _ => _gameState.RestartGame(),
                 _ => true
             );
             SaveBtnClicked = new DelegateCommand(
@@ -121,6 +121,7 @@ namespace AknamezoViewModel
         {
             StartBtnClicked.Predicate = _ => false;
             StopBtnClicked.Predicate = _ => true;
+            RestartBtnClicked.Predicate = _ => false;
             MovePlayerCmd.Predicate = _ => true;
             _gameLoopTimer?.Start();
             _gameTimer?.Start();
@@ -136,6 +137,7 @@ namespace AknamezoViewModel
         {
             StartBtnClicked.Predicate = _ => true;
             StopBtnClicked.Predicate = _ => false;
+            RestartBtnClicked.Predicate = _ => true;
             MovePlayerCmd.Predicate = _ => false;
             _gameLoopTimer?.Stop();
             _gameTimer?.Stop();

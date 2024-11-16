@@ -97,7 +97,8 @@
             VerticalAlignment="Top" 
             Height="61" 
             Width="120"
-            Content="RESTART"/>
+            Content="RESTART"
+            Command="{Binding RestartBtnClicked}"/>
         <Button
             HorizontalAlignment="Left" 
             Margin="212,543,0,0" 

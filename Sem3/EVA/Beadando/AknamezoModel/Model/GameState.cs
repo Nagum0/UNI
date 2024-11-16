@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AknamezoModel.Model
 {
@@ -83,15 +84,21 @@ namespace AknamezoModel.Model
             );
              
             // Removing mines
-            Mines = new ObservableCollection<Mine>();
+            Mines.Clear();
             
             // Changing the difficulty back to easy
             ChangeDifficulty(new Easy());
 
+            // Reset the ship directions
+            foreach (Ship ship in Ships)
+            {
+                ship.Speed = Math.Abs(ship.Speed);
+            }
+
             // Reset the elapsed time
             ElpasedTime = 0;
         }
-        
+
         // -- FOR DEBUGGING
         public override string ToString()
         {

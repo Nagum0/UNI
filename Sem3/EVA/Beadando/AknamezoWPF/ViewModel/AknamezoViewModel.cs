@@ -59,39 +59,6 @@ namespace AknamezoViewModel
             );
             _gameState.ElpasedTime = 0;
             _gameTimeText = $"Game time: {_gameState.ElpasedTime}";
-            _gameState.AddShip(
-                new Ship(
-                    OriginalGameState.SHIP1_START_X, 
-                    OriginalGameState.SHIP1_START_Y, 
-                    50, 
-                    180, 
-                    3, 
-                    _gameState.Difficulty.MineIntervalMin(), 
-                    _gameState.Difficulty.MineIntervalMax()
-                )
-            );
-            _gameState.AddShip(
-                new Ship(
-                    OriginalGameState.SHIP2_START_X, 
-                    OriginalGameState.SHIP2_START_Y, 
-                    50, 
-                    180, 
-                    3, 
-                    _gameState.Difficulty.MineIntervalMin(), 
-                    _gameState.Difficulty.MineIntervalMax()
-                )
-            );
-            _gameState.AddShip(
-                new Ship(
-                    OriginalGameState.SHIP3_START_X, 
-                    OriginalGameState.SHIP3_START_Y,
-                    50, 
-                    180, 
-                    3, 
-                    _gameState.Difficulty.MineIntervalMin(), 
-                    _gameState.Difficulty.MineIntervalMax()
-                )
-            );
 
             // -- INITIALIZING THE TIMERS
             SetupTimer(
@@ -110,6 +77,7 @@ namespace AknamezoViewModel
                     _ => true
                 )
             );
+            SetupShips();
 
             // -- INITIALIZING THE BUTTON COMMANDS
             StartBtnClicked = new DelegateCommand(
@@ -200,6 +168,15 @@ namespace AknamezoViewModel
         /// </summary>
         private void GameLoopTimerTick()
         {
+            // -- MOVING THE SHIPS
+            foreach (Ship ship in _gameState.Ships)
+            {
+                ship.Move();
+
+                if (ship.X + ship.Width >= CanvasWidth || ship.X < 0)
+                    ship.ReverseDirection();
+            }
+
             // -- SINKING THE MINES
             for (int i = 0; i < _gameState.Mines.Count; i++)
             {
@@ -232,6 +209,46 @@ namespace AknamezoViewModel
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(interval);
             timer.Tick += (_, _) => tickCommand.Execute(null);
+        }
+
+        /// <summary>
+        /// Sets up the ships and their mine drop timers.
+        /// </summary>
+        private void SetupShips()
+        {
+            _gameState.AddShip(
+               new Ship(
+                   OriginalGameState.SHIP1_START_X,
+                   OriginalGameState.SHIP1_START_Y,
+                   50,
+                   180,
+                   3,
+                   _gameState.Difficulty.MineIntervalMin(),
+                   _gameState.Difficulty.MineIntervalMax()
+               )
+           );
+            _gameState.AddShip(
+                new Ship(
+                    OriginalGameState.SHIP2_START_X,
+                    OriginalGameState.SHIP2_START_Y,
+                    50,
+                    180,
+                    3,
+                    _gameState.Difficulty.MineIntervalMin(),
+                    _gameState.Difficulty.MineIntervalMax()
+                )
+            );
+            _gameState.AddShip(
+                new Ship(
+                    OriginalGameState.SHIP3_START_X,
+                    OriginalGameState.SHIP3_START_Y,
+                    50,
+                    180,
+                    3,
+                    _gameState.Difficulty.MineIntervalMin(),
+                    _gameState.Difficulty.MineIntervalMax()
+                )
+            );
         }
 
         /// <summary>

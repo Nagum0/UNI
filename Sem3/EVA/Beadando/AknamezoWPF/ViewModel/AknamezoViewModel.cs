@@ -205,7 +205,6 @@ namespace AknamezoViewModel
                 {
                     string fileName = openFileDialog.FileName;
                     GameState readGameState = _jsonFileManager.Load(fileName);
-                    _gameState.MineCollison += GameState_MineCollision;
                     _gameState.Player = readGameState.Player;
                     _gameState.Ships = readGameState.Ships;
                     _gameState.Mines = readGameState.Mines;

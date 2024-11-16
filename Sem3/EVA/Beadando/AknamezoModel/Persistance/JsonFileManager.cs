@@ -50,8 +50,8 @@ namespace AknamezoModel.Persistance
                 player.GetProperty("x").GetInt32(),
                 player.GetProperty("y").GetInt32(),
                 player.GetProperty("speed").GetInt32(),
-                56,
-                56
+                50,
+                50
             );
 
             Difficulty difficulty = root.GetProperty("difficulty").GetInt32() switch

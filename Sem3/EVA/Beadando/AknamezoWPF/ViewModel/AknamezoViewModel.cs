@@ -283,6 +283,21 @@ namespace AknamezoViewModel
         {
             _gameState.ElpasedTime++;
             GameTimeText = $"Game time: {_gameState.ElpasedTime}";
+
+            switch (_gameState.ElpasedTime)
+            {
+                case 10:
+                    _gameState.ChangeDifficulty(new Normal());
+                    break;
+                case 15:
+                    _gameState.ChangeDifficulty(new Hard());
+                    break;
+                case 20:
+                    _gameState.ChangeDifficulty(new Death());
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>

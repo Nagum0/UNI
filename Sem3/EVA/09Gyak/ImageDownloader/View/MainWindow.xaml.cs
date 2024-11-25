@@ -1,5 +1,4 @@
-using ELTE.ImageDownloader.Model;
-using ELTE.ImageDownloader.ViewModel;
+﻿using ELTE.ImageDownloader.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

@@ -22,31 +22,9 @@ namespace ELTE.ImageDownloader.View
     /// </summary>
     public partial class ImageWindow : Window
     {
-        public ImageWindow(BitmapImage image)
+        public ImageWindow()
         {
             InitializeComponent();
-            picture.Source = image;
         }
-
-        private void Download(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveDialog = new SaveFileDialog
-            {
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
-                RestoreDirectory = true,
-                Filter = "PNG files (*.png)|*.png"
-            };
-
-            if (saveDialog.ShowDialog() == true)
-            {
-                using (var fileStream = new FileStream(saveDialog.FileName, FileMode.Create))
-                {
-                    BitmapEncoder encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create(picture.Source as BitmapImage));
-                    encoder.Save(fileStream);
-                }
-            }
-        }
-
     }
 }

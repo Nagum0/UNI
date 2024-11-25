@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="View image" Height="400" Width="600">
     <DockPanel>
-        <Button Content="Letöltés" DockPanel.Dock="Bottom" Click="Download" />
-        <Image x:Name="picture" />
+        <Button Content="Letöltés"
+                Command="{Binding SaveImageCommand}"
+                DockPanel.Dock="Bottom" />
+        <Image Source="{Binding Image}" />
     </DockPanel>
 </Window>

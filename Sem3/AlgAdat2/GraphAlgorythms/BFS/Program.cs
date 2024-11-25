@@ -49,6 +49,77 @@
 
     internal class Program
     {
+        static int time;
+
+        static void DFS<T>(Graph<T> G) where T: IEquatable<T>
+        {
+            Dictionary<T, int> ds = new Dictionary<T, int>(); // Access times
+            Dictionary<T, int> fs = new Dictionary<T, int>(); // Final times
+            Dictionary<T, T> ps = new Dictionary<T, T>(); // Parents
+            Dictionary<T, Color> cs = new Dictionary<T, Color>(); // Colors
+
+            foreach (T u in G.V)
+            {
+                cs[u] = Color.WHITE;
+            }
+
+            time = 0;
+
+            foreach (T r in G.V)
+            {
+                if (cs[r] == Color.WHITE)
+                {
+                    ps[r] = r;
+                    DFvisit(G, r, ref ds, ref fs, ref ps, ref cs);
+                }
+            }
+
+            Console.WriteLine($"Access times: {string.Join(", ", ds)}");
+            Console.WriteLine($"Final times:  {string.Join(", ", fs)}");
+            Console.WriteLine($"Parents: {string.Join(", ", ps)}");
+            Console.WriteLine($"Colors: {string.Join(", ", cs)}");
+        }
+
+        /// I don't receive time as a paremeter because it's already defined as a static member inside the class.
+        /// <typeparam name="T"></typeparam>
+        /// <param name="G">The graph.</param>
+        /// <param name="u">DFvisit start vertex.</param>
+        /// <param name="ds">A reference to the acces times.</param>
+        /// <param name="fs">A reference to the final times.</param>
+        /// <param name="ps">A reference to the parents.</param>
+        /// <param name="cs">A reference to the colors.</param>
+        static void DFvisit<T>(
+            Graph<T> G,
+            T u,
+            ref Dictionary<T, int> ds,
+            ref Dictionary<T, int> fs,
+            ref Dictionary<T, T> ps,
+            ref Dictionary<T, Color> cs
+        ) where T: IEquatable<T>
+        {
+            ds[u] = ++time;
+            cs[u] = Color.GREY;
+
+            foreach (T v in G.A(u))
+            {
+                if (cs[v] == Color.WHITE)
+                {
+                    ps[v] = u;
+                    DFvisit(G, v, ref ds, ref fs, ref ps, ref cs);
+                }
+                else
+                {
+                    if (cs[v] == Color.GREY)
+                    {
+                        // backEdge(u, v)
+                    }
+                }
+            }
+
+            fs[u] = ++time;
+            cs[u] = Color.BLACK;
+        }
+
         // NOTE (for self):
         // The method needs the `where T: IEquatable` clause beacuse Graph uses EqualityComparer<T>.Default.
         static void BFS<T>(Graph<T> G, T s) where T: IEquatable<T>
@@ -111,7 +182,22 @@
                 new Edge<char>('f', 'c'),
             ];
             Graph<char> g = new Graph<char>(vs, es);
-            BFS(g, 'a');
+            //BFS(g, 'a');
+
+            vs = ['a', 'b', 'c', 'd', 'e', 'f'];
+            es = [
+                new Edge<char>('a', 'b'),
+                new Edge<char>('a', 'e'),
+                new Edge<char>('b', 'c'),
+                new Edge<char>('b', 'e'),
+                new Edge<char>('e', 'c'),
+                new Edge<char>('e', 'd'),
+                new Edge<char>('d', 'a'),
+                new Edge<char>('f', 'c'),
+                new Edge<char>('f', 'e'),
+            ];
+            g = new Graph<char>(vs, es);
+            DFS(g);
         }
     }
 }

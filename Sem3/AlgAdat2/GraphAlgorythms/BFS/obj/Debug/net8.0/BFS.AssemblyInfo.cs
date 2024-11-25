@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BFS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8e6af12d57e957df633b653e357260c131b1ddf1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd7492d78470619a333806afa81d766ee8d3b76b")]
 [assembly: System.Reflection.AssemblyProductAttribute("BFS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BFS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

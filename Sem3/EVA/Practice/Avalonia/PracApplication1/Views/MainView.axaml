@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PracApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PracApplication1.Views.MainView"
+             x:DataType="vm:MainViewModel">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+	<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+		<TextBlock Text="Player info:"/>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="25"/>
+				<ColumnDefinition Width="25"/>
+				<ColumnDefinition Width="25"/>
+				<ColumnDefinition Width="35"/>
+				<ColumnDefinition Width="25"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="{Binding Player.X}" Grid.Row="0" Grid.Column="0"/>
+			<TextBlock Text="{Binding Player.Y}" Grid.Row="0" Grid.Column="1"/>
+			<TextBlock Text="{Binding Player.Speed}" Grid.Row="0" Grid.Column="2"/>
+			<TextBlock Text="{Binding Player.Width}" Grid.Row="0" Grid.Column="3"/>
+			<TextBlock Text="{Binding Player.Height}" Grid.Row="0" Grid.Column="4"/>
+		</Grid>
+		<Button Content="Change X Coordinate of Player" Command="{Binding ChangePlayerXCommand}"/>
+	</StackPanel>
+	
+</UserControl>

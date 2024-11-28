@@ -69,6 +69,7 @@
             {
                 if (cs[r] == Color.WHITE)
                 {
+                    // If the vertex has no parent the parent is set to itself.
                     ps[r] = r;
                     DFvisit(G, r, ref ds, ref fs, ref ps, ref cs);
                 }

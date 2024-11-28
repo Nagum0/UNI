@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AknamezoModel.Model
 {
-    public class Submarine : INotifyPropertyChanged 
+    public class Submarine : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

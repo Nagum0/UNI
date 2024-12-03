@@ -2,8 +2,10 @@
 using AknamezoAvalonia.Views;
 
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using System;
 
 namespace AknamezoAvalonia;
 
@@ -16,18 +18,27 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        AknamezoViewModel viewModel = new AknamezoViewModel();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel()
+                DataContext = viewModel
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
+            singleViewPlatform.MainView = new MobileView
             {
-                DataContext = new MainViewModel()
+                DataContext = viewModel
+            };
+
+            // When the size of the phone changes (when we load it too or flip it) update the sizes in the viewmodel
+            singleViewPlatform.MainView.SizeChanged += (s, e) =>
+            {
+                viewModel.CanvasWidth = singleViewPlatform.MainView.Bounds.Width;
+                viewModel.CanvasHeight = singleViewPlatform.MainView.Bounds.Height;
             };
         }
 

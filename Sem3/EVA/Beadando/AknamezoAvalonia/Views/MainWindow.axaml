@@ -8,7 +8,8 @@
         x:Class="AknamezoAvalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="AknamezoAvalonia"
-		Height="{Binding WindowHeight}"
-		Width="{Binding WindowWidth}">
+		Height="650"
+		Width="1100"
+		KeyDown="Window_KeyDown">
         <views:MainView />
 </Window>

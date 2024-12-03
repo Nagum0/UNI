@@ -1,0 +1,171 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:AknamezoAvalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AknamezoAvalonia.MobileView"
+			 x:DataType="vm:AknamezoViewModel">
+	<Viewbox>
+		<Panel>
+			<Canvas
+				Width="{Binding CanvasWidth}"
+				Height="{Binding CanvasHeight}"
+				Background="Aqua">
+				
+				<!-- SHIPS -->
+				<ItemsControl ItemsSource="{Binding GameState.Ships}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Canvas
+							Width="{Binding CanvasWidth}"
+							Height="{Binding CanvasHeight}"
+							Background="Transparent"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Rectangle
+								Width="{Binding Width}"
+								Height="{Binding Height}"
+								Fill="Crimson"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+
+					<ItemsControl.Styles>
+						<Style Selector="ContentPresenter">
+							<Setter Property="Canvas.Left" Value="{Binding X}"/>
+							<Setter Property="Canvas.Top" Value="{Binding Y}"/>
+						</Style>
+					</ItemsControl.Styles>
+				</ItemsControl>
+
+				<!-- MINES -->
+				<ItemsControl ItemsSource="{Binding GameState.Mines}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<Canvas
+							Width="{Binding CanvasWidth}"
+							Height="{Binding CanvasHeight}"
+							Background="Transparent"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Rectangle
+								Width="{Binding Width}"
+								Height="{Binding Height}"
+								Fill="Black"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+
+					<ItemsControl.Styles>
+						<Style Selector="ContentPresenter">
+							<Setter Property="Canvas.Left" Value="{Binding X}"/>
+							<Setter Property="Canvas.Top" Value="{Binding Y}"/>
+						</Style>
+					</ItemsControl.Styles>
+				</ItemsControl>
+
+				<!-- PLAYER -->
+				<Rectangle
+					Width="{Binding GameState.Player.Width}"
+					Height="{Binding GameState.Player.Height}"
+					Canvas.Left="{Binding GameState.Player.X}"
+					Canvas.Top="{Binding GameState.Player.Y}"
+					Fill="Gray"/>
+			</Canvas>
+			
+			<!-- MOVEMENT BUTTONS -->
+			<!-- LEFT -->
+			<Button 
+				HorizontalAlignment="Left"
+				VerticalAlignment="Center"
+				Margin="20, 0, 0, 80"
+				FontSize="50"
+				Content="&#x2190;"
+				Command="{Binding MovePlayerCmd}"
+				CommandParameter="A"/>
+			<!-- DOWN -->
+			<Button
+				HorizontalAlignment="Right"
+				VerticalAlignment="Center"
+				Margin="0, 80, 20, 0"
+				FontSize="50"
+				Content="&#x2193;"
+				Command="{Binding MovePlayerCmd}"
+				CommandParameter="S"/>
+			<!-- RIGHT -->
+			<Button
+				HorizontalAlignment="Right"
+				VerticalAlignment="Center"
+				Margin="0, 0, 20, 80"
+				FontSize="50"
+				Content="&#x2192;"
+				Command="{Binding MovePlayerCmd}"
+				CommandParameter="D"/>
+			<!-- UP -->
+			<Button
+				HorizontalAlignment="Left"
+				VerticalAlignment="Center"
+				Margin="20, 80, 0, 0"
+				FontSize="50"
+				Content="&#x2191;"
+				Command="{Binding MovePlayerCmd}"
+				CommandParameter="W"/>
+			
+			<!-- MENU BUTTON -->
+			<Button 
+				Content="MENU"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Top"
+				Command="{Binding OpenMenuCmd}"/>
+
+			<!-- MENU BUTTONS -->
+			<Grid
+				Name="BtnGrid"
+				Margin="0, 15, 0, 0"
+				ZIndex="100"
+				IsVisible="{Binding MenuOpen}"
+				Background="Crimson"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+					<ColumnDefinition Width="auto" />
+				</Grid.ColumnDefinitions>
+				
+				<Button
+					Grid.Row="0"
+					Grid.Column="0"
+					Margin="10"
+					Content="RESTART" />
+				<Button
+					Grid.Row="0"
+					Grid.Column="1"
+					Margin="10"
+					Content="STOP" />
+				<Button
+					Grid.Row="0"
+					Grid.Column="2"
+					Margin="10"
+					Content="START" />
+				<Button
+					Grid.Row="0"
+					Grid.Column="3"
+					Margin="10"
+					Content="SAVE" />
+				<Button
+					Grid.Row="0"
+					Grid.Column="4"
+					Margin="10"
+					Content="LOAD" />
+			</Grid>
+		</Panel>
+	</Viewbox>
+</UserControl>

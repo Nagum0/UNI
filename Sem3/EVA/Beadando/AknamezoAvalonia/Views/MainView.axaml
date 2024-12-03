@@ -5,32 +5,97 @@
              xmlns:vm="clr-namespace:AknamezoAvalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="650"
              x:Class="AknamezoAvalonia.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:AknamezoViewModel">
     <Design.DataContext>
       <!-- This only sets the DataContext for the previewer in an IDE,
            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-      <vm:MainViewModel />
+      <vm:AknamezoViewModel />
     </Design.DataContext>
-
+	
 	<StackPanel 
 		HorizontalAlignment="Center">
 		
 		<TextBlock
 			HorizontalAlignment="Center"
-			Background="White"
-			Margin="0, 15, 0, 0"
-			Text="{Binding GameTimeText}"/>
+			Foreground="White"
+			Margin="0, 25, 0, 0"
+			Text="{Binding CanvasWidth}"/>
 		
-        <!-- GAME CANVAS -->		
+		<!-- GAME CANVAS -->		
 		<Canvas
-			Margin="0, 35, 0, 0"
+			Margin="0, 15, 0, 0"
 			Background="Aqua"
 			Width="{Binding CanvasWidth}"
 			Height="{Binding CanvasHeight}">
+
+			<!-- SHIPS -->
+			<ItemsControl ItemsSource="{Binding GameState.Ships}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<Canvas
+						Width="{Binding CanvasWidth}"
+						Height="{Binding CanvasHeight}"
+						Background="Transparent"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Rectangle
+							Width="{Binding Width}"
+							Height="{Binding Height}"
+							Fill="Crimson"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+
+				<ItemsControl.Styles>
+					<Style Selector="ContentPresenter">
+						<Setter Property="Canvas.Left" Value="{Binding X}"/>
+						<Setter Property="Canvas.Top" Value="{Binding Y}"/>
+					</Style>
+				</ItemsControl.Styles>
+			</ItemsControl>
+
+			<!-- MINES -->
+			<ItemsControl ItemsSource="{Binding GameState.Mines}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<Canvas
+						Width="{Binding CanvasWidth}"
+						Height="{Binding CanvasHeight}"
+						Background="Transparent"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Rectangle 
+							Width="{Binding Width}"
+							Height="{Binding Height}"
+							Fill="Black"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+
+				<ItemsControl.Styles>
+					<Style Selector="ContentPresenter">
+						<Setter Property="Canvas.Left" Value="{Binding X}"/>
+						<Setter Property="Canvas.Top" Value="{Binding Y}"/>
+					</Style>
+				</ItemsControl.Styles>
+			</ItemsControl>
+			
+			<!-- PLAYER -->
+			<Rectangle 
+				Width="{Binding GameState.Player.Width}"
+				Height="{Binding GameState.Player.Height}"
+				Canvas.Left="{Binding GameState.Player.X}"
+				Canvas.Top="{Binding GameState.Player.Y}"
+				Fill="Gray"/>
 		</Canvas>
 		
 		<!-- BUTTONS -->
 		<Grid
+			Name="BtnGrid"
 			Margin="0, 15, 0, 0"
 			HorizontalAlignment="Center">
 			<Grid.ColumnDefinitions>

@@ -29,6 +29,8 @@ public partial class App : Application
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
+            viewModel.OnMobile = true;
+
             singleViewPlatform.MainView = new MobileView
             {
                 DataContext = viewModel

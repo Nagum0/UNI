@@ -12,8 +12,9 @@ public class AknamezoViewModel : ViewModelBase
 
     private double _canvasWidth = 1000;
     private double _canvasHeight = 500;
-    private bool _menuOpen = false; // Used for mobile version to check whether the menu needs to be visible.
-    private string _gameTimeText = "";
+    private bool _menuOpen = true; // Used for mobile version to check whether the menu needs to be visible.
+    private bool _gameActive = false;
+    private string _gameTimeText = "Game time: 0";
 
     private DispatcherTimer? _gameTimer;
 
@@ -22,6 +23,8 @@ public class AknamezoViewModel : ViewModelBase
     #endregion
 
     #region Properties
+
+    public bool OnMobile { get; set; } = false;
 
     public double CanvasWidth
     {
@@ -74,6 +77,9 @@ public class AknamezoViewModel : ViewModelBase
 
     public DelegateCommand OpenMenuCmd { get; set; }
     public DelegateCommand MovePlayerCmd { get; set; }
+    public DelegateCommand StartBtnClicked { get; set; }
+    public DelegateCommand StopBtnClicked { get; set; }
+    public DelegateCommand RestartBtnClicked { get; set; }
 
     #endregion
 
@@ -95,12 +101,13 @@ public class AknamezoViewModel : ViewModelBase
             )
         );
 
-        _gameTimer?.Start();
-
         // -- COMMANDS:
         // -- FOR MOBILE VERSION: Opens the menu
         OpenMenuCmd = new DelegateCommand(_ => OnMenuOpened(), _ => true);
         MovePlayerCmd = new DelegateCommand(key => OnPlayerMove(key), _ => true);
+        StartBtnClicked = new DelegateCommand(_ => OnStartBtnClicked(), _ => true);
+        StopBtnClicked = new DelegateCommand(_ => OnStopBtnClicked(), _ => false);
+        RestartBtnClicked = new DelegateCommand(_ => _gameState.RestartGame(), _ => false);
     }
 
     #endregion
@@ -111,6 +118,20 @@ public class AknamezoViewModel : ViewModelBase
     {
         _gameState.ElpasedTime++;
         GameTimeText = $"Game time: {_gameState.ElpasedTime}";
+    }
+
+    private void OnStartBtnClicked()
+    {
+        // If on mobile close the menu
+        if (OnMobile)
+            MenuOpen = false;
+
+        StartGame();
+    }
+
+    private void OnStopBtnClicked()
+    {
+        StopGame();
     }
 
     private void OnMenuOpened()
@@ -129,22 +150,40 @@ public class AknamezoViewModel : ViewModelBase
 
     private void OnPlayerMove(object? param)
     {
-        if (param is string key && !MenuOpen)
-            MovePlayer(key);
+        if (param is string key)
+        {
+            if (OnMobile && !MenuOpen)
+                MovePlayer(key);
+            else if (!OnMobile && _gameActive)
+                MovePlayer(key);
+        }
     }
 
     #endregion
 
     #region Private Methods
 
+    /// <summary>
+    /// Starts all of the timers and sets the execution predicates for the commands.
+    /// </summary>
     private void StartGame()
     {
         _gameTimer?.Start();
+        _gameActive = true;
+        StartBtnClicked.Predicate = _ => false;
+        StopBtnClicked.Predicate = _ => true;
     }
 
+    /// <summary>
+    /// Stops all of the timers and sets the execution predicates for the commands.
+    /// </summary>
     private void StopGame()
     {
         _gameTimer?.Stop();
+        _gameActive = false;
+        StartBtnClicked.Predicate = _ => true;
+        StopBtnClicked.Predicate = _ => false;
+        RestartBtnClicked.Predicate = _ => true;
     }
 
     /// <summary>

@@ -19,7 +19,7 @@
 			HorizontalAlignment="Center"
 			Foreground="White"
 			Margin="0, 25, 0, 0"
-			Text="{Binding CanvasWidth}"/>
+			Text="{Binding GameTimeText}"/>
 		
 		<!-- GAME CANVAS -->		
 		<Canvas

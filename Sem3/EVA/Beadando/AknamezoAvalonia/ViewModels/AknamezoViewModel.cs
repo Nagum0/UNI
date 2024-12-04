@@ -13,6 +13,9 @@ public class AknamezoViewModel : ViewModelBase
     private double _canvasWidth = 1000;
     private double _canvasHeight = 500;
     private bool _menuOpen = false; // Used for mobile version to check whether the menu needs to be visible.
+    private string _gameTimeText = "";
+
+    private DispatcherTimer? _gameTimer;
 
     private GameState _gameState;
 
@@ -55,6 +58,16 @@ public class AknamezoViewModel : ViewModelBase
         get => _gameState;
     }
 
+    public string GameTimeText
+    {
+        get => _gameTimeText;
+        private set
+        {
+            _gameTimeText = value;
+            this.RaisePropertyChanged(nameof(GameTimeText));
+        }
+    }
+
     #endregion
 
     #region Commands
@@ -72,19 +85,80 @@ public class AknamezoViewModel : ViewModelBase
         Submarine player = new Submarine(400, 200, 50, 50, 50);
         _gameState = new GameState(player, new Easy());
 
+        // -- TIMERS:
+        SetupTimer(
+            ref _gameTimer,
+            1000,
+            new DelegateCommand(
+                _ => OnGameTimerTick(),
+                _ => true
+            )
+        );
+
+        _gameTimer?.Start();
+
         // -- COMMANDS:
         // -- FOR MOBILE VERSION: Opens the menu
-        OpenMenuCmd = new DelegateCommand(_ => MenuOpen = !MenuOpen, _ => true);
-        MovePlayerCmd = new DelegateCommand(key =>
+        OpenMenuCmd = new DelegateCommand(_ => OnMenuOpened(), _ => true);
+        MovePlayerCmd = new DelegateCommand(key => OnPlayerMove(key), _ => true);
+    }
+
+    #endregion
+
+    #region Command Methods
+
+    private void OnGameTimerTick()
+    {
+        _gameState.ElpasedTime++;
+        GameTimeText = $"Game time: {_gameState.ElpasedTime}";
+    }
+
+    private void OnMenuOpened()
+    {
+        MenuOpen = !MenuOpen;
+
+        if (MenuOpen)
         {
-            if (key is string k)
-                MovePlayer(k);
-        }, _ => true);
+            StopGame();
+        }
+        else
+        {
+            StartGame();
+        }
+    }
+
+    private void OnPlayerMove(object? param)
+    {
+        if (param is string key && !MenuOpen)
+            MovePlayer(key);
     }
 
     #endregion
 
     #region Private Methods
+
+    private void StartGame()
+    {
+        _gameTimer?.Start();
+    }
+
+    private void StopGame()
+    {
+        _gameTimer?.Stop();
+    }
+
+    /// <summary>
+    /// Sets up the given timer.
+    /// </summary>
+    /// <param name="timer"></param>
+    /// <param name="interval"></param>
+    /// <param name="tickCommand"></param>
+    private void SetupTimer(ref DispatcherTimer? timer, int interval, DelegateCommand tickCommand)
+    {
+        timer = new DispatcherTimer();
+        timer.Interval = TimeSpan.FromMilliseconds(interval);
+        timer.Tick += (_, _) => tickCommand.Execute(null);
+    }
 
     /// <summary>
     /// Method that moves the player.

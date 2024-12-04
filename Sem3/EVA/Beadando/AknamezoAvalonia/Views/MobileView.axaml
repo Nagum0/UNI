@@ -8,6 +8,15 @@
 			 x:DataType="vm:AknamezoViewModel">
 	<Viewbox>
 		<Panel>
+			<!-- GAMETIME COUNTER -->
+			<TextBlock
+				HorizontalAlignment="Center"
+				VerticalAlignment="Top"
+				Foreground="Black"
+				FontSize="20"
+				ZIndex="10000"
+				Text="{Binding GameTimeText}"/>
+			
 			<Canvas
 				Width="{Binding CanvasWidth}"
 				Height="{Binding CanvasHeight}"

@@ -17,6 +17,10 @@ public class AknamezoViewModel : ViewModelBase
     private string _gameTimeText = "Game time: 0";
 
     private DispatcherTimer? _gameTimer;
+    private DispatcherTimer? _gameLoopTimer;
+    private DispatcherTimer? _ship1MineTimer;
+    private DispatcherTimer? _ship2MineTimer;
+    private DispatcherTimer? _ship3MineTimer;
 
     private GameState _gameState;
 
@@ -100,6 +104,17 @@ public class AknamezoViewModel : ViewModelBase
                 _ => true
             )
         );
+        SetupTimer(
+            ref _gameLoopTimer,
+            16,
+            new DelegateCommand(
+                _ => OnGameLoopTimerTick(),
+                _ => true
+            )
+        );
+
+        // -- SHIPS:
+        SetupShips();
 
         // -- COMMANDS:
         // -- FOR MOBILE VERSION: Opens the menu
@@ -114,10 +129,51 @@ public class AknamezoViewModel : ViewModelBase
 
     #region Command Methods
 
+    private void OnGameLoopTimerTick()
+    {
+        // -- MOVING THE SHIPS
+        foreach (Ship ship in _gameState.Ships)
+        {
+            ship.Move();
+
+            if (ship.X + ship.Width >= CanvasWidth || ship.X < 0)
+                ship.ReverseDirection();
+        }
+
+        // -- SINKING THE MINES
+        for (int i = 0; i < _gameState.Mines.Count; i++)
+        {
+            Mine mine = _gameState.Mines[i];
+            mine.Sink();
+
+            // If the mine is out of bounds remove it.
+            if (mine.Y >= CanvasHeight - mine.Height)
+                _gameState.Mines.RemoveAt(i);
+        }
+
+        // -- CHECKING FOR MINE COLLISION
+        //_gameState.MineHit();
+    }
+
     private void OnGameTimerTick()
     {
         _gameState.ElpasedTime++;
         GameTimeText = $"Game time: {_gameState.ElpasedTime}";
+
+        switch (_gameState.ElpasedTime)
+        {
+            case 10:
+                _gameState.ChangeDifficulty(new Normal());
+                break;
+            case 15:
+                _gameState.ChangeDifficulty(new Hard());
+                break;
+            case 20:
+                _gameState.ChangeDifficulty(new Death());
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnStartBtnClicked()
@@ -169,6 +225,11 @@ public class AknamezoViewModel : ViewModelBase
     private void StartGame()
     {
         _gameTimer?.Start();
+        _gameLoopTimer?.Start();
+        _ship1MineTimer?.Start();
+        _ship2MineTimer?.Start();
+        _ship3MineTimer?.Start();
+
         _gameActive = true;
         StartBtnClicked.Predicate = _ => false;
         StopBtnClicked.Predicate = _ => true;
@@ -180,6 +241,11 @@ public class AknamezoViewModel : ViewModelBase
     private void StopGame()
     {
         _gameTimer?.Stop();
+        _gameLoopTimer?.Stop();
+        _ship1MineTimer?.Stop();
+        _ship2MineTimer?.Stop();
+        _ship3MineTimer?.Stop();
+
         _gameActive = false;
         StartBtnClicked.Predicate = _ => true;
         StopBtnClicked.Predicate = _ => false;
@@ -197,6 +263,72 @@ public class AknamezoViewModel : ViewModelBase
         timer = new DispatcherTimer();
         timer.Interval = TimeSpan.FromMilliseconds(interval);
         timer.Tick += (_, _) => tickCommand.Execute(null);
+    }
+
+    /// <summary>
+    /// Sets up the ships and their mine drop timers.
+    /// </summary>
+    private void SetupShips()
+    {
+        // -- SHIP 1
+        _gameState.AddShip(
+           new Ship(
+               200,
+               OriginalGameState.SHIP1_START_Y,
+               50,
+               180,
+               3,
+               _gameState.Difficulty.MineIntervalMin(),
+               _gameState.Difficulty.MineIntervalMax()
+           )
+        );
+        _ship1MineTimer = new DispatcherTimer();
+        _ship1MineTimer.Interval = TimeSpan.FromMilliseconds(_gameState.Ships[0].MineIntervalSpeed);
+        _ship1MineTimer.Tick += (_, _) =>
+        {
+            _gameState.AddMine(_gameState.Ships[0].DropMine());
+            _ship1MineTimer.Interval = TimeSpan.FromMilliseconds(_gameState.Ships[0].ChangeMineDropInterval());
+        };
+
+        // -- SHIP 2
+        _gameState.AddShip(
+            new Ship(
+                200,
+                OriginalGameState.SHIP2_START_Y,
+                50,
+                180,
+                3,
+                _gameState.Difficulty.MineIntervalMin(),
+                _gameState.Difficulty.MineIntervalMax()
+            )
+        );
+        _ship2MineTimer = new DispatcherTimer();
+        _ship2MineTimer.Interval = TimeSpan.FromMilliseconds(_gameState.Ships[1].MineIntervalSpeed);
+        _ship2MineTimer.Tick += (_, _) =>
+        {
+            _gameState.AddMine(_gameState.Ships[1].DropMine());
+            _ship2MineTimer.Interval = TimeSpan.FromMilliseconds(_gameState.Ships[1].ChangeMineDropInterval());
+        };
+
+        // -- SHIP 3
+        _gameState.AddShip(
+            new Ship(
+                200,
+                OriginalGameState.SHIP3_START_Y,
+                50,
+                180,
+                3,
+                _gameState.Difficulty.MineIntervalMin(),
+                _gameState.Difficulty.MineIntervalMax()
+            )
+        );
+        _ship3MineTimer = new DispatcherTimer();
+        _ship3MineTimer.Interval = TimeSpan.FromMilliseconds(_gameState.Ships[2].MineIntervalSpeed);
+        _ship3MineTimer.Tick += (_, _) =>
+        {
+            _gameState.AddMine(_gameState.Ships[2].DropMine());
+            _ship3MineTimer.Interval = TimeSpan.FromMilliseconds(_gameState.Ships[2].ChangeMineDropInterval());
+        };
     }
 
     /// <summary>

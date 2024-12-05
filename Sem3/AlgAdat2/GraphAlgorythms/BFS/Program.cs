@@ -166,39 +166,86 @@
             Console.WriteLine($"Parents: {string.Join(", ", ps)}");
             Console.WriteLine($"Colors: {string.Join(", ", colors)}");
         }
+        
+        static void Dijkstra<T>(GraphW<T> G, T s) where T: IEquatable<T>
+        {
+            Dictionary<T, int> ds = new Dictionary<T, int>(); // Costs
+            Dictionary<T, T> ps = new Dictionary<T, T>(); // Parents (if the vertex is unreachable the parent is itself)
+
+            foreach (T v in G.V)
+            {
+                ds[v] = int.MaxValue;
+                ps[v] = v;
+            }
+
+            ds[s] = 0;
+
+            PriorityQueue<T, int> Q = new PriorityQueue<T, int>();
+            Q.EnqueueRange(G.V
+                .Aggregate(new List<(T, int)>(), (acc, i) => {
+                        if (!i.Equals(s))
+                            acc.Add((i, int.MaxValue));
+                        return acc;
+                })
+            );
+            
+            T u = s;
+
+            while (ds[u] < int.MaxValue && Q.Count > 0)
+            {
+                foreach (T v in G.A(u))
+                {
+                    int addedVWeight = ds[u] + G.W(u, v);
+
+                    if (ds[v] > addedVWeight)
+                    {
+                        ps[v] = u;
+                        ds[v] = addedVWeight;
+                        Adjust(ref Q, v, addedVWeight);
+                    }
+                }
+
+                u = Q.Dequeue();
+            }
+
+            Console.WriteLine(string.Join(", ", ds));
+            Console.WriteLine(string.Join(", ", ps));
+        }
+        
+        /// <summary>
+        /// C#'s PriorityQueue doesn't have an adjust priority method so this is my implementation.
+        /// </summary>
+        /// <param name="q">A reference to the queue that we have to adjust.</param>
+        /// <param name="v">The element that needs to be adjusted.</param>
+        /// <param name="newPriority">The new priority of the given element.</param>
+        static void Adjust<T, V>(ref PriorityQueue<T, V> q, T v, V newPriority) where T: IEquatable<T>
+        {
+            List<(T, V)> filteredItems = q.UnorderedItems
+                .Where(item => !item.Item1.Equals(v))
+                .ToList();
+
+            q.Clear();
+            q.EnqueueRange(filteredItems);
+            q.Enqueue(v, newPriority);
+        }
 
         static void Main(string[] args)
         {
-            // Ez a példa a gyakorlatos honlapról: https://people.inf.elte.hu/pgm6rw/algo/Algo2/ElementaryGraphAlgorithms/bfs/index.html
             List<char> vs = ['a', 'b', 'c', 'd', 'e', 'f'];
-            List<Edge<char>> es = [
-                new Edge<char>('a', 'b'),
-                new Edge<char>('b', 'c'),
-                new Edge<char>('b', 'e'),
-                new Edge<char>('c', 'e'),
-                new Edge<char>('c', 'e'),
-                new Edge<char>('e', 'd'),
-                new Edge<char>('d', 'a'),
-                new Edge<char>('f', 'e'),
-                new Edge<char>('f', 'c'),
+            List<EdgeW<char>> es = [
+                new EdgeW<char>('a', 'b', 5),
+                new EdgeW<char>('a', 'd', 4),
+                new EdgeW<char>('a', 'e', 2),
+                new EdgeW<char>('b', 'd', 1),
+                new EdgeW<char>('b', 'e', 2),
+                new EdgeW<char>('b', 'c', 1),
+                new EdgeW<char>('c', 'e', 1),
+                new EdgeW<char>('e', 'd', 2),
+                new EdgeW<char>('e', 'f', 1),
+                new EdgeW<char>('f', 'c', 3)
             ];
-            Graph<char> g = new Graph<char>(vs, es);
-            //BFS(g, 'a');
-
-            vs = ['a', 'b', 'c', 'd', 'e', 'f'];
-            es = [
-                new Edge<char>('a', 'b'),
-                new Edge<char>('a', 'e'),
-                new Edge<char>('b', 'c'),
-                new Edge<char>('b', 'e'),
-                new Edge<char>('e', 'c'),
-                new Edge<char>('e', 'd'),
-                new Edge<char>('d', 'a'),
-                new Edge<char>('f', 'c'),
-                new Edge<char>('f', 'e'),
-            ];
-            g = new Graph<char>(vs, es);
-            DFS(g);
+            GraphW<char> g = new GraphW<char>(vs, es);
+            Dijkstra(g, 'a');
         }
     }
 }

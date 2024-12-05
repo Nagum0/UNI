@@ -7,13 +7,13 @@ namespace AknamezoModel.Persistance
     {
         private JsonSerializerOptions jsonOptions = new  JsonSerializerOptions { WriteIndented = true };
 
-        public void Save(GameState gameState, string filePath)
+        public string Serialize(GameState gameState)
         {
             var serializedGameState = new
             {
                 elapsed_time = gameState.ElpasedTime,
                 difficulty = gameState.Difficulty.GetIdentifier(),
-                player = new 
+                player = new
                 {
                     x = gameState.Player.X,
                     y = gameState.Player.Y,
@@ -31,20 +31,15 @@ namespace AknamezoModel.Persistance
                     type = mine.GetIdentifier()
                 }).ToList()
             };
-            
-            
 
-            string jsonString = JsonSerializer.Serialize(serializedGameState, jsonOptions); 
-
-            File.WriteAllText(filePath, jsonString);
+            return JsonSerializer.Serialize(serializedGameState, jsonOptions);
         }
 
-        public GameState Load(string filePath)
+        public GameState Deserialize(string jsonString)
         {
-            string jsonString = File.ReadAllText(filePath);
             JsonDocument deserializedGameState = JsonDocument.Parse(jsonString);
             JsonElement root = deserializedGameState.RootElement;
-            
+
             JsonElement player = root.GetProperty("player");
             Submarine submarine = new Submarine(
                 player.GetProperty("x").GetInt32(),
@@ -101,6 +96,18 @@ namespace AknamezoModel.Persistance
             gameState.ElpasedTime = root.GetProperty("elapsed_time").GetInt32();
 
             return gameState;
+        }
+
+        public void Save(GameState gameState, string filePath)
+        {
+            string jsonString = Serialize(gameState);
+            File.WriteAllText(filePath, jsonString);
+        }
+
+        public GameState Load(string filePath)
+        {
+            string jsonString = File.ReadAllText(filePath);
+            return Deserialize(jsonString);
         }
     }
 }

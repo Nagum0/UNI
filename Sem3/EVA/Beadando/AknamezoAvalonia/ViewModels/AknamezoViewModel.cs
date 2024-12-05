@@ -249,6 +249,10 @@ public class AknamezoViewModel : ViewModelBase
     {
         _gameState.RestartGame();
 
+        // This is to update the player location immediatly
+        GameState.Player.MoveLeft();
+        GameState.Player.MoveUp();
+            
         // If we're on mobile change the spawn locations correctly
         if (OnMobile)
         {

@@ -18,10 +18,10 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        AknamezoViewModel viewModel = new AknamezoViewModel();
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            AknamezoViewModel viewModel = new AknamezoViewModel(false);
+
             desktop.MainWindow = new MainWindow
             {
                 DataContext = viewModel
@@ -29,7 +29,7 @@ public partial class App : Application
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            viewModel.OnMobile = true;
+            AknamezoViewModel viewModel = new AknamezoViewModel(true);
 
             singleViewPlatform.MainView = new MobileView
             {

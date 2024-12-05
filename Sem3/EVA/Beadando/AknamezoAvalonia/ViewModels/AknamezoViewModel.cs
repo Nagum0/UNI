@@ -16,6 +16,15 @@ public class AknamezoViewModel : ViewModelBase
     private bool _gameActive = false;
     private string _gameTimeText = "Game time: 0";
 
+    private int _playerStartX = 400;
+    private int _playerStartY = 300;
+    private int _ship1StartX = OriginalGameState.SHIP1_START_X;
+    private int _ship1StartY = OriginalGameState.SHIP1_START_Y;
+    private int _ship2StartX = OriginalGameState.SHIP2_START_X;
+    private int _ship2StartY = OriginalGameState.SHIP2_START_Y;
+    private int _ship3StartX = OriginalGameState.SHIP3_START_X;
+    private int _ship3StartY = OriginalGameState.SHIP3_START_Y;
+
     private DispatcherTimer? _gameTimer;
     private DispatcherTimer? _gameLoopTimer;
     private DispatcherTimer? _ship1MineTimer;
@@ -89,10 +98,15 @@ public class AknamezoViewModel : ViewModelBase
 
     #region Public Methods
 
-    public AknamezoViewModel()
+    public AknamezoViewModel(bool onMobile)
     {
+        OnMobile = onMobile;
+
+        if (OnMobile)
+            CalculateSpawnPositionsForMobile();
+
         // -- MODEL:
-        Submarine player = new Submarine(400, 200, 50, 50, 50);
+        Submarine player = new Submarine(_playerStartX, _playerStartY, 50, 50, 50);
         _gameState = new GameState(player, new Easy());
 
         // -- TIMERS:
@@ -122,7 +136,7 @@ public class AknamezoViewModel : ViewModelBase
         MovePlayerCmd = new DelegateCommand(key => OnPlayerMove(key), _ => true);
         StartBtnClicked = new DelegateCommand(_ => OnStartBtnClicked(), _ => true);
         StopBtnClicked = new DelegateCommand(_ => OnStopBtnClicked(), _ => false);
-        RestartBtnClicked = new DelegateCommand(_ => _gameState.RestartGame(), _ => false);
+        RestartBtnClicked = new DelegateCommand(_ => OnRestartBtnClicked(), _ => false);
     }
 
     #endregion
@@ -173,6 +187,19 @@ public class AknamezoViewModel : ViewModelBase
                 break;
             default:
                 break;
+        }
+    }
+
+    private void OnRestartBtnClicked()
+    {
+        _gameState.RestartGame();
+
+        // If we're on mobile change the spawn locations correctly
+        if (OnMobile)
+        {
+            _gameState.Ships[0].ResetLocation(_ship1StartX, _ship1StartY);
+            _gameState.Ships[1].ResetLocation(_ship2StartX, _ship2StartY);
+            _gameState.Ships[2].ResetLocation(_ship3StartX, _ship3StartY);
         }
     }
 
@@ -273,8 +300,8 @@ public class AknamezoViewModel : ViewModelBase
         // -- SHIP 1
         _gameState.AddShip(
            new Ship(
-               200,
-               OriginalGameState.SHIP1_START_Y,
+               _ship1StartX,
+               _ship1StartY,
                50,
                180,
                3,
@@ -293,8 +320,8 @@ public class AknamezoViewModel : ViewModelBase
         // -- SHIP 2
         _gameState.AddShip(
             new Ship(
-                200,
-                OriginalGameState.SHIP2_START_Y,
+                _ship2StartX,
+                _ship2StartY,
                 50,
                 180,
                 3,
@@ -313,8 +340,8 @@ public class AknamezoViewModel : ViewModelBase
         // -- SHIP 3
         _gameState.AddShip(
             new Ship(
-                200,
-                OriginalGameState.SHIP3_START_Y,
+                _ship3StartX,
+                _ship3StartY,
                 50,
                 180,
                 3,
@@ -358,6 +385,21 @@ public class AknamezoViewModel : ViewModelBase
             default:
                 break;
         }
+    }
+
+    /// <summary>
+    /// Calculates the spawn positions for the ships and the player depending on the platform.
+    /// </summary>
+    private void CalculateSpawnPositionsForMobile()
+    {
+        _ship1StartX = 500;
+        _ship1StartY = OriginalGameState.SHIP1_START_Y;
+
+        _ship2StartX = 400;
+        _ship2StartY = OriginalGameState.SHIP2_START_Y;
+
+        _ship3StartX = 300;
+        _ship3StartY = OriginalGameState.SHIP3_START_Y;
     }
 
     #endregion

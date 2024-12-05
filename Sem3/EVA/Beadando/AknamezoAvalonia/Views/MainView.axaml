@@ -34,7 +34,7 @@
 				ZIndex="100"
 				Canvas.Left="300"
 				Canvas.Top="175"
-				Width="300"
+				Width="400"
 				Height="150"
 				Background="Red">
 				<Border 
@@ -156,6 +156,7 @@
 				Grid.Row="0"
 				Grid.Column="3"
 				Margin="10"
+				Click="SaveBtn_Clicked"
 				Content="SAVE" />
 			<Button
 				Grid.Row="0"

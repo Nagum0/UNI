@@ -8,6 +8,34 @@
 			 x:DataType="vm:AknamezoViewModel">
 	<Viewbox>
 		<Panel>
+			<!-- YOU DIED PANEL -->
+			<Panel
+				IsVisible="{Binding DeathScreenIsEnabled}"
+				ZIndex="100"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				Width="300"
+				Height="150"
+				Background="Red">
+				<Border
+					BorderThickness="2"
+					BorderBrush="Black"/>
+				<TextBlock
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					FontSize="15"
+					Foreground="White"
+					Text="{Binding DeathMessage}"/>
+				<Button
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom"
+					Margin="0,0,0,15"
+					FontSize="15"
+					Background="DarkRed"
+					Content="OK"
+					Command="{Binding AcceptDeathCmd}"/>
+			</Panel>
+			
 			<!-- GAMETIME COUNTER -->
 			<TextBlock
 				HorizontalAlignment="Center"

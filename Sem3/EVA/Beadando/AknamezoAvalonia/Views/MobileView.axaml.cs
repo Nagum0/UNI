@@ -88,16 +88,19 @@ public partial class MobileView : UserControl
         {
             try
             {
-                string filePath = files[0].Path.ToString();
-                GameState readGameState = jsonFileManager.Load(filePath);
+                await using var stream = await files[0].OpenReadAsync();
+                using var streamReader = new StreamReader(stream);
+                string fileContent = await streamReader.ReadToEndAsync();
+
+                GameState readGameState = jsonFileManager.Deserialize(fileContent);
                 vm.GameState.Player = readGameState.Player;
                 vm.GameState.Ships = readGameState.Ships;
                 vm.GameState.Mines = readGameState.Mines;
                 vm.GameState.ElpasedTime = readGameState.ElpasedTime;
             }
-            catch (Exception e)
+            catch
             {
-                vm.ShowError($"Error while reading saved game\n{e.Message}");
+                vm.ShowError($"Error while reading saved game");
             }
         }
     }

@@ -193,12 +193,13 @@
 					Grid.Row="0"
 					Grid.Column="3"
 					Margin="10"
-					Command="{Binding SaveGameBtnClicked}"
+					Click="SaveBtn_Clicked"
 					Content="SAVE" />
 				<Button
 					Grid.Row="0"
 					Grid.Column="4"
 					Margin="10"
+					Click="LoadBtn_Clicked"
 					Content="LOAD" />
 			</Grid>
 		</Panel>

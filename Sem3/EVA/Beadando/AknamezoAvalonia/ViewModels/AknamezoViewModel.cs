@@ -118,7 +118,6 @@ public class AknamezoViewModel : ViewModelBase
     public DelegateCommand StartBtnClicked { get; set; }
     public DelegateCommand StopBtnClicked { get; set; }
     public DelegateCommand RestartBtnClicked { get; set; }
-    public DelegateCommand SaveGameBtnClicked { get; set; }
     public DelegateCommand AcceptDeathCmd { get; set; }
 
     #endregion
@@ -165,7 +164,6 @@ public class AknamezoViewModel : ViewModelBase
         StartBtnClicked = new DelegateCommand(_ => OnStartBtnClicked(), _ => true);
         StopBtnClicked = new DelegateCommand(_ => OnStopBtnClicked(), _ => false);
         RestartBtnClicked = new DelegateCommand(_ => OnRestartBtnClicked(), _ => false);
-        SaveGameBtnClicked = new DelegateCommand(_ => SaveGame(), _ => true);
         AcceptDeathCmd = new DelegateCommand(_ => OnAcceptDeathCmd(), _ => false);
     }
 
@@ -358,42 +356,6 @@ public class AknamezoViewModel : ViewModelBase
         StartBtnClicked.Predicate = _ => true;
         StopBtnClicked.Predicate = _ => false;
         RestartBtnClicked.Predicate = _ => true;
-    }
-
-    /// <summary>
-    /// Saves the game state in a json format.
-    /// 
-    /// DOESN'T WORK LIKE THIS
-    /// </summary>
-    private void SaveGame()
-    {
-        try
-        {
-            if (OperatingSystem.IsAndroid())
-            {
-                // Plan for mobile:
-                //  - Close the menu
-                //  - Open deathscreen but with a textbox
-                //  - User enters name for save file
-                //  - We get that and save it
-            }
-            else
-            {
-
-            }
-        }
-        catch
-        {
-            MenuOpen = false;
-            DeathMessage = "Error while saving game";
-            DeathScreenIsEnabled = true;
-
-            MovePlayerCmd.Predicate = _ => false;
-            StartBtnClicked.Predicate = _ => false;
-            StopBtnClicked.Predicate = _ => false;
-            RestartBtnClicked.Predicate = _ => false;
-            AcceptDeathCmd.Predicate = _ => true;
-        }
     }
 
     /// <summary>

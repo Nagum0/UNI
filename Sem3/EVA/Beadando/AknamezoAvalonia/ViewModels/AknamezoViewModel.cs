@@ -15,6 +15,8 @@ public class AknamezoViewModel : ViewModelBase
     private bool _menuOpen = true; // Used for mobile version to check whether the menu needs to be visible.
     private bool _gameActive = false;
     private string _gameTimeText = "Game time: 0";
+    private string _deathMessage = "YOU DIED\nTotal gametime: 0";
+    private bool _deathScreenIsEnabled = false;
 
     private int _playerStartX = 400;
     private int _playerStartY = 300;
@@ -36,6 +38,25 @@ public class AknamezoViewModel : ViewModelBase
     #endregion
 
     #region Properties
+
+    public bool DeathScreenIsEnabled
+    {
+        get => _deathScreenIsEnabled;
+        private set
+        {
+            _deathScreenIsEnabled = value;
+            this.RaisePropertyChanged(nameof(DeathScreenIsEnabled));
+        }
+    }
+
+    public string DeathMessage
+    {
+        get => _deathMessage;
+        private set {
+            _deathMessage = value;
+            this.RaisePropertyChanged(nameof(DeathMessage));
+        }
+    }
 
     public bool OnMobile { get; set; } = false;
 
@@ -94,6 +115,8 @@ public class AknamezoViewModel : ViewModelBase
     public DelegateCommand StopBtnClicked { get; set; }
     public DelegateCommand RestartBtnClicked { get; set; }
 
+    public DelegateCommand AcceptDeathCmd { get; set; }
+
     #endregion
 
     #region Public Methods
@@ -108,6 +131,7 @@ public class AknamezoViewModel : ViewModelBase
         // -- MODEL:
         Submarine player = new Submarine(_playerStartX, _playerStartY, 50, 50, 50);
         _gameState = new GameState(player, new Easy());
+        _gameState.MineCollison += GameState_MineCollision;
 
         // -- TIMERS:
         SetupTimer(
@@ -137,6 +161,25 @@ public class AknamezoViewModel : ViewModelBase
         StartBtnClicked = new DelegateCommand(_ => OnStartBtnClicked(), _ => true);
         StopBtnClicked = new DelegateCommand(_ => OnStopBtnClicked(), _ => false);
         RestartBtnClicked = new DelegateCommand(_ => OnRestartBtnClicked(), _ => false);
+        AcceptDeathCmd = new DelegateCommand(_ => OnAcceptDeathCmd(), _ => false);
+    }
+
+    #endregion
+
+    #region Event Handlers
+
+    private void GameState_MineCollision(object? sender, EventArgs e)
+    {
+        StopGame();
+        DeathMessage = $"\tYOU DIED\nTotal gametime: {_gameState.ElpasedTime}";
+        DeathScreenIsEnabled = true;
+
+        OpenMenuCmd.Predicate = _ => false;
+        MovePlayerCmd.Predicate = _ => false;
+        StartBtnClicked.Predicate = _ => false;
+        StopBtnClicked.Predicate = _ => false;
+        RestartBtnClicked.Predicate = _ => false;
+        AcceptDeathCmd.Predicate = _ => true;
     }
 
     #endregion
@@ -166,7 +209,19 @@ public class AknamezoViewModel : ViewModelBase
         }
 
         // -- CHECKING FOR MINE COLLISION
-        //_gameState.MineHit();
+        _gameState.MineHit();
+    }
+
+    private void OnAcceptDeathCmd()
+    {
+        DeathScreenIsEnabled = false;
+
+        OpenMenuCmd.Predicate = _ => true;
+        MovePlayerCmd.Predicate = _ => true;
+        StartBtnClicked.Predicate = _ => true;
+        StopBtnClicked.Predicate = _ => false;
+        RestartBtnClicked.Predicate = _ => true;
+        AcceptDeathCmd.Predicate = _ => false;
     }
 
     private void OnGameTimerTick()

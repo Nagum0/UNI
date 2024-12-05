@@ -20,13 +20,41 @@
 			Foreground="White"
 			Margin="0, 25, 0, 0"
 			Text="{Binding GameTimeText}"/>
-		
+
 		<!-- GAME CANVAS -->		
 		<Canvas
 			Margin="0, 15, 0, 0"
 			Background="Aqua"
 			Width="{Binding CanvasWidth}"
 			Height="{Binding CanvasHeight}">
+
+			<!-- YOU DIED PANEL -->
+			<Panel
+				IsVisible="{Binding DeathScreenIsEnabled}"
+				ZIndex="100"
+				Canvas.Left="300"
+				Canvas.Top="175"
+				Width="300"
+				Height="150"
+				Background="Red">
+				<Border 
+					BorderThickness="2"
+					BorderBrush="Black"/>
+				<TextBlock
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					FontSize="15"
+					Foreground="White"
+					Text="{Binding DeathMessage}"/>
+				<Button
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom"
+					Margin="0,0,0,15"
+					FontSize="15"
+					Background="DarkRed"
+					Content="OK"
+					Command="{Binding AcceptDeathCmd}"/>
+			</Panel>
 
 			<!-- SHIPS -->
 			<ItemsControl ItemsSource="{Binding GameState.Ships}">
@@ -135,7 +163,7 @@
 				Margin="10"
 				Content="LOAD" />
 		</Grid>
-		
+	
 	</StackPanel>
 	
 </UserControl>

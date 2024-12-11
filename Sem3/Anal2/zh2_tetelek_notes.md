@@ -15,6 +15,13 @@
   - (ynk) felirasa
   - atviteli tetel => lim (nk -> poz. inf.) f(xnk) - f(ynk) = 0 (ellentmondas)
 
+7. **A folytonos fv. integralhatosaga**:
+  - Azt kell belatni, hogy minden folyonos f eseten igaz az oszcillacios osszeg es Riemann integralhatosag tetel
+  - Mivel f folytonos ezert egyenletesen folytonos es igy a vegen |f(x) - f(y)| < epsilon/(b - a)
+  - Legyen epsilon > 0 es egy tau felosztas es legyen a ||T|| = max{xi - (xi - 1) | i = 1..n} < delta
+  - Bevezetem az mi-t (f(ui)) es Mi-t (f(vi)) es felirom az oszcillacios osszeg tetelt ezekkel, ami epsilon lesz
+  - Tehat f eleme R[a, b]
+
 9. **Az integral fv. folytonossaga**:
   - Legyenek x,y valos szamok es x < y, ekkor felirom az |F(y) - F(x)| = ... = M * (y - x)
   - Bevezetem az M-et, ami az f egy felso korlatja

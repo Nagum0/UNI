@@ -5,4 +5,10 @@
   - (ynk) felirasa
   - atviteli tetel => lim (nk -> poz. inf.) f(xnk) - f(ynk) = 0 (ellentmondas)
 
-
+12. A helyettesites integralas szabalya hatarozott integralon:
+  - F(x) (g(alfa), x), G(u) felirasa
+  - Belatjuk, hogy, ami a tetelben van a kozepe: F(g(B)) = G(B)
+  - Felirjuk a folytonossag miatt az F es G derivaltjat
+  - (F o g)' = f o g * g' => (F o g - G)' = 0
+  - Letezik c valos szam, hogy F o g - G = 0. Ugyanakkor F(alfa) = 0 = G(alfa)
+  - c = 0 => F o g = G => F(g(B)) = G(B)

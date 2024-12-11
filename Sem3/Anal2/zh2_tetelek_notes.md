@@ -15,6 +15,11 @@
   - (ynk) felirasa
   - atviteli tetel => lim (nk -> poz. inf.) f(xnk) - f(ynk) = 0 (ellentmondas)
 
+9. **Az integral fv. folytonossaga**:
+  - Legyenek x,y valos szamok es x < y, ekkor felirom az |F(y) - F(x)| = ... = M * (y - x)
+  - Bevezetem az M-et, ami az f egy felso korlatja
+  - Ezutan felirom az egyenletes folytonossag tetelet (M * delta < epsilon eseten) es |F(y) - F(x)| < M * epsilon/M => F eleme C[a, b]
+
 10. **Az integral fv. differencialhatosaga**:
   - h-ra teljesul, hogy d + h eleme (a, b): F(d + h) - F(d) = ...
   - f(d) = 1/h * d..d+h int. f(d)dt, ezert (F(d + h) - F(d) / h) - f(d) = 1/h * d..d+h int. f(t) - f(d) dt

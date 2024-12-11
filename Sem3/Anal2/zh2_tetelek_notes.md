@@ -1,3 +1,13 @@
+3. **A szorzatfv. integralhatosaga**:
+  - (i): f, g >= 0:
+    - Levezetem az osszegfv-s allitast az osszcillacios osszegik aztan az f * g oszcillacios osszeget kisebb, mint az szummas felirasa
+    - Bevezetem az M f, g felso korlatjat es felirom vele az osszcillacios osszeget (vegeredmeny: M * osc(g, T) + osc(f, T))
+    - Mivel f,g Riemann integralhato [a, b]-n => oszcillacios osszeg tetel => oszcillacios osszeg tetel csak f * g-re => f * g Riemann integralhato [a, b]-n
+  - (ii): f, g tetszoleges:
+    - Legyen mf = inf f es mg = inf g
+    - Ekkor (f - mf), (g - mg) > 0
+    - Az (i) miatt (f - mf) * (g - mg) = f * g - ... => f * g Riemann integralhato [a, b]-n
+
 6. **Heine-tetel**:
   - Indirekt tfh. nem f nem egyenletesen folytonos
   - delta = 1/n => (xn) es (yn) sorozatok

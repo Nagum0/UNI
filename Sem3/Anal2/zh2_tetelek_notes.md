@@ -22,6 +22,14 @@
   - (xi - xi - 1)-el valo szorzas es osszegzes utan oszcillacios osszeg es integralhatosag tetel
   - osc(1/g, tau) <= epsilon/m^2 => 1/g eleme R[a, b]
 
+5. **Monoton fv-k integralhatosaga**:
+  - Oszcillacios osszeg tetel felhasznalasa
+  - Ha f(a) = f(b) => igaz, mert f allando
+  - Ha f(a) < f(b) => minden tau felosztasra letezik inf f = f(xi - 1) es sup f = f(xi). Ezekkel felirom az oszcillacios osszeget
+  - Kivalasztok egy epsilont es egy n-t: (b-a/n) < epsilon/(f(b) - f(a)), tau egyenletes felosztas
+  - (xi - xi - 1) < epsilon/(f(b) - f(a)) => felulbecsulem ezzel az oszcillacios osszeget es megkapom az epsilont
+  - Tehat f eleme R[a, b]
+
 6. **Heine-tetel**:
   - Indirekt tfh. nem f nem egyenletesen folytonos
   - delta = 1/n => (xn) es (yn) sorozatok

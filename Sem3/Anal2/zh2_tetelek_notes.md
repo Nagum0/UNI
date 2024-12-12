@@ -1,3 +1,11 @@
+2. **Az osszegfv. integralhatosaga**:
+  - Felirom a inf, es sup jeloleseket es levezetem vele a becsleseket
+  - Szorzok (xi - xi - 1)-el es osszegzek
+  - Felirom a felso es also kozelito osszegekkel a becslest
+  - Bevezetem a tau1, tau2-t es tau = tau1 unio tau2, aztan levezetem a becslest az also darboux integralig
+  - Hasonloan belatom a felso darboux integralt is
+  - f, g eleme R[a, b] => also es felso darboux-k megegyeznek, ezert az osszege is => f + g eleme R[a, b]
+
 3. **A szorzatfv. integralhatosaga**:
   - (i): f, g >= 0:
     - Levezetem az osszegfv-s allitast az osszcillacios osszegik aztan az f * g oszcillacios osszeget kisebb, mint az szummas felirasa
@@ -7,6 +15,12 @@
     - Legyen mf = inf f es mg = inf g
     - Ekkor (f - mf), (g - mg) > 0
     - Az (i) miatt (f - mf) * (g - mg) = f * g - ... => f * g Riemann integralhato [a, b]-n
+
+4. **Hanyados fv. integralhatosaga**:
+  - A szorzatfv integralhatosaga miatt eleg belatni, hogy 1/g eleme R[a, b]
+  - Legyen tau egy felosztas es minden x, y-ra igaz, hogy 1/g(x) - 1/g(y) = ... <= (Gi - gi)/m^2
+  - (xi - xi - 1)-el valo szorzas es osszegzes utan oszcillacios osszeg es integralhatosag tetel
+  - osc(1/g, tau) <= epsilon/m^2 => 1/g eleme R[a, b]
 
 6. **Heine-tetel**:
   - Indirekt tfh. nem f nem egyenletesen folytonos

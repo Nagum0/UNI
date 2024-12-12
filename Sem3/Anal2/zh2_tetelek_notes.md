@@ -65,6 +65,11 @@
   - Ez elozoek alapjan megkapom, hogy abs(a fenti dolog) < epsilon
   - Ezert lim (h -> 0) ... = 0 => lim (h -> 0) ... = f(d) => F eleme D{d} es F'(d) = f(d)
 
+11. **A parcialis integralas hatarozott integralra**:
+  - Belatom, hogy f*g' + f'*g eleme R[a, b]
+  - Felirom az N-L tetellel
+  - A hatarozott integralok additivitasat kihasznalva felirom a vegeredmenyt
+
 12. **A helyettesites integralas szabalya hatarozott integralon**:
   - F(x) (g(alfa), x), G(u) felirasa
   - Belatjuk, hogy, ami a tetelben van a kozepe: F(g(B)) = G(B)

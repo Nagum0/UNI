@@ -44,6 +44,15 @@
   - Bevezetem az mi-t (f(ui)) es Mi-t (f(vi)) es felirom az oszcillacios osszeg tetelt ezekkel, ami epsilon lesz
   - Tehat f eleme R[a, b]
 
+8. **Az N-L tetel**:
+  - Bevezetek egy tau felosztast
+  - A lagrange k.e.t. szerint minden i indexre letezik kszi (xi) es (xi - 1)-en
+  - Ekkor az F(xi) - F(xi - 1) = F'(kszi i) * (xi - xi - 1) = f(kszi i) * (xi - xi - 1)
+  - Ebbol jon, hogy: F(b) - F(a) = SUM(i=1..n, f(kszi i) * (xi - xi - 1)) = sigma(f, tau, kszi)
+  - Mivel inf f < f(kszi i) < sup f => s(f, tau) <= sigma(...) <= S(f, tau)
+  - also darboux = sup s(f, tau) < sigma < inf S(f, tau) = felso darboux
+  - Mivel f eleme R[a, b] => also darboux = felso darboux, igy F(b) - F(a) = int(a..b)f(x)dx
+
 9. **Az integral fv. folytonossaga**:
   - Legyenek x,y valos szamok es x < y, ekkor felirom az |F(y) - F(x)| = ... = M * (y - x)
   - Bevezetem az M-et, ami az f egy felso korlatja

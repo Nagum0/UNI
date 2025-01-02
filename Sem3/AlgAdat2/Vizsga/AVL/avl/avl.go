@@ -137,3 +137,102 @@ func balanceMMp[T Ordered](t, l **Node[T]) {
     r.b = 0
     *t = r
 }
+
+func AVLremMin[T Ordered](t **Node[T], minp *Node[T], d *bool) {
+    if (*t).Left == nil {
+        minp = *t
+        *t = minp.Right
+        minp.Right = nil
+        *d = true
+    } else {
+        AVLremMin(&(*t).Left, minp, d)
+        if *d {
+            leftSubTreeShrunk(t, d)       
+        }
+    }
+}
+
+func leftSubTreeShrunk[T Ordered](t **Node[T], d *bool) {
+    if (*t).b == 1 {
+        balancePP(t, d)
+    } else {
+        (*t).b++
+        *d = (*t).b == 0
+    }
+}
+
+func balancePP[T Ordered](t **Node[T], d *bool) {
+    r := (*t).Right
+    
+    if r.b == -1 {
+        balancePPm(t, &r)
+    } else if r.b == 0 {
+        balancePP0(t, &r)
+        *d = false
+    } else if r.b == 1 {
+        balancePPp(t, &r)
+    }
+}
+
+func balancePP0[T Ordered](t, r **Node[T]) {
+    (*t).Right = (*r).Left
+    (*r).Left = *t
+    (*t).b = 1
+    (*r).b = -1
+    *t = *r
+}
+
+func AVLdel[T Ordered](t **Node[T], k T, d *bool) {
+    if *t != nil {
+        if k < (*t).key {
+            AVLdel(&(*t).Left, k, d)
+        } else if k > (*t).key {
+            AVLdel(&(*t).Right, k, d)
+        } else if k == (*t).key {
+            AVLdelRoot(t, d)
+            if *d {
+                rightSubTreeShrunk(t, d)
+            }
+        }
+    } else {
+        *d = false
+    }
+}
+
+func AVLdelRoot[T Ordered](t **Node[T], d *bool) {
+    if (*t).Left == nil {
+        p := *t
+        *t = p.Right
+        // delete p
+        *d = true
+    } else if (*t).Right == nil {
+        p := *t
+        *t = p.Left
+        // delete p
+        *d = true
+    } else if (*t).Left != nil && (*t).Right != nil {
+        rightSubTreeMinToRoot(t, d)
+
+        if *d {
+            rightSubTreeShrunk(t, d)
+        }
+    }
+}
+
+func rightSubTreeMinToRoot[T Ordered](t **Node[T], d *bool) {
+    p := NewNode[T]()
+    AVLremMin(t, p, d)
+    p.Left = (*t).Left
+    p.Right = (*t).Right
+    p.b = (*t).b
+    // delete t
+    *t = p
+}
+
+func rightSubTreeShrunk[T Ordered](t **Node[T], d *bool) {
+    panic("not impelemted")
+}
+
+func balanceMM[T Ordered](t **Node[T], d *bool) {
+    panic("not impelemted")
+}

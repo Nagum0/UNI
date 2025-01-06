@@ -1,4 +1,4 @@
-package gtrees
+package trees
 
 import (
 	"fmt"
@@ -113,4 +113,16 @@ func AreEqual(n1, n2 *GTreeNode) bool {
     }
 
     return AreEqual(n1.Child1, n2.Child1) && AreEqual(n1.Sibling, n2.Sibling)
+}
+
+func Height(t *GTreeNode) int {
+    if t == nil {
+        return 0
+    }
+
+    if t.Child1 != nil {
+        return 1 + Height(t.Child1)
+    }
+
+    return Height(t.Sibling)
 }

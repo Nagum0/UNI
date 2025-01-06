@@ -1,11 +1,39 @@
 package main
 
 import (
+	"feladatok/graphs"
 	"feladatok/trees"
 	"fmt"
 )
 
 func main() {
+    vmatrixMain()
+}
+
+func adjListMain() {
+    l := graphs.NewAdjList(4)
+    l[0].Next = graphs.NewEdge(1)
+    l[1].Next = graphs.NewEdge(2)
+    l[1].Next.Next = graphs.NewEdge(3)
+    l[2].Next = graphs.NewEdge(0)
+    fmt.Println(l.String())
+}
+
+func vmatrixMain() {
+    c := [][]int{
+        {0, 1, 0, 0},
+        {0, 0, 1, 1},
+        {1, 0, 0, 0},
+        {0, 0, 0, 0},
+    }
+    var m graphs.VertexMatrix = c
+    l := graphs.NewAdjList(len(c))
+    m.Transform(len(m), &l)
+    fmt.Println(m.String())
+    fmt.Println(l.String())
+}
+
+func gtreesMain() {
     root := trees.NewGTreeNodeK(1)
     root.Child1 = trees.NewGTreeNodeK(2)
     root.Child1.Sibling = trees.NewGTreeNodeK(3)

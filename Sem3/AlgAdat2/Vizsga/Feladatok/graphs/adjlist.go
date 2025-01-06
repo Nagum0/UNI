@@ -56,3 +56,19 @@ func (edge *Edge) String() string {
 
     return s
 }
+
+func (a AdjList) Transponent(n int, at *AdjList) {
+    *at = NewAdjList(n)
+
+    for i := n - 1; i >= 0; i-- {
+        p := a[i].Next
+        
+        for p != nil {
+            u := p.V
+            q := NewEdge(i)
+            q.Next = (*at)[u].Next
+            (*at)[u].Next = q
+            p = p.Next
+        }
+    }
+}

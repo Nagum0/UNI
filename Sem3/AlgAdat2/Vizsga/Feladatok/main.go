@@ -7,16 +7,19 @@ import (
 )
 
 func main() {
-    vmatrixMain()
+    adjListMain()
 }
 
 func adjListMain() {
-    l := graphs.NewAdjList(4)
-    l[0].Next = graphs.NewEdge(1)
-    l[1].Next = graphs.NewEdge(2)
-    l[1].Next.Next = graphs.NewEdge(3)
-    l[2].Next = graphs.NewEdge(0)
-    fmt.Println(l.String())
+    a := graphs.NewAdjList(3)
+    a[0].Next = graphs.NewEdge(2)
+    a[1].Next = graphs.NewEdge(2)
+    var at graphs.AdjList = nil
+    n := 3
+
+    fmt.Println("A:\n" + a.String())
+    a.Transponent(n, &at)
+    fmt.Println("AT:\n" + at.String())
 }
 
 func vmatrixMain() {

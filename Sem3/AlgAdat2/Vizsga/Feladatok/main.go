@@ -20,6 +20,11 @@ func adjListMain() {
     fmt.Println("A:\n" + a.String())
     a.Transponent(n, &at)
     fmt.Println("AT:\n" + at.String())
+
+    in := []int{}
+    out := []int{}
+    a.InOutCounts(n, &in, &out)
+    fmt.Printf("IN: %v; OUT: %v\n", in, out)
 }
 
 func vmatrixMain() {

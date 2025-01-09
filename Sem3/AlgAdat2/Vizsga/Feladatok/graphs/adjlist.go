@@ -72,3 +72,18 @@ func (a AdjList) Transponent(n int, at *AdjList) {
         }
     }
 }
+
+func (g AdjList) InOutCounts(n int, in, out *[]int) {
+    *in = make([]int, n)
+    *out = make([]int, n)
+
+    for i := 0; i < n; i++ {
+        p := g[i].Next
+
+        for p != nil {
+            (*out)[i]++
+            (*in)[p.V]++
+            p = p.Next
+        }
+    }
+}

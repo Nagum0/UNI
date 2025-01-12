@@ -1,4 +1,7 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
+using AvaloniaMintaZH.ViewModels;
+using System.Drawing;
 
 namespace AvaloniaMintaZH.Views;
 

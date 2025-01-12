@@ -148,12 +148,21 @@ namespace AvaloniaMintaZH
             }
         }
 
+        public void PlaceSoldier(ref Field field)
+        {
+            if (_availableSoldiers >= 1 && field.FieldType == FieldType.None)
+            {
+                field.FieldType = FieldType.Soldier;
+                AvailableSoldiers--;
+            }
+        }
+
         public void GenerateRandomEnemies()
         {
             Random r = new Random();
             int n = r.Next(1, 3);
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i <= n; i++)
             {
                 int x = Columns - 1;
                 int y = r.Next(0, Rows);
@@ -200,12 +209,14 @@ namespace AvaloniaMintaZH
             if (oldField == FieldType.Soldier)
             {
                 Fields[i - 1].FieldType = FieldType.None;
+                Money++;
             }
 
             // Check if the field above or below the enemy is a soldier
             if (GetFieldType(Fields[i - 1].X, Fields[i - 1].Y + 1) == FieldType.Soldier || GetFieldType(Fields[i - 1].X, Fields[i - 1].Y - 1) == FieldType.Soldier)
             {
                 Fields[i - 1].FieldType = FieldType.None;
+                Money++;
             }
         }
 

@@ -34,7 +34,9 @@
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<Border BorderBrush="Gray" BorderThickness="0.5">
-						<Rectangle Fill="{Binding FieldColor}" />
+						<Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{Binding FieldColor}"
+								Command="{Binding DataContext.PlaceSoldierCmd, RelativeSource={RelativeSource AncestorType=UserControl}}"
+								CommandParameter="{Binding}"/>
 					</Border>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

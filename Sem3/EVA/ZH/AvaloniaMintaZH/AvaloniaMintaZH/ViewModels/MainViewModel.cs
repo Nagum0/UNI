@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using ReactiveUI;
 using System;
+using System.Drawing;
 
 namespace AvaloniaMintaZH.ViewModels;
 
@@ -79,7 +80,14 @@ public class MainViewModel : ViewModelBase
             _ => true
         );
         PlaceSoldierCmd = new DelegateCommand(
-            _ => { },
+            param =>
+            {
+                if (param is Field field)
+                {
+                    Model.PlaceSoldier(ref field);
+                    SoldiersText = $"Soldiers: {Model.AvailableSoldiers}";
+                }
+            },
             _ => true
         );
     }
@@ -90,6 +98,7 @@ public class MainViewModel : ViewModelBase
         TimeText = $"Time: {_time}";
         Model.Update();
         Model.GenerateRandomEnemies();
+        MoneyText = $"Money: ${Model.Money}";
     }
 
     private void Model_CastleHit(object? sender, EventArgs args)

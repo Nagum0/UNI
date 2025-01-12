@@ -1,0 +1,60 @@
+﻿<Window x:Class="ColoringApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ColoringApp"
+        mc:Ignorable="d"
+        Title="Coloring App" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="75"/>
+        </Grid.ColumnDefinitions>
+        <ItemsControl ItemsSource="{Binding Model.Cells}" Grid.Column="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="{Binding Model.CanvasHeight}" Columns="{Binding Model.CanvasWidth}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle>
+                        <Rectangle.InputBindings>
+                            <MouseBinding 
+                                Gesture="LeftClick" 
+                                Command="{Binding DataContext.ColorRect, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                CommandParameter="{Binding}"/>
+                        </Rectangle.InputBindings>
+                        <Rectangle.Style>
+                            <Style TargetType="Rectangle">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Color}" Value="{x:Static local:Color.White}">
+                                        <Setter Property="Fill" Value="White"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Color}" Value="{x:Static local:Color.Red}">
+                                        <Setter Property="Fill" Value="Red"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Color}" Value="{x:Static local:Color.Green}">
+                                        <Setter Property="Fill" Value="Green"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Color}" Value="{x:Static local:Color.Blue}">
+                                        <Setter Property="Fill" Value="Blue"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Rectangle.Style>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+            <StackPanel>
+                <Button Content="WHITE" Command="{Binding SelectColor}" CommandParameter="{x:Static local:Color.White}"/>
+                <Button Content="RED" Command="{Binding SelectColor}" CommandParameter="{x:Static local:Color.Red}"/>
+                <Button Content="GREEN" Command="{Binding SelectColor}" CommandParameter="{x:Static local:Color.Green}"/>
+                <Button Content="BLUE" Command="{Binding SelectColor}" CommandParameter="{x:Static local:Color.Blue}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

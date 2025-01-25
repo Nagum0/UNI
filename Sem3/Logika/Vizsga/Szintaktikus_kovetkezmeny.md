@@ -23,4 +23,7 @@
 - A bizonyitasielmeleti kalkulus helyes, azaz ha F |- G, akkor F |= G
 - A bizonyitasielmeleti kalkulus teljes, azaz ha F |= G, akkor F |- G
 
+## Tulajdonsagok
 
+- G bizonyithato, ha a G formula barmely F feltetelhalmazbol levezetheto
+- F ellentmondasos, ha F |- G es F |- -G, egyebkent nem ellentmondasos

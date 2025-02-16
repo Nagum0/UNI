@@ -1,0 +1,107 @@
+@startuml
+
+Model *-- Difficulty
+abstract class Difficulty {
+    
+}
+
+Difficulty <|-- DifficultyEasy
+class DifficultyEasy {}
+
+Difficulty <|-- DifficultyMedium
+class DifficultyMedium{}
+
+Difficulty <|-- DifficultyHard
+class DifficultyHard{}
+
+class Model {
+   playerName : string
+   capital : int
+   gameSpeed : GameSpeed
+   diffictulty: Difficulty
+   timer : Timer
+   entryFee : int
+   animals : Animal[]
+   ojbect : PlacableObject[]
+}
+
+Model *-- GameSpeed
+enum GameSpeed {
+  HOUR
+  DAY
+  WEEK
+}
+
+abstract class Plant {
+}
+
+class Bush {
+}
+
+class Tree {
+}
+
+class Grass {
+}
+
+Plant <|-- Bush
+Plant <|-- Tree
+Plant <|-- Grass
+
+Model *-- PlacableObject
+abstract class PlacableObject {
+    x: int
+    y: int
+    radius: int
+}
+
+class Road {    
+}
+
+class Water {
+}
+
+
+PlacableObject <|-- Road
+PlacableObject <|-- Water
+PlacableObject <|-- Plant
+
+Model *-- Animal
+abstract class Animal {
+    hunger: int
+    thirst: int
+    age: int
+}
+
+Animal <|-- Herbivore
+abstract class Herbivore {
+}
+
+Herbivore <|-- Zebra
+class Zebra {
+}
+
+Herbivore <|-- Giraffe
+class Giraffe {
+}
+
+Animal <|-- Carnivore
+abstract class Carnivore {
+}
+
+Carnivore <|-- Lion
+class Lion {
+}
+
+Carnivore <|-- Cheetah
+class Cheetah {    
+}
+
+class Jeep {
+    passengers : int
+}
+
+class Shop {
+}
+
+@enduml

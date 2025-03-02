@@ -2,7 +2,11 @@
 
 Model *-- Difficulty
 abstract class Difficulty {
-    
+    months: int
+    {static} numHerbivores: int
+    {static} numCarnivores: int
+    {static} capital: int
+    {static} visitors: int
 }
 
 Difficulty <|-- DifficultyEasy
@@ -19,10 +23,13 @@ class Model {
    capital : int
    gameSpeed : GameSpeed
    diffictulty: Difficulty
+   gameTime: int
    timer : Timer
    entryFee : int
-   animals : Animal[]
-   ojbect : PlacableObject[]
+   herds : Herd[]
+   ojbects : PlacableObject[,]
+   totalNumOfVisitors: int,
+   jeeps: Jeep[]
 }
 
 Model *-- GameSpeed
@@ -52,10 +59,11 @@ Model *-- PlacableObject
 abstract class PlacableObject {
     x: int
     y: int
-    radius: int
+    sprite: Sprite
 }
 
-class Road {    
+class Road { 
+    
 }
 
 class Water {
@@ -66,11 +74,24 @@ PlacableObject <|-- Road
 PlacableObject <|-- Water
 PlacableObject <|-- Plant
 
-Model *-- Animal
+Model *-- Herd
+class Herd {
+    animals: Animal[]
+    lastBreeding: int
+    target: (int, int)
+    isHungry(): bool
+    isThirsty(): bool
+    produceOffspring(): void
+}
+
+Herd *-- Animal
 abstract class Animal {
     hunger: int
     thirst: int
     age: int
+    isChipped: bool
+    sprite: Sprite
+    getPrice(): int
 }
 
 Animal <|-- Herbivore
@@ -97,11 +118,15 @@ Carnivore <|-- Cheetah
 class Cheetah {    
 }
 
+Model *-- Jeep
 class Jeep {
     passengers : int
 }
 
 class Shop {
+    animals: (Animal, int)[]
+    objects: (PlacableObject, int)[]
+    jeep: (Jeep, int)
 }
 
 @enduml

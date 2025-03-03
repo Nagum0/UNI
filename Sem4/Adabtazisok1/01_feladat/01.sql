@@ -5,7 +5,8 @@ SELECT * FROM DOLGOZO WHERE fizetes > 2800;
 SELECT * FROM DOLGOZO WHERE oazon = 10 OR oazon = 20;
 
 -- Feladat: 3
-SELECT * FROM DOLGOZO WHERE jutalek > 600;
+SELECT dkod, dnev FROM DOLGOZO WHERE jutalek IS NOT NULL AND jutalek > 600;
+SELECT dkod, dnev FROM DOLGOZO WHERE nvl(jutalek, 0) > 600; -- Itt az nvl fv. atalakitja a NULL-t 0-ra
 
 -- Feladat: 4
 SELECT * FROM DOLGOZO WHERE jutalek < 600;

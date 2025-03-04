@@ -81,4 +81,13 @@ FROM DOLGOZO NATURAL JOIN OSZTALY
 WHERE foglalkozas = 'ANALYST';
 
 -- 28. Adjuk meg azoknak a dolgozóknak a nevét, akiknek a legnagyobb a fizetésük.
--- ?
+SELECT DISTINCT dnev, fizetes
+FROM DOLGOZO
+MINUS
+SELECT DISTINCT d1.dnev, d1.fizetes
+FROM DOLGOZO d1, DOLGOZO d2
+WHERE d1.fizetes < d2.fizetes;
+
+SELECT DISTINCT dnev
+FROM DOLGOZO
+WHERE fizetes = (SELECT MAX(fizetes) FROM DOLGOZO);

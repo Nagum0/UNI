@@ -8,9 +8,9 @@
     ha f(0, 0) = 0, akkor φ(0) = 0
   - **Bizonyitsd** be, hogy nem folytonos az f(x, y) adott pontban:
     - Hatarerteket vizsgalom kulonbozo iranyokbol
-  - [TETEL] (./Kepek/folyonossag.png)
+  ![TETEL] (./Kepek/folyonossag.png)
 
 ## Hatarertek
   - **Lassuk be**, hogy lim ((x, y) -> (0, 0)) = A
     - Tetel szerint belatom
-  - [TETEL] (./Kepek/hatarertek.png)
+  ![TETEL] (./Kepek/hatarertek.png)

@@ -277,3 +277,121 @@ WHERE fizetes BETWEEN also AND felso
 AND kategoria = 1
 GROUP BY onev, telephely
 HAVING COUNT(*) >= 2;
+
+-- FELADATOK 5
+-- CREATE TABLE R(A VARCHAR(10), B INTEGER, C INTEGER);
+-- CREATE TABLE S(C INTEGER, D INTEGER);
+
+-- γ A; AVG(D) → av (σ B >= 2 (R x S)) 
+SELECT A, AVG(D) AS av
+FROM R CROSS JOIN S
+WHERE B >= 2
+GROUP BY A;
+
+-- pi A, as (gamma A; AVG(D) -> as (sigma B >= 2 (R x S)))
+SELECT A, AVG(D) 
+FROM R, S 
+WHERE R.B >= 2 
+GROUP BY A;
+
+-- pi A (sigma av > 10 (gamma A; AVG(D) -> av (R natural join S)))
+SELECT A 
+FROM R NATURAL JOIN S 
+GROUP BY A 
+HAVING AVG(S.D) > 10;
+
+-- pi A (sigma R.C = S.C (R x S))
+SELECT DISTINCT A 
+FROM R, S 
+WHERE R.C = S.C;
+
+-- tau A (pi A, C (sigma B = 2 (R)))
+SELECT A, C 
+FROM R 
+WHERE B = 2 
+ORDER BY A;
+
+-- pi A, B (sigma C in (pi C (sigma D = 1 (S))) (R))
+SELECT DISTINCT A, B 
+FROM R 
+WHERE C IN (
+    SELECT C 
+    FROM S 
+    WHERE D = 1
+);
+
+-- pi A (sigma C not in (pi C (S)) (R))
+SELECT A 
+FROM R 
+WHERE C NOT IN (
+    SELECT C 
+    FROM S
+);
+
+SELECT A 
+FROM R 
+WHERE NOT EXISTS (
+    SELECT * 
+    FROM S 
+    WHERE R.C = S.C
+);
+
+-- Adjuk meg osztályonként a maximális fizetésű dolgozókat. Egy osztályon több dolgozónak is lehet
+-- egyszerre maximális a fizetése. Adjuk meg az osztály azonosítót, a dolgozó nevét és fizetését.
+-- (oazon, dnév, fizetés)
+-- pi oazon, dnev, fizetes (sigma fizetes (pi mfiz (gamma oazon; MAX(fizetes) -> mfiz (Dolgozo))) (Dolgozo))
+SELECT oazon, dnev, fizetes
+FROM Dolgozo
+WHERE fizetes IN (
+    SELECT MAX(fizetes)
+    FROM Dolgozo
+    GROUP BY oazon
+    HAVING oazon IS NOT NULL
+);
+
+-- Adjuk meg azoknak a nevét, akik minden gyümölcsöt szeretnek. (név)
+-- (Adjuk meg a lekérdezést kiterjesztett relációs algebrában és SQL-ben és a megoldáshoz
+-- használjunk csoportképzést és összesítést.)
+-- pi nev (sigma gc = (gamma COUNT(gyumolcs) -> ac (Szeret)) (gamma nev; COUNT(*) -> gc (Szeret)))
+SELECT nev
+FROM Szeret
+GROUP BY nev
+HAVING COUNT(gyumolcs) = (
+    SELECT COUNT(DISTINCT gyumolcs)
+    FROM Szeret
+);
+
+-- Adjuk meg azokat a foglalkozásokat, amelyek csak egyetlen osztályon fordulnak elő, és adjuk meg
+-- hozzájuk azt az osztályt, ahol van ilyen foglalkozású dolgozó. (Foglalkozás, Onév)
+-- (Adjuk meg a lekérdezést kiterjesztett relációs algebrában és SQL-ben.)
+SELECT foglalkozas, COUNT(onev)
+FROM Dolgozo NATURAL JOIN Osztaly
+GROUP BY foglalkozas;
+
+SELECT foglalkozas, onev
+FROM Dolgozo NATURAL JOIN Osztaly
+WHERE foglalkozas IN (
+    SELECT foglalkozas
+    FROM Dolgozo NATURAL JOIN Osztaly
+    GROUP BY foglalkozas
+    HAVING COUNT(onev) = 1
+);
+
+-- Adjuk meg a következő lekérdezést WITH utasítás segítségével, vagy nézettáblák létrehozásával.
+-- Számítsuk ki az átlagfizetést osztályonként (oazon, oszt_atlag), majd számítsuk ki az összes
+-- dolgozóra vett átlag fizetést (atlag), végül az előzőek segítségével adjuk meg végeredményként
+-- minden osztályra az osztály nevét, az átlagfizetést az osztályon, az összes dolgozó átlagfizetését,
+-- és az osztályátlag és a teljes átlag közötti különbséget. (onev, oszt_atlag, atlag, kulonbseg)
+WITH
+osztaly_atlag_fiz AS (
+    SELECT oazon, TRUNC(AVG(fizetes), 2) AS oszt_atlag
+    FROM Dolgozo
+    GROUP BY oazon
+),
+atlag_fiz AS (
+    SELECT TRUNC(AVG(fizetes), 2) AS atlag
+    FROM Dolgozo
+)
+SELECT onev, oszt_atlag, atlag, oszt_atlag - atlag AS kulonbseg
+FROM osztaly_atlag_fiz, atlag_fiz, Osztaly o
+WHERE o.oazon = osztaly_atlag_fiz.oazon;

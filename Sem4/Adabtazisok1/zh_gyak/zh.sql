@@ -181,15 +181,99 @@ WHERE fizetes = (
     FROM Dolgozo
 );
 
+-- FELADATOK 4
 
+-- 1. Mekkora a maximális fizetés a dolgozók között?
+-- pi mfiz gamma MAX(fizetes) -> mfiz (Dolgozo)
+SELECT MAX(fizetes)
+FROM Dolgozo;
 
+-- 2. Mennyi a dolgozók összfizetése?
+-- pi s (gamma SUM(fizetes) -> s (Dolgozo))
+SELECT SUM(fizetes)
+FROM Dolgozo;
 
+-- 3. Mennyi a 20-as osztályon az összfizetes és az átlagfizetés? (Atlag, Össz)
+-- pi atlag, ossz (gamma AVG(fizetes) -> atlag, SUM(fizetes) -> ossz (sigma oazon = 20) (Dolgozo))
+SELECT AVG(fizetes) AS Atlag, SUM(fizetes) AS Ossz
+FROM Dolgozo
+WHERE oazon = 20;
 
+-- 4. Adjuk meg, hogy hány különböző foglalkozás fordul elő a dolgozók között. 
+-- gamma COUNT(foglalkozas) -> c (pi foglalkozas (Dolgozo))
+SELECT COUNT(DISTINCT foglalkozas)
+FROM Dolgozo;
 
+-- 5. Hány olyan dolgozó van, akinek a fizetése > 2000? 
+-- gamma COUNT(dnev) -> c (sigma fizetes > 2000 (Dolgozo))
+SELECT COUNT(*)
+FROM Dolgozo
+WHERE fizetes > 2000;
 
+-- 6. Adjuk meg osztályonként az átlagfizetést (oazon, atl_fiz).
+-- pi oazon, atl_fiz (gamma oazon; AVG(fizetes) -> atl_fiz (Dolgozo))
+SELECT NVL(oazon, 0), AVG(fizetes) AS atl_fiz
+FROM Dolgozo
+GROUP BY oazon;
 
+-- 7. Adjuk meg osztályonként a telephelyet és az átlagfizetést (oazon, telephely, atl_fiz).
+-- pi oazon, telephely, atl_fiz (gamma oazon, telephely; AVG(fizetes) -> atl_fiz (Dolgozo natural join Osztaly))
+SELECT oazon, telephely, AVG(fizetes) AS atl_fiz
+FROM Dolgozo NATURAL JOIN Osztaly
+GROUP BY oazon, telephely;
 
+-- 8. Adjuk meg, hogy az egyes osztályokon hány ember dolgozik. (oazon, mennyi)
+-- pi oazon, mennyi (sigma oazon != NULL (gamma oazon; COUNT(*) -> mennyi (Dolgozo)))
+SELECT oazon, COUNT(*) AS mennyi
+FROM Dolgozo
+GROUP BY oazon
+HAVING oazon IS NOT NULL;
 
+-- 9. Adjuk meg azokra az osztályokra az átlagfizetést, ahol ez nagyobb mint 2000. (oazon, atlag)
+-- pi oazon, atlag (sigma atlag > 2000 (gamma oazon; AVG(fizetes) -> atlag (Dolgozo)))
+SELECT oazon, AVG(fizetes) AS atlag
+FROM Dolgozo
+GROUP BY oazon
+HAVING AVG(fizetes) > 2000;
 
+-- 10. Adjuk meg az átlagfizetést azokon az osztályokon, ahol legalább 4-en dolgoznak (oazon, atlag)
+-- pi oazon, atlag (sigma c >= 4 (gamma oazon; AVG(fizetes) -> atlag, COUNT(*) -> c (Dolgozo)))
+SELECT oazon, AVG(fizetes) AS atlag
+FROM Dolgozo
+GROUP BY oazon
+HAVING COUNT(*) >= 4;
 
+-- 13. Adjuk meg azokat a fizetési kategóriákat, amelybe pontosan 3 dolgozó fizetése esik.
+-- pi kategoria (sigma c = 3 (gamma kategoria; COUNT(*) -> c (sigma also <= fizetes and fizetes <= felso (Dolgozo x Fiz_kategoria))))
+SELECT kategoria
+FROM Dolgozo CROSS JOIN Fiz_kategoria
+WHERE fizetes BETWEEN also AND felso
+GROUP BY kategoria
+HAVING COUNT(*) = 3;
 
+-- 14. Adjuk meg azokat a fizetési kategóriákat, amelyekbe eső dolgozók mindannyian ugyanazon 
+-- az osztályon dolgoznak. (kategoria)
+-- pi kategoria (sigma c = 1 (gamma kategoria; COUNT(oazon) -> c (pi kategoria, oazon (sigma also <= fizetes and fizetes <= felso (Dolgozo x Fiz_kategoria)))))
+SELECT kategoria
+FROM Dolgozo CROSS JOIN Fiz_kategoria
+WHERE fizetes BETWEEN also AND felso
+GROUP BY kategoria
+HAVING COUNT(DISTINCT oazon) = 1;
+
+-- 15. Adjuk meg azon osztályok nevét és telephelyét, amelyeknek van 1-es fizetési kategóriájú dolgozója. (onev, telephely)
+-- (Ez a feladat már volt korábban, de segíthet a következőnek a megoldásában.)
+-- pi onev, telephely (sigma kategoria = 1 (sigma also <= fizetes and fizetes <= felso (Dolgozo natural join Osztaly x Fiz_kategoria)))
+SELECT DISTINCT onev, telephely
+FROM Dolgozo NATURAL JOIN Osztaly CROSS JOIN Fiz_kategoria
+WHERE fizetes BETWEEN also AND felso
+AND kategoria = 1;
+
+-- 16. Adjuk meg azon osztályok nevét és telephelyét, amelyeknek legalább 2 fő 1-es fizetési 
+-- kategóriájú dolgozója van.
+-- pi onev, telephely (sigma c >= 2 (gamma onev, telephely; COUNT(*) -> c (sigma kategori = 1 and also <= fizetes and fizetes <= felso (Dolgozo natural join Osztaly x Fiz_kategoria))))
+SELECT DISTINCT onev, telephely
+FROM Dolgozo NATURAL JOIN Osztaly CROSS JOIN Fiz_kategoria
+WHERE fizetes BETWEEN also AND felso
+AND kategoria = 1
+GROUP BY onev, telephely
+HAVING COUNT(*) >= 2;

@@ -1,0 +1,12 @@
+program inc
+    integer x;
+    integer y;
+    integer z;
+begin
+    read(x);
+    x := x+(1?2:3);
+    write(x);
+    repeat x := x + 1; until x = 10
+    for i from 1 upto 10 do write(i); done
+    for i from 10+2 downto 2-1 do write(i); done
+end

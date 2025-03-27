@@ -13,9 +13,10 @@ struct uzenet {
 }; 
 
 // sendig a message
-int kuld( int uzenetsor ) 
+int kuld( int uzenetsor, char* msg , int category) 
 { 
-    const struct uzenet uz = { 5, "Hajra Fradi!" }; 
+    const struct uzenet uz = { .mtype = category }; 
+    strcpy(uz.mtext, msg);
     int status; 
 
     status = msgsnd( uzenetsor, &uz, strlen( uz.mtext ) + 1 , 0 ); 
@@ -28,7 +29,7 @@ int kuld( int uzenetsor )
 } 
 
 // receiving a message. 
-int fogad( int uzenetsor ) 
+int fogad( int uzenetsor, int category ) 
 { 
     struct uzenet uz; 
     int status; 
@@ -36,7 +37,7 @@ int fogad( int uzenetsor )
     // ha az 0, akkor a sor elso uzenetet vesszuk ki
     // ha >0 (5), akkor az 5-os uzenetekbol a kovetkezot
     // vesszuk ki a sorbol 
-    status = msgrcv(uzenetsor, &uz, 1024, 5, 0 ); 
+    status = msgrcv(uzenetsor, &uz, 1024, category, 0 ); 
 
     if ( status < 0 ) 
         perror("msgsnd"); 
@@ -62,7 +63,9 @@ int main (int argc, char* argv[]) {
 
     child = fork(); 
     if ( child > 0 ) { 
-        kuld( uzenetsor );  // Parent sends a message. 
+        kuld(uzenetsor, "Hello, there!", 5);  // Parent sends a message. 
+        sleep(1);
+        fogad(uzenetsor, 6);
         wait( NULL ); 
         // After terminating child process, the message queue is deleted. 
         status = msgctl( uzenetsor, IPC_RMID, NULL ); 
@@ -70,7 +73,9 @@ int main (int argc, char* argv[]) {
             perror("msgctl"); 
         return 0; 
     } else if ( child == 0 ) { 
-        return fogad( uzenetsor ); 
+        fogad(uzenetsor, 5); 
+        kuld(uzenetsor, "Hola!", 6);
+        return 0;
         // The child process receives a message. 
     } else { 
         perror("fork"); 

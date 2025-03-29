@@ -19,7 +19,8 @@
 #include "../include/cmd.h"
 
 int main(int argc, char* argv[]) {
-    nyuszi_list_t* nyuszik = malloc(sizeof(nyuszi_list_t));
+    // nyuszi_list_t* nyuszik = malloc(sizeof(nyuszi_list_t));
+    nyuszi_list_t* nyuszik = load_from_file("data.txt");
     nyuszik->data = NULL;
     nyuszik->len = 0;
 

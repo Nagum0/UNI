@@ -44,6 +44,37 @@ char* nyuszi_to_str(nyuszi_t* nyuszi) {
     return buffer;
 }
 
+char* read_file(const char* path) {
+    FILE* f = fopen(path, "r");
+    if (f == NULL) {
+        fprintf(stderr, "Error while loading data\n");
+        exit(1);
+    }
+    
+    fseek(f, 0, SEEK_END);
+    size_t f_size = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    char* contents = malloc(f_size);
+    if (contents == NULL) {
+        fprintf(stderr, "Error while loading data\n");
+        exit(1);
+    }
+
+    fread(contents, 1, f_size, f);
+    printf("%s\n", contents);
+
+    fclose(f);
+    
+    return contents;
+}
+
+nyuszi_list_t* load_from_file(const char* path) {
+    char* data_str = read_file(path);
+       
+    return NULL;
+}
+
 void nyuszi_list_append(nyuszi_list_t* nyuszik, nyuszi_t* nyuszi) {
     nyuszik->data = realloc(nyuszik->data, (nyuszik->len + 1) * sizeof(nyuszi_t*));
     if (nyuszik->data == NULL) {

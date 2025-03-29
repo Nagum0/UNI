@@ -23,6 +23,7 @@ typedef struct Nyuszik {
     size_t len;
 } nyuszi_list_t;
 
+nyuszi_list_t* load_from_file(const char* path);
 void nyuszi_list_append(nyuszi_list_t* nyuszik, nyuszi_t* nyuszi);
 void nyuszi_list_free(nyuszi_list_t* nyuszik);
 void nyuszi_list_update_name(nyuszi_list_t* nyuszik, char* search, char* new_name);

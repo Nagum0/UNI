@@ -11,79 +11,18 @@
  * vagy egy hozzá hasonló Linux rendszeren kell futnia. A megoldást a beadási határidőt követő héten be kell mutatni a gyakorlatvezetőnek. 
  */
 
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include "../include/nyuszi.h"
-
-#define INPUT_BUFFER_SIZE 1024
-
-void flush_stdin() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
-/*
- *
- * ------- USER COMMANDS -------
- *
- * */
-typedef enum {
-    EXIT = 1,
-    CHANGE_NAME,
-    CHANGE_VERS,
-    CHANGE_EGGS,
-    LIST,
-    SIGN_UP,
-    DELETE_NYUSZI,
-    MAN,
-} cmd_t;
-
-void print_manual() {
-    printf("-------- MANUAL --------\n");
-    printf("%-22s %d\n", "EXIT", 1);
-    printf("%-22s %d\n", "CHANGE NAME", 2);
-    printf("%-22s %d\n", "CHANGE POEM", 3);
-    printf("%-22s %d\n", "CHANGE EGGS", 4);
-    printf("%-22s %d\n", "LIST PARTICIPANTS", 5);
-    printf("%-22s %d\n", "SIGN UP A PARTICIPANT", 6);
-    printf("%-22s %d\n", "DELETE PARTICIPANT", 7);
-    printf("%-22s %d\n", "MANUAL", 8);
-}
-
-void sign_up_handler() {
-    flush_stdin();
-
-    nyuszi_t nyuszi = {0};
-
-    printf("Participant name: ");
-    char name_buffer[LEN_NAME];
-    if (fgets(name_buffer, LEN_NAME, stdin) == NULL) {
-        fprintf(stderr, "Error while signing up new participant...\n");
-        exit(1);
-    }
-    nyuszi_set_name(&nyuszi, name_buffer);
-    flush_stdin();
-
-    printf("Participant poem: ");
-    char poem_buffer[LEN_POEM];
-    if (fgets(poem_buffer, LEN_POEM, stdin) == NULL) {
-        fprintf(stderr, "Error while signing up new participant...\n");
-        exit(1);
-    }
-    nyuszi_set_poem(&nyuszi, poem_buffer);
-    flush_stdin();
-
-    printf("Participant eggs: ");
-    scanf("%d", &nyuszi.eggs);
-
-    char* n_str = nyuszi_to_str(&nyuszi);
-    printf("%s\n", n_str);
-    free(n_str);
-}
+#include "../include/cmd.h"
 
 int main(int argc, char* argv[]) {
+    nyuszi_list_t* nyuszik = malloc(sizeof(nyuszi_list_t));
+    nyuszik->data = NULL;
+    nyuszik->len = 0;
+
     int running = true;
 
     while (running) {
@@ -93,13 +32,15 @@ int main(int argc, char* argv[]) {
         switch ((cmd_t)command) {
             case EXIT:
                 printf("Exiting...\n");
-                exit(0);
+                // exit(0);
+                running = false;
+                break;
             case CHANGE_NAME:
                 break;
             case LIST:
                 break;
             case SIGN_UP:
-                sign_up_handler();
+                sign_up_handler(nyuszik);
                 break;
             case MAN:
                 print_manual();
@@ -111,7 +52,18 @@ int main(int argc, char* argv[]) {
         }
 
         flush_stdin();
+        printf("here\n");
     }
+    
+    printf("%li\n", nyuszik->len);
+
+    for (size_t i = 0; i < nyuszik->len; ++i) {
+        char* str = nyuszi_to_str(nyuszik->data[i]);
+        printf("%s\n", str);
+        free(str);
+    }
+
+    nyuszi_list_free(nyuszik);
 
     return 0;
 }

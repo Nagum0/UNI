@@ -5,6 +5,7 @@ if [ ! -d "obj/" ]; then
 fi
 
 echo "Compiling ..."
+gcc -o obj/cmd.o -c src/cmd.c
 gcc -o obj/nyuszi.o -c src/nyuszi.c
 gcc -o obj/main.o -c src/main.c
 gcc -o nyuszi obj/*.o

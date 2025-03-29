@@ -28,7 +28,7 @@ void nyuszi_set_eggs(nyuszi_t* nyuszi, int eggs) {
 
 void nyuszi_print(nyuszi_t* nyuszi) {
     if (nyuszi == NULL)
-        printf("NULL\n");
+        printf("REMOVED\n");
     else
         printf("%-20s %-5d %s\n", nyuszi->name, nyuszi->eggs, nyuszi->poem);
 }
@@ -82,15 +82,26 @@ void nyuszi_list_delete(nyuszi_list_t* nyuszik, char* search) {
         free(nyuszik->data[i]); 
         nyuszik->data[i] = NULL; 
         break;
-    );
+    )
 }
 
 void nyuszi_list_update_name(nyuszi_list_t* nyuszik, char* search, char* new_name) {
-    for (size_t i = 0; i < nyuszik->len; ++i) {
-        nyuszi_t* nyuszi = nyuszik->data[i];
-        if (nyuszi != NULL && strcmp(nyuszi->name, search) == 0) {
-            nyuszi_set_name(nyuszi, new_name);
-            break;
-        }
-    }
+    FOR_EACH_NYUSZI(
+        nyuszi_set_name(nyuszi, new_name);
+        break;
+    )
+}
+
+void nyuszi_list_update_poem(nyuszi_list_t* nyuszik, char* search, char* new_poem) {
+    FOR_EACH_NYUSZI(
+        nyuszi_set_poem(nyuszi, new_poem);
+        break;
+    )
+}
+
+void nyuszi_list_update_eggs(nyuszi_list_t* nyuszik, char* search, int new_eggs) {
+    FOR_EACH_NYUSZI(
+        nyuszi_set_eggs(nyuszi, new_eggs);
+        break;
+    )
 }

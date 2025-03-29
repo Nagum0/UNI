@@ -35,6 +35,13 @@ int main(int argc, char* argv[]) {
                 running = false;
                 break;
             case CHANGE_NAME:
+                change_name_handler(nyuszik);
+                break;
+            case CHANGE_VERS:
+                change_poem_handler(nyuszik);
+                break;
+            case CHANGE_EGGS:
+                change_eggs_handler(nyuszik);
                 break;
             case LIST:
                 list_handler(nyuszik);
@@ -53,8 +60,6 @@ int main(int argc, char* argv[]) {
                 print_manual();
                 break;
         }
-
-        flush_stdin();
     }
     
     nyuszi_list_free(nyuszik);

@@ -22,6 +22,9 @@ typedef enum {
 void flush_stdin();
 void print_manual();
 void sign_up_handler(nyuszi_list_t* nyuszik);
+void change_name_handler(nyuszi_list_t* nyuszik);
+void change_poem_handler(nyuszi_list_t* nyuszik);
+void change_eggs_handler(nyuszi_list_t* nyuszik);
 void list_handler(nyuszi_list_t* nyuszik);
 void delete_handler(nyuszi_list_t* nyuszik);
 

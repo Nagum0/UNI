@@ -49,8 +49,9 @@ void sign_up_handler(nyuszi_list_t* nyuszik) {
     if (strlen(nyuszi->poem) == LEN_POEM - 1)
         flush_stdin();
 
-    printf("Participant eggs: ");
-    scanf("%d", &nyuszi->eggs);
+    // printf("Participant eggs: ");
+    // scanf("%d", &nyuszi->eggs);
+    nyuszi->eggs = 0;
 
     nyuszi_list_append(nyuszik, nyuszi);
 }
@@ -76,4 +77,81 @@ void delete_handler(nyuszi_list_t* nyuszik) {
         flush_stdin();
     
     nyuszi_list_delete(nyuszik, buffer);
+}
+
+void change_name_handler(nyuszi_list_t* nyuszik) {
+    flush_stdin();
+
+    printf("Participant name: ");
+    char name_buffer[LEN_NAME];
+    if (fgets(name_buffer, LEN_NAME, stdin) == NULL) {
+        fprintf(stderr, "Error while renaming participant...\n");
+        exit(1);
+    }
+    name_buffer[strcspn(name_buffer, "\n")] = '\0';
+
+    if (strlen(name_buffer) == LEN_NAME - 1) 
+        flush_stdin();
+
+    printf("New name: ");
+    char new_name_buffer[LEN_NAME];
+    if (fgets(new_name_buffer, LEN_NAME, stdin) == NULL) {
+        fprintf(stderr, "Error while renaming participant...\n");
+        exit(1);
+    }
+    new_name_buffer[strcspn(new_name_buffer, "\n")] = '\0';
+
+    if (strlen(new_name_buffer) == LEN_NAME - 1) 
+        flush_stdin();
+    
+    nyuszi_list_update_name(nyuszik, name_buffer, new_name_buffer);
+}
+
+void change_poem_handler(nyuszi_list_t* nyuszik) {
+    flush_stdin();
+
+    printf("Participant name: ");
+    char name_buffer[LEN_NAME];
+    if (fgets(name_buffer, LEN_NAME, stdin) == NULL) {
+        fprintf(stderr, "Error while renaming participant...\n");
+        exit(1);
+    }
+    name_buffer[strcspn(name_buffer, "\n")] = '\0';
+
+    if (strlen(name_buffer) == LEN_NAME - 1) 
+        flush_stdin();
+
+    printf("New poem: ");
+    char new_poem_buffer[LEN_POEM];
+    if (fgets(new_poem_buffer, LEN_POEM, stdin) == NULL) {
+        fprintf(stderr, "Error while renaming participant...\n");
+        exit(1);
+    }
+    new_poem_buffer[strcspn(new_poem_buffer, "\n")] = '\0';
+
+    if (strlen(new_poem_buffer) == LEN_POEM - 1) 
+        flush_stdin();
+    
+    nyuszi_list_update_poem(nyuszik, name_buffer, new_poem_buffer);
+}
+
+void change_eggs_handler(nyuszi_list_t* nyuszik) {
+    flush_stdin();
+
+    printf("Participant name: ");
+    char name_buffer[LEN_NAME];
+    if (fgets(name_buffer, LEN_NAME, stdin) == NULL) {
+        fprintf(stderr, "Error while renaming participant...\n");
+        exit(1);
+    }
+    name_buffer[strcspn(name_buffer, "\n")] = '\0';
+
+    if (strlen(name_buffer) == LEN_NAME - 1) 
+        flush_stdin();
+    
+    printf("New egg count: ");
+    int new_eggs;
+    scanf("%d", &new_eggs);
+        
+    nyuszi_list_update_eggs(nyuszik, name_buffer, new_eggs);
 }

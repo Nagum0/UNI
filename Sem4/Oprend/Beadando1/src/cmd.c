@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -45,15 +46,34 @@ void sign_up_handler(nyuszi_list_t* nyuszik) {
     }
     nyuszi_set_poem(nyuszi, poem_buffer);
     
-    if (strlen(nyuszi->poem) == LEN_POEM)
+    if (strlen(nyuszi->poem) == LEN_POEM - 1)
         flush_stdin();
 
     printf("Participant eggs: ");
     scanf("%d", &nyuszi->eggs);
 
-    char* n_str = nyuszi_to_str(nyuszi); // DEBUG
-    printf("%s\n", n_str);
-    free(n_str);
-
     nyuszi_list_append(nyuszik, nyuszi);
+}
+
+void list_handler(nyuszi_list_t* nyuszik) {
+    for (size_t i = 0; i < nyuszik->len; ++i) {
+        nyuszi_print(nyuszik->data[i]);
+    }
+}
+
+void delete_handler(nyuszi_list_t* nyuszik) {
+    flush_stdin();
+
+    printf("Participant name: ");
+    char buffer[LEN_NAME];
+    if (fgets(buffer, LEN_NAME, stdin) == NULL) {
+        fprintf(stderr, "Error while deleting participant...\n");
+        exit(1);
+    }
+    buffer[strcspn(buffer, "\n")] = '\0';
+
+    if (strlen(buffer) == LEN_NAME - 1) 
+        flush_stdin();
+    
+    nyuszi_list_delete(nyuszik, buffer);
 }

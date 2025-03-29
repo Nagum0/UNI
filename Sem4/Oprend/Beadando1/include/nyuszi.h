@@ -15,6 +15,7 @@ typedef struct Nyuszi {
 void nyuszi_set_name(nyuszi_t* nyuszi, char* name);
 void nyuszi_set_poem(nyuszi_t* nyuszi, char* poem);
 void nyuszi_set_eggs(nyuszi_t* nyuszi, int eggs);
+void nyuszi_print(nyuszi_t* nyuszi);
 char* nyuszi_to_str(nyuszi_t* nyuszi);
 
 typedef struct Nyuszik {
@@ -24,5 +25,7 @@ typedef struct Nyuszik {
 
 void nyuszi_list_append(nyuszi_list_t* nyuszik, nyuszi_t* nyuszi);
 void nyuszi_list_free(nyuszi_list_t* nyuszik);
+void nyuszi_list_update_name(nyuszi_list_t* nyuszik, char* search, char* new_name);
+void nyuszi_list_delete(nyuszi_list_t* nyuszik, char* search);
 
 #endif // !NYUSZI_H

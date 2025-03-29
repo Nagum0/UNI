@@ -32,15 +32,18 @@ int main(int argc, char* argv[]) {
         switch ((cmd_t)command) {
             case EXIT:
                 printf("Exiting...\n");
-                // exit(0);
                 running = false;
                 break;
             case CHANGE_NAME:
                 break;
             case LIST:
+                list_handler(nyuszik);
                 break;
             case SIGN_UP:
                 sign_up_handler(nyuszik);
+                break;
+            case DELETE_NYUSZI:
+                delete_handler(nyuszik);
                 break;
             case MAN:
                 print_manual();
@@ -52,17 +55,8 @@ int main(int argc, char* argv[]) {
         }
 
         flush_stdin();
-        printf("here\n");
     }
     
-    printf("%li\n", nyuszik->len);
-
-    for (size_t i = 0; i < nyuszik->len; ++i) {
-        char* str = nyuszi_to_str(nyuszik->data[i]);
-        printf("%s\n", str);
-        free(str);
-    }
-
     nyuszi_list_free(nyuszik);
 
     return 0;

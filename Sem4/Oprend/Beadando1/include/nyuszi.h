@@ -17,6 +17,7 @@ void nyuszi_set_poem(nyuszi_t* nyuszi, char* poem);
 void nyuszi_set_eggs(nyuszi_t* nyuszi, int eggs);
 void nyuszi_print(nyuszi_t* nyuszi);
 char* nyuszi_to_str(nyuszi_t* nyuszi);
+nyuszi_t* nyuszi_str_conv(char* line);
 
 typedef struct Nyuszik {
     nyuszi_t** data;

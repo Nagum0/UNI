@@ -21,49 +21,49 @@
 int main(int argc, char* argv[]) {
     // nyuszi_list_t* nyuszik = malloc(sizeof(nyuszi_list_t));
     nyuszi_list_t* nyuszik = load_from_file("data.txt");
-    nyuszik->data = NULL;
-    nyuszik->len = 0;
+    // nyuszik->data = NULL;
+    // nyuszik->len = 0;
 
-    int running = true;
-
-    while (running) {
-        int command;
-        scanf("%d", &command);
-
-        switch ((cmd_t)command) {
-            case EXIT:
-                printf("Exiting...\n");
-                running = false;
-                break;
-            case CHANGE_NAME:
-                change_name_handler(nyuszik);
-                break;
-            case CHANGE_VERS:
-                change_poem_handler(nyuszik);
-                break;
-            case CHANGE_EGGS:
-                change_eggs_handler(nyuszik);
-                break;
-            case LIST:
-                list_handler(nyuszik);
-                break;
-            case SIGN_UP:
-                sign_up_handler(nyuszik);
-                break;
-            case DELETE_NYUSZI:
-                delete_handler(nyuszik);
-                break;
-            case MAN:
-                print_manual();
-                break;
-            default:
-                printf("Unexpected command...\n");
-                print_manual();
-                break;
-        }
-    }
-    
-    nyuszi_list_free(nyuszik);
+    // int running = true;
+    //
+    // while (running) {
+    //     int command;
+    //     scanf("%d", &command);
+    //
+    //     switch ((cmd_t)command) {
+    //         case EXIT:
+    //             printf("Exiting...\n");
+    //             running = false;
+    //             break;
+    //         case CHANGE_NAME:
+    //             change_name_handler(nyuszik);
+    //             break;
+    //         case CHANGE_VERS:
+    //             change_poem_handler(nyuszik);
+    //             break;
+    //         case CHANGE_EGGS:
+    //             change_eggs_handler(nyuszik);
+    //             break;
+    //         case LIST:
+    //             list_handler(nyuszik);
+    //             break;
+    //         case SIGN_UP:
+    //             sign_up_handler(nyuszik);
+    //             break;
+    //         case DELETE_NYUSZI:
+    //             delete_handler(nyuszik);
+    //             break;
+    //         case MAN:
+    //             print_manual();
+    //             break;
+    //         default:
+    //             printf("Unexpected command...\n");
+    //             print_manual();
+    //             break;
+    //     }
+    // }
+    // 
+    // nyuszi_list_free(nyuszik);
 
     return 0;
 }

@@ -44,34 +44,58 @@ char* nyuszi_to_str(nyuszi_t* nyuszi) {
     return buffer;
 }
 
-char* read_file(const char* path) {
-    FILE* f = fopen(path, "r");
-    if (f == NULL) {
-        fprintf(stderr, "Error while loading data\n");
-        exit(1);
-    }
-    
-    fseek(f, 0, SEEK_END);
-    size_t f_size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-
-    char* contents = malloc(f_size);
-    if (contents == NULL) {
+// ERROR: Valgrind uninitialized stack value error
+char** read_file_lines(const char* path, size_t* line_count) {
+    FILE* file = fopen(path, "r");
+    if (file == NULL) {
         fprintf(stderr, "Error while loading data\n");
         exit(1);
     }
 
-    fread(contents, 1, f_size, f);
-    printf("%s\n", contents);
+    char** lines = NULL;
+    size_t c = 0;
+    char* line;
+    size_t line_len;
+    size_t read;
 
-    fclose(f);
-    
-    return contents;
+    while ((read = getline(&line, &line_len, file)) != -1) {
+        line[strcspn(line, "\n")] = '\0';
+
+        lines = realloc(lines, (c + 1) * sizeof(char*));
+        if (lines == NULL) {
+            fprintf(stderr, "Error while loading data\n");
+            exit(1);
+        }
+
+        lines[c] = malloc(read);
+        if (lines[c] == NULL) {
+            fprintf(stderr, "Error while loading data\n");
+            exit(1);
+        }
+        strcpy(lines[c], line);
+
+        c++;
+    }
+
+    fclose(file);
+    free(line);
+
+    *line_count = c;
+    return lines;
 }
 
 nyuszi_list_t* load_from_file(const char* path) {
-    char* data_str = read_file(path);
-       
+    size_t line_count = 0;
+    char** data_lines = read_file_lines(path, &line_count);
+
+    
+    
+    for (size_t i = 0; i < line_count; ++i) {
+        printf("%li: %s\n", i, data_lines[i]);
+        free(data_lines[i]);
+    }
+    free(data_lines);
+
     return NULL;
 }
 

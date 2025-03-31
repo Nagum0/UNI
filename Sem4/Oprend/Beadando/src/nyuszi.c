@@ -39,7 +39,7 @@ char* nyuszi_to_str(nyuszi_t* nyuszi) {
         fprintf(stderr, "Error while converting nyuszi to string...\n");
         exit(1);
     }
-    sprintf(buffer, "%s|%d|%s", nyuszi->name, nyuszi->eggs, nyuszi->poem);
+    sprintf(buffer, "%s|%d|%s\n", nyuszi->name, nyuszi->eggs, nyuszi->poem);
 
     return buffer;
 }
@@ -77,7 +77,7 @@ char** read_file_lines(const char* path, size_t* line_count) {
     size_t line_len;
     size_t read;
 
-    printf("-- read_file_lines: file loaded\n");  // DEBUG
+    // printf("-- read_file_lines: file loaded\n");  // DEBUG
                                                     
     while ((read = getline(&line, &line_len, file)) != -1) {
         line[strcspn(line, "\n")] = '\0';
@@ -95,7 +95,7 @@ char** read_file_lines(const char* path, size_t* line_count) {
                 exit(1);
             }
             lines = new_lines;
-            printf("-- read_file_lines: lines realloced\n");  // DEBUG
+            // printf("-- read_file_lines: lines realloced\n");  // DEBUG
         }
 
         lines[c] = strdup(line);
@@ -116,7 +116,7 @@ nyuszi_list_t* load_from_file(const char* path) {
     nyuszik->data = NULL;
     nyuszik->len = 0;
 
-    printf("-- load_from_file: nyuszik loaded\n");  // DEBUG
+    // printf("-- load_from_file: nyuszik loaded\n");  // DEBUG
     
     for (size_t i = 0; i < line_count; ++i) {
         nyuszi_t* nyuszi = nyuszi_str_conv(data_lines[i]);
@@ -124,11 +124,33 @@ nyuszi_list_t* load_from_file(const char* path) {
         free(data_lines[i]);
     }
 
-    printf("-- load_from_file: nyuszik parsed\n");  // DEBUG
+    // printf("-- load_from_file: nyuszik parsed\n");  // DEBUG
 
     free(data_lines);
 
     return nyuszik;
+}
+
+void save_to_file(const char* path, nyuszi_list_t* nyuszik) {
+    FILE* file = fopen(path, "w");
+    if (file == NULL) {
+        fprintf(stderr, "Error while saving data\n");
+        exit(1);
+    }
+
+    for (size_t i = 0; i < nyuszik->len; ++i) {
+        nyuszi_t* nyuszi = nyuszik->data[i];
+        if (nyuszi == NULL)
+            continue;
+
+        char* nyuszi_str = nyuszi_to_str(nyuszi);
+        size_t size = strlen(nyuszi_str);
+        fwrite(nyuszi_str, size, 1, file);
+
+        free(nyuszi_str);
+    }
+
+    fclose(file);
 }
 
 void nyuszi_list_append(nyuszi_list_t* nyuszik, nyuszi_t* nyuszi) {

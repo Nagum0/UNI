@@ -20,6 +20,7 @@ void print_manual() {
     printf("%-22s %d\n", "SIGN UP A PARTICIPANT", 6);
     printf("%-22s %d\n", "DELETE PARTICIPANT", 7);
     printf("%-22s %d\n", "MANUAL", 8);
+    printf("%-22s %d\n", "SAVE", 9);
 }
 
 void sign_up_handler(nyuszi_list_t* nyuszik) {
@@ -154,4 +155,9 @@ void change_eggs_handler(nyuszi_list_t* nyuszik) {
     scanf("%d", &new_eggs);
         
     nyuszi_list_update_eggs(nyuszik, name_buffer, new_eggs);
+}
+
+void save_handler(const char* path, nyuszi_list_t* nyuszik) {
+    flush_stdin();
+    save_to_file(path, nyuszik);
 }

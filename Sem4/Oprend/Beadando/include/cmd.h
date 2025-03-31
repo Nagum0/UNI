@@ -17,6 +17,7 @@ typedef enum {
     SIGN_UP,
     DELETE_NYUSZI,
     MAN,
+    SAVE,
 } cmd_t;
 
 void flush_stdin();
@@ -27,5 +28,6 @@ void change_poem_handler(nyuszi_list_t* nyuszik);
 void change_eggs_handler(nyuszi_list_t* nyuszik);
 void list_handler(nyuszi_list_t* nyuszik);
 void delete_handler(nyuszi_list_t* nyuszik);
+void save_handler(const char* path, nyuszi_list_t* nyuszik);
 
 #endif // !CMD_H

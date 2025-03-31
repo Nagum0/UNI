@@ -18,13 +18,16 @@
 #include "../include/cmd.h"
 
 int main(int argc, char* argv[]) {
-    printf("-- main: started\n"); // DEBUG
+    print_manual();
+
+    // printf("-- main: started\n"); // DEBUG
     nyuszi_list_t* nyuszik = load_from_file("data.txt");
-    printf("-- main: nyuszik loaded\n"); // DEBUG
+    // printf("-- main: nyuszik loaded\n"); // DEBUG
 
     int running = true;
 
     while (running) {
+        printf("Command: ");
         int command;
         scanf("%d", &command);
 
@@ -54,6 +57,9 @@ int main(int argc, char* argv[]) {
             case MAN:
                 print_manual();
                 break;
+            case SAVE:
+                save_handler("data.txt", nyuszik);
+                break;
             default:
                 printf("Unexpected command...\n");
                 print_manual();
@@ -62,7 +68,7 @@ int main(int argc, char* argv[]) {
     }
     
     nyuszi_list_free(nyuszik);
-    printf("-- main: nyuszik freed\n"); // DEBUG
+    // printf("-- main: nyuszik freed\n"); // DEBUG
 
     return 0;
 }

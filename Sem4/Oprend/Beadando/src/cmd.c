@@ -161,3 +161,11 @@ void save_handler(const char* path, nyuszi_list_t* nyuszik) {
     flush_stdin();
     save_to_file(path, nyuszik);
 }
+
+void winner_handler(nyuszi_list_t* nyuszik) {
+    nyuszi_t* winner = nyuszi_list_winner(nyuszik);
+    if (winner != NULL) {
+        printf("The winner is: ");
+        nyuszi_print(winner);
+    }
+}

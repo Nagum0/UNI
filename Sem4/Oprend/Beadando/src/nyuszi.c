@@ -200,3 +200,19 @@ void nyuszi_list_update_eggs(nyuszi_list_t* nyuszik, char* search, int new_eggs)
         break;
     )
 }
+
+nyuszi_t* nyuszi_list_winner(nyuszi_list_t* nyuszik) {
+    if (nyuszik->len == 0) {
+        return NULL;
+    }
+
+    nyuszi_t* winner = nyuszik->data[0];
+    
+    for (size_t i = 1; i < nyuszik->len; ++i) {
+        nyuszi_t* nyuszi = nyuszik->data[i];
+        if (nyuszi->eggs > winner->eggs)
+            winner = nyuszi;
+    }
+
+    return winner;
+}

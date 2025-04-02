@@ -32,5 +32,6 @@ void nyuszi_list_update_name(nyuszi_list_t* nyuszik, char* search, char* new_nam
 void nyuszi_list_update_poem(nyuszi_list_t* nyuszik, char* search, char* new_poem);
 void nyuszi_list_update_eggs(nyuszi_list_t* nyuszik, char* search, int new_eggs);
 void nyuszi_list_delete(nyuszi_list_t* nyuszik, char* search);
+nyuszi_t* nyuszi_list_winner(nyuszi_list_t* nyuszik);
 
 #endif // !NYUSZI_H

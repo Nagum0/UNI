@@ -33,6 +33,12 @@ int main(int argc, char* argv[]) {
 
         switch ((cmd_t)command) {
             case EXIT:
+                nyuszi_t* winner = nyuszi_list_winner(nyuszik);
+                if (winner != NULL) {
+                    printf("The winner is: ");
+                    nyuszi_print(winner);
+                }
+
                 printf("Exiting...\n");
                 running = false;
                 break;

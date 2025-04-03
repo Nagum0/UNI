@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
         perror("Hiba a pipe nyitaskor!");
         exit(EXIT_FAILURE);
     }
+
     pid = fork();	// creating parent-child processes
     if (pid == -1) 
     {
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
                         // try it without wait()
         printf("Szulo befejezte!");	
     }
+
     exit(EXIT_SUCCESS);	// force exit, not necessary
 }
 

@@ -11,15 +11,15 @@ void handler(int signumber) {
 
 int main() {
     signal(SIGTERM, handler); //handler = SIG_IGN - ignore the signal (not SIGKILL,SIGSTOP), 
-                             //handler = SIG_DFL - back to default behavior 
+                              //handler = SIG_DFL - back to default behavior 
     signal(SIGUSR1, handler);
 
     pid_t child = fork();
     if (child > 0) { 
         pause(); //waits till a signal arrive 
         printf("PARENT - Signal arrived\n",SIGTERM);
-                // printf("Parent process ended\n");
-        
+        // printf("Parent process ended\n");
+
         printf("PARENT - Sending SIGUSR1 to child\n");
         sleep(3);
         kill(child, SIGUSR1);
@@ -31,7 +31,7 @@ int main() {
         printf("CHILD - Waits 3 seconds, then send a SIGTERM %i signal\n",SIGTERM);
         sleep(3);
         kill(getppid(), SIGTERM); 
-        
+
         printf("CHILD - Waiting on parent\n");
         pause();
         printf("CHILD - Signal received\n");

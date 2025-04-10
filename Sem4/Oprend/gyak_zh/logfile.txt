@@ -1,0 +1,15 @@
+info: betegek: 6, kapott oltast: 24
+info: betegek: 6, kapott oltast: 24
+
+info: betegek: 6, kapott oltast: 28
+info: betegek: 6, kapott oltast: 29
+
+info: betegek: 990, kapott oltast: 4010
+info: betegek: 990, kapott oltast: 4011
+
+info: betegek: 2990, kapott oltast: 11596
+info: betegek: 2990, kapott oltast: 11596
+
+info: betegek: 5092, kapott oltast: 20421
+info: betegek: 5092, kapott oltast: 20422
+

@@ -53,9 +53,9 @@ int main(int argc, char *argv[])
             whoami = "Dr. Bubo";
             close(bubo_to_csormester[0]);
             close(bubo_to_ursula[0]);
+            
             pause();
             pause();
-
             
             write(bubo_to_csormester[1], &csormesterek, sizeof(csormesterek));
             write(bubo_to_ursula[1], &ursulanak, sizeof(ursulanak));
@@ -86,6 +86,7 @@ int main(int argc, char *argv[])
         close(bubo_to_ursula[0]);
         close(bubo_to_ursula[1]);
         close(bubo_to_csormester[1]);
+
         sleep(2);
         kill(getppid(), SIGUSR1);
         
@@ -96,5 +97,6 @@ int main(int argc, char *argv[])
 
         pt("kilepes");
     }
+
     return 0;
 }

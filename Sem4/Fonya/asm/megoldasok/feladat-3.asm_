@@ -1,0 +1,31 @@
+global main
+extern be_egesz
+extern ki_egesz
+
+section .text
+main:
+    call be_egesz
+    mov ecx,eax
+    
+    push ecx    ; elmentjuk
+    call be_egesz
+    pop ecx     ; visszatoltjuk
+eleje:
+    cmp ecx,0
+    je vege
+    push eax    ; elmentjuk ezeket
+    push ecx    ; mert a fuggvenyhivas elronthatja eax, ecx es edx-et
+    
+    push eax
+    call ki_egesz
+    add esp,4
+    
+    pop ecx     ; visszatoltjuk az
+    pop eax     ; az elmentett regisztereket
+    
+    dec ecx
+    jmp eleje
+vege:
+    
+    ; visszateres:
+    ret

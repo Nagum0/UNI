@@ -1,0 +1,6 @@
+program TestProgram
+    integer xs[5];
+begin
+    xs[0] := 10;
+    write(xs[0]);
+end

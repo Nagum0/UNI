@@ -380,6 +380,7 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
+      // T_NUM
       // T_ID
       char dummy1[sizeof (std::string)];
 
@@ -439,35 +440,50 @@ namespace yy {
     T_END = 260,                   // T_END
     T_INTEGER = 261,               // T_INTEGER
     T_BOOLEAN = 262,               // T_BOOLEAN
-    T_SKIP = 263,                  // T_SKIP
-    T_IF = 264,                    // T_IF
-    T_THEN = 265,                  // T_THEN
-    T_ELSE = 266,                  // T_ELSE
-    T_ENDIF = 267,                 // T_ENDIF
-    T_WHILE = 268,                 // T_WHILE
-    T_DO = 269,                    // T_DO
-    T_DONE = 270,                  // T_DONE
-    T_READ = 271,                  // T_READ
-    T_WRITE = 272,                 // T_WRITE
-    T_SEMICOLON = 273,             // T_SEMICOLON
-    T_ASSIGN = 274,                // T_ASSIGN
-    T_OPEN = 275,                  // T_OPEN
-    T_CLOSE = 276,                 // T_CLOSE
-    T_NUM = 277,                   // T_NUM
-    T_TRUE = 278,                  // T_TRUE
-    T_FALSE = 279,                 // T_FALSE
-    T_ID = 280,                    // T_ID
-    T_OR = 281,                    // T_OR
-    T_AND = 282,                   // T_AND
-    T_EQ = 283,                    // T_EQ
-    T_LESS = 284,                  // T_LESS
-    T_GR = 285,                    // T_GR
-    T_ADD = 286,                   // T_ADD
-    T_SUB = 287,                   // T_SUB
-    T_MUL = 288,                   // T_MUL
-    T_DIV = 289,                   // T_DIV
-    T_MOD = 290,                   // T_MOD
-    T_NOT = 291                    // T_NOT
+    T_DATE = 263,                  // T_DATE
+    T_SKIP = 264,                  // T_SKIP
+    T_IF = 265,                    // T_IF
+    T_THEN = 266,                  // T_THEN
+    T_ELSE = 267,                  // T_ELSE
+    T_ENDIF = 268,                 // T_ENDIF
+    T_WHILE = 269,                 // T_WHILE
+    T_DO = 270,                    // T_DO
+    T_DONE = 271,                  // T_DONE
+    T_REPEAT = 272,                // T_REPEAT
+    T_UNTIL = 273,                 // T_UNTIL
+    T_READ = 274,                  // T_READ
+    T_WRITE = 275,                 // T_WRITE
+    T_SEMICOLON = 276,             // T_SEMICOLON
+    T_ASSIGN = 277,                // T_ASSIGN
+    T_OPEN = 278,                  // T_OPEN
+    T_CLOSE = 279,                 // T_CLOSE
+    T_NUM = 280,                   // T_NUM
+    T_TRUE = 281,                  // T_TRUE
+    T_FALSE = 282,                 // T_FALSE
+    T_ID = 283,                    // T_ID
+    T_QUESTIONMARK = 284,          // T_QUESTIONMARK
+    T_COLON = 285,                 // T_COLON
+    T_COMMA = 286,                 // T_COMMA
+    T_FOR = 287,                   // T_FOR
+    T_FROM = 288,                  // T_FROM
+    T_UPTO = 289,                  // T_UPTO
+    T_DOWNTO = 290,                // T_DOWNTO
+    T_DATE_LIT = 291,              // T_DATE_LIT
+    T_GET_DAY = 292,               // T_GET_DAY
+    T_GET_MONTH = 293,             // T_GET_MONTH
+    T_GET_YEAR = 294,              // T_GET_YEAR
+    T_GOTO = 295,                  // T_GOTO
+    T_OR = 296,                    // T_OR
+    T_AND = 297,                   // T_AND
+    T_EQ = 298,                    // T_EQ
+    T_LESS = 299,                  // T_LESS
+    T_GR = 300,                    // T_GR
+    T_ADD = 301,                   // T_ADD
+    T_SUB = 302,                   // T_SUB
+    T_MUL = 303,                   // T_MUL
+    T_DIV = 304,                   // T_DIV
+    T_MOD = 305,                   // T_MOD
+    T_NOT = 306                    // T_NOT
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -484,7 +500,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 37, ///< Number of tokens.
+        YYNTOKENS = 52, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -494,42 +510,57 @@ namespace yy {
         S_T_END = 5,                             // T_END
         S_T_INTEGER = 6,                         // T_INTEGER
         S_T_BOOLEAN = 7,                         // T_BOOLEAN
-        S_T_SKIP = 8,                            // T_SKIP
-        S_T_IF = 9,                              // T_IF
-        S_T_THEN = 10,                           // T_THEN
-        S_T_ELSE = 11,                           // T_ELSE
-        S_T_ENDIF = 12,                          // T_ENDIF
-        S_T_WHILE = 13,                          // T_WHILE
-        S_T_DO = 14,                             // T_DO
-        S_T_DONE = 15,                           // T_DONE
-        S_T_READ = 16,                           // T_READ
-        S_T_WRITE = 17,                          // T_WRITE
-        S_T_SEMICOLON = 18,                      // T_SEMICOLON
-        S_T_ASSIGN = 19,                         // T_ASSIGN
-        S_T_OPEN = 20,                           // T_OPEN
-        S_T_CLOSE = 21,                          // T_CLOSE
-        S_T_NUM = 22,                            // T_NUM
-        S_T_TRUE = 23,                           // T_TRUE
-        S_T_FALSE = 24,                          // T_FALSE
-        S_T_ID = 25,                             // T_ID
-        S_T_OR = 26,                             // T_OR
-        S_T_AND = 27,                            // T_AND
-        S_T_EQ = 28,                             // T_EQ
-        S_T_LESS = 29,                           // T_LESS
-        S_T_GR = 30,                             // T_GR
-        S_T_ADD = 31,                            // T_ADD
-        S_T_SUB = 32,                            // T_SUB
-        S_T_MUL = 33,                            // T_MUL
-        S_T_DIV = 34,                            // T_DIV
-        S_T_MOD = 35,                            // T_MOD
-        S_T_NOT = 36,                            // T_NOT
-        S_YYACCEPT = 37,                         // $accept
-        S_start = 38,                            // start
-        S_declarations = 39,                     // declarations
-        S_declaration = 40,                      // declaration
-        S_statements = 41,                       // statements
-        S_statement = 42,                        // statement
-        S_expression = 43                        // expression
+        S_T_DATE = 8,                            // T_DATE
+        S_T_SKIP = 9,                            // T_SKIP
+        S_T_IF = 10,                             // T_IF
+        S_T_THEN = 11,                           // T_THEN
+        S_T_ELSE = 12,                           // T_ELSE
+        S_T_ENDIF = 13,                          // T_ENDIF
+        S_T_WHILE = 14,                          // T_WHILE
+        S_T_DO = 15,                             // T_DO
+        S_T_DONE = 16,                           // T_DONE
+        S_T_REPEAT = 17,                         // T_REPEAT
+        S_T_UNTIL = 18,                          // T_UNTIL
+        S_T_READ = 19,                           // T_READ
+        S_T_WRITE = 20,                          // T_WRITE
+        S_T_SEMICOLON = 21,                      // T_SEMICOLON
+        S_T_ASSIGN = 22,                         // T_ASSIGN
+        S_T_OPEN = 23,                           // T_OPEN
+        S_T_CLOSE = 24,                          // T_CLOSE
+        S_T_NUM = 25,                            // T_NUM
+        S_T_TRUE = 26,                           // T_TRUE
+        S_T_FALSE = 27,                          // T_FALSE
+        S_T_ID = 28,                             // T_ID
+        S_T_QUESTIONMARK = 29,                   // T_QUESTIONMARK
+        S_T_COLON = 30,                          // T_COLON
+        S_T_COMMA = 31,                          // T_COMMA
+        S_T_FOR = 32,                            // T_FOR
+        S_T_FROM = 33,                           // T_FROM
+        S_T_UPTO = 34,                           // T_UPTO
+        S_T_DOWNTO = 35,                         // T_DOWNTO
+        S_T_DATE_LIT = 36,                       // T_DATE_LIT
+        S_T_GET_DAY = 37,                        // T_GET_DAY
+        S_T_GET_MONTH = 38,                      // T_GET_MONTH
+        S_T_GET_YEAR = 39,                       // T_GET_YEAR
+        S_T_GOTO = 40,                           // T_GOTO
+        S_T_OR = 41,                             // T_OR
+        S_T_AND = 42,                            // T_AND
+        S_T_EQ = 43,                             // T_EQ
+        S_T_LESS = 44,                           // T_LESS
+        S_T_GR = 45,                             // T_GR
+        S_T_ADD = 46,                            // T_ADD
+        S_T_SUB = 47,                            // T_SUB
+        S_T_MUL = 48,                            // T_MUL
+        S_T_DIV = 49,                            // T_DIV
+        S_T_MOD = 50,                            // T_MOD
+        S_T_NOT = 51,                            // T_NOT
+        S_YYACCEPT = 52,                         // $accept
+        S_start = 53,                            // start
+        S_declarations = 54,                     // declarations
+        S_declaration = 55,                      // declaration
+        S_statements = 56,                       // statements
+        S_statement = 57,                        // statement
+        S_expression = 58                        // expression
       };
     };
 
@@ -566,6 +597,7 @@ namespace yy {
       {
         switch (this->kind ())
     {
+      case symbol_kind::S_T_NUM: // T_NUM
       case symbol_kind::S_T_ID: // T_ID
         value.move< std::string > (std::move (that.value));
         break;
@@ -649,6 +681,7 @@ namespace yy {
         // Value type destructor.
 switch (yykind)
     {
+      case symbol_kind::S_T_NUM: // T_NUM
       case symbol_kind::S_T_ID: // T_ID
         value.template destroy< std::string > ();
         break;
@@ -938,6 +971,21 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_T_DATE (location_type l)
+      {
+        return symbol_type (token::T_DATE, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_DATE (const location_type& l)
+      {
+        return symbol_type (token::T_DATE, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_T_SKIP (location_type l)
       {
         return symbol_type (token::T_SKIP, std::move (l));
@@ -1058,6 +1106,36 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_T_REPEAT (location_type l)
+      {
+        return symbol_type (token::T_REPEAT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_REPEAT (const location_type& l)
+      {
+        return symbol_type (token::T_REPEAT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_UNTIL (location_type l)
+      {
+        return symbol_type (token::T_UNTIL, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_UNTIL (const location_type& l)
+      {
+        return symbol_type (token::T_UNTIL, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_T_READ (location_type l)
       {
         return symbol_type (token::T_READ, std::move (l));
@@ -1148,16 +1226,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_T_NUM (location_type l)
+      make_T_NUM (std::string v, location_type l)
       {
-        return symbol_type (token::T_NUM, std::move (l));
+        return symbol_type (token::T_NUM, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_T_NUM (const location_type& l)
+      make_T_NUM (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::T_NUM, l);
+        return symbol_type (token::T_NUM, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1203,6 +1281,186 @@ switch (yykind)
       make_T_ID (const std::string& v, const location_type& l)
       {
         return symbol_type (token::T_ID, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_QUESTIONMARK (location_type l)
+      {
+        return symbol_type (token::T_QUESTIONMARK, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_QUESTIONMARK (const location_type& l)
+      {
+        return symbol_type (token::T_QUESTIONMARK, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_COLON (location_type l)
+      {
+        return symbol_type (token::T_COLON, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_COLON (const location_type& l)
+      {
+        return symbol_type (token::T_COLON, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_COMMA (location_type l)
+      {
+        return symbol_type (token::T_COMMA, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_COMMA (const location_type& l)
+      {
+        return symbol_type (token::T_COMMA, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_FOR (location_type l)
+      {
+        return symbol_type (token::T_FOR, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_FOR (const location_type& l)
+      {
+        return symbol_type (token::T_FOR, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_FROM (location_type l)
+      {
+        return symbol_type (token::T_FROM, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_FROM (const location_type& l)
+      {
+        return symbol_type (token::T_FROM, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_UPTO (location_type l)
+      {
+        return symbol_type (token::T_UPTO, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_UPTO (const location_type& l)
+      {
+        return symbol_type (token::T_UPTO, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_DOWNTO (location_type l)
+      {
+        return symbol_type (token::T_DOWNTO, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_DOWNTO (const location_type& l)
+      {
+        return symbol_type (token::T_DOWNTO, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_DATE_LIT (location_type l)
+      {
+        return symbol_type (token::T_DATE_LIT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_DATE_LIT (const location_type& l)
+      {
+        return symbol_type (token::T_DATE_LIT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_GET_DAY (location_type l)
+      {
+        return symbol_type (token::T_GET_DAY, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_GET_DAY (const location_type& l)
+      {
+        return symbol_type (token::T_GET_DAY, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_GET_MONTH (location_type l)
+      {
+        return symbol_type (token::T_GET_MONTH, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_GET_MONTH (const location_type& l)
+      {
+        return symbol_type (token::T_GET_MONTH, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_GET_YEAR (location_type l)
+      {
+        return symbol_type (token::T_GET_YEAR, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_GET_YEAR (const location_type& l)
+      {
+        return symbol_type (token::T_GET_YEAR, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_GOTO (location_type l)
+      {
+        return symbol_type (token::T_GOTO, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_GOTO (const location_type& l)
+      {
+        return symbol_type (token::T_GOTO, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1414,7 +1672,7 @@ switch (yykind)
     // Tables.
     // YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
     // STATE-NUM.
-    static const signed char yypact_[];
+    static const short yypact_[];
 
     // YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
     // Performed when YYTABLE does not specify something else to do.  Zero
@@ -1674,7 +1932,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 134,     ///< Last index in yytable_.
+      yylast_ = 216,     ///< Last index in yytable_.
       yynnts_ = 7,  ///< Number of nonterminal symbols.
       yyfinal_ = 4 ///< Termination state number.
     };
@@ -1685,7 +1943,7 @@ switch (yykind)
 
 
 } // yy
-#line 1689 "while.tab.hh"
+#line 1947 "while.tab.hh"
 
 
 // "%code provides" blocks.
@@ -1693,7 +1951,7 @@ switch (yykind)
 
 int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 
-#line 1697 "while.tab.hh"
+#line 1955 "while.tab.hh"
 
 
 #endif // !YY_YY_WHILE_TAB_HH_INCLUDED

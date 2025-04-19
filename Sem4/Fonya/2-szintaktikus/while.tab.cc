@@ -618,7 +618,7 @@ namespace yy {
           switch (yyn)
             {
   case 2: // start: T_PROGRAM T_ID declarations T_BEGIN statements T_END
-#line 52 "while.y"
+#line 53 "while.y"
     {
         std::cout << "start -> T_PROGRAM T_ID declarations T_BEGIN statements T_END" << std::endl;
     }
@@ -626,7 +626,7 @@ namespace yy {
     break;
 
   case 3: // declarations: %empty
-#line 59 "while.y"
+#line 60 "while.y"
     {
         std::cout << "declarations -> epsilon" << std::endl;
     }
@@ -634,7 +634,7 @@ namespace yy {
     break;
 
   case 4: // declarations: declaration declarations
-#line 64 "while.y"
+#line 65 "while.y"
     {
         std::cout << "declarations -> declaration declarations" << std::endl;
     }
@@ -642,7 +642,7 @@ namespace yy {
     break;
 
   case 5: // declaration: T_INTEGER T_ID T_SEMICOLON
-#line 71 "while.y"
+#line 72 "while.y"
     {
         std::cout << "declaration -> T_INTEGER T_ID T_SEMICOLON" << std::endl;
     }
@@ -650,255 +650,287 @@ namespace yy {
     break;
 
   case 6: // declaration: T_BOOLEAN T_ID T_SEMICOLON
-#line 76 "while.y"
+#line 77 "while.y"
     {
         std::cout << "declaration -> T_BOOLEAN T_ID T_SEMICOLON" << std::endl;
     }
 #line 658 "while.tab.cc"
     break;
 
-  case 7: // statements: statement
-#line 83 "while.y"
+  case 7: // label: T_ID T_COLON
+#line 84 "while.y"
     {
-        std::cout << "statements -> statement" << std::endl;
+        std::cout << "label -> T_ID T_COLON" << std::endl;
     }
 #line 666 "while.tab.cc"
     break;
 
-  case 8: // statements: statement statements
-#line 88 "while.y"
+  case 8: // statements: statement
+#line 91 "while.y"
     {
-        std::cout << "statements -> statement statements" << std::endl;
+        std::cout << "statements -> statement" << std::endl;
     }
 #line 674 "while.tab.cc"
     break;
 
-  case 9: // statement: T_SKIP T_SEMICOLON
-#line 95 "while.y"
+  case 9: // statements: statement statements
+#line 96 "while.y"
     {
-        std::cout << "statement -> T_SKIP T_SEMICOLON" << std::endl;
+        std::cout << "statements -> statement statements" << std::endl;
     }
 #line 682 "while.tab.cc"
     break;
 
-  case 10: // statement: T_ID T_ASSIGN expression T_SEMICOLON
-#line 100 "while.y"
+  case 10: // statements: label statement
+#line 101 "while.y"
     {
-        std::cout << "assignment -> T_ID T_ASSIGN expression T_SEMICOLON" << std::endl;
+        std::cout << "statements -> label statement" << std::endl;
     }
 #line 690 "while.tab.cc"
     break;
 
-  case 11: // statement: T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
-#line 105 "while.y"
+  case 11: // statements: label statement statements
+#line 106 "while.y"
     {
-        std::cout << "read -> T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON" << std::endl;
+        std::cout << "statements -> label statement statements" << std::endl;
     }
 #line 698 "while.tab.cc"
     break;
 
-  case 12: // statement: T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON
-#line 110 "while.y"
+  case 12: // statement: T_SKIP T_SEMICOLON
+#line 113 "while.y"
     {
-        std::cout << "write -> T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON" << std::endl;
+        std::cout << "statement -> T_SKIP T_SEMICOLON" << std::endl;
     }
 #line 706 "while.tab.cc"
     break;
 
-  case 13: // statement: T_IF expression T_THEN statements T_ENDIF
-#line 115 "while.y"
+  case 13: // statement: T_ID T_ASSIGN expression T_SEMICOLON
+#line 118 "while.y"
     {
-        std::cout << "branch -> T_IF expression T_THEN statements T_ENDIF" << std::endl;
+        std::cout << "assignment -> T_ID T_ASSIGN expression T_SEMICOLON" << std::endl;
     }
 #line 714 "while.tab.cc"
     break;
 
-  case 14: // statement: T_IF expression T_THEN statements T_ELSE statements T_ENDIF
-#line 120 "while.y"
+  case 14: // statement: T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
+#line 123 "while.y"
     {
-        std::cout << "branch -> T_IF expression T_THEN statements T_ELSE statements T_ENDIF" << std::endl;
+        std::cout << "read -> T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON" << std::endl;
     }
 #line 722 "while.tab.cc"
     break;
 
-  case 15: // statement: T_WHILE expression T_DO statements T_DONE
-#line 125 "while.y"
+  case 15: // statement: T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON
+#line 128 "while.y"
     {
-        std::cout << "loop -> T_WHILE expression T_DO statements T_DONE" << std::endl;
+        std::cout << "write -> T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON" << std::endl;
     }
 #line 730 "while.tab.cc"
     break;
 
-  case 16: // statement: T_REPEAT statements T_UNTIL expression
-#line 130 "while.y"
+  case 16: // statement: T_IF expression T_THEN statements T_ENDIF
+#line 133 "while.y"
     {
-        std::cout << "repeat -> T_REPEAT statements T_UNTIL expression" << std::endl;
+        std::cout << "branch -> T_IF expression T_THEN statements T_ENDIF" << std::endl;
     }
 #line 738 "while.tab.cc"
     break;
 
-  case 17: // statement: T_FOR T_ID T_FROM expression for_way expression T_DO statements T_DONE
-#line 135 "while.y"
+  case 17: // statement: T_IF expression T_THEN statements T_ELSE statements T_ENDIF
+#line 138 "while.y"
     {
-        std::cout << "for -> T_FOR T_ID T_FROM expression for_way expression T_DO statements T_DONE" << std::endl;
+        std::cout << "branch -> T_IF expression T_THEN statements T_ELSE statements T_ENDIF" << std::endl;
     }
 #line 746 "while.tab.cc"
     break;
 
-  case 18: // for_way: T_UPTO
-#line 142 "while.y"
+  case 18: // statement: T_WHILE expression T_DO statements T_DONE
+#line 143 "while.y"
     {
-        std::cout << "for_way -> T_UPTO" << std::endl;
+        std::cout << "loop -> T_WHILE expression T_DO statements T_DONE" << std::endl;
     }
 #line 754 "while.tab.cc"
     break;
 
-  case 19: // for_way: T_DOWNTO
-#line 147 "while.y"
+  case 19: // statement: T_REPEAT statements T_UNTIL expression
+#line 148 "while.y"
     {
-        std::cout << "for_way -> T_DOWNTO" << std::endl;
+        std::cout << "repeat -> T_REPEAT statements T_UNTIL expression" << std::endl;
     }
 #line 762 "while.tab.cc"
     break;
 
-  case 20: // expression: T_NUM
-#line 154 "while.y"
+  case 20: // statement: T_FOR T_ID T_FROM expression directions expression T_DO statements T_DONE
+#line 153 "while.y"
     {
-        std::cout << "expression -> T_NUM" << std::endl;
+        std::cout << "T_FOR T_ID expression directions expression T_DO statements T_DONE" << std::endl;
     }
 #line 770 "while.tab.cc"
     break;
 
-  case 21: // expression: T_TRUE
-#line 159 "while.y"
+  case 21: // statement: T_GOTO T_ID
+#line 158 "while.y"
     {
-        std::cout << "expression -> T_TRUE" << std::endl;
+        std::cout << "T_GOTO T_ID" << std::endl;
     }
 #line 778 "while.tab.cc"
     break;
 
-  case 22: // expression: T_FALSE
-#line 164 "while.y"
+  case 22: // directions: T_UPTO
+#line 165 "while.y"
     {
-        std::cout << "expression -> T_FALSE" << std::endl;
+        std::cout << "T_UPTO" << std::endl;
     }
 #line 786 "while.tab.cc"
     break;
 
-  case 23: // expression: T_ID
-#line 169 "while.y"
+  case 23: // directions: T_DOWNTO
+#line 170 "while.y"
     {
-        std::cout << "expression -> T_ID" << std::endl;
+        std::cout << "T_DOWNTO" << std::endl;
     }
 #line 794 "while.tab.cc"
     break;
 
-  case 24: // expression: expression T_ADD expression
-#line 174 "while.y"
+  case 24: // expression: T_NUM
+#line 177 "while.y"
     {
-        std::cout << "expression -> expression T_ADD expression" << std::endl;
+        std::cout << "expression -> T_NUM" << std::endl;
     }
 #line 802 "while.tab.cc"
     break;
 
-  case 25: // expression: expression T_SUB expression
-#line 179 "while.y"
+  case 25: // expression: T_TRUE
+#line 182 "while.y"
     {
-        std::cout << "expression -> expression T_SUB expression" << std::endl;
+        std::cout << "expression -> T_TRUE" << std::endl;
     }
 #line 810 "while.tab.cc"
     break;
 
-  case 26: // expression: expression T_MUL expression
-#line 184 "while.y"
+  case 26: // expression: T_FALSE
+#line 187 "while.y"
     {
-        std::cout << "expression -> expression T_MUL expression" << std::endl;
+        std::cout << "expression -> T_FALSE" << std::endl;
     }
 #line 818 "while.tab.cc"
     break;
 
-  case 27: // expression: expression T_DIV expression
-#line 189 "while.y"
+  case 27: // expression: T_ID
+#line 192 "while.y"
     {
-        std::cout << "expression -> expression T_DIV expression" << std::endl;
+        std::cout << "expression -> T_ID" << std::endl;
     }
 #line 826 "while.tab.cc"
     break;
 
-  case 28: // expression: expression T_MOD expression
-#line 194 "while.y"
+  case 28: // expression: expression T_ADD expression
+#line 197 "while.y"
     {
-        std::cout << "expression -> expression T_MOD expression" << std::endl;
+        std::cout << "expression -> expression T_ADD expression" << std::endl;
     }
 #line 834 "while.tab.cc"
     break;
 
-  case 29: // expression: expression T_LESS expression
-#line 199 "while.y"
+  case 29: // expression: expression T_SUB expression
+#line 202 "while.y"
     {
-        std::cout << "expression -> expression T_LESS expression" << std::endl;
+        std::cout << "expression -> expression T_SUB expression" << std::endl;
     }
 #line 842 "while.tab.cc"
     break;
 
-  case 30: // expression: expression T_GR expression
-#line 204 "while.y"
+  case 30: // expression: expression T_MUL expression
+#line 207 "while.y"
     {
-        std::cout << "expression -> expression T_GR expression" << std::endl;
+        std::cout << "expression -> expression T_MUL expression" << std::endl;
     }
 #line 850 "while.tab.cc"
     break;
 
-  case 31: // expression: expression T_EQ expression
-#line 209 "while.y"
+  case 31: // expression: expression T_DIV expression
+#line 212 "while.y"
     {
-        std::cout << "expression -> expression T_EQ expression" << std::endl;
+        std::cout << "expression -> expression T_DIV expression" << std::endl;
     }
 #line 858 "while.tab.cc"
     break;
 
-  case 32: // expression: expression T_AND expression
-#line 214 "while.y"
+  case 32: // expression: expression T_MOD expression
+#line 217 "while.y"
     {
-        std::cout << "expression -> expression T_AND expression" << std::endl;
+        std::cout << "expression -> expression T_MOD expression" << std::endl;
     }
 #line 866 "while.tab.cc"
     break;
 
-  case 33: // expression: expression T_OR expression
-#line 219 "while.y"
+  case 33: // expression: expression T_LESS expression
+#line 222 "while.y"
     {
-        std::cout << "expression -> expression T_OR expression" << std::endl;
+        std::cout << "expression -> expression T_LESS expression" << std::endl;
     }
 #line 874 "while.tab.cc"
     break;
 
-  case 34: // expression: T_NOT expression
-#line 224 "while.y"
+  case 34: // expression: expression T_GR expression
+#line 227 "while.y"
     {
-        std::cout << "expression -> T_NOT expression" << std::endl;
+        std::cout << "expression -> expression T_GR expression" << std::endl;
     }
 #line 882 "while.tab.cc"
     break;
 
-  case 35: // expression: T_OPEN expression T_CLOSE
-#line 229 "while.y"
+  case 35: // expression: expression T_EQ expression
+#line 232 "while.y"
     {
-        std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
+        std::cout << "expression -> expression T_EQ expression" << std::endl;
     }
 #line 890 "while.tab.cc"
     break;
 
-  case 36: // expression: expression T_QMARK expression T_COLON expression
-#line 234 "while.y"
+  case 36: // expression: expression T_AND expression
+#line 237 "while.y"
     {
-        std::cout << "expression -> expression T_QMARK expression T_COLON expression" << std::endl;
+        std::cout << "expression -> expression T_AND expression" << std::endl;
     }
 #line 898 "while.tab.cc"
     break;
 
+  case 37: // expression: expression T_OR expression
+#line 242 "while.y"
+    {
+        std::cout << "expression -> expression T_OR expression" << std::endl;
+    }
+#line 906 "while.tab.cc"
+    break;
 
-#line 902 "while.tab.cc"
+  case 38: // expression: T_NOT expression
+#line 247 "while.y"
+    {
+        std::cout << "expression -> T_NOT expression" << std::endl;
+    }
+#line 914 "while.tab.cc"
+    break;
+
+  case 39: // expression: T_OPEN expression T_CLOSE
+#line 252 "while.y"
+    {
+        std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
+    }
+#line 922 "while.tab.cc"
+    break;
+
+  case 40: // expression: expression T_QMARK expression T_COLON expression
+#line 257 "while.y"
+    {
+        std::cout << "expression T_QMARK expression T_COLON expression" << std::endl;
+    }
+#line 930 "while.tab.cc"
+    break;
+
+
+#line 934 "while.tab.cc"
 
             default:
               break;
@@ -1091,23 +1123,24 @@ namespace yy {
 
 
 
-  const signed char parser::yypact_ninf_ = -22;
+  const signed char parser::yypact_ninf_ = -27;
 
   const signed char parser::yytable_ninf_ = -1;
 
   const short
   parser::yypact_[] =
   {
-      -2,   -17,    14,     4,   -22,    -6,    -5,    11,     4,    -1,
-       3,   168,   -22,   -22,   -22,     6,   -18,   -18,     5,    15,
-      28,   168,    24,    45,   168,   -22,   -18,   -22,   -22,   -22,
-     -22,   -18,    47,    65,    29,   -18,   -18,    26,    25,   -22,
-     -22,    27,    32,   168,   -18,   -18,   -18,   -18,   -18,   -18,
-     -18,   -18,   -18,   -18,   -18,   168,    50,   132,   109,   -18,
-     -18,   -22,     1,   187,   223,   223,   230,   -10,   -10,    34,
-      34,    32,    32,    32,    63,    74,    75,   -22,   205,   169,
-     168,   -22,   -18,   -22,   -22,   -22,   -22,   -22,   -18,    82,
-     205,    83,   -22,   168,    80,   -22
+       1,   -11,     7,    -4,   -27,    -1,     2,    15,    -4,    13,
+      14,   135,   -27,   -27,   -27,    21,   -12,   -12,    34,    35,
+     -18,   135,    16,    31,   149,    54,   135,   -27,   -12,   -27,
+     -27,   -27,   -27,   -12,    53,    66,    36,   -12,   -12,   -27,
+      33,    48,   -27,    43,   135,   -27,   -27,    32,    46,   135,
+     -12,   -12,   -12,   -12,   -12,   -12,   -12,   -12,   -12,   -12,
+     -12,   135,    44,   150,    98,   -12,   -12,   -27,   -27,    10,
+     178,   204,   204,   217,    -6,    -6,   -26,   -26,    46,    46,
+      46,    67,    65,    68,   -27,   191,   165,   135,   -27,   -12,
+     -27,   -27,   -27,   -27,   -27,   -12,    72,   191,    85,   -27,
+     135,    96,   -27
   };
 
   const signed char
@@ -1115,125 +1148,127 @@ namespace yy {
   {
        0,     0,     0,     3,     1,     0,     0,     0,     3,     0,
        0,     0,     4,     5,     6,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     7,     9,     0,    20,    21,    22,
-      23,     0,     0,     0,     0,     0,     0,     0,     0,     2,
-       8,     0,    34,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     8,    12,     0,    24,
+      25,    26,    27,     0,     0,     0,     0,     0,     0,     7,
+       0,     0,    21,     0,    10,     2,     9,     0,    38,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    35,     0,     0,    33,    32,    31,    29,    30,    24,
-      25,    26,    27,    28,     0,     0,     0,    10,    16,     0,
-       0,    13,     0,    15,    11,    12,    18,    19,     0,     0,
-      36,     0,    14,     0,     0,    17
+       0,     0,     0,     0,     0,     0,     0,    11,    39,     0,
+       0,    37,    36,    35,    33,    34,    28,    29,    30,    31,
+      32,     0,     0,     0,    13,    19,     0,     0,    16,     0,
+      18,    14,    15,    22,    23,     0,     0,    40,     0,    17,
+       0,     0,    20
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -22,   -22,    88,   -22,   -21,   -22,   -22,    -8
+     -27,   -27,    92,   -27,   -27,   -21,    88,   -27,    -8
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-       0,     2,     7,     8,    23,    24,    88,    32
+       0,     2,     7,     8,    24,    25,    26,    95,    34
   };
 
   const signed char
   parser::yytable_[] =
   {
-      37,     1,    26,    40,    27,    28,    29,    30,     3,    33,
-       5,     6,    80,    81,     4,    11,    44,    13,    41,     9,
-      10,    14,    62,    42,    25,    34,    31,    57,    58,    50,
-      51,    52,    53,    54,    74,    35,    63,    64,    65,    66,
-      67,    68,    69,    70,    71,    72,    73,    36,    61,    38,
-      39,    78,    79,    44,    56,    59,    60,    43,    44,    89,
-      44,    45,    46,    47,    48,    49,    50,    51,    52,    53,
-      54,    75,    94,    44,    90,    52,    53,    54,    83,    55,
-      91,    45,    46,    47,    48,    49,    50,    51,    52,    53,
-      54,    44,    84,    85,    92,    95,    12,    93,     0,    45,
-      46,    47,    48,    49,    50,    51,    52,    53,    54,    44,
-       0,     0,     0,     0,     0,     0,     0,    45,    46,    47,
-      48,    49,    50,    51,    52,    53,    54,    77,     0,     0,
-       0,     0,     0,     0,     0,    44,     0,     0,     0,     0,
-       0,     0,     0,    45,    46,    47,    48,    49,    50,    51,
-      52,    53,    54,    76,     0,     0,     0,     0,    44,     0,
-       0,     0,     0,     0,     0,     0,    45,    46,    47,    48,
-      49,    50,    51,    52,    53,    54,    15,    16,     0,     0,
-       0,    17,     0,     0,    18,    19,     0,     0,     0,     0,
-       0,     0,     0,    20,     0,    44,    21,     0,    22,     0,
-       0,    86,    87,    45,    46,    47,    48,    49,    50,    51,
-      52,    53,    54,    44,    82,     0,     0,     0,     0,     0,
-       0,    45,    46,    47,    48,    49,    50,    51,    52,    53,
-      54,    44,     0,     0,     0,     0,     0,     0,     0,    45,
-      46,    47,    48,    49,    50,    51,    52,    53,    54,    44,
-       0,     0,     0,     0,     0,     0,    44,     0,     0,    47,
-      48,    49,    50,    51,    52,    53,    54,    48,    49,    50,
-      51,    52,    53,    54
+      40,    38,     5,     6,     1,    46,    50,     4,    28,    35,
+      29,    30,    31,    32,     3,    39,    58,    59,    60,    11,
+      47,    87,    88,    67,     9,    48,    50,    10,    69,    63,
+      64,    13,    14,    33,    56,    57,    58,    59,    60,    27,
+      81,    41,    70,    71,    72,    73,    74,    75,    76,    77,
+      78,    79,    80,    68,    36,    37,    42,    85,    86,    45,
+      65,    62,    38,    49,    50,    82,    96,    51,    52,    53,
+      54,    55,    56,    57,    58,    59,    60,    66,    50,   101,
+      61,    97,    90,    91,    99,    50,    92,    98,    51,    52,
+      53,    54,    55,    56,    57,    58,    59,    60,    50,   100,
+      12,    51,    52,    53,    54,    55,    56,    57,    58,    59,
+      60,   102,    44,     0,     0,     0,    84,    50,     0,     0,
+      51,    52,    53,    54,    55,    56,    57,    58,    59,    60,
+      50,     0,     0,    51,    52,    53,    54,    55,    56,    57,
+      58,    59,    60,    15,    16,     0,     0,     0,    17,     0,
+       0,    18,    19,     0,     0,     0,     0,    15,    16,     0,
+      20,    21,    17,    22,     0,    18,    19,     0,     0,    23,
+       0,    83,     0,     0,    43,    21,     0,    22,     0,     0,
+       0,     0,    50,    23,     0,    51,    52,    53,    54,    55,
+      56,    57,    58,    59,    60,    93,    94,    50,     0,     0,
+      51,    52,    53,    54,    55,    56,    57,    58,    59,    60,
+      50,    89,     0,    51,    52,    53,    54,    55,    56,    57,
+      58,    59,    60,    50,     0,     0,    51,    52,    53,    54,
+      55,    56,    57,    58,    59,    60,    50,     0,     0,     0,
+       0,    53,    54,    55,    56,    57,    58,    59,    60,    50,
+       0,     0,     0,     0,     0,    54,    55,    56,    57,    58,
+      59,    60
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      21,     3,    20,    24,    22,    23,    24,    25,    25,    17,
-       6,     7,    11,    12,     0,     4,    26,    18,    26,    25,
-      25,    18,    43,    31,    18,    20,    44,    35,    36,    39,
-      40,    41,    42,    43,    55,    20,    44,    45,    46,    47,
-      48,    49,    50,    51,    52,    53,    54,    19,    21,    25,
-       5,    59,    60,    26,    25,    29,    31,    10,    26,    80,
-      26,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    21,    93,    26,    82,    41,    42,    43,    15,    14,
-      88,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    26,    18,    18,    12,    15,     8,    14,    -1,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    26,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    34,    35,    36,
-      37,    38,    39,    40,    41,    42,    43,    18,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    26,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    34,    35,    36,    37,    38,    39,    40,
-      41,    42,    43,    21,    -1,    -1,    -1,    -1,    26,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    43,     8,     9,    -1,    -1,
-      -1,    13,    -1,    -1,    16,    17,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    25,    -1,    26,    28,    -1,    30,    -1,
-      -1,    32,    33,    34,    35,    36,    37,    38,    39,    40,
-      41,    42,    43,    26,    27,    -1,    -1,    -1,    -1,    -1,
-      -1,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    26,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    26,
-      -1,    -1,    -1,    -1,    -1,    -1,    26,    -1,    -1,    36,
-      37,    38,    39,    40,    41,    42,    43,    37,    38,    39,
-      40,    41,    42,    43
+      21,    19,     6,     7,     3,    26,    32,     0,    20,    17,
+      22,    23,    24,    25,    25,    33,    42,    43,    44,     4,
+      28,    11,    12,    44,    25,    33,    32,    25,    49,    37,
+      38,    18,    18,    45,    40,    41,    42,    43,    44,    18,
+      61,    25,    50,    51,    52,    53,    54,    55,    56,    57,
+      58,    59,    60,    21,    20,    20,    25,    65,    66,     5,
+      27,    25,    19,    10,    32,    21,    87,    35,    36,    37,
+      38,    39,    40,    41,    42,    43,    44,    29,    32,   100,
+      14,    89,    15,    18,    12,    32,    18,    95,    35,    36,
+      37,    38,    39,    40,    41,    42,    43,    44,    32,    14,
+       8,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    15,    24,    -1,    -1,    -1,    18,    32,    -1,    -1,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      32,    -1,    -1,    35,    36,    37,    38,    39,    40,    41,
+      42,    43,    44,     8,     9,    -1,    -1,    -1,    13,    -1,
+      -1,    16,    17,    -1,    -1,    -1,    -1,     8,     9,    -1,
+      25,    26,    13,    28,    -1,    16,    17,    -1,    -1,    34,
+      -1,    21,    -1,    -1,    25,    26,    -1,    28,    -1,    -1,
+      -1,    -1,    32,    34,    -1,    35,    36,    37,    38,    39,
+      40,    41,    42,    43,    44,    30,    31,    32,    -1,    -1,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      32,    33,    -1,    35,    36,    37,    38,    39,    40,    41,
+      42,    43,    44,    32,    -1,    -1,    35,    36,    37,    38,
+      39,    40,    41,    42,    43,    44,    32,    -1,    -1,    -1,
+      -1,    37,    38,    39,    40,    41,    42,    43,    44,    32,
+      -1,    -1,    -1,    -1,    -1,    38,    39,    40,    41,    42,
+      43,    44
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     3,    46,    25,     0,     6,     7,    47,    48,    25,
-      25,     4,    47,    18,    18,     8,     9,    13,    16,    17,
-      25,    28,    30,    49,    50,    18,    20,    22,    23,    24,
-      25,    44,    52,    52,    20,    20,    19,    49,    25,     5,
-      49,    52,    52,    10,    26,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    43,    14,    25,    52,    52,    29,
-      31,    21,    49,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    49,    21,    21,    18,    52,    52,
-      11,    12,    27,    15,    18,    18,    32,    33,    51,    49,
-      52,    52,    12,    14,    49,    15
+       0,     3,    47,    25,     0,     6,     7,    48,    49,    25,
+      25,     4,    48,    18,    18,     8,     9,    13,    16,    17,
+      25,    26,    28,    34,    50,    51,    52,    18,    20,    22,
+      23,    24,    25,    45,    54,    54,    20,    20,    19,    33,
+      51,    25,    25,    25,    52,     5,    51,    54,    54,    10,
+      32,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    14,    25,    54,    54,    27,    29,    51,    21,    51,
+      54,    54,    54,    54,    54,    54,    54,    54,    54,    54,
+      54,    51,    21,    21,    18,    54,    54,    11,    12,    33,
+      15,    18,    18,    30,    31,    53,    51,    54,    54,    12,
+      14,    51,    15
   };
 
   const signed char
   parser::yyr1_[] =
   {
-       0,    45,    46,    47,    47,    48,    48,    49,    49,    50,
-      50,    50,    50,    50,    50,    50,    50,    50,    51,    51,
-      52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    52
+       0,    46,    47,    48,    48,    49,    49,    50,    51,    51,
+      51,    51,    52,    52,    52,    52,    52,    52,    52,    52,
+      52,    52,    53,    53,    54,    54,    54,    54,    54,    54,
+      54,    54,    54,    54,    54,    54,    54,    54,    54,    54,
+      54
   };
 
   const signed char
   parser::yyr2_[] =
   {
-       0,     2,     6,     0,     2,     3,     3,     1,     2,     2,
-       4,     5,     5,     5,     7,     5,     4,     9,     1,     1,
-       1,     1,     1,     1,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,     3,     2,     3,     5
+       0,     2,     6,     0,     2,     3,     3,     2,     1,     2,
+       2,     3,     2,     4,     5,     5,     5,     7,     5,     4,
+       9,     2,     1,     1,     1,     1,     1,     1,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,     2,     3,
+       5
   };
 
 
@@ -1247,23 +1282,24 @@ namespace yy {
   "T_END", "T_INTEGER", "T_BOOLEAN", "T_SKIP", "T_IF", "T_THEN", "T_ELSE",
   "T_ENDIF", "T_WHILE", "T_DO", "T_DONE", "T_READ", "T_WRITE",
   "T_SEMICOLON", "T_ASSIGN", "T_OPEN", "T_CLOSE", "T_NUM", "T_TRUE",
-  "T_FALSE", "T_ID", "T_QMARK", "T_COLON", "T_REPEAT", "T_UNTIL", "T_FOR",
-  "T_FROM", "T_UPTO", "T_DOWNTO", "T_OR", "T_AND", "T_EQ", "T_LESS",
-  "T_GR", "T_ADD", "T_SUB", "T_MUL", "T_DIV", "T_MOD", "T_NOT", "$accept",
-  "start", "declarations", "declaration", "statements", "statement",
-  "for_way", "expression", YY_NULLPTR
+  "T_FALSE", "T_ID", "T_REPEAT", "T_UNTIL", "T_FOR", "T_FROM", "T_UPTO",
+  "T_DOWNTO", "T_QMARK", "T_COLON", "T_GOTO", "T_OR", "T_AND", "T_EQ",
+  "T_LESS", "T_GR", "T_ADD", "T_SUB", "T_MUL", "T_DIV", "T_MOD", "T_NOT",
+  "$accept", "start", "declarations", "declaration", "label", "statements",
+  "statement", "directions", "expression", YY_NULLPTR
   };
 #endif
 
 
 #if YYDEBUG
-  const unsigned char
+  const short
   parser::yyrline_[] =
   {
-       0,    51,    51,    59,    63,    70,    75,    82,    87,    94,
-      99,   104,   109,   114,   119,   124,   129,   134,   141,   146,
-     153,   158,   163,   168,   173,   178,   183,   188,   193,   198,
-     203,   208,   213,   218,   223,   228,   233
+       0,    52,    52,    60,    64,    71,    76,    83,    90,    95,
+     100,   105,   112,   117,   122,   127,   132,   137,   142,   147,
+     152,   157,   164,   169,   176,   181,   186,   191,   196,   201,
+     206,   211,   216,   221,   226,   231,   236,   241,   246,   251,
+     256
   };
 
   void
@@ -1331,10 +1367,11 @@ namespace yy {
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45
     };
     // Last valid token kind.
-    const int code_max = 299;
+    const int code_max = 300;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -1345,5 +1382,5 @@ namespace yy {
   }
 
 } // yy
-#line 1349 "while.tab.cc"
+#line 1386 "while.tab.cc"
 

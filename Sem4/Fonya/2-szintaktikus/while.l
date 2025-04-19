@@ -35,6 +35,7 @@ for       return parser::token::T_FOR;
 from       return parser::token::T_FROM;
 upto       return parser::token::T_UPTO;
 downto       return parser::token::T_DOWNTO;
+goto        return parser::token::T_GOTO;
 ";"         return parser::token::T_SEMICOLON;
 ":="        return parser::token::T_ASSIGN;
 "="         return parser::token::T_EQ;
@@ -56,7 +57,6 @@ mod         return parser::token::T_MOD;
 {DIGIT}+	return parser::token::T_NUM;
 true        return parser::token::T_TRUE;
 false       return parser::token::T_FALSE;
-{DIGIT}   return parser::token::T_YEAR;
 
 "#".*\n    // nothing to do
 

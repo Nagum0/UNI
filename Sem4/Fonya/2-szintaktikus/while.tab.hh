@@ -445,25 +445,26 @@ namespace yy {
     T_TRUE = 278,                  // T_TRUE
     T_FALSE = 279,                 // T_FALSE
     T_ID = 280,                    // T_ID
-    T_QMARK = 281,                 // T_QMARK
-    T_COLON = 282,                 // T_COLON
-    T_REPEAT = 283,                // T_REPEAT
-    T_UNTIL = 284,                 // T_UNTIL
-    T_FOR = 285,                   // T_FOR
-    T_FROM = 286,                  // T_FROM
-    T_UPTO = 287,                  // T_UPTO
-    T_DOWNTO = 288,                // T_DOWNTO
-    T_OR = 289,                    // T_OR
-    T_AND = 290,                   // T_AND
-    T_EQ = 291,                    // T_EQ
-    T_LESS = 292,                  // T_LESS
-    T_GR = 293,                    // T_GR
-    T_ADD = 294,                   // T_ADD
-    T_SUB = 295,                   // T_SUB
-    T_MUL = 296,                   // T_MUL
-    T_DIV = 297,                   // T_DIV
-    T_MOD = 298,                   // T_MOD
-    T_NOT = 299                    // T_NOT
+    T_REPEAT = 281,                // T_REPEAT
+    T_UNTIL = 282,                 // T_UNTIL
+    T_FOR = 283,                   // T_FOR
+    T_FROM = 284,                  // T_FROM
+    T_UPTO = 285,                  // T_UPTO
+    T_DOWNTO = 286,                // T_DOWNTO
+    T_QMARK = 287,                 // T_QMARK
+    T_COLON = 288,                 // T_COLON
+    T_GOTO = 289,                  // T_GOTO
+    T_OR = 290,                    // T_OR
+    T_AND = 291,                   // T_AND
+    T_EQ = 292,                    // T_EQ
+    T_LESS = 293,                  // T_LESS
+    T_GR = 294,                    // T_GR
+    T_ADD = 295,                   // T_ADD
+    T_SUB = 296,                   // T_SUB
+    T_MUL = 297,                   // T_MUL
+    T_DIV = 298,                   // T_DIV
+    T_MOD = 299,                   // T_MOD
+    T_NOT = 300                    // T_NOT
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -480,7 +481,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 45, ///< Number of tokens.
+        YYNTOKENS = 46, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -508,33 +509,35 @@ namespace yy {
         S_T_TRUE = 23,                           // T_TRUE
         S_T_FALSE = 24,                          // T_FALSE
         S_T_ID = 25,                             // T_ID
-        S_T_QMARK = 26,                          // T_QMARK
-        S_T_COLON = 27,                          // T_COLON
-        S_T_REPEAT = 28,                         // T_REPEAT
-        S_T_UNTIL = 29,                          // T_UNTIL
-        S_T_FOR = 30,                            // T_FOR
-        S_T_FROM = 31,                           // T_FROM
-        S_T_UPTO = 32,                           // T_UPTO
-        S_T_DOWNTO = 33,                         // T_DOWNTO
-        S_T_OR = 34,                             // T_OR
-        S_T_AND = 35,                            // T_AND
-        S_T_EQ = 36,                             // T_EQ
-        S_T_LESS = 37,                           // T_LESS
-        S_T_GR = 38,                             // T_GR
-        S_T_ADD = 39,                            // T_ADD
-        S_T_SUB = 40,                            // T_SUB
-        S_T_MUL = 41,                            // T_MUL
-        S_T_DIV = 42,                            // T_DIV
-        S_T_MOD = 43,                            // T_MOD
-        S_T_NOT = 44,                            // T_NOT
-        S_YYACCEPT = 45,                         // $accept
-        S_start = 46,                            // start
-        S_declarations = 47,                     // declarations
-        S_declaration = 48,                      // declaration
-        S_statements = 49,                       // statements
-        S_statement = 50,                        // statement
-        S_for_way = 51,                          // for_way
-        S_expression = 52                        // expression
+        S_T_REPEAT = 26,                         // T_REPEAT
+        S_T_UNTIL = 27,                          // T_UNTIL
+        S_T_FOR = 28,                            // T_FOR
+        S_T_FROM = 29,                           // T_FROM
+        S_T_UPTO = 30,                           // T_UPTO
+        S_T_DOWNTO = 31,                         // T_DOWNTO
+        S_T_QMARK = 32,                          // T_QMARK
+        S_T_COLON = 33,                          // T_COLON
+        S_T_GOTO = 34,                           // T_GOTO
+        S_T_OR = 35,                             // T_OR
+        S_T_AND = 36,                            // T_AND
+        S_T_EQ = 37,                             // T_EQ
+        S_T_LESS = 38,                           // T_LESS
+        S_T_GR = 39,                             // T_GR
+        S_T_ADD = 40,                            // T_ADD
+        S_T_SUB = 41,                            // T_SUB
+        S_T_MUL = 42,                            // T_MUL
+        S_T_DIV = 43,                            // T_DIV
+        S_T_MOD = 44,                            // T_MOD
+        S_T_NOT = 45,                            // T_NOT
+        S_YYACCEPT = 46,                         // $accept
+        S_start = 47,                            // start
+        S_declarations = 48,                     // declarations
+        S_declaration = 49,                      // declaration
+        S_label = 50,                            // label
+        S_statements = 51,                       // statements
+        S_statement = 52,                        // statement
+        S_directions = 53,                       // directions
+        S_expression = 54                        // expression
       };
     };
 
@@ -1161,36 +1164,6 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_T_QMARK (location_type l)
-      {
-        return symbol_type (token::T_QMARK, std::move (l));
-      }
-#else
-      static
-      symbol_type
-      make_T_QMARK (const location_type& l)
-      {
-        return symbol_type (token::T_QMARK, l);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_T_COLON (location_type l)
-      {
-        return symbol_type (token::T_COLON, std::move (l));
-      }
-#else
-      static
-      symbol_type
-      make_T_COLON (const location_type& l)
-      {
-        return symbol_type (token::T_COLON, l);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
       make_T_REPEAT (location_type l)
       {
         return symbol_type (token::T_REPEAT, std::move (l));
@@ -1276,6 +1249,51 @@ switch (yykind)
       make_T_DOWNTO (const location_type& l)
       {
         return symbol_type (token::T_DOWNTO, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_QMARK (location_type l)
+      {
+        return symbol_type (token::T_QMARK, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_QMARK (const location_type& l)
+      {
+        return symbol_type (token::T_QMARK, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_COLON (location_type l)
+      {
+        return symbol_type (token::T_COLON, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_COLON (const location_type& l)
+      {
+        return symbol_type (token::T_COLON, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_GOTO (location_type l)
+      {
+        return symbol_type (token::T_GOTO, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_GOTO (const location_type& l)
+      {
+        return symbol_type (token::T_GOTO, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1520,7 +1538,7 @@ switch (yykind)
 
 #if YYDEBUG
     // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-    static const unsigned char yyrline_[];
+    static const short yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r) const;
     /// Print the state stack on the debug stream.
@@ -1747,8 +1765,8 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 273,     ///< Last index in yytable_.
-      yynnts_ = 8,  ///< Number of nonterminal symbols.
+      yylast_ = 261,     ///< Last index in yytable_.
+      yynnts_ = 9,  ///< Number of nonterminal symbols.
       yyfinal_ = 4 ///< Termination state number.
     };
 
@@ -1758,7 +1776,7 @@ switch (yykind)
 
 
 } // yy
-#line 1762 "while.tab.hh"
+#line 1780 "while.tab.hh"
 
 
 // "%code provides" blocks.
@@ -1766,7 +1784,7 @@ switch (yykind)
 
 int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 
-#line 1770 "while.tab.hh"
+#line 1788 "while.tab.hh"
 
 
 #endif // !YY_YY_WHILE_TAB_HH_INCLUDED

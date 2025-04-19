@@ -174,6 +174,10 @@ namespace yy {
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_variable: // variable
+        value.copy< type > (YY_MOVE (that.value));
+        break;
+
       default:
         break;
     }
@@ -214,6 +218,10 @@ namespace yy {
       case symbol_kind::S_statements: // statements
       case symbol_kind::S_statement: // statement
         value.move< std::string > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_variable: // variable
+        value.move< type > (YY_MOVE (s.value));
         break;
 
       default:
@@ -328,6 +336,10 @@ namespace yy {
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_variable: // variable
+        value.YY_MOVE_OR_COPY< type > (YY_MOVE (that.value));
+        break;
+
       default:
         break;
     }
@@ -352,6 +364,10 @@ namespace yy {
       case symbol_kind::S_statements: // statements
       case symbol_kind::S_statement: // statement
         value.move< std::string > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_variable: // variable
+        value.move< type > (YY_MOVE (that.value));
         break;
 
       default:
@@ -380,6 +396,10 @@ namespace yy {
         value.copy< std::string > (that.value);
         break;
 
+      case symbol_kind::S_variable: // variable
+        value.copy< type > (that.value);
+        break;
+
       default:
         break;
     }
@@ -403,6 +423,10 @@ namespace yy {
       case symbol_kind::S_statements: // statements
       case symbol_kind::S_statement: // statement
         value.move< std::string > (that.value);
+        break;
+
+      case symbol_kind::S_variable: // variable
+        value.move< type > (that.value);
         break;
 
       default:
@@ -674,6 +698,10 @@ namespace yy {
         yylhs.value.emplace< std::string > ();
         break;
 
+      case symbol_kind::S_variable: // variable
+        yylhs.value.emplace< type > ();
+        break;
+
       default:
         break;
     }
@@ -695,20 +723,23 @@ namespace yy {
           switch (yyn)
             {
   case 2: // start: T_PROGRAM T_ID declarations T_BEGIN statements T_END
-#line 53 "while.y"
+#line 58 "while.y"
     {
         std::cout << "global main" << std::endl;
         std::cout << "extern read_unsigned, write_unsigned" << std::endl;
         std::cout << "extern read_boolean, write_boolean" << std::endl;
         std::cout << "segment .bss" << std::endl;
-        std::map<std::string,symbol_data>::iterator it; 
+
+        std::map<std::string, symbol_data>::iterator it; 
         for(it = symbol_table.begin(); it != symbol_table.end(); ++it) {
             std::string label = it->second.label;
             std::cout
                 << it->second.label << ": "
                 << (it->second.typ == boolean ? "resb " : "resd ")
-                << 1 << std::endl;
-        } 
+                << (it->second.is_array ? it->second.array_size : 1)
+                << std::endl;
+        }
+
         std::cout << std::endl;
         std::cout << "segment .text" << std::endl;
         std::cout << "main:" << std::endl;
@@ -716,73 +747,94 @@ namespace yy {
         std::cout << "mov eax, 0" << std::endl;
         std::cout << "ret" << std::endl;
     }
-#line 720 "while.tab.cc"
+#line 751 "while.tab.cc"
     break;
 
   case 3: // declarations: %empty
-#line 77 "while.y"
+#line 85 "while.y"
     {
-    }
-#line 727 "while.tab.cc"
-    break;
-
-  case 4: // declarations: declaration declarations
-#line 81 "while.y"
-    {
-    }
-#line 734 "while.tab.cc"
-    break;
-
-  case 5: // declaration: T_INTEGER T_ID T_SEMICOLON
-#line 87 "while.y"
-    {
-		if( symbol_table.count(yystack_[1].value.as < std::string > ()) > 0 )
-		{
-			semantic_error(yystack_[2].location.begin.line, "Re-declared variable: " + yystack_[1].value.as < std::string > ());
-		}
-		symbol_table[yystack_[1].value.as < std::string > ()] = symbol_data(integer);
-    }
-#line 746 "while.tab.cc"
-    break;
-
-  case 6: // declaration: T_BOOLEAN T_ID T_SEMICOLON
-#line 96 "while.y"
-    {
-		if( symbol_table.count(yystack_[1].value.as < std::string > ()) > 0 )
-		{
-			semantic_error(yystack_[2].location.begin.line, "Re-declared variable: " + yystack_[1].value.as < std::string > ());
-		}
-		symbol_table[yystack_[1].value.as < std::string > ()] = symbol_data(boolean);
     }
 #line 758 "while.tab.cc"
     break;
 
-  case 7: // statements: statement
+  case 4: // declarations: declaration declarations
+#line 89 "while.y"
+    {
+    }
+#line 765 "while.tab.cc"
+    break;
+
+  case 5: // variable: T_INTEGER
+#line 95 "while.y"
+    {
+        yylhs.value.as < type > () = integer;
+    }
+#line 773 "while.tab.cc"
+    break;
+
+  case 6: // variable: T_BOOLEAN
+#line 100 "while.y"
+    {
+        yylhs.value.as < type > () = boolean;
+    }
+#line 781 "while.tab.cc"
+    break;
+
+  case 7: // declaration: variable T_ID T_SEMICOLON
 #line 107 "while.y"
+    {
+		if( symbol_table.count(yystack_[1].value.as < std::string > ()) > 0 )
+		{
+			semantic_error(yystack_[2].location.begin.line, "Re-declared variable: " + yystack_[1].value.as < std::string > ());
+		}
+		symbol_table[yystack_[1].value.as < std::string > ()] = symbol_data(yystack_[2].value.as < type > ());
+        symbol_table[yystack_[1].value.as < std::string > ()].is_array = false;
+    }
+#line 794 "while.tab.cc"
+    break;
+
+  case 8: // declaration: variable T_ID T_OPEN_BRACKET T_NUM T_CLOSE_BRACKET T_SEMICOLON
+#line 117 "while.y"
+    {
+        if( symbol_table.count(yystack_[4].value.as < std::string > ()) > 0 )
+        {
+            semantic_error(yystack_[5].location.begin.line, "Re-declared variable: " + yystack_[4].value.as < std::string > ());
+        }
+        
+        int size = std::stoi(yystack_[2].value.as < std::string > ());
+        symbol_table[yystack_[4].value.as < std::string > ()] = symbol_data(yystack_[5].value.as < type > ());
+        symbol_table[yystack_[4].value.as < std::string > ()].is_array = true;
+        symbol_table[yystack_[4].value.as < std::string > ()].array_size = size;
+    }
+#line 810 "while.tab.cc"
+    break;
+
+  case 9: // statements: statement
+#line 132 "while.y"
     {
         yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > ();
     }
-#line 766 "while.tab.cc"
+#line 818 "while.tab.cc"
     break;
 
-  case 8: // statements: statement statements
-#line 112 "while.y"
+  case 10: // statements: statement statements
+#line 137 "while.y"
     {
         yylhs.value.as < std::string > () = yystack_[1].value.as < std::string > () + yystack_[0].value.as < std::string > ();
     }
-#line 774 "while.tab.cc"
+#line 826 "while.tab.cc"
     break;
 
-  case 9: // statement: T_SKIP T_SEMICOLON
-#line 119 "while.y"
+  case 11: // statement: T_SKIP T_SEMICOLON
+#line 144 "while.y"
     {
         yylhs.value.as < std::string > () = "nop";
     }
-#line 782 "while.tab.cc"
+#line 834 "while.tab.cc"
     break;
 
-  case 10: // statement: T_ID T_ASSIGN expression T_SEMICOLON
-#line 124 "while.y"
+  case 12: // statement: T_ID T_ASSIGN expression T_SEMICOLON
+#line 149 "while.y"
     {
 		if( symbol_table.count(yystack_[3].value.as < std::string > ()) == 0 )
 		{
@@ -792,6 +844,7 @@ namespace yy {
 		{
 		   semantic_error(yystack_[3].location.begin.line, "Type error.");
 		}
+
         if(yystack_[1].value.as < expression > ().typ == integer)
             yylhs.value.as < std::string > () = "" +
                  yystack_[1].value.as < expression > ().code +
@@ -801,11 +854,48 @@ namespace yy {
                  yystack_[1].value.as < expression > ().code +
                  "mov [" + symbol_table[yystack_[3].value.as < std::string > ()].label + "], al\n";
     }
-#line 805 "while.tab.cc"
+#line 858 "while.tab.cc"
     break;
 
-  case 11: // statement: T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
-#line 144 "while.y"
+  case 13: // statement: T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET T_ASSIGN expression T_SEMICOLON
+#line 170 "while.y"
+    {
+        if( symbol_table.count(yystack_[6].value.as < std::string > ()) == 0 )
+		{
+			semantic_error(yystack_[6].location.begin.line, "Undeclared variable: " + yystack_[6].value.as < std::string > ());
+		}
+
+        if(symbol_table[yystack_[6].value.as < std::string > ()].typ != yystack_[1].value.as < expression > ().typ)
+		{
+		   semantic_error(yystack_[6].location.begin.line, "Type error.");
+		}
+
+        if (yystack_[4].value.as < expression > ().typ != integer) {
+		   semantic_error(yystack_[4].location.begin.line, "Type error.");
+        }
+        
+        if (symbol_table[yystack_[6].value.as < std::string > ()].typ == integer) 
+        {
+            yylhs.value.as < std::string > () = "" +
+                yystack_[4].value.as < expression > ().code +
+                "mov esi, eax\n" +
+                yystack_[1].value.as < expression > ().code +
+                "mov [" + symbol_table[yystack_[6].value.as < std::string > ()].label + " + esi * 4], eax\n";
+        }
+        else if (symbol_table[yystack_[6].value.as < std::string > ()].typ == boolean) 
+        {
+            yylhs.value.as < std::string > () = "" +
+                yystack_[4].value.as < expression > ().code +
+                "mov esi, eax\n" +
+                yystack_[1].value.as < expression > ().code +
+                "mov [" + symbol_table[yystack_[6].value.as < std::string > ()].label + " + esi * 1], al\n";
+        }
+    }
+#line 895 "while.tab.cc"
+    break;
+
+  case 14: // statement: T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
+#line 204 "while.y"
     {
 		if( symbol_table.count(yystack_[2].value.as < std::string > ()) == 0 )
 		{
@@ -820,11 +910,11 @@ namespace yy {
             yylhs.value.as < std::string > () = "call read_boolean\nmov [" + symbol_table[yystack_[2].value.as < std::string > ()].label + "], al\n";
         }
     }
-#line 824 "while.tab.cc"
+#line 914 "while.tab.cc"
     break;
 
-  case 12: // statement: T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON
-#line 160 "while.y"
+  case 15: // statement: T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON
+#line 220 "while.y"
     {
         if(yystack_[2].value.as < expression > ().typ == integer)
         {
@@ -843,11 +933,11 @@ namespace yy {
                  "add esp,4\n";
         }
     }
-#line 847 "while.tab.cc"
+#line 937 "while.tab.cc"
     break;
 
-  case 13: // statement: T_IF expression T_THEN statements T_ENDIF
-#line 180 "while.y"
+  case 16: // statement: T_IF expression T_THEN statements T_ENDIF
+#line 240 "while.y"
     {
 		if(yystack_[3].value.as < expression > ().typ != boolean)
 		{
@@ -861,11 +951,11 @@ namespace yy {
              yystack_[1].value.as < std::string > () +
              end + ":\n";
     }
-#line 865 "while.tab.cc"
+#line 955 "while.tab.cc"
     break;
 
-  case 14: // statement: T_IF expression T_THEN statements T_ELSE statements T_ENDIF
-#line 195 "while.y"
+  case 17: // statement: T_IF expression T_THEN statements T_ELSE statements T_ENDIF
+#line 255 "while.y"
     {
 		if(yystack_[5].value.as < expression > ().typ != boolean)
 		{
@@ -883,11 +973,11 @@ namespace yy {
              yystack_[1].value.as < std::string > () +
              end + ":\n";
     }
-#line 887 "while.tab.cc"
+#line 977 "while.tab.cc"
     break;
 
-  case 15: // statement: T_WHILE expression T_DO statements T_DONE
-#line 214 "while.y"
+  case 18: // statement: T_WHILE expression T_DO statements T_DONE
+#line 274 "while.y"
     {
 		if(yystack_[3].value.as < expression > ().typ != boolean)
 		{
@@ -904,35 +994,83 @@ namespace yy {
              "jmp " + start + "\n" +
              end + ":\n";
     }
-#line 908 "while.tab.cc"
+#line 998 "while.tab.cc"
     break;
 
-  case 16: // expression: T_NUM
-#line 234 "while.y"
+  case 19: // statement: T_ASSERT T_OPEN expression T_CLOSE T_SEMICOLON
+#line 292 "while.y"
+    {
+        if (yystack_[2].value.as < expression > ().typ != boolean)
+        {
+            semantic_error(yystack_[4].location.begin.line, "Type error.");
+        }
+
+        std::string end = next_label();
+
+        yylhs.value.as < std::string > () = "" +
+            yystack_[2].value.as < expression > ().code +
+            "cmp al, 0\n" +
+            "jne " + end + "\n" +
+            "mov eax, 1\n" +
+            "ret\n" +
+            end + ":\n";
+    }
+#line 1019 "while.tab.cc"
+    break;
+
+  case 20: // statement: T_MULTI expression statement
+#line 310 "while.y"
+    {
+        if (yystack_[1].value.as < expression > ().typ != integer)
+        {
+            semantic_error(yystack_[2].location.begin.line, "Type error.");
+        }
+
+        std::string start = next_label();
+        std::string end = next_label();
+
+        yylhs.value.as < std::string > () = "" +
+            yystack_[1].value.as < expression > ().code +
+            "mov ecx, eax\n" +
+            start + ":\n" +
+            "cmp ecx, 0\n" +
+            "je " + end + "\n" +
+            "dec ecx\n" +
+            "push ecx\n" +
+            yystack_[0].value.as < std::string > () +
+            "pop ecx\n" +
+            "jmp " + start + "\n" +
+            end + ":\n";
+    }
+#line 1046 "while.tab.cc"
+    break;
+
+  case 21: // expression: T_NUM
+#line 336 "while.y"
     {
 		yylhs.value.as < expression > () = expression(integer, "mov eax, " + yystack_[0].value.as < std::string > () + "\n");
     }
-#line 916 "while.tab.cc"
+#line 1054 "while.tab.cc"
     break;
 
-  case 17: // expression: T_TRUE
-#line 239 "while.y"
+  case 22: // expression: T_TRUE
+#line 341 "while.y"
     {
 		yylhs.value.as < expression > () = expression(boolean, "mov al, 1\n");
     }
-#line 924 "while.tab.cc"
+#line 1062 "while.tab.cc"
     break;
 
-  case 18: // expression: T_FALSE
-#line 244 "while.y"
+  case 23: // expression: T_FALSE
+#line 346 "while.y"
     {
 		yylhs.value.as < expression > () = expression(boolean, "mov al, 0\n");
     }
-#line 932 "while.tab.cc"
+#line 1070 "while.tab.cc"
     break;
 
-  case 19: // expression: T_ID
-#line 249 "while.y"
+  case 24: // expression: T_ID
+#line 351 "while.y"
     {
 		if( symbol_table.count(yystack_[0].value.as < std::string > ()) == 0 )
 		{
@@ -949,11 +1087,36 @@ namespace yy {
                     "mov al, [" + symbol_table[yystack_[0].value.as < std::string > ()].label + "]\n");
         }
     }
-#line 953 "while.tab.cc"
+#line 1091 "while.tab.cc"
     break;
 
-  case 20: // expression: expression T_ADD expression
-#line 267 "while.y"
+  case 25: // expression: T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET
+#line 369 "while.y"
+    {
+        if( symbol_table.count(yystack_[3].value.as < std::string > ()) == 0 )
+		{
+			semantic_error(yystack_[3].location.begin.line, "Undeclared variable: " + yystack_[3].value.as < std::string > ());
+		}
+
+        if (yystack_[1].value.as < expression > ().typ != integer)
+        {
+            semantic_error(yystack_[3].location.begin.line, "Array must be indexed by an integer.");
+        }
+
+        int offset = symbol_table[yystack_[3].value.as < std::string > ()].typ == boolean ? 1 : 4;
+
+        yylhs.value.as < expression > () = expression(symbol_table[yystack_[3].value.as < std::string > ()].typ,
+                        "" +
+                        yystack_[1].value.as < expression > ().code +
+                        "mov esi, eax\n" +
+                        "mov eax, [" + symbol_table[yystack_[3].value.as < std::string > ()].label + " + esi * " + std::to_string(offset) + "]\n"
+        );
+    }
+#line 1116 "while.tab.cc"
+    break;
+
+  case 26: // expression: expression T_ADD expression
+#line 391 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -967,11 +1130,11 @@ namespace yy {
                 "pop ebx\n" +
                 "add eax, ebx\n");
     }
-#line 971 "while.tab.cc"
+#line 1134 "while.tab.cc"
     break;
 
-  case 21: // expression: expression T_SUB expression
-#line 282 "while.y"
+  case 27: // expression: expression T_SUB expression
+#line 406 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -984,11 +1147,11 @@ namespace yy {
                 "pop ebx\n" +
                 "sub eax, ebx\n");
     }
-#line 988 "while.tab.cc"
+#line 1151 "while.tab.cc"
     break;
 
-  case 22: // expression: expression T_MUL expression
-#line 296 "while.y"
+  case 28: // expression: expression T_MUL expression
+#line 420 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1001,11 +1164,11 @@ namespace yy {
                 "pop ebx\n" +
                 "mul ebx\n");
     }
-#line 1005 "while.tab.cc"
+#line 1168 "while.tab.cc"
     break;
 
-  case 23: // expression: expression T_DIV expression
-#line 310 "while.y"
+  case 29: // expression: expression T_DIV expression
+#line 434 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1019,11 +1182,11 @@ namespace yy {
                 "pop ebx\n" +
                 "div ebx\n");
     }
-#line 1023 "while.tab.cc"
+#line 1186 "while.tab.cc"
     break;
 
-  case 24: // expression: expression T_MOD expression
-#line 325 "while.y"
+  case 30: // expression: expression T_MOD expression
+#line 449 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1038,11 +1201,11 @@ namespace yy {
                 "div ebx\n" +
                 "mov eax, edx\n");
     }
-#line 1042 "while.tab.cc"
+#line 1205 "while.tab.cc"
     break;
 
-  case 25: // expression: expression T_LESS expression
-#line 341 "while.y"
+  case 31: // expression: expression T_LESS expression
+#line 465 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1056,11 +1219,11 @@ namespace yy {
                 "cmp eax, ebx\n" +
                 "setl al\n");
     }
-#line 1060 "while.tab.cc"
+#line 1223 "while.tab.cc"
     break;
 
-  case 26: // expression: expression T_GR expression
-#line 356 "while.y"
+  case 32: // expression: expression T_GR expression
+#line 480 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1074,11 +1237,11 @@ namespace yy {
                 "cmp eax, ebx\n" +
                 "setg al\n");
     }
-#line 1078 "while.tab.cc"
+#line 1241 "while.tab.cc"
     break;
 
-  case 27: // expression: expression T_EQ expression
-#line 371 "while.y"
+  case 33: // expression: expression T_EQ expression
+#line 495 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != yystack_[0].value.as < expression > ().typ)
 		{
@@ -1092,11 +1255,11 @@ namespace yy {
                 "cmp eax, ebx\n" +
                 "sete al\n");
     }
-#line 1096 "while.tab.cc"
+#line 1259 "while.tab.cc"
     break;
 
-  case 28: // expression: expression T_AND expression
-#line 386 "while.y"
+  case 34: // expression: expression T_AND expression
+#line 510 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != boolean || yystack_[0].value.as < expression > ().typ != boolean)
 		{
@@ -1109,11 +1272,11 @@ namespace yy {
                 "pop bx\n" +
                 "and al, bl\n");
     }
-#line 1113 "while.tab.cc"
+#line 1276 "while.tab.cc"
     break;
 
-  case 29: // expression: expression T_OR expression
-#line 400 "while.y"
+  case 35: // expression: expression T_OR expression
+#line 524 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != boolean || yystack_[0].value.as < expression > ().typ != boolean)
 		{
@@ -1126,11 +1289,11 @@ namespace yy {
                 "pop bx\n" +
                 "or al, bl\n");
     }
-#line 1130 "while.tab.cc"
+#line 1293 "while.tab.cc"
     break;
 
-  case 30: // expression: T_NOT expression
-#line 414 "while.y"
+  case 36: // expression: T_NOT expression
+#line 538 "while.y"
     {
 		if(yystack_[0].value.as < expression > ().typ != boolean)
 		{
@@ -1140,45 +1303,45 @@ namespace yy {
                 yystack_[0].value.as < expression > ().code +
                 "xor al, 1\n");
     }
-#line 1144 "while.tab.cc"
+#line 1307 "while.tab.cc"
     break;
 
-  case 31: // expression: T_OPEN expression T_CLOSE
-#line 425 "while.y"
+  case 37: // expression: T_OPEN expression T_CLOSE
+#line 549 "while.y"
     {
 		yylhs.value.as < expression > () = expression(yystack_[1].value.as < expression > ().typ, "" + yystack_[1].value.as < expression > ().code);
     }
-#line 1152 "while.tab.cc"
+#line 1315 "while.tab.cc"
     break;
 
-  case 32: // expression: T_OPEN expression T_QUESTIONMARK expression T_COLON expression T_CLOSE
-#line 430 "while.y"
+  case 38: // expression: expression T_QMARK expression T_COLON expression
+#line 554 "while.y"
     {
-        if(yystack_[5].value.as < expression > ().typ != boolean)
-		{
-		   semantic_error(yystack_[6].location.begin.line, "Type error.");
-		}
-        if(yystack_[3].value.as < expression > ().typ != yystack_[1].value.as < expression > ().typ)
-		{
-		   semantic_error(yystack_[6].location.begin.line, "Type error.");
-		}
-        std::string elsel = next_label();
+        if (yystack_[4].value.as < expression > ().typ != yystack_[0].value.as < expression > ().typ || yystack_[2].value.as < expression > ().typ != boolean)
+        {
+            semantic_error(yystack_[4].location.begin.line, "Type error.");
+        }
+        
+        std::string second = next_label();
         std::string end = next_label();
-		yylhs.value.as < expression > () = expression(yystack_[3].value.as < expression > ().typ, "" +
-            yystack_[5].value.as < expression > ().code +
-             "cmp al, 1\n" +
-             "jne near " + elsel + "\n" +
-             yystack_[3].value.as < expression > ().code +
-             "jmp " + std::end + "\n" +
-             elsel + ":\n" +
-             yystack_[1].value.as < expression > ().code +
-             std::end + ":\n");
+        
+        yylhs.value.as < expression > () = expression(yystack_[4].value.as < expression > ().typ,
+            "" +
+            yystack_[2].value.as < expression > ().code +
+            "cmp al, 1\n" +
+            "jne " + second + "\n" +
+            yystack_[4].value.as < expression > ().code +
+            "jmp " + end + "\n" +
+            second + ":\n" +
+            yystack_[0].value.as < expression > ().code +
+            end + ":\n"
+        );
     }
-#line 1178 "while.tab.cc"
+#line 1341 "while.tab.cc"
     break;
 
 
-#line 1182 "while.tab.cc"
+#line 1345 "while.tab.cc"
 
             default:
               break;
@@ -1378,119 +1541,153 @@ namespace yy {
   const short
   parser::yypact_[] =
   {
-      -1,   -14,    15,     7,   -28,    -3,     8,    30,     7,    22,
-      24,    28,   -28,   -28,   -28,    25,   -19,   -19,    19,    27,
-      29,    44,    28,   -28,   -19,   -28,   -28,   -28,   -28,   -19,
-      41,    51,    34,   -19,   -19,   -28,   -28,    88,   -28,    28,
-     -19,   -19,   -19,   -19,   -19,   -19,   -19,   -19,   -19,   -19,
-      28,    31,   105,    71,   -28,   -19,     9,    60,    60,   140,
-      21,    21,   -27,   -27,   -28,   -28,   -28,    35,    43,    45,
-     -28,   133,    28,   -28,   -28,   -28,   -28,   -19,    50,   122,
-     -28,   -28
+       3,   -13,    25,    11,   -28,   -28,   -28,    27,    17,    11,
+     118,     7,   -28,    28,   -18,   -18,    23,    30,    31,   -19,
+     -18,    41,   118,   -28,    24,   -28,   -18,   -28,   -28,   -28,
+      42,   -18,    68,    84,    20,   -18,   -18,   -18,   -18,    55,
+     -28,   -28,    29,   162,   -18,    37,   118,   -18,   -18,   -18,
+     -18,   -18,   -18,   -18,   -18,   -18,   -18,   -18,   118,    32,
+     182,   202,   119,   220,   -28,    48,   -28,   238,    16,   251,
+     277,   277,    21,   103,   103,   -27,   -27,    37,    37,    37,
+      54,    51,    57,    58,   -28,    59,   -28,   -28,   118,   -28,
+     -18,   -28,   -28,   -28,   -28,   -18,    62,   264,   142,   -28,
+     -28
   };
 
   const signed char
   parser::yydefact_[] =
   {
-       0,     0,     0,     3,     1,     0,     0,     0,     3,     0,
-       0,     0,     4,     5,     6,     0,     0,     0,     0,     0,
-       0,     0,     7,     9,     0,    16,    17,    18,    19,     0,
-       0,     0,     0,     0,     0,     2,     8,     0,    30,     0,
+       0,     0,     0,     3,     1,     5,     6,     0,     0,     3,
+       0,     0,     4,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     9,     7,     0,    11,     0,    21,    22,    23,
+      24,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       2,    10,     0,     0,     0,    36,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    31,     0,     0,    29,    28,    27,
-      25,    26,    20,    21,    22,    23,    24,     0,     0,     0,
-      10,     0,     0,    13,    15,    11,    12,     0,     0,     0,
-      14,    32
+       0,     0,     0,     0,    20,     0,    37,     0,     0,     0,
+      35,    34,    33,    31,    32,    26,    27,    28,    29,    30,
+       0,     0,     0,     0,    12,     0,     8,    25,     0,    16,
+       0,    18,    14,    15,    19,     0,     0,    38,     0,    17,
+      13
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -28,   -28,    56,   -28,    -4,   -28,   -17
+     -28,   -28,    72,   -28,   -28,    -3,    43,   -15
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-       0,     2,     7,     8,    21,    22,    30
+       0,     2,     7,     8,     9,    21,    22,    32
   };
 
   const signed char
   parser::yytable_[] =
   {
-      31,    24,     1,    25,    26,    27,    28,    37,    47,    48,
-      49,     3,    38,     5,     6,     4,    52,    53,    36,    29,
-      72,    73,     9,    57,    58,    59,    60,    61,    62,    63,
-      64,    65,    66,    10,    11,    56,    15,    16,    71,    32,
-      13,    17,    14,    23,    18,    19,    67,    33,    34,    35,
-      74,    39,    68,    20,    45,    46,    47,    48,    49,    51,
-      79,    75,    80,    76,    12,    50,     0,     0,    78,    40,
-      41,    42,    43,    44,    45,    46,    47,    48,    49,    40,
-      41,    42,    43,    44,    45,    46,    47,    48,    49,    70,
-      42,    43,    44,    45,    46,    47,    48,    49,     0,    40,
-      41,    42,    43,    44,    45,    46,    47,    48,    49,    54,
-       0,     0,     0,     0,    55,     0,    40,    41,    42,    43,
-      44,    45,    46,    47,    48,    49,    69,     0,     0,     0,
-       0,     0,     0,    40,    41,    42,    43,    44,    45,    46,
-      47,    48,    49,    81,     0,     0,     0,     0,     0,     0,
-      40,    41,    42,    43,    44,    45,    46,    47,    48,    49,
-      77,    40,    41,    42,    43,    44,    45,    46,    47,    48,
-      49,    43,    44,    45,    46,    47,    48,    49
+      33,    37,    47,    26,    38,    39,     1,    27,    28,    29,
+      30,    43,    55,    56,    57,     3,    45,     5,     6,    41,
+      60,    61,    62,    63,    31,     4,    23,    88,    89,    67,
+      24,    10,    69,    70,    71,    72,    73,    74,    75,    76,
+      77,    78,    79,    68,    34,    11,    40,    25,    59,    42,
+      47,    35,    36,    65,    81,    80,    51,    52,    53,    54,
+      55,    56,    57,    13,    14,    44,    47,    86,    15,    91,
+      92,    16,    17,    18,    99,    97,    93,    94,    46,    95,
+      98,    12,    64,    19,    47,    96,    20,    48,    49,    50,
+      51,    52,    53,    54,    55,    56,    57,    47,    58,     0,
+      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+       0,     0,     0,    47,     0,     0,    48,    49,    50,    51,
+      52,    53,    54,    55,    56,    57,    13,    14,     0,     0,
+       0,    15,    47,     0,    16,    17,    18,     0,    84,     0,
+      53,    54,    55,    56,    57,     0,    19,     0,    47,    20,
+       0,    48,    49,    50,    51,    52,    53,    54,    55,    56,
+      57,   100,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    47,     0,     0,    48,    49,    50,    51,    52,    53,
+      54,    55,    56,    57,    66,     0,     0,     0,     0,     0,
+       0,    47,     0,     0,    48,    49,    50,    51,    52,    53,
+      54,    55,    56,    57,    82,     0,     0,     0,     0,     0,
+       0,    47,     0,     0,    48,    49,    50,    51,    52,    53,
+      54,    55,    56,    57,    83,     0,     0,     0,     0,     0,
+       0,    47,     0,     0,    48,    49,    50,    51,    52,    53,
+      54,    55,    56,    57,    85,     0,     0,     0,     0,    47,
+       0,     0,    48,    49,    50,    51,    52,    53,    54,    55,
+      56,    57,    87,     0,     0,     0,     0,    47,     0,     0,
+      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+      47,    90,     0,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    47,     0,     0,    48,    49,    50,    51,
+      52,    53,    54,    55,    56,    57,    47,     0,     0,     0,
+       0,    50,    51,    52,    53,    54,    55,    56,    57
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      17,    20,     3,    22,    23,    24,    25,    24,    35,    36,
-      37,    25,    29,     6,     7,     0,    33,    34,    22,    38,
-      11,    12,    25,    40,    41,    42,    43,    44,    45,    46,
-      47,    48,    49,    25,     4,    39,     8,     9,    55,    20,
-      18,    13,    18,    18,    16,    17,    50,    20,    19,     5,
-      15,    10,    21,    25,    33,    34,    35,    36,    37,    25,
-      77,    18,    12,    18,     8,    14,    -1,    -1,    72,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    18,
-      30,    31,    32,    33,    34,    35,    36,    37,    -1,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    21,
-      -1,    -1,    -1,    -1,    26,    -1,    28,    29,    30,    31,
-      32,    33,    34,    35,    36,    37,    21,    -1,    -1,    -1,
-      -1,    -1,    -1,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    21,    -1,    -1,    -1,    -1,    -1,    -1,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
-      37,    31,    32,    33,    34,    35,    36,    37
+      15,    20,    29,    21,    23,    20,     3,    25,    26,    27,
+      28,    26,    39,    40,    41,    28,    31,     6,     7,    22,
+      35,    36,    37,    38,    42,     0,    19,    11,    12,    44,
+      23,     4,    47,    48,    49,    50,    51,    52,    53,    54,
+      55,    56,    57,    46,    21,    28,     5,    19,    28,    25,
+      29,    21,    21,    24,    22,    58,    35,    36,    37,    38,
+      39,    40,    41,     8,     9,    23,    29,    19,    13,    15,
+      19,    16,    17,    18,    12,    90,    19,    19,    10,    20,
+      95,     9,    39,    28,    29,    88,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    29,    14,    -1,
+      32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
+      -1,    -1,    -1,    29,    -1,    -1,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,     8,     9,    -1,    -1,
+      -1,    13,    29,    -1,    16,    17,    18,    -1,    19,    -1,
+      37,    38,    39,    40,    41,    -1,    28,    -1,    29,    31,
+      -1,    32,    33,    34,    35,    36,    37,    38,    39,    40,
+      41,    19,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    29,    -1,    -1,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    22,    -1,    -1,    -1,    -1,    -1,
+      -1,    29,    -1,    -1,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    22,    -1,    -1,    -1,    -1,    -1,
+      -1,    29,    -1,    -1,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    22,    -1,    -1,    -1,    -1,    -1,
+      -1,    29,    -1,    -1,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    24,    -1,    -1,    -1,    -1,    29,
+      -1,    -1,    32,    33,    34,    35,    36,    37,    38,    39,
+      40,    41,    24,    -1,    -1,    -1,    -1,    29,    -1,    -1,
+      32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
+      29,    30,    -1,    32,    33,    34,    35,    36,    37,    38,
+      39,    40,    41,    29,    -1,    -1,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    29,    -1,    -1,    -1,
+      -1,    34,    35,    36,    37,    38,    39,    40,    41
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     3,    40,    25,     0,     6,     7,    41,    42,    25,
-      25,     4,    41,    18,    18,     8,     9,    13,    16,    17,
-      25,    43,    44,    18,    20,    22,    23,    24,    25,    38,
-      45,    45,    20,    20,    19,     5,    43,    45,    45,    10,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      14,    25,    45,    45,    21,    26,    43,    45,    45,    45,
-      45,    45,    45,    45,    45,    45,    45,    43,    21,    21,
-      18,    45,    11,    12,    15,    18,    18,    27,    43,    45,
-      12,    21
+       0,     3,    44,    28,     0,     6,     7,    45,    46,    47,
+       4,    28,    45,     8,     9,    13,    16,    17,    18,    28,
+      31,    48,    49,    19,    23,    19,    21,    25,    26,    27,
+      28,    42,    50,    50,    21,    21,    21,    20,    23,    50,
+       5,    48,    25,    50,    23,    50,    10,    29,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    14,    28,
+      50,    50,    50,    50,    49,    24,    22,    50,    48,    50,
+      50,    50,    50,    50,    50,    50,    50,    50,    50,    50,
+      48,    22,    22,    22,    19,    24,    19,    24,    11,    12,
+      30,    15,    19,    19,    19,    20,    48,    50,    50,    12,
+      19
   };
 
   const signed char
   parser::yyr1_[] =
   {
-       0,    39,    40,    41,    41,    42,    42,    43,    43,    44,
-      44,    44,    44,    44,    44,    44,    45,    45,    45,    45,
-      45,    45,    45,    45,    45,    45,    45,    45,    45,    45,
-      45,    45,    45
+       0,    43,    44,    45,    45,    46,    46,    47,    47,    48,
+      48,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    50,    50,    50,    50,    50,    50,    50,    50,    50,
+      50,    50,    50,    50,    50,    50,    50,    50,    50
   };
 
   const signed char
   parser::yyr2_[] =
   {
-       0,     2,     6,     0,     2,     3,     3,     1,     2,     2,
-       4,     5,     5,     5,     7,     5,     1,     1,     1,     1,
-       3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       2,     3,     7
+       0,     2,     6,     0,     2,     1,     1,     3,     6,     1,
+       2,     2,     4,     7,     5,     5,     5,     7,     5,     5,
+       3,     1,     1,     1,     1,     4,     3,     3,     3,     3,
+       3,     3,     3,     3,     3,     3,     2,     3,     5
   };
 
 
@@ -1502,12 +1699,13 @@ namespace yy {
   {
   "\"end of file\"", "error", "\"invalid token\"", "T_PROGRAM", "T_BEGIN",
   "T_END", "T_INTEGER", "T_BOOLEAN", "T_SKIP", "T_IF", "T_THEN", "T_ELSE",
-  "T_ENDIF", "T_WHILE", "T_DO", "T_DONE", "T_READ", "T_WRITE",
-  "T_SEMICOLON", "T_ASSIGN", "T_OPEN", "T_CLOSE", "T_NUM", "T_TRUE",
-  "T_FALSE", "T_ID", "T_QUESTIONMARK", "T_COLON", "T_OR", "T_AND", "T_EQ",
-  "T_LESS", "T_GR", "T_ADD", "T_SUB", "T_MUL", "T_DIV", "T_MOD", "T_NOT",
-  "$accept", "start", "declarations", "declaration", "statements",
-  "statement", "expression", YY_NULLPTR
+  "T_ENDIF", "T_WHILE", "T_DO", "T_DONE", "T_READ", "T_WRITE", "T_ASSERT",
+  "T_SEMICOLON", "T_ASSIGN", "T_OPEN", "T_CLOSE", "T_OPEN_BRACKET",
+  "T_CLOSE_BRACKET", "T_NUM", "T_TRUE", "T_FALSE", "T_ID", "T_QMARK",
+  "T_COLON", "T_MULTI", "T_OR", "T_AND", "T_EQ", "T_LESS", "T_GR", "T_ADD",
+  "T_SUB", "T_MUL", "T_DIV", "T_MOD", "T_NOT", "$accept", "start",
+  "declarations", "variable", "declaration", "statements", "statement",
+  "expression", YY_NULLPTR
   };
 #endif
 
@@ -1516,10 +1714,10 @@ namespace yy {
   const short
   parser::yyrline_[] =
   {
-       0,    52,    52,    77,    80,    86,    95,   106,   111,   118,
-     123,   143,   159,   179,   194,   213,   233,   238,   243,   248,
-     266,   281,   295,   309,   324,   340,   355,   370,   385,   399,
-     413,   424,   429
+       0,    57,    57,    85,    88,    94,    99,   106,   116,   131,
+     136,   143,   148,   169,   203,   219,   239,   254,   273,   291,
+     309,   335,   340,   345,   350,   368,   390,   405,   419,   433,
+     448,   464,   479,   494,   509,   523,   537,   548,   553
   };
 
   void
@@ -1587,10 +1785,10 @@ namespace yy {
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38
+      35,    36,    37,    38,    39,    40,    41,    42
     };
     // Last valid token kind.
-    const int code_max = 293;
+    const int code_max = 297;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -1601,5 +1799,5 @@ namespace yy {
   }
 
 } // yy
-#line 1605 "while.tab.cc"
+#line 1803 "while.tab.cc"
 

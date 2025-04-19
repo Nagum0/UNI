@@ -8,3 +8,5 @@ void semantic_error(int line, std::string text) {
 }
 
 std::map<std::string, type> symbol_table;
+
+std::map<std::string, int> label_table;

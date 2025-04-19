@@ -15,6 +15,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_END
 %token T_INTEGER 
 %token T_BOOLEAN
+%token T_DATE
 %token T_SKIP
 %token T_IF
 %token T_THEN
@@ -23,16 +24,30 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_WHILE
 %token T_DO
 %token T_DONE
+%token T_REPEAT
+%token T_UNTIL
 %token T_READ
 %token T_WRITE
 %token T_SEMICOLON
 %token T_ASSIGN
 %token T_OPEN
 %token T_CLOSE
-%token T_NUM
+%token <std::string> T_NUM
 %token T_TRUE
 %token T_FALSE
 %token <std::string> T_ID
+%token T_QUESTIONMARK
+%token T_COLON
+%token T_COMMA
+%token T_FOR
+%token T_FROM
+%token T_UPTO
+%token T_DOWNTO
+%token T_DATE_LIT
+%token T_GET_DAY
+%token T_GET_MONTH
+%token T_GET_YEAR
+%token T_GOTO 
 
 %left T_OR T_AND
 %left T_EQ
@@ -64,20 +79,20 @@ declarations:
 declaration:
     T_INTEGER T_ID T_SEMICOLON
     {
-		if( symbol_table.count($2) > 0 )
-		{
-			semantic_error(@1.begin.line, "Re-declared variable: " + $2);
-		}
-		symbol_table[$2] = integer;
+        if( symbol_table.count($2) > 0 )
+        {
+            semantic_error(@1.begin.line, "Re-declared variable: " + $2);
+        }
+        symbol_table[$2] = integer;
     }
 |
     T_BOOLEAN T_ID T_SEMICOLON
     {
-		if( symbol_table.count($2) > 0 )
-		{
-			semantic_error(@1.begin.line, "Re-declared variable: " + $2);
-		}
-		symbol_table[$2] = boolean;
+        if( symbol_table.count($2) > 0 )
+        {
+            semantic_error(@1.begin.line, "Re-declared variable: " + $2);
+        }
+        symbol_table[$2] = boolean;
     }
 ;
 
@@ -96,24 +111,24 @@ statement:
     {
     }
 |
-   T_ID T_ASSIGN expression T_SEMICOLON
+    T_ID T_ASSIGN expression T_SEMICOLON
     {
-		if( symbol_table.count($1) == 0 )
-		{
-			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
-		}
-		if(symbol_table[$1] != $3)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
+        if( symbol_table.count($1) == 0 )
+        {
+            semantic_error(@1.begin.line, "Undeclared variable: " + $1);
+        }
+        if(symbol_table[$1] != $3)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
     }
 |
     T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
     {
-		if( symbol_table.count($3) == 0 )
-		{
-			semantic_error(@1.begin.line, "Undeclared variable: " + $3);
-		}
+        if( symbol_table.count($3) == 0 )
+        {
+            semantic_error(@1.begin.line, "Undeclared variable: " + $3);
+        }
     }
 |
     T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON
@@ -122,156 +137,177 @@ statement:
 |
     T_IF expression T_THEN statements T_ENDIF
     {
-		if($2 != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
+        if($2 != boolean)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
     }
 |
     T_IF expression T_THEN statements T_ELSE statements T_ENDIF
     {
-		if($2 != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
+        if($2 != boolean)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
     }
 |
     T_WHILE expression T_DO statements T_DONE
     {
-		if($2 != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
+        if($2 != boolean)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+    }
+|
+    T_REPEAT statements T_UNTIL expression
+    {
+        if ($4 != boolean)
+        {
+            semantic_error(@4.begin.line, "Must be logical expression after until.");
+        }
     }
 ;
 
 expression:
     T_NUM
     {
-		$$ = integer;
+        $$ = integer;
     }
 |
     T_TRUE
     {
-		$$ = boolean;
+        $$ = boolean;
     }
 |
     T_FALSE
     {
-		$$ = boolean;
+        $$ = boolean;
     }
 |
     T_ID
     {
-		if( symbol_table.count($1) == 0 )
-		{
-			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
-		}
-		$$ = symbol_table[$1];
+        if( symbol_table.count($1) == 0 )
+        {
+            semantic_error(@1.begin.line, "Undeclared variable: " + $1);
+        }
+        $$ = symbol_table[$1];
     }
 |
     expression T_ADD expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-           
-		}
-		$$ = integer;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = integer;
     }
 |
     expression T_SUB expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = integer;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = integer;
     }
 |
     expression T_MUL expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = integer;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = integer;
     }
 |
     expression T_DIV expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = integer;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = integer;
     }
 |
     expression T_MOD expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = integer;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = integer;
     }
 |
     expression T_LESS expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = boolean;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = boolean;
     }
 |
     expression T_GR expression
     {
-		if($1 != integer || $3 != integer)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = boolean;
+        if($1 != integer || $3 != integer)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = boolean;
     }
 |
     expression T_EQ expression
     {
-		if($1 != $3)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = boolean;
+        if($1 != $3)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = boolean;
     }
 |
     expression T_AND expression
     {
-		if($1 != boolean || $3 != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = boolean;
+        if($1 != boolean || $3 != boolean)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = boolean;
     }
 |
     expression T_OR expression
     {
-		if($1 != boolean || $3 != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = boolean;
+        if($1 != boolean || $3 != boolean)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = boolean;
     }
 |
     T_NOT expression
     {
-		if($2 != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-		$$ = boolean;
+        if($2 != boolean)
+        {
+           semantic_error(@1.begin.line, "Type error.");
+        }
+        $$ = boolean;
     }
 |
     T_OPEN expression T_CLOSE
     {
-		$$ = $2;
+        $$ = $2;
+    }
+|
+    expression T_QUESTIONMARK expression T_COLON expression
+    {
+        if ($1 != $5) 
+        {
+            semantic_error(@1.begin.line, "Both branches must be of same type.");
+        }
+        else if ($3 != boolean)
+        {
+            semantic_error(@3.begin.line, "Must be logical expression.");
+        }
+        $$ = $1;
     }
 ;
+

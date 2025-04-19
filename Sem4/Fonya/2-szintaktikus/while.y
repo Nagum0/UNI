@@ -29,14 +29,15 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_TRUE
 %token T_FALSE
 %token T_ID
-%token T_QMARK
-%token T_COLON
 %token T_REPEAT
 %token T_UNTIL
 %token T_FOR
 %token T_FROM
 %token T_UPTO
 %token T_DOWNTO
+%token T_QMARK
+%token T_COLON
+%token T_GOTO
 
 %left T_OR T_AND
 %left T_EQ
@@ -78,15 +79,32 @@ declaration:
     }
 ;
 
+label:
+    T_ID T_COLON
+    {
+        std::cout << "label -> T_ID T_COLON" << std::endl;
+    }
+;
+
 statements:
-    statement
+    statement 
     {
         std::cout << "statements -> statement" << std::endl;
     }
 |
-    statement statements
+    statement statements 
     {
         std::cout << "statements -> statement statements" << std::endl;
+    }
+|
+    label statement
+    {
+        std::cout << "statements -> label statement" << std::endl;
+    }
+|
+    label statement statements
+    {
+        std::cout << "statements -> label statement statements" << std::endl;
     }
 ;
 
@@ -131,21 +149,26 @@ statement:
         std::cout << "repeat -> T_REPEAT statements T_UNTIL expression" << std::endl;
     }
 |
-    T_FOR T_ID T_FROM expression for_way expression T_DO statements T_DONE
+    T_FOR T_ID T_FROM expression directions expression T_DO statements T_DONE
     {
-        std::cout << "for -> T_FOR T_ID T_FROM expression for_way expression T_DO statements T_DONE" << std::endl;
+        std::cout << "T_FOR T_ID expression directions expression T_DO statements T_DONE" << std::endl;
+    }
+|
+    T_GOTO T_ID
+    {
+        std::cout << "T_GOTO T_ID" << std::endl;
     }
 ;
 
-for_way:
+directions:
     T_UPTO
     {
-        std::cout << "for_way -> T_UPTO" << std::endl;
+        std::cout << "T_UPTO" << std::endl;
     }
 |
     T_DOWNTO
     {
-        std::cout << "for_way -> T_DOWNTO" << std::endl;
+        std::cout << "T_DOWNTO" << std::endl;
     }
 ;
 
@@ -232,6 +255,6 @@ expression:
 |
     expression T_QMARK expression T_COLON expression
     {
-        std::cout << "expression -> expression T_QMARK expression T_COLON expression" << std::endl;
+        std::cout << "expression T_QMARK expression T_COLON expression" << std::endl;
     }
 ;

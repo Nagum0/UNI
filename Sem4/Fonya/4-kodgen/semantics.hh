@@ -15,6 +15,8 @@ std::string next_label();
 struct symbol_data {
     type typ;
     std::string label;
+    bool is_array;
+    int array_size;
     symbol_data();
     symbol_data(type t);
 };

@@ -1,0 +1,7 @@
+program TestProg
+    integer x;
+begin
+    x := 1;
+
+    goto l1
+end

@@ -246,6 +246,7 @@ statement:
 expression:
     T_NUM
     {
+        std::cout << "Val: " << $1 << std::endl;
 		$$ = integer;
     }
 |

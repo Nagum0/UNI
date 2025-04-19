@@ -1,0 +1,7 @@
+program Test
+    integer x;
+    integer y;
+begin
+    x := 69 ? 1 = 1 : 420;
+    repeat y := y + 1; until y = 10
+end

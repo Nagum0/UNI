@@ -25,16 +25,20 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_DONE
 %token T_READ
 %token T_WRITE
+%token T_ASSERT
 %token T_SEMICOLON
 %token T_ASSIGN
 %token T_OPEN
 %token T_CLOSE
+%token T_OPEN_BRACKET;
+%token T_CLOSE_BRACKET;
 %token <std::string> T_NUM
 %token T_TRUE
 %token T_FALSE
 %token <std::string> T_ID
-%token T_QUESTIONMARK
+%token T_QMARK
 %token T_COLON
+%token T_MULTI
 
 %left T_OR T_AND
 %left T_EQ
@@ -44,6 +48,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %precedence T_NOT
 
 %type <expression> expression
+%type <type> variable
 %type <std::string> statement statements
 
 %%
@@ -55,14 +60,17 @@ start:
         std::cout << "extern read_unsigned, write_unsigned" << std::endl;
         std::cout << "extern read_boolean, write_boolean" << std::endl;
         std::cout << "segment .bss" << std::endl;
-        std::map<std::string,symbol_data>::iterator it; 
+
+        std::map<std::string, symbol_data>::iterator it; 
         for(it = symbol_table.begin(); it != symbol_table.end(); ++it) {
             std::string label = it->second.label;
             std::cout
                 << it->second.label << ": "
                 << (it->second.typ == boolean ? "resb " : "resd ")
-                << 1 << std::endl;
-        } 
+                << (it->second.is_array ? it->second.array_size : 1)
+                << std::endl;
+        }
+
         std::cout << std::endl;
         std::cout << "segment .text" << std::endl;
         std::cout << "main:" << std::endl;
@@ -82,23 +90,40 @@ declarations:
     }
 ;
 
-declaration:
-    T_INTEGER T_ID T_SEMICOLON
+variable:
+    T_INTEGER 
     {
-		if( symbol_table.count($2) > 0 )
-		{
-			semantic_error(@1.begin.line, "Re-declared variable: " + $2);
-		}
-		symbol_table[$2] = symbol_data(integer);
+        $$ = integer;
     }
 |
-    T_BOOLEAN T_ID T_SEMICOLON
+    T_BOOLEAN
+    {
+        $$ = boolean;
+    }
+;
+
+declaration:
+    variable T_ID T_SEMICOLON
     {
 		if( symbol_table.count($2) > 0 )
 		{
 			semantic_error(@1.begin.line, "Re-declared variable: " + $2);
 		}
-		symbol_table[$2] = symbol_data(boolean);
+		symbol_table[$2] = symbol_data($1);
+        symbol_table[$2].is_array = false;
+    }
+|
+    variable T_ID T_OPEN_BRACKET T_NUM T_CLOSE_BRACKET T_SEMICOLON
+    {
+        if( symbol_table.count($2) > 0 )
+        {
+            semantic_error(@1.begin.line, "Re-declared variable: " + $2);
+        }
+        
+        int size = std::stoi($4);
+        symbol_table[$2] = symbol_data($1);
+        symbol_table[$2].is_array = true;
+        symbol_table[$2].array_size = size;
     }
 ;
 
@@ -130,6 +155,7 @@ statement:
 		{
 		   semantic_error(@1.begin.line, "Type error.");
 		}
+
         if($3.typ == integer)
             $$ = "" +
                  $3.code +
@@ -138,6 +164,40 @@ statement:
             $$ = "" +
                  $3.code +
                  "mov [" + symbol_table[$1].label + "], al\n";
+    }
+|
+    T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET T_ASSIGN expression T_SEMICOLON
+    {
+        if( symbol_table.count($1) == 0 )
+		{
+			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
+		}
+
+        if(symbol_table[$1].typ != $6.typ)
+		{
+		   semantic_error(@1.begin.line, "Type error.");
+		}
+
+        if ($3.typ != integer) {
+		   semantic_error(@3.begin.line, "Type error.");
+        }
+        
+        if (symbol_table[$1].typ == integer) 
+        {
+            $$ = "" +
+                $3.code +
+                "mov esi, eax\n" +
+                $6.code +
+                "mov [" + symbol_table[$1].label + " + esi * 4], eax\n";
+        }
+        else if (symbol_table[$1].typ == boolean) 
+        {
+            $$ = "" +
+                $3.code +
+                "mov esi, eax\n" +
+                $6.code +
+                "mov [" + symbol_table[$1].label + " + esi * 1], al\n";
+        }
     }
 |
     T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
@@ -227,6 +287,48 @@ statement:
              "jmp " + start + "\n" +
              end + ":\n";
     }
+|
+    T_ASSERT T_OPEN expression T_CLOSE T_SEMICOLON
+    {
+        if ($3.typ != boolean)
+        {
+            semantic_error(@1.begin.line, "Type error.");
+        }
+
+        std::string end = next_label();
+
+        $$ = "" +
+            $3.code +
+            "cmp al, 0\n" +
+            "jne " + end + "\n" +
+            "mov eax, 1\n" +
+            "ret\n" +
+            end + ":\n";
+    }
+|
+    T_MULTI expression statement
+    {
+        if ($2.typ != integer)
+        {
+            semantic_error(@1.begin.line, "Type error.");
+        }
+
+        std::string start = next_label();
+        std::string end = next_label();
+
+        $$ = "" +
+            $2.code +
+            "mov ecx, eax\n" +
+            start + ":\n" +
+            "cmp ecx, 0\n" +
+            "je " + end + "\n" +
+            "dec ecx\n" +
+            "push ecx\n" +
+            $3 +
+            "pop ecx\n" +
+            "jmp " + start + "\n" +
+            end + ":\n";
+    }
 ;
 
 expression:
@@ -261,6 +363,28 @@ expression:
             $$ = expression(symbol_table[$1].typ,
                     "mov al, [" + symbol_table[$1].label + "]\n");
         }
+    }
+|
+    T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET
+    {
+        if( symbol_table.count($1) == 0 )
+		{
+			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
+		}
+
+        if ($3.typ != integer)
+        {
+            semantic_error(@1.begin.line, "Array must be indexed by an integer.");
+        }
+
+        int offset = symbol_table[$1].typ == boolean ? 1 : 4;
+
+        $$ = expression(symbol_table[$1].typ,
+                        "" +
+                        $3.code +
+                        "mov esi, eax\n" +
+                        "mov eax, [" + symbol_table[$1].label + " + esi * " + std::to_string(offset) + "]\n"
+        );
     }
 |
     expression T_ADD expression
@@ -425,27 +549,27 @@ expression:
     {
 		$$ = expression($2.typ, "" + $2.code);
     }
-|   
-    T_OPEN expression T_QUESTIONMARK expression T_COLON expression T_CLOSE 
+|
+    expression T_QMARK expression T_COLON expression
     {
-        if($2.typ != boolean)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-        if($4.typ != $6.typ)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
-        std::string elsel = next_label();
+        if ($1.typ != $5.typ || $3.typ != boolean)
+        {
+            semantic_error(@1.begin.line, "Type error.");
+        }
+        
+        std::string second = next_label();
         std::string end = next_label();
-		$$ = expression($4.typ, "" +
-            $2.code +
-             "cmp al, 1\n" +
-             "jne near " + elsel + "\n" +
-             $4.code +
-             "jmp " + std::end + "\n" +
-             elsel + ":\n" +
-             $6.code +
-             std::end + ":\n");
+        
+        $$ = expression($1.typ,
+            "" +
+            $3.code +
+            "cmp al, 1\n" +
+            "jne " + second + "\n" +
+            $1.code +
+            "jmp " + end + "\n" +
+            second + ":\n" +
+            $5.code +
+            end + ":\n"
+        );
     }
 ;

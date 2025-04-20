@@ -1,6 +1,9 @@
 program TestProgram
-    integer i;
-    char cs[5];
+    char name[5];
+    char text[69];
 begin
-    stdout(cs, 5); 
+    name := "Zeki\n";
+    stdout(name, 5);
+    text := "ASTOLFOOOOOOOO IS THE\tBEEEEEEEEEST\n";
+    stdout(text, 69);
 end

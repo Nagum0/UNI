@@ -42,6 +42,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_COLON
 %token T_MULTI
 %token <std::string> T_CHAR_LIT
+%token <std::string> T_STRING_LIT
 %token T_COMMA;
 
 %left T_OR T_AND
@@ -176,6 +177,34 @@ statement:
             $$ = "" +
                  $3.code +
                  "mov [" + symbol_table[$1].label + "], al\n";
+    }
+|
+    T_ID T_ASSIGN T_STRING_LIT T_SEMICOLON
+    {
+        if (symbol_table.count($1) == 0)
+		{
+			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
+		}
+        
+        if (symbol_table[$1].typ != ch || !symbol_table[$1].is_array)
+        {
+            semantic_error(@1.begin.line, "Type error.");
+        }
+
+
+        std::string str = extract_str($3);
+
+        if (symbol_table[$1].array_size < str.size()) 
+        {
+            semantic_error(@3.begin.line, "Array size and string literal sizes do not match: " + std::to_string(symbol_table[$1].array_size) + ", " + std::to_string(str.size()));
+        }
+
+        $$ = "";
+        for (size_t i = 0; i < str.size(); ++i)
+        {   
+            char c = str[i];
+            $$ += "mov BYTE [" + symbol_table[$1].label + " + " + std::to_string(i) + "], " + std::to_string(static_cast<int>(c)) + "\n";
+        }
     }
 |
     T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET T_ASSIGN expression T_SEMICOLON

@@ -55,6 +55,7 @@ mod         return parser::token::T_MOD;
 ","         return parser::token::T_COMMA;
 
 {DIGIT}+	return parser::token::T_NUM;
+\"({LETTER}|{DIGIT}|{WS}|\\n|\\t)*\" return parser::token::T_STRING_LIT;
 '({LETTER}|\\n|\\t)' return parser::token::T_CHAR_LIT;
 true        return parser::token::T_TRUE;
 false       return parser::token::T_FALSE;

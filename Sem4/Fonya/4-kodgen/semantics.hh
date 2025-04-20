@@ -31,5 +31,6 @@ struct expression {
 };
 
 char extract_char(std::string char_literal);
+std::string extract_str(std::string string_literal);
 
 #endif // IMPLEMENTATION_HH

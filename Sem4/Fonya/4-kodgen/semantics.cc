@@ -41,3 +41,26 @@ char extract_char(std::string char_literal) {
 
     throw std::invalid_argument("Invalid argument: " + char_literal);
 }
+
+std::string extract_str(std::string str) {
+    std::string result;
+    bool escaping = false; 
+
+    for (size_t i = 1; i < str.size() - 1; ++i) {
+        char c = str[i];
+
+        if (escaping) {
+            switch (c) {
+                case 'n': result += '\n'; break;
+                case 't': result += '\t'; break;
+            }
+            escaping = false;
+        } else if (c == '\\') {
+            escaping = true;
+        } else {
+            result += c;
+        }
+    }
+
+    return result;
+}

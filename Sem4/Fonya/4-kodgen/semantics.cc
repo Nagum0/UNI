@@ -25,3 +25,7 @@ std::map<std::string, symbol_data> symbol_table;
 expression::expression() : typ(integer), code("") {}
 
 expression::expression(type t, std::string c) : typ(t), code(c) {}  
+
+char extract_char(std::string char_literal) {
+    return char_literal[1];
+}

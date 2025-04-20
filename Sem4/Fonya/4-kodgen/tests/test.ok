@@ -1,0 +1,15 @@
+program TestProgram
+    integer i;
+    char cs[5];
+begin
+    cs[0] := 'Z';
+    cs[1] := 'e';
+    cs[2] := 'k';
+    cs[3] := 'i';
+    
+    i := 0;
+    while i < 5 do
+        write(cs[i]);
+        i := i + 1;
+    done
+end

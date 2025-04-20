@@ -3,7 +3,7 @@
 %define api.value.type variant
 
 %code requires {
-#include "semantics.hh"
+#include "../semantics.hh"
 }
 
 %code provides {
@@ -15,6 +15,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_END
 %token T_INTEGER 
 %token T_BOOLEAN
+%token T_CHAR
 %token T_SKIP
 %token T_IF
 %token T_THEN
@@ -39,6 +40,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_QMARK
 %token T_COLON
 %token T_MULTI
+%token <std::string> T_CHAR_LIT
 
 %left T_OR T_AND
 %left T_EQ
@@ -59,6 +61,7 @@ start:
         std::cout << "global main" << std::endl;
         std::cout << "extern read_unsigned, write_unsigned" << std::endl;
         std::cout << "extern read_boolean, write_boolean" << std::endl;
+        std::cout << "extern write_char, write_str" << std::endl;
         std::cout << "segment .bss" << std::endl;
 
         std::map<std::string, symbol_data>::iterator it; 
@@ -66,7 +69,7 @@ start:
             std::string label = it->second.label;
             std::cout
                 << it->second.label << ": "
-                << (it->second.typ == boolean ? "resb " : "resd ")
+                << ((it->second.typ == boolean || it->second.typ == ch) ? "resb " : "resd ")
                 << (it->second.is_array ? it->second.array_size : 1)
                 << std::endl;
         }
@@ -100,9 +103,15 @@ variable:
     {
         $$ = boolean;
     }
+|
+    T_CHAR
+    {
+        $$ = ch;
+    }
 ;
 
 declaration:
+    // Variable declaration
     variable T_ID T_SEMICOLON
     {
 		if( symbol_table.count($2) > 0 )
@@ -113,6 +122,7 @@ declaration:
         symbol_table[$2].is_array = false;
     }
 |
+    // Array declaration
     variable T_ID T_OPEN_BRACKET T_NUM T_CLOSE_BRACKET T_SEMICOLON
     {
         if( symbol_table.count($2) > 0 )
@@ -160,7 +170,7 @@ statement:
             $$ = "" +
                  $3.code +
                  "mov [" + symbol_table[$1].label + "], eax\n";
-        if($3.typ == boolean)
+        else if($3.typ == boolean || $3.typ == ch)
             $$ = "" +
                  $3.code +
                  "mov [" + symbol_table[$1].label + "], al\n";
@@ -178,7 +188,8 @@ statement:
 		   semantic_error(@1.begin.line, "Type error.");
 		}
 
-        if ($3.typ != integer) {
+        if ($3.typ != integer) 
+        {
 		   semantic_error(@3.begin.line, "Type error.");
         }
         
@@ -190,7 +201,7 @@ statement:
                 $6.code +
                 "mov [" + symbol_table[$1].label + " + esi * 4], eax\n";
         }
-        else if (symbol_table[$1].typ == boolean) 
+        else if (symbol_table[$1].typ == boolean || symbol_table[$1].typ == ch) 
         {
             $$ = "" +
                 $3.code +
@@ -226,12 +237,20 @@ statement:
                  "call write_unsigned\n" +
                  "add esp,4\n";
         }
-        if($3.typ == boolean)
+        else if($3.typ == boolean)
         {
             $$ = "xor eax, eax\n" +
                  $3.code +
                  "push eax\n" +
                  "call write_boolean\n" +
+                 "add esp,4\n";
+        }
+        else if ($3.typ == ch)
+        {
+            $$ = "xor eax, eax\n" +
+                 $3.code +
+                 "push eax\n" +
+                 "call write_char\n" +
                  "add esp,4\n";
         }
     }
@@ -347,18 +366,24 @@ expression:
 		$$ = expression(boolean, "mov al, 0\n");
     }
 |
+    T_CHAR_LIT
+    {
+        char c = extract_char($1);
+        $$ = expression(ch, "mov al, " + std::to_string(c) + "\n");
+    }
+|
     T_ID
     {
 		if( symbol_table.count($1) == 0 )
 		{
 			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
 		}
-		if(symbol_table[$1].typ == integer)
+		if (symbol_table[$1].typ == integer)
         {
             $$ = expression(symbol_table[$1].typ,
                     "mov eax, [" + symbol_table[$1].label + "]\n");
         }
-        if(symbol_table[$1].typ == boolean)
+        else if (symbol_table[$1].typ == boolean || symbol_table[$1].typ == ch)
         {
             $$ = expression(symbol_table[$1].typ,
                     "mov al, [" + symbol_table[$1].label + "]\n");
@@ -377,7 +402,7 @@ expression:
             semantic_error(@1.begin.line, "Array must be indexed by an integer.");
         }
 
-        int offset = symbol_table[$1].typ == boolean ? 1 : 4;
+        int offset = (symbol_table[$1].typ == boolean || symbol_table[$1].typ == ch) ? 1 : 4;
 
         $$ = expression(symbol_table[$1].typ,
                         "" +

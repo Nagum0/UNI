@@ -6,7 +6,7 @@
 
 void semantic_error(int line, std::string text);
 
-enum type {boolean, integer};
+enum type {boolean, integer, ch};
 
 extern long id;
 
@@ -30,5 +30,6 @@ struct expression {
     expression(type typ, std::string code);
 };
 
-#endif // IMPLEMENTATION_HH
+char extract_char(std::string char_literal);
 
+#endif // IMPLEMENTATION_HH

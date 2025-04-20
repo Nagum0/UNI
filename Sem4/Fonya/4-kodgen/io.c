@@ -40,3 +40,11 @@ void write_boolean( int num )
 	else
 		fprintf( stdout, "false\n" );
 }
+
+void write_char(char c) {
+    fprintf(stdout, "%c\n", c);
+}
+
+void write_str(char cs[]) {
+    fprintf(stdout, "%s\n", cs);
+}

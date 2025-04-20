@@ -47,7 +47,7 @@
 // "%code requires" blocks.
 #line 5 "while.y"
 
-#include "semantics.hh"
+#include "../semantics.hh"
 
 #line 53 "while.tab.hh"
 
@@ -385,6 +385,7 @@ namespace yy {
 
       // T_NUM
       // T_ID
+      // T_CHAR_LIT
       // statements
       // statement
       char dummy2[sizeof (std::string)];
@@ -445,41 +446,43 @@ namespace yy {
     T_END = 260,                   // T_END
     T_INTEGER = 261,               // T_INTEGER
     T_BOOLEAN = 262,               // T_BOOLEAN
-    T_SKIP = 263,                  // T_SKIP
-    T_IF = 264,                    // T_IF
-    T_THEN = 265,                  // T_THEN
-    T_ELSE = 266,                  // T_ELSE
-    T_ENDIF = 267,                 // T_ENDIF
-    T_WHILE = 268,                 // T_WHILE
-    T_DO = 269,                    // T_DO
-    T_DONE = 270,                  // T_DONE
-    T_READ = 271,                  // T_READ
-    T_WRITE = 272,                 // T_WRITE
-    T_ASSERT = 273,                // T_ASSERT
-    T_SEMICOLON = 274,             // T_SEMICOLON
-    T_ASSIGN = 275,                // T_ASSIGN
-    T_OPEN = 276,                  // T_OPEN
-    T_CLOSE = 277,                 // T_CLOSE
-    T_OPEN_BRACKET = 278,          // T_OPEN_BRACKET
-    T_CLOSE_BRACKET = 279,         // T_CLOSE_BRACKET
-    T_NUM = 280,                   // T_NUM
-    T_TRUE = 281,                  // T_TRUE
-    T_FALSE = 282,                 // T_FALSE
-    T_ID = 283,                    // T_ID
-    T_QMARK = 284,                 // T_QMARK
-    T_COLON = 285,                 // T_COLON
-    T_MULTI = 286,                 // T_MULTI
-    T_OR = 287,                    // T_OR
-    T_AND = 288,                   // T_AND
-    T_EQ = 289,                    // T_EQ
-    T_LESS = 290,                  // T_LESS
-    T_GR = 291,                    // T_GR
-    T_ADD = 292,                   // T_ADD
-    T_SUB = 293,                   // T_SUB
-    T_MUL = 294,                   // T_MUL
-    T_DIV = 295,                   // T_DIV
-    T_MOD = 296,                   // T_MOD
-    T_NOT = 297                    // T_NOT
+    T_CHAR = 263,                  // T_CHAR
+    T_SKIP = 264,                  // T_SKIP
+    T_IF = 265,                    // T_IF
+    T_THEN = 266,                  // T_THEN
+    T_ELSE = 267,                  // T_ELSE
+    T_ENDIF = 268,                 // T_ENDIF
+    T_WHILE = 269,                 // T_WHILE
+    T_DO = 270,                    // T_DO
+    T_DONE = 271,                  // T_DONE
+    T_READ = 272,                  // T_READ
+    T_WRITE = 273,                 // T_WRITE
+    T_ASSERT = 274,                // T_ASSERT
+    T_SEMICOLON = 275,             // T_SEMICOLON
+    T_ASSIGN = 276,                // T_ASSIGN
+    T_OPEN = 277,                  // T_OPEN
+    T_CLOSE = 278,                 // T_CLOSE
+    T_OPEN_BRACKET = 279,          // T_OPEN_BRACKET
+    T_CLOSE_BRACKET = 280,         // T_CLOSE_BRACKET
+    T_NUM = 281,                   // T_NUM
+    T_TRUE = 282,                  // T_TRUE
+    T_FALSE = 283,                 // T_FALSE
+    T_ID = 284,                    // T_ID
+    T_QMARK = 285,                 // T_QMARK
+    T_COLON = 286,                 // T_COLON
+    T_MULTI = 287,                 // T_MULTI
+    T_CHAR_LIT = 288,              // T_CHAR_LIT
+    T_OR = 289,                    // T_OR
+    T_AND = 290,                   // T_AND
+    T_EQ = 291,                    // T_EQ
+    T_LESS = 292,                  // T_LESS
+    T_GR = 293,                    // T_GR
+    T_ADD = 294,                   // T_ADD
+    T_SUB = 295,                   // T_SUB
+    T_MUL = 296,                   // T_MUL
+    T_DIV = 297,                   // T_DIV
+    T_MOD = 298,                   // T_MOD
+    T_NOT = 299                    // T_NOT
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -496,7 +499,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 43, ///< Number of tokens.
+        YYNTOKENS = 45, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -506,49 +509,51 @@ namespace yy {
         S_T_END = 5,                             // T_END
         S_T_INTEGER = 6,                         // T_INTEGER
         S_T_BOOLEAN = 7,                         // T_BOOLEAN
-        S_T_SKIP = 8,                            // T_SKIP
-        S_T_IF = 9,                              // T_IF
-        S_T_THEN = 10,                           // T_THEN
-        S_T_ELSE = 11,                           // T_ELSE
-        S_T_ENDIF = 12,                          // T_ENDIF
-        S_T_WHILE = 13,                          // T_WHILE
-        S_T_DO = 14,                             // T_DO
-        S_T_DONE = 15,                           // T_DONE
-        S_T_READ = 16,                           // T_READ
-        S_T_WRITE = 17,                          // T_WRITE
-        S_T_ASSERT = 18,                         // T_ASSERT
-        S_T_SEMICOLON = 19,                      // T_SEMICOLON
-        S_T_ASSIGN = 20,                         // T_ASSIGN
-        S_T_OPEN = 21,                           // T_OPEN
-        S_T_CLOSE = 22,                          // T_CLOSE
-        S_T_OPEN_BRACKET = 23,                   // T_OPEN_BRACKET
-        S_T_CLOSE_BRACKET = 24,                  // T_CLOSE_BRACKET
-        S_T_NUM = 25,                            // T_NUM
-        S_T_TRUE = 26,                           // T_TRUE
-        S_T_FALSE = 27,                          // T_FALSE
-        S_T_ID = 28,                             // T_ID
-        S_T_QMARK = 29,                          // T_QMARK
-        S_T_COLON = 30,                          // T_COLON
-        S_T_MULTI = 31,                          // T_MULTI
-        S_T_OR = 32,                             // T_OR
-        S_T_AND = 33,                            // T_AND
-        S_T_EQ = 34,                             // T_EQ
-        S_T_LESS = 35,                           // T_LESS
-        S_T_GR = 36,                             // T_GR
-        S_T_ADD = 37,                            // T_ADD
-        S_T_SUB = 38,                            // T_SUB
-        S_T_MUL = 39,                            // T_MUL
-        S_T_DIV = 40,                            // T_DIV
-        S_T_MOD = 41,                            // T_MOD
-        S_T_NOT = 42,                            // T_NOT
-        S_YYACCEPT = 43,                         // $accept
-        S_start = 44,                            // start
-        S_declarations = 45,                     // declarations
-        S_variable = 46,                         // variable
-        S_declaration = 47,                      // declaration
-        S_statements = 48,                       // statements
-        S_statement = 49,                        // statement
-        S_expression = 50                        // expression
+        S_T_CHAR = 8,                            // T_CHAR
+        S_T_SKIP = 9,                            // T_SKIP
+        S_T_IF = 10,                             // T_IF
+        S_T_THEN = 11,                           // T_THEN
+        S_T_ELSE = 12,                           // T_ELSE
+        S_T_ENDIF = 13,                          // T_ENDIF
+        S_T_WHILE = 14,                          // T_WHILE
+        S_T_DO = 15,                             // T_DO
+        S_T_DONE = 16,                           // T_DONE
+        S_T_READ = 17,                           // T_READ
+        S_T_WRITE = 18,                          // T_WRITE
+        S_T_ASSERT = 19,                         // T_ASSERT
+        S_T_SEMICOLON = 20,                      // T_SEMICOLON
+        S_T_ASSIGN = 21,                         // T_ASSIGN
+        S_T_OPEN = 22,                           // T_OPEN
+        S_T_CLOSE = 23,                          // T_CLOSE
+        S_T_OPEN_BRACKET = 24,                   // T_OPEN_BRACKET
+        S_T_CLOSE_BRACKET = 25,                  // T_CLOSE_BRACKET
+        S_T_NUM = 26,                            // T_NUM
+        S_T_TRUE = 27,                           // T_TRUE
+        S_T_FALSE = 28,                          // T_FALSE
+        S_T_ID = 29,                             // T_ID
+        S_T_QMARK = 30,                          // T_QMARK
+        S_T_COLON = 31,                          // T_COLON
+        S_T_MULTI = 32,                          // T_MULTI
+        S_T_CHAR_LIT = 33,                       // T_CHAR_LIT
+        S_T_OR = 34,                             // T_OR
+        S_T_AND = 35,                            // T_AND
+        S_T_EQ = 36,                             // T_EQ
+        S_T_LESS = 37,                           // T_LESS
+        S_T_GR = 38,                             // T_GR
+        S_T_ADD = 39,                            // T_ADD
+        S_T_SUB = 40,                            // T_SUB
+        S_T_MUL = 41,                            // T_MUL
+        S_T_DIV = 42,                            // T_DIV
+        S_T_MOD = 43,                            // T_MOD
+        S_T_NOT = 44,                            // T_NOT
+        S_YYACCEPT = 45,                         // $accept
+        S_start = 46,                            // start
+        S_declarations = 47,                     // declarations
+        S_variable = 48,                         // variable
+        S_declaration = 49,                      // declaration
+        S_statements = 50,                       // statements
+        S_statement = 51,                        // statement
+        S_expression = 52                        // expression
       };
     };
 
@@ -591,6 +596,7 @@ namespace yy {
 
       case symbol_kind::S_T_NUM: // T_NUM
       case symbol_kind::S_T_ID: // T_ID
+      case symbol_kind::S_T_CHAR_LIT: // T_CHAR_LIT
       case symbol_kind::S_statements: // statements
       case symbol_kind::S_statement: // statement
         value.move< std::string > (std::move (that.value));
@@ -695,6 +701,7 @@ switch (yykind)
 
       case symbol_kind::S_T_NUM: // T_NUM
       case symbol_kind::S_T_ID: // T_ID
+      case symbol_kind::S_T_CHAR_LIT: // T_CHAR_LIT
       case symbol_kind::S_statements: // statements
       case symbol_kind::S_statement: // statement
         value.template destroy< std::string > ();
@@ -980,6 +987,21 @@ switch (yykind)
       make_T_BOOLEAN (const location_type& l)
       {
         return symbol_type (token::T_BOOLEAN, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_CHAR (location_type l)
+      {
+        return symbol_type (token::T_CHAR, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_CHAR (const location_type& l)
+      {
+        return symbol_type (token::T_CHAR, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1340,6 +1362,21 @@ switch (yykind)
       make_T_MULTI (const location_type& l)
       {
         return symbol_type (token::T_MULTI, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_CHAR_LIT (std::string v, location_type l)
+      {
+        return symbol_type (token::T_CHAR_LIT, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_CHAR_LIT (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::T_CHAR_LIT, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1811,7 +1848,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 318,     ///< Last index in yytable_.
+      yylast_ = 331,     ///< Last index in yytable_.
       yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 4 ///< Termination state number.
     };
@@ -1822,7 +1859,7 @@ switch (yykind)
 
 
 } // yy
-#line 1826 "while.tab.hh"
+#line 1863 "while.tab.hh"
 
 
 // "%code provides" blocks.
@@ -1830,7 +1867,7 @@ switch (yykind)
 
 int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 
-#line 1834 "while.tab.hh"
+#line 1871 "while.tab.hh"
 
 
 #endif // !YY_YY_WHILE_TAB_HH_INCLUDED

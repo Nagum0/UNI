@@ -1,12 +1,34 @@
-while: lex.yy.cc while.cc while.tab.cc while.tab.hh semantics.hh semantics.cc
-	g++ lex.yy.cc while.cc while.tab.cc semantics.cc -o while
+BUILD_DIR := build
 
-lex.yy.cc: while.l
-	flex while.l
+TAB_CC := $(BUILD_DIR)/while.tab.cc
+TAB_HH := $(BUILD_DIR)/while.tab.hh
+LEX_CC := $(BUILD_DIR)/lex.yy.cc
+POSITION_HH := $(BUILD_DIR)/position.hh
+LOCATION_HH := $(BUILD_DIR)/location.hh
 
-while.tab.cc while.tab.hh: while.y
+SRC := while.cc semantics.cc
+OUT := while
+
+all: $(OUT)
+
+$(OUT): $(LEX_CC) $(TAB_CC) $(TAB_HH) $(POSITION_HH) $(LOCATION_HH) $(SRC)
+	g++ -I$(BUILD_DIR) $(LEX_CC) $(TAB_CC) $(SRC) -o $(OUT)
+
+$(LEX_CC): while.l | $(BUILD_DIR)
+	flex -o $(LEX_CC) while.l
+
+$(TAB_CC) $(TAB_HH) $(LOCATION_HH) $(POSITION_HH): while.y | $(BUILD_DIR)
 	bison -d while.y
+	mv while.tab.cc $(TAB_CC)
+	mv while.tab.hh $(TAB_HH)
+	mv location.hh $(LOCATION_HH)
+	mv position.hh $(POSITION_HH)
+	mv stack.hh $(BUILD_DIR)/stack.hh
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 .PHONY: clean
 clean:
-	rm -f lex.yy.cc while.tab.cc while.tab.hh location.hh position.hh stack.hh while 
+	rm -rf $(BUILD_DIR) $(OUT)
+

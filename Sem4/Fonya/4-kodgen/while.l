@@ -19,6 +19,7 @@ begin       return parser::token::T_BEGIN;
 end         return parser::token::T_END;
 integer     return parser::token::T_INTEGER; 
 boolean     return parser::token::T_BOOLEAN;
+char        return parser::token::T_CHAR;
 skip        return parser::token::T_SKIP;
 if          return parser::token::T_IF;
 then        return parser::token::T_THEN;
@@ -52,6 +53,7 @@ mod         return parser::token::T_MOD;
 ":"         return parser::token::T_COLON;
 
 {DIGIT}+	return parser::token::T_NUM;
+'{LETTER}'  return parser::token::T_CHAR_LIT;
 true        return parser::token::T_TRUE;
 false       return parser::token::T_FALSE;
 

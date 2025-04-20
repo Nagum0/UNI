@@ -1,5 +1,7 @@
 #include "stdio.h"
+#include <stddef.h>
 #include <string.h>
+#include <unistd.h>
 
 unsigned read_unsigned()
 {
@@ -45,6 +47,6 @@ void write_char(char c) {
     fprintf(stdout, "%c\n", c);
 }
 
-void write_str(char cs[]) {
-    fprintf(stdout, "%s\n", cs);
+void write_str(char* cs, size_t len) {
+    write(1, cs, len);
 }

@@ -26,6 +26,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_DONE
 %token T_READ
 %token T_WRITE
+%token T_STDOUT
 %token T_ASSERT
 %token T_SEMICOLON
 %token T_ASSIGN
@@ -41,6 +42,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token T_COLON
 %token T_MULTI
 %token <std::string> T_CHAR_LIT
+%token T_COMMA;
 
 %left T_OR T_AND
 %left T_EQ
@@ -225,6 +227,31 @@ statement:
         {
             $$ = "call read_boolean\nmov [" + symbol_table[$3].label + "], al\n";
         }
+    }
+|
+    T_STDOUT T_OPEN T_ID T_COMMA expression T_CLOSE T_SEMICOLON
+    {
+        if (symbol_table.count($3) == 0)
+        {
+			semantic_error(@3.begin.line, "Undeclared variable: " + $3);
+        }
+
+        if (symbol_table[$3].typ != ch)
+        {
+			semantic_error(@3.begin.line, "Type error.");
+        }
+
+        if ($5.typ != integer)
+        {
+			semantic_error(@5.begin.line, "Type error.");
+        }
+        
+        $$ = "" +
+            $5.code +
+            "push eax\n" +
+            "push " + symbol_table[$3].label + "\n" +
+            "call write_str\n" +
+            "add esp, 8\n";
     }
 |
     T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON

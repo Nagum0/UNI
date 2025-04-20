@@ -32,6 +32,7 @@ read        return parser::token::T_READ;
 write       return parser::token::T_WRITE;
 assert      return parser::token::T_ASSERT;
 multi       return parser::token::T_MULTI;
+stdout      return parser::token::T_STDOUT;
 ";"         return parser::token::T_SEMICOLON;
 ":="        return parser::token::T_ASSIGN;
 "="         return parser::token::T_EQ;
@@ -51,9 +52,10 @@ mod         return parser::token::T_MOD;
 "]"         return parser::token::T_CLOSE_BRACKET;
 "?"         return parser::token::T_QMARK;
 ":"         return parser::token::T_COLON;
+","         return parser::token::T_COMMA;
 
 {DIGIT}+	return parser::token::T_NUM;
-'{LETTER}'  return parser::token::T_CHAR_LIT;
+'({LETTER}|\\n|\\t)' return parser::token::T_CHAR_LIT;
 true        return parser::token::T_TRUE;
 false       return parser::token::T_FALSE;
 

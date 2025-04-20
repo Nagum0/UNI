@@ -24,32 +24,15 @@ mov eax, 3
 mov esi, eax
 mov al, 105
 mov [label1 + esi * 1], al
-mov eax, 0
-mov [label0], eax
-label2:
+mov eax, 4
+mov esi, eax
+mov al, 10
+mov [label1 + esi * 1], al
 mov eax, 5
 push eax
-mov eax, [label0]
-pop ebx
-cmp eax, ebx
-setl al
-cmp al, 1
-jne near label3
-xor eax, eax
-mov eax, [label0]
-mov esi, eax
-mov eax, [label1 + esi * 1]
-push eax
-call write_char
-add esp,4
-mov eax, 1
-push eax
-mov eax, [label0]
-pop ebx
-add eax, ebx
-mov [label0], eax
-jmp label2
-label3:
+push label1
+call write_str
+add esp, 8
 
 mov eax, 0
 ret

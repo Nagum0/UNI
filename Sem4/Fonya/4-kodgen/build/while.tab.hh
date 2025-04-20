@@ -457,32 +457,34 @@ namespace yy {
     T_DONE = 271,                  // T_DONE
     T_READ = 272,                  // T_READ
     T_WRITE = 273,                 // T_WRITE
-    T_ASSERT = 274,                // T_ASSERT
-    T_SEMICOLON = 275,             // T_SEMICOLON
-    T_ASSIGN = 276,                // T_ASSIGN
-    T_OPEN = 277,                  // T_OPEN
-    T_CLOSE = 278,                 // T_CLOSE
-    T_OPEN_BRACKET = 279,          // T_OPEN_BRACKET
-    T_CLOSE_BRACKET = 280,         // T_CLOSE_BRACKET
-    T_NUM = 281,                   // T_NUM
-    T_TRUE = 282,                  // T_TRUE
-    T_FALSE = 283,                 // T_FALSE
-    T_ID = 284,                    // T_ID
-    T_QMARK = 285,                 // T_QMARK
-    T_COLON = 286,                 // T_COLON
-    T_MULTI = 287,                 // T_MULTI
-    T_CHAR_LIT = 288,              // T_CHAR_LIT
-    T_OR = 289,                    // T_OR
-    T_AND = 290,                   // T_AND
-    T_EQ = 291,                    // T_EQ
-    T_LESS = 292,                  // T_LESS
-    T_GR = 293,                    // T_GR
-    T_ADD = 294,                   // T_ADD
-    T_SUB = 295,                   // T_SUB
-    T_MUL = 296,                   // T_MUL
-    T_DIV = 297,                   // T_DIV
-    T_MOD = 298,                   // T_MOD
-    T_NOT = 299                    // T_NOT
+    T_STDOUT = 274,                // T_STDOUT
+    T_ASSERT = 275,                // T_ASSERT
+    T_SEMICOLON = 276,             // T_SEMICOLON
+    T_ASSIGN = 277,                // T_ASSIGN
+    T_OPEN = 278,                  // T_OPEN
+    T_CLOSE = 279,                 // T_CLOSE
+    T_OPEN_BRACKET = 280,          // T_OPEN_BRACKET
+    T_CLOSE_BRACKET = 281,         // T_CLOSE_BRACKET
+    T_NUM = 282,                   // T_NUM
+    T_TRUE = 283,                  // T_TRUE
+    T_FALSE = 284,                 // T_FALSE
+    T_ID = 285,                    // T_ID
+    T_QMARK = 286,                 // T_QMARK
+    T_COLON = 287,                 // T_COLON
+    T_MULTI = 288,                 // T_MULTI
+    T_CHAR_LIT = 289,              // T_CHAR_LIT
+    T_COMMA = 290,                 // T_COMMA
+    T_OR = 291,                    // T_OR
+    T_AND = 292,                   // T_AND
+    T_EQ = 293,                    // T_EQ
+    T_LESS = 294,                  // T_LESS
+    T_GR = 295,                    // T_GR
+    T_ADD = 296,                   // T_ADD
+    T_SUB = 297,                   // T_SUB
+    T_MUL = 298,                   // T_MUL
+    T_DIV = 299,                   // T_DIV
+    T_MOD = 300,                   // T_MOD
+    T_NOT = 301                    // T_NOT
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -499,7 +501,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 45, ///< Number of tokens.
+        YYNTOKENS = 47, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -520,40 +522,42 @@ namespace yy {
         S_T_DONE = 16,                           // T_DONE
         S_T_READ = 17,                           // T_READ
         S_T_WRITE = 18,                          // T_WRITE
-        S_T_ASSERT = 19,                         // T_ASSERT
-        S_T_SEMICOLON = 20,                      // T_SEMICOLON
-        S_T_ASSIGN = 21,                         // T_ASSIGN
-        S_T_OPEN = 22,                           // T_OPEN
-        S_T_CLOSE = 23,                          // T_CLOSE
-        S_T_OPEN_BRACKET = 24,                   // T_OPEN_BRACKET
-        S_T_CLOSE_BRACKET = 25,                  // T_CLOSE_BRACKET
-        S_T_NUM = 26,                            // T_NUM
-        S_T_TRUE = 27,                           // T_TRUE
-        S_T_FALSE = 28,                          // T_FALSE
-        S_T_ID = 29,                             // T_ID
-        S_T_QMARK = 30,                          // T_QMARK
-        S_T_COLON = 31,                          // T_COLON
-        S_T_MULTI = 32,                          // T_MULTI
-        S_T_CHAR_LIT = 33,                       // T_CHAR_LIT
-        S_T_OR = 34,                             // T_OR
-        S_T_AND = 35,                            // T_AND
-        S_T_EQ = 36,                             // T_EQ
-        S_T_LESS = 37,                           // T_LESS
-        S_T_GR = 38,                             // T_GR
-        S_T_ADD = 39,                            // T_ADD
-        S_T_SUB = 40,                            // T_SUB
-        S_T_MUL = 41,                            // T_MUL
-        S_T_DIV = 42,                            // T_DIV
-        S_T_MOD = 43,                            // T_MOD
-        S_T_NOT = 44,                            // T_NOT
-        S_YYACCEPT = 45,                         // $accept
-        S_start = 46,                            // start
-        S_declarations = 47,                     // declarations
-        S_variable = 48,                         // variable
-        S_declaration = 49,                      // declaration
-        S_statements = 50,                       // statements
-        S_statement = 51,                        // statement
-        S_expression = 52                        // expression
+        S_T_STDOUT = 19,                         // T_STDOUT
+        S_T_ASSERT = 20,                         // T_ASSERT
+        S_T_SEMICOLON = 21,                      // T_SEMICOLON
+        S_T_ASSIGN = 22,                         // T_ASSIGN
+        S_T_OPEN = 23,                           // T_OPEN
+        S_T_CLOSE = 24,                          // T_CLOSE
+        S_T_OPEN_BRACKET = 25,                   // T_OPEN_BRACKET
+        S_T_CLOSE_BRACKET = 26,                  // T_CLOSE_BRACKET
+        S_T_NUM = 27,                            // T_NUM
+        S_T_TRUE = 28,                           // T_TRUE
+        S_T_FALSE = 29,                          // T_FALSE
+        S_T_ID = 30,                             // T_ID
+        S_T_QMARK = 31,                          // T_QMARK
+        S_T_COLON = 32,                          // T_COLON
+        S_T_MULTI = 33,                          // T_MULTI
+        S_T_CHAR_LIT = 34,                       // T_CHAR_LIT
+        S_T_COMMA = 35,                          // T_COMMA
+        S_T_OR = 36,                             // T_OR
+        S_T_AND = 37,                            // T_AND
+        S_T_EQ = 38,                             // T_EQ
+        S_T_LESS = 39,                           // T_LESS
+        S_T_GR = 40,                             // T_GR
+        S_T_ADD = 41,                            // T_ADD
+        S_T_SUB = 42,                            // T_SUB
+        S_T_MUL = 43,                            // T_MUL
+        S_T_DIV = 44,                            // T_DIV
+        S_T_MOD = 45,                            // T_MOD
+        S_T_NOT = 46,                            // T_NOT
+        S_YYACCEPT = 47,                         // $accept
+        S_start = 48,                            // start
+        S_declarations = 49,                     // declarations
+        S_variable = 50,                         // variable
+        S_declaration = 51,                      // declaration
+        S_statements = 52,                       // statements
+        S_statement = 53,                        // statement
+        S_expression = 54                        // expression
       };
     };
 
@@ -1157,6 +1161,21 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_T_STDOUT (location_type l)
+      {
+        return symbol_type (token::T_STDOUT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_STDOUT (const location_type& l)
+      {
+        return symbol_type (token::T_STDOUT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_T_ASSERT (location_type l)
       {
         return symbol_type (token::T_ASSERT, std::move (l));
@@ -1377,6 +1396,21 @@ switch (yykind)
       make_T_CHAR_LIT (const std::string& v, const location_type& l)
       {
         return symbol_type (token::T_CHAR_LIT, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_T_COMMA (location_type l)
+      {
+        return symbol_type (token::T_COMMA, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_COMMA (const location_type& l)
+      {
+        return symbol_type (token::T_COMMA, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1848,7 +1882,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 331,     ///< Last index in yytable_.
+      yylast_ = 377,     ///< Last index in yytable_.
       yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 4 ///< Termination state number.
     };
@@ -1859,7 +1893,7 @@ switch (yykind)
 
 
 } // yy
-#line 1863 "while.tab.hh"
+#line 1897 "while.tab.hh"
 
 
 // "%code provides" blocks.
@@ -1867,7 +1901,7 @@ switch (yykind)
 
 int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 
-#line 1871 "while.tab.hh"
+#line 1905 "while.tab.hh"
 
 
 #endif // !YY_YY_WHILE_TAB_HH_INCLUDED

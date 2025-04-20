@@ -33,6 +33,7 @@ write       return parser::token::T_WRITE;
 assert      return parser::token::T_ASSERT;
 multi       return parser::token::T_MULTI;
 stdout      return parser::token::T_STDOUT;
+let         return parser::token::T_LET;
 ";"         return parser::token::T_SEMICOLON;
 ":="        return parser::token::T_ASSIGN;
 "="         return parser::token::T_EQ;

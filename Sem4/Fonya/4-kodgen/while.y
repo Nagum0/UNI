@@ -44,6 +44,7 @@ int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 %token <std::string> T_CHAR_LIT
 %token <std::string> T_STRING_LIT
 %token T_COMMA;
+%token T_LET;
 
 %left T_OR T_AND
 %left T_EQ
@@ -81,6 +82,10 @@ start:
         std::cout << "segment .text" << std::endl;
         std::cout << "main:" << std::endl;
         std::cout << $5 << std::endl;
+
+        size_t used_stack_size = vars_size(vars);
+        std::cout << "add esp, " << std::to_string(used_stack_size) << std::endl;
+
         std::cout << "mov eax, 0" << std::endl;
         std::cout << "ret" << std::endl;
     }
@@ -240,6 +245,29 @@ statement:
                 $6.code +
                 "mov [" + symbol_table[$1].label + " + esi * 1], al\n";
         }
+    }
+|
+    T_LET variable T_ID T_ASSIGN expression T_SEMICOLON
+    {
+        if (symbol_table.count($3) != 0 || vars.count($3) != 0)
+        {
+            semantic_error(@3.begin.line, "Redeclaration of variable: " + $3);
+        }
+
+        if ($2 != $5.typ)
+        {
+            semantic_error(@2.begin.line, "Type error.");
+        }
+        
+        size_t size = ($2 == boolean || $2 == ch) ? 1 : 4;
+        std::string exp_result_reg = ($2 == boolean || $2 == ch) ? "al" : "eax";
+
+        size_t stack_pos = vars_get_largest_offset(vars) + size;
+        vars[$3] = variable($2, stack_pos);
+        
+        $$ = "sub esp, " + std::to_string(stack_pos) + "\n" +
+            $5.code +
+            "mov [ebp - " + std::to_string(stack_pos) + "], " + exp_result_reg + "\n";
     }
 |
     T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
@@ -430,19 +458,36 @@ expression:
 |
     T_ID
     {
-		if( symbol_table.count($1) == 0 )
+		if(symbol_table.count($1) == 0 && vars.count($1) == 0)
 		{
 			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
 		}
-		if (symbol_table[$1].typ == integer)
+        
+        bool local = vars.count($1) == 1;
+        
+        if (!local) 
         {
-            $$ = expression(symbol_table[$1].typ,
-                    "mov eax, [" + symbol_table[$1].label + "]\n");
+            if (symbol_table[$1].typ == integer)
+            {
+                $$ = expression(symbol_table[$1].typ,
+                        "mov eax, [" + symbol_table[$1].label + "]\n");
+            }
+            else if (symbol_table[$1].typ == boolean || symbol_table[$1].typ == ch)
+            {
+                $$ = expression(symbol_table[$1].typ,
+                        "mov al, [" + symbol_table[$1].label + "]\n");
+            }
         }
-        else if (symbol_table[$1].typ == boolean || symbol_table[$1].typ == ch)
+        else 
         {
-            $$ = expression(symbol_table[$1].typ,
-                    "mov al, [" + symbol_table[$1].label + "]\n");
+            if (vars[$1].typ == integer)
+            {
+                $$ = expression(vars[$1].typ, "mov DWORD eax, [ebp - " + std::to_string(vars[$1].stack_pos) + "]\n");
+            }
+            else if (vars[$1].typ == boolean || vars[$1].typ == ch)
+            {
+                $$ = expression(vars[$1].typ, "mov BYTE al, [ebp - " + std::to_string(vars[$1].stack_pos) + "]\n");
+            }
         }
     }
 |

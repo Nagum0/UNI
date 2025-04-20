@@ -1,9 +1,10 @@
 program TestProgram
-    char name[5];
-    char text[69];
 begin
-    name := "Zeki\n";
-    stdout(name, 5);
-    text := "ASTOLFOOOOOOOO IS THE\tBEEEEEEEEEST\n";
-    stdout(text, 69);
+    let integer x := 10;
+    let boolean l := true;
+    let char c := 'Z';
+
+    write(x);
+    write(l);
+    write(c);
 end

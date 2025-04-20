@@ -19,14 +19,38 @@ std::string next_label() {
 }
 
 symbol_data::symbol_data() {}
-
 symbol_data::symbol_data(type t) : typ(t), label(next_label()) {}
-
 std::map<std::string, symbol_data> symbol_table;
 
 expression::expression() : typ(integer), code("") {}
-
 expression::expression(type t, std::string c) : typ(t), code(c) {}  
+
+variable::variable() {}
+variable::variable(type typ, size_t stack_pos) : typ(typ), stack_pos(stack_pos) {}
+std::map<std::string, variable> vars;
+
+size_t vars_size(std::map<std::string, variable> vars) {
+    size_t sum = 0;
+    
+    auto it = vars.begin();
+    for (; it != vars.end(); ++it) {
+        sum += it->second.stack_pos;
+    }
+
+    return sum;
+}
+
+size_t vars_get_largest_offset(std::map<std::string, variable> vars) {
+    size_t offset = 0;
+
+    auto it = vars.begin();
+    for (; it != vars.end(); ++it) {
+        if (it->second.stack_pos > offset)
+            offset = it->second.stack_pos;
+    }
+
+    return offset;
+}
 
 char extract_char(std::string char_literal) {
     if (char_literal.size() == 3) {

@@ -476,17 +476,18 @@ namespace yy {
     T_CHAR_LIT = 289,              // T_CHAR_LIT
     T_STRING_LIT = 290,            // T_STRING_LIT
     T_COMMA = 291,                 // T_COMMA
-    T_OR = 292,                    // T_OR
-    T_AND = 293,                   // T_AND
-    T_EQ = 294,                    // T_EQ
-    T_LESS = 295,                  // T_LESS
-    T_GR = 296,                    // T_GR
-    T_ADD = 297,                   // T_ADD
-    T_SUB = 298,                   // T_SUB
-    T_MUL = 299,                   // T_MUL
-    T_DIV = 300,                   // T_DIV
-    T_MOD = 301,                   // T_MOD
-    T_NOT = 302                    // T_NOT
+    T_LET = 292,                   // T_LET
+    T_OR = 293,                    // T_OR
+    T_AND = 294,                   // T_AND
+    T_EQ = 295,                    // T_EQ
+    T_LESS = 296,                  // T_LESS
+    T_GR = 297,                    // T_GR
+    T_ADD = 298,                   // T_ADD
+    T_SUB = 299,                   // T_SUB
+    T_MUL = 300,                   // T_MUL
+    T_DIV = 301,                   // T_DIV
+    T_MOD = 302,                   // T_MOD
+    T_NOT = 303                    // T_NOT
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -503,7 +504,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 48, ///< Number of tokens.
+        YYNTOKENS = 49, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -542,25 +543,26 @@ namespace yy {
         S_T_CHAR_LIT = 34,                       // T_CHAR_LIT
         S_T_STRING_LIT = 35,                     // T_STRING_LIT
         S_T_COMMA = 36,                          // T_COMMA
-        S_T_OR = 37,                             // T_OR
-        S_T_AND = 38,                            // T_AND
-        S_T_EQ = 39,                             // T_EQ
-        S_T_LESS = 40,                           // T_LESS
-        S_T_GR = 41,                             // T_GR
-        S_T_ADD = 42,                            // T_ADD
-        S_T_SUB = 43,                            // T_SUB
-        S_T_MUL = 44,                            // T_MUL
-        S_T_DIV = 45,                            // T_DIV
-        S_T_MOD = 46,                            // T_MOD
-        S_T_NOT = 47,                            // T_NOT
-        S_YYACCEPT = 48,                         // $accept
-        S_start = 49,                            // start
-        S_declarations = 50,                     // declarations
-        S_variable = 51,                         // variable
-        S_declaration = 52,                      // declaration
-        S_statements = 53,                       // statements
-        S_statement = 54,                        // statement
-        S_expression = 55                        // expression
+        S_T_LET = 37,                            // T_LET
+        S_T_OR = 38,                             // T_OR
+        S_T_AND = 39,                            // T_AND
+        S_T_EQ = 40,                             // T_EQ
+        S_T_LESS = 41,                           // T_LESS
+        S_T_GR = 42,                             // T_GR
+        S_T_ADD = 43,                            // T_ADD
+        S_T_SUB = 44,                            // T_SUB
+        S_T_MUL = 45,                            // T_MUL
+        S_T_DIV = 46,                            // T_DIV
+        S_T_MOD = 47,                            // T_MOD
+        S_T_NOT = 48,                            // T_NOT
+        S_YYACCEPT = 49,                         // $accept
+        S_start = 50,                            // start
+        S_declarations = 51,                     // declarations
+        S_variable = 52,                         // variable
+        S_declaration = 53,                      // declaration
+        S_statements = 54,                       // statements
+        S_statement = 55,                        // statement
+        S_expression = 56                        // expression
       };
     };
 
@@ -1436,6 +1438,21 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_T_LET (location_type l)
+      {
+        return symbol_type (token::T_LET, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_T_LET (const location_type& l)
+      {
+        return symbol_type (token::T_LET, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_T_OR (location_type l)
       {
         return symbol_type (token::T_OR, std::move (l));
@@ -1902,7 +1919,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 391,     ///< Last index in yytable_.
+      yylast_ = 432,     ///< Last index in yytable_.
       yynnts_ = 8,  ///< Number of nonterminal symbols.
       yyfinal_ = 4 ///< Termination state number.
     };
@@ -1913,7 +1930,7 @@ switch (yykind)
 
 
 } // yy
-#line 1917 "while.tab.hh"
+#line 1934 "while.tab.hh"
 
 
 // "%code provides" blocks.
@@ -1921,7 +1938,7 @@ switch (yykind)
 
 int yylex(yy::parser::semantic_type* yylval, yy::parser::location_type* yylloc);
 
-#line 1925 "while.tab.hh"
+#line 1942 "while.tab.hh"
 
 
 #endif // !YY_YY_WHILE_TAB_HH_INCLUDED

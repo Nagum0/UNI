@@ -9,27 +9,19 @@ main:
 sub esp, 4
 mov eax, 10
 mov [ebp - 4], eax
-sub esp, 5
-mov al, 1
-mov [ebp - 5], al
-sub esp, 6
+sub esp, 1
 mov al, 90
-mov [ebp - 6], al
-mov DWORD eax, [ebp - 4]
+mov [ebp - 5], al
+mov eax, [ebp - 4]
 push eax
 call write_unsigned
 add esp,4
 xor eax, eax
-mov BYTE al, [ebp - 5]
-push eax
-call write_boolean
-add esp,4
-xor eax, eax
-mov BYTE al, [ebp - 6]
+mov al, [ebp - 5]
 push eax
 call write_char
 add esp,4
 
-add esp, 15
+add esp, 5
 mov eax, 0
 ret

@@ -1,10 +1,8 @@
 program TestProgram
 begin
     let integer x := 10;
-    let boolean l := true;
     let char c := 'Z';
 
     write(x);
-    write(l);
     write(c);
 end

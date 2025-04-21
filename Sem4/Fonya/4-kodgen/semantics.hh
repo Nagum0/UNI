@@ -33,9 +33,10 @@ struct expression {
 
 struct variable {
     type typ;
+    size_t size;
     size_t stack_pos;
     variable();
-    variable(type typ, size_t stack_pos);
+    variable(type typ, size_t size, size_t stack_pos);
 };
 
 extern std::map<std::string, variable> vars;

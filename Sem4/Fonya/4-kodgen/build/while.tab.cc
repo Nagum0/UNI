@@ -970,9 +970,9 @@ namespace yy {
         std::string exp_result_reg = (yystack_[4].value.as < type > () == boolean || yystack_[4].value.as < type > () == ch) ? "al" : "eax";
 
         size_t stack_pos = vars_get_largest_offset(vars) + size;
-        vars[yystack_[3].value.as < std::string > ()] = variable(yystack_[4].value.as < type > (), stack_pos);
+        vars[yystack_[3].value.as < std::string > ()] = variable(yystack_[4].value.as < type > (), size, stack_pos);
         
-        yylhs.value.as < std::string > () = "sub esp, " + std::to_string(stack_pos) + "\n" +
+        yylhs.value.as < std::string > () = "sub esp, " + std::to_string(size) + "\n" +
             yystack_[1].value.as < expression > ().code +
             "mov [ebp - " + std::to_string(stack_pos) + "], " + exp_result_reg + "\n";
     }
@@ -1203,42 +1203,22 @@ namespace yy {
 #line 460 "while.y"
     {
 		if(symbol_table.count(yystack_[0].value.as < std::string > ()) == 0 && vars.count(yystack_[0].value.as < std::string > ()) == 0)
-		{
 			semantic_error(yystack_[0].location.begin.line, "Undeclared variable: " + yystack_[0].value.as < std::string > ());
-		}
         
         bool local = vars.count(yystack_[0].value.as < std::string > ()) == 1;
+        type typ = local ? vars[yystack_[0].value.as < std::string > ()].typ : symbol_table[yystack_[0].value.as < std::string > ()].typ;
+        std::string dest_reg = (typ == boolean || typ == ch) ? "al" : "eax";
         
         if (!local) 
-        {
-            if (symbol_table[yystack_[0].value.as < std::string > ()].typ == integer)
-            {
-                yylhs.value.as < expression > () = expression(symbol_table[yystack_[0].value.as < std::string > ()].typ,
-                        "mov eax, [" + symbol_table[yystack_[0].value.as < std::string > ()].label + "]\n");
-            }
-            else if (symbol_table[yystack_[0].value.as < std::string > ()].typ == boolean || symbol_table[yystack_[0].value.as < std::string > ()].typ == ch)
-            {
-                yylhs.value.as < expression > () = expression(symbol_table[yystack_[0].value.as < std::string > ()].typ,
-                        "mov al, [" + symbol_table[yystack_[0].value.as < std::string > ()].label + "]\n");
-            }
-        }
+            yylhs.value.as < expression > () = expression(typ, "mov " + dest_reg + ", [" + symbol_table[yystack_[0].value.as < std::string > ()].label + "]\n");
         else 
-        {
-            if (vars[yystack_[0].value.as < std::string > ()].typ == integer)
-            {
-                yylhs.value.as < expression > () = expression(vars[yystack_[0].value.as < std::string > ()].typ, "mov DWORD eax, [ebp - " + std::to_string(vars[yystack_[0].value.as < std::string > ()].stack_pos) + "]\n");
-            }
-            else if (vars[yystack_[0].value.as < std::string > ()].typ == boolean || vars[yystack_[0].value.as < std::string > ()].typ == ch)
-            {
-                yylhs.value.as < expression > () = expression(vars[yystack_[0].value.as < std::string > ()].typ, "mov BYTE al, [ebp - " + std::to_string(vars[yystack_[0].value.as < std::string > ()].stack_pos) + "]\n");
-            }
-        }
+            yylhs.value.as < expression > () = expression(typ, "mov " + dest_reg + ", [ebp - " + std::to_string(vars[yystack_[0].value.as < std::string > ()].stack_pos) + "]\n");
     }
-#line 1238 "while.tab.cc"
+#line 1218 "while.tab.cc"
     break;
 
   case 30: // expression: T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET
-#line 495 "while.y"
+#line 475 "while.y"
     {
         if( symbol_table.count(yystack_[3].value.as < std::string > ()) == 0 )
 		{
@@ -1259,11 +1239,11 @@ namespace yy {
                         "mov eax, [" + symbol_table[yystack_[3].value.as < std::string > ()].label + " + esi * " + std::to_string(offset) + "]\n"
         );
     }
-#line 1263 "while.tab.cc"
+#line 1243 "while.tab.cc"
     break;
 
   case 31: // expression: expression T_ADD expression
-#line 517 "while.y"
+#line 497 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1277,11 +1257,11 @@ namespace yy {
                 "pop ebx\n" +
                 "add eax, ebx\n");
     }
-#line 1281 "while.tab.cc"
+#line 1261 "while.tab.cc"
     break;
 
   case 32: // expression: expression T_SUB expression
-#line 532 "while.y"
+#line 512 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1294,11 +1274,11 @@ namespace yy {
                 "pop ebx\n" +
                 "sub eax, ebx\n");
     }
-#line 1298 "while.tab.cc"
+#line 1278 "while.tab.cc"
     break;
 
   case 33: // expression: expression T_MUL expression
-#line 546 "while.y"
+#line 526 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1311,11 +1291,11 @@ namespace yy {
                 "pop ebx\n" +
                 "mul ebx\n");
     }
-#line 1315 "while.tab.cc"
+#line 1295 "while.tab.cc"
     break;
 
   case 34: // expression: expression T_DIV expression
-#line 560 "while.y"
+#line 540 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1329,11 +1309,11 @@ namespace yy {
                 "pop ebx\n" +
                 "div ebx\n");
     }
-#line 1333 "while.tab.cc"
+#line 1313 "while.tab.cc"
     break;
 
   case 35: // expression: expression T_MOD expression
-#line 575 "while.y"
+#line 555 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1348,11 +1328,11 @@ namespace yy {
                 "div ebx\n" +
                 "mov eax, edx\n");
     }
-#line 1352 "while.tab.cc"
+#line 1332 "while.tab.cc"
     break;
 
   case 36: // expression: expression T_LESS expression
-#line 591 "while.y"
+#line 571 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1366,11 +1346,11 @@ namespace yy {
                 "cmp eax, ebx\n" +
                 "setl al\n");
     }
-#line 1370 "while.tab.cc"
+#line 1350 "while.tab.cc"
     break;
 
   case 37: // expression: expression T_GR expression
-#line 606 "while.y"
+#line 586 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != integer || yystack_[0].value.as < expression > ().typ != integer)
 		{
@@ -1384,11 +1364,11 @@ namespace yy {
                 "cmp eax, ebx\n" +
                 "setg al\n");
     }
-#line 1388 "while.tab.cc"
+#line 1368 "while.tab.cc"
     break;
 
   case 38: // expression: expression T_EQ expression
-#line 621 "while.y"
+#line 601 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != yystack_[0].value.as < expression > ().typ)
 		{
@@ -1402,11 +1382,11 @@ namespace yy {
                 "cmp eax, ebx\n" +
                 "sete al\n");
     }
-#line 1406 "while.tab.cc"
+#line 1386 "while.tab.cc"
     break;
 
   case 39: // expression: expression T_AND expression
-#line 636 "while.y"
+#line 616 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != boolean || yystack_[0].value.as < expression > ().typ != boolean)
 		{
@@ -1419,11 +1399,11 @@ namespace yy {
                 "pop bx\n" +
                 "and al, bl\n");
     }
-#line 1423 "while.tab.cc"
+#line 1403 "while.tab.cc"
     break;
 
   case 40: // expression: expression T_OR expression
-#line 650 "while.y"
+#line 630 "while.y"
     {
 		if(yystack_[2].value.as < expression > ().typ != boolean || yystack_[0].value.as < expression > ().typ != boolean)
 		{
@@ -1436,11 +1416,11 @@ namespace yy {
                 "pop bx\n" +
                 "or al, bl\n");
     }
-#line 1440 "while.tab.cc"
+#line 1420 "while.tab.cc"
     break;
 
   case 41: // expression: T_NOT expression
-#line 664 "while.y"
+#line 644 "while.y"
     {
 		if(yystack_[0].value.as < expression > ().typ != boolean)
 		{
@@ -1450,19 +1430,19 @@ namespace yy {
                 yystack_[0].value.as < expression > ().code +
                 "xor al, 1\n");
     }
-#line 1454 "while.tab.cc"
+#line 1434 "while.tab.cc"
     break;
 
   case 42: // expression: T_OPEN expression T_CLOSE
-#line 675 "while.y"
+#line 655 "while.y"
     {
 		yylhs.value.as < expression > () = expression(yystack_[1].value.as < expression > ().typ, "" + yystack_[1].value.as < expression > ().code);
     }
-#line 1462 "while.tab.cc"
+#line 1442 "while.tab.cc"
     break;
 
   case 43: // expression: expression T_QMARK expression T_COLON expression
-#line 680 "while.y"
+#line 660 "while.y"
     {
         if (yystack_[4].value.as < expression > ().typ != yystack_[0].value.as < expression > ().typ || yystack_[2].value.as < expression > ().typ != boolean)
         {
@@ -1484,11 +1464,11 @@ namespace yy {
             end + ":\n"
         );
     }
-#line 1488 "while.tab.cc"
+#line 1468 "while.tab.cc"
     break;
 
 
-#line 1492 "while.tab.cc"
+#line 1472 "while.tab.cc"
 
             default:
               break;
@@ -1894,8 +1874,8 @@ namespace yy {
        0,    63,    63,    96,    99,   105,   110,   115,   123,   134,
      149,   154,   161,   166,   187,   215,   250,   273,   289,   314,
      342,   357,   376,   394,   412,   438,   443,   448,   453,   459,
-     494,   516,   531,   545,   559,   574,   590,   605,   620,   635,
-     649,   663,   674,   679
+     474,   496,   511,   525,   539,   554,   570,   585,   600,   615,
+     629,   643,   654,   659
   };
 
   void
@@ -1978,5 +1958,5 @@ namespace yy {
   }
 
 } // yy
-#line 1982 "while.tab.cc"
+#line 1962 "while.tab.cc"
 

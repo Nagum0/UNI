@@ -263,9 +263,9 @@ statement:
         std::string exp_result_reg = ($2 == boolean || $2 == ch) ? "al" : "eax";
 
         size_t stack_pos = vars_get_largest_offset(vars) + size;
-        vars[$3] = variable($2, stack_pos);
+        vars[$3] = variable($2, size, stack_pos);
         
-        $$ = "sub esp, " + std::to_string(stack_pos) + "\n" +
+        $$ = "sub esp, " + std::to_string(size) + "\n" +
             $5.code +
             "mov [ebp - " + std::to_string(stack_pos) + "], " + exp_result_reg + "\n";
     }
@@ -459,36 +459,16 @@ expression:
     T_ID
     {
 		if(symbol_table.count($1) == 0 && vars.count($1) == 0)
-		{
 			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
-		}
         
         bool local = vars.count($1) == 1;
+        type typ = local ? vars[$1].typ : symbol_table[$1].typ;
+        std::string dest_reg = (typ == boolean || typ == ch) ? "al" : "eax";
         
         if (!local) 
-        {
-            if (symbol_table[$1].typ == integer)
-            {
-                $$ = expression(symbol_table[$1].typ,
-                        "mov eax, [" + symbol_table[$1].label + "]\n");
-            }
-            else if (symbol_table[$1].typ == boolean || symbol_table[$1].typ == ch)
-            {
-                $$ = expression(symbol_table[$1].typ,
-                        "mov al, [" + symbol_table[$1].label + "]\n");
-            }
-        }
+            $$ = expression(typ, "mov " + dest_reg + ", [" + symbol_table[$1].label + "]\n");
         else 
-        {
-            if (vars[$1].typ == integer)
-            {
-                $$ = expression(vars[$1].typ, "mov DWORD eax, [ebp - " + std::to_string(vars[$1].stack_pos) + "]\n");
-            }
-            else if (vars[$1].typ == boolean || vars[$1].typ == ch)
-            {
-                $$ = expression(vars[$1].typ, "mov BYTE al, [ebp - " + std::to_string(vars[$1].stack_pos) + "]\n");
-            }
-        }
+            $$ = expression(typ, "mov " + dest_reg + ", [ebp - " + std::to_string(vars[$1].stack_pos) + "]\n");
     }
 |
     T_ID T_OPEN_BRACKET expression T_CLOSE_BRACKET

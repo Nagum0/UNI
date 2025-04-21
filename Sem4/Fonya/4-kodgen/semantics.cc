@@ -26,7 +26,7 @@ expression::expression() : typ(integer), code("") {}
 expression::expression(type t, std::string c) : typ(t), code(c) {}  
 
 variable::variable() {}
-variable::variable(type typ, size_t stack_pos) : typ(typ), stack_pos(stack_pos) {}
+variable::variable(type typ, size_t size, size_t stack_pos) : typ(typ), size(size), stack_pos(stack_pos) {}
 std::map<std::string, variable> vars;
 
 size_t vars_size(std::map<std::string, variable> vars) {
@@ -34,7 +34,7 @@ size_t vars_size(std::map<std::string, variable> vars) {
     
     auto it = vars.begin();
     for (; it != vars.end(); ++it) {
-        sum += it->second.stack_pos;
+        sum += it->second.size;
     }
 
     return sum;

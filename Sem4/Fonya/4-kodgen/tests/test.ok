@@ -1,8 +1,6 @@
 program TestProgram
 begin
-    let integer x := 10;
-    let char c := 'Z';
-
+    let integer x;
+    x := 10;
     write(x);
-    write(c);
 end

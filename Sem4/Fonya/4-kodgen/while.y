@@ -165,23 +165,36 @@ statement:
 |
     T_ID T_ASSIGN expression T_SEMICOLON
     {
-		if( symbol_table.count($1) == 0 )
-		{
+		if (symbol_table.count($1) == 0 && vars.count($1) == 0)
 			semantic_error(@1.begin.line, "Undeclared variable: " + $1);
-		}
-		if(symbol_table[$1].typ != $3.typ)
-		{
-		   semantic_error(@1.begin.line, "Type error.");
-		}
+        
+        bool local = vars.count($1) == 1;
+        
+        if (!local) 
+        {
+		    if (symbol_table[$1].typ != $3.typ)
+		        semantic_error(@1.begin.line, "Type error.");
 
-        if($3.typ == integer)
-            $$ = "" +
-                 $3.code +
-                 "mov [" + symbol_table[$1].label + "], eax\n";
-        else if($3.typ == boolean || $3.typ == ch)
-            $$ = "" +
-                 $3.code +
-                 "mov [" + symbol_table[$1].label + "], al\n";
+            if ($3.typ == integer)
+                $$ = "" +
+                     $3.code +
+                     "mov [" + symbol_table[$1].label + "], eax\n";
+            else if ($3.typ == boolean || $3.typ == ch)
+                $$ = "" +
+                     $3.code +
+                     "mov [" + symbol_table[$1].label + "], al\n";
+        }
+        else
+        {
+            if (vars[$1].typ != $3.typ)
+		        semantic_error(@1.begin.line, "Type error.");
+           
+            std::string result_reg = (vars[$1].typ == integer) ? "eax" : "al";
+            std::string value_size = (vars[$1].typ == integer) ? "DWORD" : "BYTE";
+
+            $$ = $3.code + 
+                "mov " + value_size + "[ebp - " + std::to_string(vars[$1].stack_pos) + "], " + result_reg + "\n";
+        }
     }
 |
     T_ID T_ASSIGN T_STRING_LIT T_SEMICOLON
@@ -247,6 +260,19 @@ statement:
         }
     }
 |
+    T_LET variable T_ID T_SEMICOLON
+    {
+        if (symbol_table.count($3) != 0 || vars.count($3) != 0)
+            semantic_error(@3.begin.line, "Redeclaration of variable: " + $3);
+
+        size_t size = ($2 == boolean || $2 == ch) ? 1 : 4;
+        size_t stack_pos = vars_get_largest_offset(vars) + size;
+
+        vars[$3] = variable($2, size, stack_pos);
+
+        $$ = "sub esp, " + std::to_string(size) + "\n";
+    }
+|
     T_LET variable T_ID T_ASSIGN expression T_SEMICOLON
     {
         if (symbol_table.count($3) != 0 || vars.count($3) != 0)
@@ -261,8 +287,8 @@ statement:
         
         size_t size = ($2 == boolean || $2 == ch) ? 1 : 4;
         std::string exp_result_reg = ($2 == boolean || $2 == ch) ? "al" : "eax";
-
         size_t stack_pos = vars_get_largest_offset(vars) + size;
+
         vars[$3] = variable($2, size, stack_pos);
         
         $$ = "sub esp, " + std::to_string(size) + "\n" +

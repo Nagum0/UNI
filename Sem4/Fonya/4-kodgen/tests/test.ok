@@ -1,6 +1,8 @@
 program TestProgram
 begin
-    let integer x;
-    x := 10;
-    write(x);
+    let integer[5] xs;
+    xs[0] = 420;
+    xs[1] = 69;
+    write(xs[0]);
+    write(xs[1]);
 end

@@ -6,22 +6,8 @@ segment .bss
 
 segment .text
 main:
-sub esp, 4
-mov eax, 10
-mov DWORD[ebp - 4], eax
-mov eax, [ebp - 4]
-push eax
-call write_unsigned
-add esp,4
-sub esp, 1
-mov al, 90
-mov [ebp - 5], al
-xor eax, eax
-mov al, [ebp - 5]
-push eax
-call write_char
-add esp,4
+sub esp, 20
 
-add esp, 5
+add esp, 20
 mov eax, 0
 ret

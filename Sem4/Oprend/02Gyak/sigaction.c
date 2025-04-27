@@ -17,12 +17,7 @@ int main() {
     sigact.sa_flags=0; //nothing special behaviour
     sigaction(SIGTERM,&sigact,NULL);
     sigaction(SIGUSR1,&sigact,NULL);
-    //1. parameter the signal number
-    //2. parameter the new sigaction with handler and blocked signals during the execution of handler (sa_mask) and a 
-    //special sa_flags - it change the behavior of signal, 
-    //e.g. SIGNOCLDSTOP - after the child process ended it won't send a signal to the parent 
-    //3. parameter - &old sigset or NULL. 
-    //If there is a variable, the function will fill with the value of formerly set sigset
+
     pid_t child=fork();
     if (child>0)
     {

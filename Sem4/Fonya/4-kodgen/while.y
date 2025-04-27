@@ -296,6 +296,22 @@ statement:
             "mov [ebp - " + std::to_string(stack_pos) + "], " + exp_result_reg + "\n";
     }
 |
+    T_LET variable T_OPEN_BRACKET T_NUM T_CLOSE_BRACKET T_ID T_SEMICOLON
+    {
+        if (vars.count($6) != 0)
+            semantic_error(@6.begin.line, "Redeclaration of variable: " + $6);
+        
+        size_t array_size = std::stoi($4);
+        size_t size = ($2 == integer ? 4 : 1) * array_size;
+        size_t stack_pos = vars_get_largest_offset(vars) + size;
+
+        vars[$6] = variable($2, size, stack_pos);
+        vars[$6].is_array = true;
+        vars[$6].array_size = array_size;
+        
+        $$ = "sub esp, " + std::to_string(size) + "\n";
+    }
+|
     T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON
     {
 		if( symbol_table.count($3) == 0 )

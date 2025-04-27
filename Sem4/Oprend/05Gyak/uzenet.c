@@ -16,7 +16,7 @@ struct uzenet {
 int kuld( int uzenetsor, char* msg , int category) 
 { 
     const struct uzenet uz = { .mtype = category }; 
-    strcpy(uz.mtext, msg);
+    memcpy((char*)uz.mtext, msg, strlen(msg) + 1);
     int status; 
 
     status = msgsnd( uzenetsor, &uz, strlen( uz.mtext ) + 1 , 0 ); 

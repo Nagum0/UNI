@@ -35,6 +35,8 @@ struct variable {
     type typ;
     size_t size;
     size_t stack_pos;
+    bool is_array;
+    size_t array_size;
     variable();
     variable(type typ, size_t size, size_t stack_pos);
 };

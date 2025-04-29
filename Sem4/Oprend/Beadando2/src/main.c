@@ -35,7 +35,7 @@
 #define pt(fstr, ...) {printf("[%s] "fstr"\n", whoami ?: "N/A", ##__VA_ARGS__);}
 char* whoami = 0;
 
-void dummy_handler(int sig) {}
+void handler(int sig) {}
 
 int main(int argc, char* argv[]) {
     print_manual();
@@ -87,60 +87,62 @@ int main(int argc, char* argv[]) {
     }
     
     printf("The tournament is starting!\n");
-    
-    for (size_t i = 0; i < nyuszik->len; ++i) {
-        if (nyuszik->data[i] == NULL)
-            continue;
 
-        nyuszi_t* nyuszi = nyuszik->data[i];
+    int pipefd[2];
+    pipe(pipefd);
 
-        int pipefd[2];
-        pipe(pipefd);
+    struct sigaction sigact;
+    sigact.sa_handler = handler;
+    sigact.sa_flags = 0;
+    sigemptyset(&sigact.sa_mask);
 
-        struct sigaction sigact;
-        sigact.sa_handler = dummy_handler;
-        sigact.sa_flags = 0;
-        sigemptyset(&sigact.sa_mask);
+    pid_t child = fork();
 
-        pid_t child = fork();
+    if (child > 0) {
+        whoami = "FŐNYUSZI";
+        sigaction(SIGUSR1, &sigact, NULL);
+        close(pipefd[1]);
 
-        if (child > 0) {
-            whoami = "FŐNYUSZI";
-            sigaction(SIGUSR1, &sigact, NULL);
-            close(pipefd[1]);
+        pause();
 
-            // Parent waits for child signal
-            pause();
+        for (size_t i = 0; i < nyuszik->len; ++i) {
+            if (nyuszik->data[i] == NULL)
+                continue;
 
-            // Give time for child to write into the pipe
-            sleep(1);
-            int egg_count;
-            read(pipefd[0], &egg_count, sizeof(int));
-        
-            // Update data
-            nyuszi_list_update_eggs(nyuszik, nyuszi->name, egg_count);
+            nyuszi_t* nyuszi = nyuszik->data[i];
+            int eggs;
+            read(pipefd[0], &eggs, sizeof(int));
 
-            wait(NULL);
+            nyuszi_list_update_eggs(nyuszik, nyuszi->name, eggs);
         }
-        else {
+
+        wait(NULL);
+        save_handler("data.txt", nyuszik);
+        winner_handler(nyuszik);
+    }
+    else {
+        srand(time(NULL));
+
+        close(pipefd[0]);
+        kill(getppid(), SIGUSR1);
+
+        for (size_t i = 0; i < nyuszik->len; ++i) {
+            if (nyuszik->data[i] == NULL)
+                continue;
+
+            nyuszi_t* nyuszi = nyuszik->data[i];
             whoami = nyuszi->name;
-            close(pipefd[0]);
-            
-            srand(time(NULL));
-            kill(getppid(), SIGUSR1);
             pt("%s", nyuszi->poem);
 
-            // Get eggs
-            int egg_count = (rand() % 19) + 1;
-            pt("Received eggs: %d", egg_count);
-            write(pipefd[1], &egg_count, sizeof(egg_count));
+            int eggs = (rand() % 20) + 1;
+            pt("Received eggs: %d", eggs);
 
-            exit(0);
+            write(pipefd[1], &eggs, sizeof(int));
         }
+
+        exit(0);
     }
-    
-    save_handler("data.txt", nyuszik);
-    winner_handler(nyuszik);
+
     nyuszi_list_free(nyuszik);
 
     return 0;

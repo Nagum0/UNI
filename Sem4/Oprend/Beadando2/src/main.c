@@ -11,11 +11,31 @@
  * vagy egy hozzá hasonló Linux rendszeren kell futnia. A megoldást a beadási határidőt követő héten be kell mutatni a gyakorlatvezetőnek. 
  */
 
-#include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <time.h>
+#include <mqueue.h>
+#include <sys/msg.h>
+#include <sys/sem.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stddef.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "../include/nyuszi.h"
 #include "../include/cmd.h"
+
+#define pt(fstr, ...) {printf("[%s] "fstr"\n", whoami ?: "N/A", ##__VA_ARGS__);}
+char* whoami = 0;
+
+void dummy_handler(int sig) {}
 
 int main(int argc, char* argv[]) {
     print_manual();
@@ -33,8 +53,6 @@ int main(int argc, char* argv[]) {
 
         switch ((cmd_t)command) {
             case EXIT:
-                winner_handler(nyuszik);
-                printf("Exiting...\n");
                 running = false;
                 break;
             case CHANGE_NAME:
@@ -68,8 +86,62 @@ int main(int argc, char* argv[]) {
         }
     }
     
+    printf("The tournament is starting!\n");
+    
+    for (size_t i = 0; i < nyuszik->len; ++i) {
+        if (nyuszik->data[i] == NULL)
+            continue;
+
+        nyuszi_t* nyuszi = nyuszik->data[i];
+
+        int pipefd[2];
+        pipe(pipefd);
+
+        struct sigaction sigact;
+        sigact.sa_handler = dummy_handler;
+        sigact.sa_flags = 0;
+        sigemptyset(&sigact.sa_mask);
+
+        pid_t child = fork();
+
+        if (child > 0) {
+            whoami = "FŐNYUSZI";
+            sigaction(SIGUSR1, &sigact, NULL);
+            close(pipefd[1]);
+
+            // Parent waits for child signal
+            pause();
+
+            // Give time for child to write into the pipe
+            sleep(1);
+            int egg_count;
+            read(pipefd[0], &egg_count, sizeof(int));
+        
+            // Update data
+            nyuszi_list_update_eggs(nyuszik, nyuszi->name, egg_count);
+
+            wait(NULL);
+        }
+        else {
+            whoami = nyuszi->name;
+            close(pipefd[0]);
+            
+            srand(time(NULL));
+            kill(getppid(), SIGUSR1);
+            pt("%s", nyuszi->poem);
+
+            // Get eggs
+            int egg_count = (rand() % 19) + 1;
+            pt("Received eggs: %d", egg_count);
+            write(pipefd[1], &egg_count, sizeof(egg_count));
+
+            exit(0);
+        }
+    }
+    
+    save_handler("data.txt", nyuszik);
+    winner_handler(nyuszik);
     nyuszi_list_free(nyuszik);
-    // printf("-- main: nyuszik freed\n"); // DEBUG
 
     return 0;
 }

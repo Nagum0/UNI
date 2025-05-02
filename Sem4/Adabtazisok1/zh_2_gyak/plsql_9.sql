@@ -261,7 +261,3 @@ WHERE fizetes >= (
     SELECT ROUND(AVG(fizetes), 2)
     FROM DOLGOZO
 );
-
--- 1: 108, 29/29, 3.6
--- 2: 96, 28/33 3.2
--- Korrigalt: 

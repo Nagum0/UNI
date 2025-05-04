@@ -1,5 +1,5 @@
-Zeki|18|Ez egy vers
-Laci|15|Ez is vers
-Balazs|6|En nem mondok verset
-Dani|1|Ime egy versike
-Zalan|16|Nemtudok magyarul
+Zeki|4|Ez egy vers
+Laci|16|Ez is vers
+Balazs|4|En nem mondok verset
+Dani|19|Ime egy versike
+Zalan|7|Nemtudok magyarul

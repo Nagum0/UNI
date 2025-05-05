@@ -104,6 +104,7 @@ int main(int argc, char* argv[]) {
         }
 
         szemafor_muvelet(semid, -1);
+        pt("Itt!");
         data[tapsi_idx] = n;
         szemafor_muvelet(semid, 1);
 
@@ -145,6 +146,7 @@ int main(int argc, char* argv[]) {
         }
         
         szemafor_muvelet(semid, -1);
+        pt("Itt!");
         data[fules_idx] = n;
         szemafor_muvelet(semid, 1);
 

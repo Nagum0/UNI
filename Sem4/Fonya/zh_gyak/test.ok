@@ -1,0 +1,4 @@
+program Test
+begin
+    multi 3 write(10);
+end

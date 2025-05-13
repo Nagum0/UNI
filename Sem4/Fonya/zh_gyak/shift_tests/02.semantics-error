@@ -1,0 +1,7 @@
+program ures
+    boolean i;
+    integer j;
+begin
+    read(j);
+    i := (j >> 3);
+end

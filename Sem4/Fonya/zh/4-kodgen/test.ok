@@ -1,0 +1,6 @@
+program Test
+  integer a;
+begin
+  lock a;
+  write(a);
+end

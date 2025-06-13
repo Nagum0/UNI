@@ -111,3 +111,20 @@ Alogritmus: Adott R es F.
 
     Tehat Fonokok BCNF felbontasa: Fonokok1(nev, cim, kedvencTea), Fonokok3(kedveltTeák, gyarto), Fonokok4(nev, kedveltTeák)
 ```
+
+# Chase-teszt veszteségmentességhez
+
+## Algoritmus
+
+1. Adott egy R relacio es egy F fuggoseg halmaz es adott R egy felbontasa
+2. Konstrualok egy tablot (tableau)
+  1. Fogom a felbontasokat pl: R1(A, D) esetben a tablo 1. sora lesz a, b1, c1, d
+  R2(B, C) esetben a2, b, c, d2 lesz, stb.
+3. Ezutan vegig megyek az F-en es minden fuggoseg eseten megnezem, hogy ha egyezik 2 sor bal oldala, 
+akkor ataliktom a jobb oldal reszet ezek a szabalyok szerint:
+  1. Ha a két egyenlővé teendő szimbólum közül az egyik index nélküli, akkor a másik is ezt az
+  értéket kapja.
+  2. Két indexes szimbólum esetén a kisebbik indexű értéket kapja meg a másik.
+  3. A szimbólumok minden előfordulását helyettesíteni kell az új értékkel.
+4. Miutan vegig mentem minden F-beli fuggosegen megnezem, hogy van-e olyan sor a táblában, ahol minden 
+oszlopban ugyanaz a szimbólum van, mint az első sorban (vagy minden mező ugyanaz egy sorban).

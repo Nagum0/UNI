@@ -1,0 +1,11 @@
+program pelda
+    natural n
+    real r1
+    real r2
+begin
+    n:=0
+    r1:=18,25
+    r2:=r1+1,02
+    n:=int(r2)+frac(r1)
+    write(n)
+end

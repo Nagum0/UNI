@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "node.h": "c",
-        "stdio.h": "c",
-        "stdlib.h": "c",
-        "hsls.h": "c"
-    }
-}

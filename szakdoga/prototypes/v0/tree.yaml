@@ -1,0 +1,8 @@
+object: Tree
+hash: <tree's hash>
+children:
+  - hash: <child hash>
+    # blob or tree
+    type: <child type>
+    # file name or folder name
+    name: <child name>

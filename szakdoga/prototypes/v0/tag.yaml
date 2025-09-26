@@ -1,8 +1,0 @@
-object: Tag
-type: <git object being tagged>
-name: <tagname>
-metadata:
-  tagger:
-    name: <tagger's name>
-    email: <tagger's email>
-  message: <tag message>

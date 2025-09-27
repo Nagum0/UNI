@@ -13,5 +13,7 @@ func main()  {
 		pkg.Init()
 	case "add":
 		pkg.Add(args[1])
+	case "commit":
+		pkg.Commit(args[1])
 	}
 }

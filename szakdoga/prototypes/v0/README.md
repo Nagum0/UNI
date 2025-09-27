@@ -5,7 +5,7 @@
 - Points to the current branch head file
 
 ``` yaml
-ref: <head file path>
+ref: heads/<branch name>
 ```
 
 ## Index
@@ -28,13 +28,25 @@ files:
 
 ``` yaml
 object: Tree
-hash: <tree's hash>
+hash: <tree hash>
+parent: <parent hash>
 children:
   - hash: <child hash>
     # blob or tree
     type: <child type>
     # file name or folder name
     name: <child name>
+```
+
+``` yaml
+hash: <tree hash>
+children:
+  - dir: <subdirectory name>
+    children: ...
+    blobs: ...
+blobs:
+  - name: <file name>
+    hash: <blob hash>
 ```
 
 ### COMMIT

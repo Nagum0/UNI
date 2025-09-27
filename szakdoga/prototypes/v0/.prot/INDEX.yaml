@@ -1,5 +1,6 @@
 files:
-    Makefile: <none>
-    README.md: <none>
-    src/cmd/proto1/main.go: <none>
-    src/pkg/commands.go: <none>
+    README.md: 85d1d98c58edd9a3efcd4724627dc32b08d1de7d
+    bin/proto: b6bdf3954c0bde308e59bd06288c9eb7d64c576e
+    src/cmd/proto1/main.go: 13ad90fed585ae62b53fe37b066d63aa5a47147c
+    src/pkg/commands.go: 220dc7a5d2eac3690c530c7883a466d16186397b
+    src/pkg/objects.go: 273a8588535ec3d16456e0747c0683f04f648e34

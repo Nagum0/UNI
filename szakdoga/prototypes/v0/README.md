@@ -1,10 +1,26 @@
 # PROTO 1
 
+## Commands
+
+### Init
+
+- Initializes a new repository and creates the following:
+  - obj/
+  - heads/
+  - INDEX.yaml and bootstraps it
+  - HEAD.yaml and sets the ref to heads/main
+  - Automatically creates the main branch in heads/
+
+``` bash
+proto init
+```
+
 ## Head
 
 - Points to the current branch head file
 
 ``` yaml
+branch: <current active branch>
 ref: heads/<branch name>
 ```
 
@@ -40,14 +56,12 @@ blobs: {}
 ### COMMIT
 
 ``` yaml
-hash: <commit hash>
-tree: <tree hash>
+snapshot: <tree hash>
 parents:
   - hash: <parent hash>
 metadata:
-  committer:
-    name: <committer name>
-    email: <committer email>
+  committer: <committer name>
+  email: <committer email>
   message: <commit message>
 ```
 

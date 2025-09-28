@@ -1,0 +1,22 @@
+dirs:
+  bin:
+    dirs: {}
+    blobs:
+      proto: 17a4255ecdc3d0685da8eb49239b9bf336a70bbe
+  src:
+    dirs:
+      cmd:
+        dirs:
+          proto1:
+            dirs: {}
+            blobs:
+              main.go: 818ff2f98207a8e7de6a744d99484dc4e63761dc
+        blobs: {}
+      pkg:
+        dirs: {}
+        blobs:
+          commands.go: b496f4a4579ffdf09a8f37b4dee55cbc1c14752c
+          objects.go: 574a35d64c5c42a448f3e7df8b235e28ec65149f
+    blobs: {}
+blobs:
+  README.md: 41ace5177a5504dac3997560512679e8d9089c66

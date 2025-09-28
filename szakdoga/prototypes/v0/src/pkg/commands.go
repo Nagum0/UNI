@@ -25,6 +25,20 @@ func Init() {
 	indexFile, _ := os.Create(".prot/INDEX.yaml")
 	defer indexFile.Close()
 	indexFile.Write(out)
+
+	// Create main branch
+	main, _ := os.Create(".prot/heads/main")
+	defer main.Close()
+
+	// Create and bootstrap HEAD
+	headObject := Head{
+		Branch: "main",
+		Ref: "heads/main",
+	}
+	head, _ := yaml.Marshal(headObject)
+	headFile, _ := os.Create(".prot/HEAD.yaml")
+	defer headFile.Close()
+	headFile.Write(head)
 }
 
 func Add(filePath string) {
@@ -60,16 +74,36 @@ func Add(filePath string) {
 }
 
 func Commit(msg string) {
+	// Reading INDEX
 	indexFileData, _ := os.ReadFile(".prot/INDEX.yaml")
 	var index Index
 	yaml.Unmarshal(indexFileData, &index)
-
-	root := createSnapshot(index)
-	rootString := root.String()
 	
-	var snap Snapshot
-	yaml.Unmarshal([]byte(rootString), &snap)
-	fmt.Println(snap.String())
+	// Creating snapshot object
+	snapshotObject := createSnapshot(index)
+	snapshotHash := genSHA1([]byte(snapshotObject.String()))
+	WriteObject(snapshotHash, []byte(snapshotObject.String()))
+
+	// Creating commit object
+	commitObject := CommitObject{
+		Snapshot: snapshotHash,
+		Metadata: CommitMetadata{
+			Committer: "<test>",
+			Email: "<test>",
+			Message: msg,
+		},
+	}
+
+	parent, ok := GetTopCommitHash()
+	if ok {
+		commitObject.Parents = append(commitObject.Parents, parent)
+	}
+
+	commitHash := genSHA1([]byte(commitObject.String()))
+	WriteObject(commitHash, []byte(commitObject.String()))
+
+	// Update heads/<current branch>
+	UpdateBranchHead(commitHash)
 }
 
 func createSnapshot(index Index) *Snapshot {

@@ -64,29 +64,32 @@ func Commit(msg string) {
 	var index Index
 	yaml.Unmarshal(indexFileData, &index)
 
-	root := createTree(index)
-	fmt.Println(root.String())
+	root := createSnapshot(index)
+	rootString := root.String()
+	
+	var snap Snapshot
+	yaml.Unmarshal([]byte(rootString), &snap)
+	fmt.Println(snap.String())
 }
 
-func createTree(index Index) *Tree {
-	root := NewTree()
+func createSnapshot(index Index) *Snapshot {
+	root := NewSnapshot()
 
 	for filePath, hash := range index.Files {
 		dirs := strings.Split(filePath, "/")
+		currDir := root
 
 		if len(dirs) > 1 {
-			currDir := root
-
 			for _, dir := range dirs[:len(dirs) - 1] {
-				if _, ok := currDir.Children[dir]; !ok {
-					currDir.Children[dir] = NewTree()
+				if _, ok := currDir.Dirs[dir]; !ok {
+					currDir.Dirs[dir] = NewSnapshot()
 				}
 
-				currDir = currDir.Children[dir]
+				currDir = currDir.Dirs[dir]
 			}
-
-			currDir.Blobs[dirs[len(dirs)-1]] = hash
 		}
+
+		currDir.Blobs[dirs[len(dirs)-1]] = hash
 	}
 
 	return root

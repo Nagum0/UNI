@@ -10,19 +10,19 @@ type Index struct {
 	Files map[string]string `yaml:"files"`
 }
 
-type Tree struct {
-	Children map[string]*Tree  `yaml:"children"`
+type Snapshot struct {
+	Dirs     map[string]*Snapshot  `yaml:"dirs"`
 	Blobs    map[string]string `yaml:"blobs"`
 }
 
-func NewTree() *Tree {
-	return &Tree{
-		Children: make(map[string]*Tree),
+func NewSnapshot() *Snapshot {
+	return &Snapshot{
+		Dirs: make(map[string]*Snapshot),
 		Blobs: make(map[string]string),
 	}
 }
 
-func (t Tree) String() string {
+func (t Snapshot) String() string {
 	var buf bytes.Buffer
 	enc := yaml.NewEncoder(&buf)
 	defer enc.Close()

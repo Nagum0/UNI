@@ -24,55 +24,41 @@ files:
 
 - Just a compressed file placed in .prot/obj/hash
 
-### TREE
+### DIRECTORY SNAPSHOT
+
+- A snapshot of the directory structure of the staged files at the time of a commit.
+- This replaces git's tree objects for a simpler one file solution with the tradeoff of efficiency (good for a prototype)
 
 ``` yaml
-object: Tree
-hash: <tree hash>
-parent: <parent hash>
-children:
-  - hash: <child hash>
-    # blob or tree
-    type: <child type>
-    # file name or folder name
-    name: <child name>
-```
-
-``` yaml
-hash: <tree hash>
-children:
-  - dir: <subdirectory name>
-    children: ...
-    blobs: ...
-blobs:
-  - name: <file name>
-    hash: <blob hash>
-```
+dirs:
+  dirName:
+    children: {}
+    blobs: {}
+blobs: {}
+  ```
 
 ### COMMIT
 
 ``` yaml
-object: Commit
-hash: <commit's hash>
+hash: <commit hash>
 tree: <tree hash>
 parents:
   - hash: <parent hash>
 metadata:
   committer:
-    name: <committer's name>
-    email: <committer's email>
+    name: <committer name>
+    email: <committer email>
   message: <commit message>
 ```
 
 ### TAG
 
 ``` yaml
-object: Tag
 type: <git object being tagged>
 name: <tagname>
 metadata:
   tagger:
-    name: <tagger's name>
-    email: <tagger's email>
+    name: <tagger name>
+    email: <tagger email>
   message: <tag message>
 ```

@@ -1,11 +1,10 @@
-PROTO=./bin/proto
+PROTO=./../bin/proto
 
 .PHONY: build run setup clean
 
 clean:
 	rm -rf bin/
-	rm -rf .prot/
-	rm -rf test/
+	rm -rf test/.prot
 
 build:
 	mkdir -p bin
@@ -15,17 +14,12 @@ run:
 	go run ./src/cmd/proto1/
 
 setup:
-	mkdir -p test
-	cd test/
-
 	$(PROTO) init
 
-	$(PROTO) add README.md
-	$(PROTO) add src/cmd/proto1/main.go
-	$(PROTO) add src/pkg/commands.go
-	$(PROTO) add src/pkg/objects.go
-	$(PROTO) add bin/proto
-	
+	$(PROTO) add a.txt
+	$(PROTO) add src/b.txt
+	$(PROTO) add src/pkg/c.txt
+			
 	$(PROTO) commit "test commit"
 
 	$(PROTO) branch "feat"

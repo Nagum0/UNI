@@ -2,10 +2,11 @@ package pkg
 
 import (
 	"bytes"
-	"fmt"
-	"os"
-	"io"
 	"compress/zlib"
+	"fmt"
+	"io"
+	"os"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -62,6 +63,7 @@ func NewSnapshot() *Snapshot {
 func (s Snapshot) UpdateWorkingDirectory(dirs string, index *Index) {
 	for fileName, hash := range s.Blobs {
 		filePath := fmt.Sprintf("%v/%v", dirs, fileName)
+		filePath = strings.TrimPrefix(filePath, "./")
 		contents, _ := zlibDecompress(hash)
 		file, _ := os.Create(filePath)
 		defer file.Close()

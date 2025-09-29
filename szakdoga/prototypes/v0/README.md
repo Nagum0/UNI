@@ -49,6 +49,24 @@ proto commit <message>
 proto branch <branch name>
 ```
 
+### Checkout
+
+- Goes to another branch and updates the working directory to match it
+- Details:
+  1. Update HEAD to target branch
+  2. Read top commit object of the branch
+  3. Update the working directory to match the commit's snapshot
+
+``` bash
+proto checkout <branch name>
+```
+
+### Get
+
+- Gets info about the repository
+- Commands:
+  - branch
+
 ## Head
 
 - Points to the current branch head file

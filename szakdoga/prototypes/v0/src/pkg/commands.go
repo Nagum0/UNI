@@ -11,6 +11,21 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+func Get(command string) {
+	switch command {
+	case "branch":
+		branches := getBranches()
+		head := GetHead()
+		for _, branch := range branches {
+			if branch == head.Branch {
+				fmt.Printf(" * %v\n", branch)
+			} else {
+				fmt.Printf("   %v\n", branch)
+			}
+		}
+	}
+}
+
 func Init() {
 	// Create needed directories
 	os.Mkdir(".prot", os.ModePerm)
@@ -123,6 +138,39 @@ func Branch(branchName string) {
 	if topCommitHash, ok := GetTopCommitHash(); ok {
 		branchFile.WriteString(topCommitHash)
 	}
+}
+
+func Checkout(branchName string) {
+	// Update HEAD
+	SwitchBranch(branchName)
+
+	// Read top commit
+	topCommitHash, ok := GetTopCommitHash()
+	if !ok {
+		return
+	}
+	commitFile, _ := os.ReadFile(".prot/obj/" + topCommitHash)
+	var commit CommitObject
+	yaml.Unmarshal(commitFile, &commit)
+
+	// Read commit's snapshot
+	snapshotFile, _ := os.ReadFile(".prot/obj/" + commit.Snapshot)
+	var snapshot Snapshot
+	yaml.Unmarshal(snapshotFile, &snapshot)
+
+	// Loading INDEX
+	indexFile, _ := os.ReadFile(".prot/INDEX.yaml")
+	var index Index
+	yaml.Unmarshal(indexFile, &index)
+
+	// Update working directory
+	snapshot.UpdateWorkingDirectory(".", &index)
+
+	// Updating INDEX
+	newIndexContents, _ := yaml.Marshal(index)
+	newIndexFile, _ := os.Create(".prot/INDEX.yaml")
+	defer newIndexFile.Close()
+	newIndexFile.Write(newIndexContents)
 }
 
 func getBranches() []string {

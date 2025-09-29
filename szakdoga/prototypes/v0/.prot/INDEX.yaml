@@ -1,6 +1,0 @@
-files:
-    README.md: a527642490c4a8f29372a552413f685767ee5b7f
-    bin/proto: 09d6fe647d1a08c490c487d925b7f479fac7bf0d
-    src/cmd/proto1/main.go: 8d2a5fc94de9f5de01318f76d0622a7cbe2afa88
-    src/pkg/commands.go: 92e38ee1f430f1c894fecad77288b12f612923a5
-    src/pkg/objects.go: 7c4ebd2017da44f9a8591522a142a7d9413fe28e

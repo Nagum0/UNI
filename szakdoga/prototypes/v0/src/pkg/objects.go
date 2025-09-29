@@ -2,7 +2,10 @@ package pkg
 
 import (
 	"bytes"
+	"fmt"
 	"os"
+	"io"
+	"compress/zlib"
 
 	"gopkg.in/yaml.v3"
 )
@@ -26,6 +29,18 @@ func UpdateBranchHead(commitHash string) {
 	branchHead.WriteString(commitHash)
 }
 
+// Switch the current branch and ref to branchName in HEAD.yaml
+func SwitchBranch(branchName string) {
+	head := GetHead()
+	head.Branch = branchName
+	head.Ref = fmt.Sprintf("heads/%v", branchName)
+
+	newHeadContents, _ := yaml.Marshal(head)
+	headFile, _ := os.Create(".prot/HEAD.yaml")
+	defer headFile.Close()
+	headFile.Write(newHeadContents)
+}
+
 type Index struct {
 	Files map[string]string `yaml:"files"`
 }
@@ -40,6 +55,45 @@ func NewSnapshot() *Snapshot {
 		Dirs:  make(map[string]*Snapshot),
 		Blobs: make(map[string]string),
 	}
+}
+
+// Update working directory to look like the Snapshot's directory structure and
+// update the INDEX to match the commit's tracked files
+func (s Snapshot) UpdateWorkingDirectory(dirs string, index *Index) {
+	for fileName, hash := range s.Blobs {
+		filePath := fmt.Sprintf("%v/%v", dirs, fileName)
+		contents, _ := zlibDecompress(hash)
+		file, _ := os.Create(filePath)
+		defer file.Close()
+		file.Write(contents)
+		index.Files[filePath] = hash
+	}
+
+	for dirName, dirSnapshot := range s.Dirs {
+		dirSnapshot.UpdateWorkingDirectory(dirs + "/" + dirName, index)
+	}
+}
+
+// Decompress the byte slice from zlib.
+func zlibDecompress(hash string) ([]byte, error) {
+	contents, err := os.ReadFile(".prot/obj/" + hash)
+	if err != nil {
+		return nil, err
+	}
+
+    contentsReader := bytes.NewReader(contents)
+    reader, err := zlib.NewReader(contentsReader)
+    if err != nil {
+        return nil, err
+    }
+    defer reader.Close()
+    
+    decompressedBytes := bytes.Buffer{}
+    if _, err := io.Copy(&decompressedBytes, reader); err != nil {
+        return nil, err
+    }
+
+    return decompressedBytes.Bytes(), nil
 }
 
 func (t Snapshot) String() string {

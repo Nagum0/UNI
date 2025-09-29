@@ -5,6 +5,7 @@ PROTO=./bin/proto
 clean:
 	rm -rf bin/
 	rm -rf .prot/
+	rm -rf test/
 
 build:
 	mkdir -p bin
@@ -14,6 +15,9 @@ run:
 	go run ./src/cmd/proto1/
 
 setup:
+	mkdir -p test
+	cd test/
+
 	$(PROTO) init
 
 	$(PROTO) add README.md

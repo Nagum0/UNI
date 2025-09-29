@@ -164,7 +164,7 @@ func Checkout(branchName string) {
 	yaml.Unmarshal(indexFile, &index)
 
 	// Update working directory
-	snapshot.UpdateWorkingDirectory(".", &index)
+	snapshot.UpdateWorkingDirectory("", &index)
 
 	// Updating INDEX
 	newIndexContents, _ := yaml.Marshal(index)

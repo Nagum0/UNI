@@ -31,13 +31,13 @@ type Index struct {
 }
 
 type Snapshot struct {
-	Dirs     map[string]*Snapshot  `yaml:"dirs"`
-	Blobs    map[string]string `yaml:"blobs"`
+	Dirs  map[string]*Snapshot `yaml:"dirs"`
+	Blobs map[string]string    `yaml:"blobs"`
 }
 
 func NewSnapshot() *Snapshot {
 	return &Snapshot{
-		Dirs: make(map[string]*Snapshot),
+		Dirs:  make(map[string]*Snapshot),
 		Blobs: make(map[string]string),
 	}
 }
@@ -58,8 +58,8 @@ type CommitMetadata struct {
 }
 
 type CommitObject struct {
-	Snapshot string `yaml:"snapshot"`
-	Parents  []string `yaml:"parents"`
+	Snapshot string         `yaml:"snapshot"`
+	Parents  []string       `yaml:"parents"`
 	Metadata CommitMetadata `yaml:"metadata"`
 }
 

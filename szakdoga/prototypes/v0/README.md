@@ -15,6 +15,40 @@
 proto init
 ```
 
+### Add 
+
+- Adds a file to the INDEX and compresses it and stores the blob in the
+  object database
+
+``` bash
+proto add <file path>
+```
+
+### Commit
+
+- Takes a snapshot of the tracked directory structure and creates a commit object
+- Details:
+  1. Create a Snapshot from the INDEX and write it to the object database
+  2. Create the Commit object
+  3. Collect parent commits (there are multiple in case of a merge commit) and update the Commit object
+  4. Write the Commit object to the object database
+  5. Update the heads/current branch to the new commit objects hash
+
+``` bash
+proto commit <message>
+```
+
+### Branch
+
+- Create a new branch
+- Details:
+  1. Creates a new file in the heads/ folder for the new branch
+  2. Set the new branch to point to the current commit object
+
+``` bash
+proto branch <branch name>
+```
+
 ## Head
 
 - Points to the current branch head file

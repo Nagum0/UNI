@@ -1,7 +1,6 @@
 files:
-    Makefile: c45260ccb4f64b1db305e0c2cb3cf535509014ad
-    README.md: 41ace5177a5504dac3997560512679e8d9089c66
-    bin/proto: 17a4255ecdc3d0685da8eb49239b9bf336a70bbe
-    src/cmd/proto1/main.go: 818ff2f98207a8e7de6a744d99484dc4e63761dc
-    src/pkg/commands.go: b496f4a4579ffdf09a8f37b4dee55cbc1c14752c
-    src/pkg/objects.go: 574a35d64c5c42a448f3e7df8b235e28ec65149f
+    README.md: a527642490c4a8f29372a552413f685767ee5b7f
+    bin/proto: 09d6fe647d1a08c490c487d925b7f479fac7bf0d
+    src/cmd/proto1/main.go: 8d2a5fc94de9f5de01318f76d0622a7cbe2afa88
+    src/pkg/commands.go: 92e38ee1f430f1c894fecad77288b12f612923a5
+    src/pkg/objects.go: 7c4ebd2017da44f9a8591522a142a7d9413fe28e

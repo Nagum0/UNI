@@ -18,7 +18,7 @@ func Init() {
 	for _, dir := range dirs {
 		os.Mkdir(fmt.Sprintf(".prot/%v", dir), os.ModePerm)
 	}
-	
+
 	// Create and bootstrap INDEX
 	index := Index{}
 	out, _ := yaml.Marshal(index)
@@ -33,7 +33,7 @@ func Init() {
 	// Create and bootstrap HEAD
 	headObject := Head{
 		Branch: "main",
-		Ref: "heads/main",
+		Ref:    "heads/main",
 	}
 	head, _ := yaml.Marshal(headObject)
 	headFile, _ := os.Create(".prot/HEAD.yaml")
@@ -48,7 +48,7 @@ func Add(filePath string) {
 	indexFileData, _ := os.ReadFile(".prot/INDEX.yaml")
 	var index Index
 	yaml.Unmarshal(indexFileData, &index)
-	
+
 	// Generating SHA1 hash
 	hash := genSHA1(contents)
 	currentHash, ok := index.Files[filePath]
@@ -78,7 +78,7 @@ func Commit(msg string) {
 	indexFileData, _ := os.ReadFile(".prot/INDEX.yaml")
 	var index Index
 	yaml.Unmarshal(indexFileData, &index)
-	
+
 	// Creating snapshot object
 	snapshotObject := createSnapshot(index)
 	snapshotHash := genSHA1([]byte(snapshotObject.String()))
@@ -89,8 +89,8 @@ func Commit(msg string) {
 		Snapshot: snapshotHash,
 		Metadata: CommitMetadata{
 			Committer: "<test>",
-			Email: "<test>",
-			Message: msg,
+			Email:     "<test>",
+			Message:   msg,
 		},
 	}
 
@@ -102,8 +102,40 @@ func Commit(msg string) {
 	commitHash := genSHA1([]byte(commitObject.String()))
 	WriteObject(commitHash, []byte(commitObject.String()))
 
-	// Update heads/<current branch>
+	// Update the head of the branch to new commit
 	UpdateBranchHead(commitHash)
+}
+
+func Branch(branchName string) {
+	// Cheack whether branch already exists
+	branches := getBranches()
+	for _, branch := range branches {
+		if branch == branchName {
+			panic(fmt.Sprintf("Branch %v already exists", branch))
+		}
+	}
+	
+	// Creating branch file
+	branchFile, _ := os.Create(".prot/heads/" + branchName)
+	defer branchFile.Close()
+
+	// Setting up new branch
+	if topCommitHash, ok := GetTopCommitHash(); ok {
+		branchFile.WriteString(topCommitHash)
+	}
+}
+
+func getBranches() []string {
+	var branches []string
+	headsDir, _ := os.ReadDir(".prot/heads")
+	
+	for _, entry := range headsDir {
+		if !entry.IsDir() {
+			branches = append(branches, entry.Name())
+		}
+	}
+
+	return branches
 }
 
 func createSnapshot(index Index) *Snapshot {
@@ -114,7 +146,7 @@ func createSnapshot(index Index) *Snapshot {
 		currDir := root
 
 		if len(dirs) > 1 {
-			for _, dir := range dirs[:len(dirs) - 1] {
+			for _, dir := range dirs[:len(dirs)-1] {
 				if _, ok := currDir.Dirs[dir]; !ok {
 					currDir.Dirs[dir] = NewSnapshot()
 				}
@@ -130,13 +162,13 @@ func createSnapshot(index Index) *Snapshot {
 }
 
 func zlibCompress(contents []byte) []byte {
-    buffer := bytes.Buffer{}
-    zlibWriter := zlib.NewWriter(&buffer)
-    zlibWriter.Write(contents)
-    zlibWriter.Close()
-    return buffer.Bytes()
+	buffer := bytes.Buffer{}
+	zlibWriter := zlib.NewWriter(&buffer)
+	zlibWriter.Write(contents)
+	zlibWriter.Close()
+	return buffer.Bytes()
 }
 
 func genSHA1(contents []byte) string {
-    return fmt.Sprintf("%x", sha1.Sum(contents))
+	return fmt.Sprintf("%x", sha1.Sum(contents))
 }

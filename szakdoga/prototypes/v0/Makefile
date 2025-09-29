@@ -23,3 +23,5 @@ setup:
 	$(PROTO) add bin/proto
 	
 	$(PROTO) commit "test commit"
+
+	$(PROTO) branch "feat"

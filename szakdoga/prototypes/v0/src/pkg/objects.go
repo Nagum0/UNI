@@ -119,6 +119,18 @@ type CommitObject struct {
 	Metadata CommitMetadata `yaml:"metadata"`
 }
 
+func UnmarshalCommit(contents []byte) CommitObject {
+	var commit CommitObject
+	yaml.Unmarshal(contents, &commit)
+	return commit
+}
+
+func GetBranchTopCommit(branch string) CommitObject {
+	branchHeadFile, _ := os.ReadFile(".prot/heads/" + branch)
+	commitFile, _ := os.ReadFile(".prot/obj/" + string(branchHeadFile))
+	return UnmarshalCommit(commitFile)
+}
+
 func (c CommitObject) String() string {
 	var buf bytes.Buffer
 	enc := yaml.NewEncoder(&buf)
@@ -145,4 +157,9 @@ func WriteObject(hash string, contents []byte) {
 	file, _ := os.Create(".prot/obj/" + hash)
 	defer file.Close()
 	file.Write(contents)
+}
+
+func ReadObject(hash string) []byte {
+	out, _ := os.ReadFile(".prot/obj/" + hash)
+	return out
 }

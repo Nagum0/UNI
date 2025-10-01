@@ -141,6 +141,7 @@ func Branch(branchName string) {
 	}
 }
 
+// TODO: INDEX doesn't remove untracked files
 func Checkout(branchName string) {
 	// Update HEAD
 	SwitchBranch(branchName)
@@ -172,6 +173,26 @@ func Checkout(branchName string) {
 	newIndexFile, _ := os.Create(".prot/INDEX.yaml")
 	defer newIndexFile.Close()
 	newIndexFile.Write(newIndexContents)
+}
+
+func Merge(otherBranch string) {
+	head := GetHead()
+	commonAncestor := findCommonAncestor(head.Branch, otherBranch)
+	fmt.Println(commonAncestor)
+}
+
+func findCommonAncestor(b1 string, b2 string) string {
+	// Read branch commit objects
+	b1Commit := GetBranchTopCommit(b1)
+	b2Commit := GetBranchTopCommit(b2)
+
+	for (len(b1Commit.Parents) != 0 && len(b2Commit.Parents) != 0) && 
+	    (b1Commit.Parents[0] != b2Commit.Parents[0]) {
+		b1Commit = UnmarshalCommit(ReadObject(b1Commit.Parents[0]))
+		b2Commit = UnmarshalCommit(ReadObject(b2Commit.Parents[0]))
+	}
+
+	return b1Commit.Parents[0]
 }
 
 func getBranches() []string {

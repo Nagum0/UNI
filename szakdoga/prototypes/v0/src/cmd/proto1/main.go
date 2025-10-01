@@ -21,5 +21,7 @@ func main()  {
 		pkg.Branch(args[1])
 	case "checkout":
 		pkg.Checkout(args[1])
+	case "merge":
+		pkg.Merge(args[1])
 	}
 }

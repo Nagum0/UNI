@@ -141,34 +141,27 @@ func Branch(branchName string) {
 	}
 }
 
-// TODO: INDEX doesn't remove untracked files
 func Checkout(branchName string) {
 	// Update HEAD
 	SwitchBranch(branchName)
 
 	// Read top commit
-	topCommitHash, ok := GetTopCommitHash()
+	_, ok := GetTopCommitHash()
 	if !ok {
 		return
 	}
-	commitFile, _ := os.ReadFile(".prot/obj/" + topCommitHash)
-	var commit CommitObject
-	yaml.Unmarshal(commitFile, &commit)
-
+	commit := GetBranchTopCommit(branchName)
+	
 	// Read commit's snapshot
 	snapshotFile, _ := os.ReadFile(".prot/obj/" + commit.Snapshot)
 	var snapshot Snapshot
 	yaml.Unmarshal(snapshotFile, &snapshot)
 
-	// Loading INDEX
-	indexFile, _ := os.ReadFile(".prot/INDEX.yaml")
-	var index Index
-	yaml.Unmarshal(indexFile, &index)
-
-	// Update working directory
+	// Update working directory and INDEX
+	index := Index{ Files: make(map[string]string) }
 	snapshot.UpdateWorkingDirectory(".", &index)
 
-	// Updating INDEX
+	// Updating INDEX.yaml file
 	newIndexContents, _ := yaml.Marshal(index)
 	newIndexFile, _ := os.Create(".prot/INDEX.yaml")
 	defer newIndexFile.Close()

@@ -4,7 +4,8 @@ PROTO=./../bin/proto
 
 clean:
 	rm -rf bin/
-	rm -rf test/.prot
+	rm -rf test/src/
+	rm -rf test/a.txt
 
 build:
 	mkdir -p bin
@@ -14,6 +15,14 @@ run:
 	go run ./src/cmd/proto1/
 
 setup:
+	mkdir -p src/
+	mkdir -p src/pkg/
+	echo "Hello A!" > a.txt
+	echo "Hello B!" > src/b.txt
+	echo "Hello B2!" > src/b2.txt
+	echo "Hello C!" > src/pkg/c.txt
+	echo "Hello C2!" > src/pkg/c2.txt
+
 	$(PROTO) init
 
 	$(PROTO) add a.txt

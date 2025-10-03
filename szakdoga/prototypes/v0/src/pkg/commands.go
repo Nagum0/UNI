@@ -3,6 +3,7 @@ package pkg
 import (
 	"bytes"
 	"compress/zlib"
+	"container/list"
 	"crypto/sha1"
 	"fmt"
 	"os"
@@ -150,7 +151,7 @@ func Checkout(branchName string) {
 	if !ok {
 		return
 	}
-	commit := GetBranchTopCommit(branchName)
+	commit, _ := GetBranchTopCommit(branchName)
 	
 	// Read commit's snapshot
 	snapshotFile, _ := os.ReadFile(".prot/obj/" + commit.Snapshot)
@@ -174,18 +175,48 @@ func Merge(otherBranch string) {
 	fmt.Println(commonAncestor)
 }
 
-func findCommonAncestor(b1 string, b2 string) string {
-	// Read branch commit objects
-	b1Commit := GetBranchTopCommit(b1)
-	b2Commit := GetBranchTopCommit(b2)
+func findCommonAncestor(a string, b string) *CommitObject {
+	_, aHash := GetBranchTopCommit(a)
+	_, bHash := GetBranchTopCommit(b)
+	
+	visited := make(map[string]CommitObject)
+	queue := list.List{}
+	queue.Init()
 
-	for (len(b1Commit.Parents) != 0 && len(b2Commit.Parents) != 0) && 
-	    (b1Commit.Parents[0] != b2Commit.Parents[0]) {
-		b1Commit = UnmarshalCommit(ReadObject(b1Commit.Parents[0]))
-		b2Commit = UnmarshalCommit(ReadObject(b2Commit.Parents[0]))
+	// Visit A commits
+	queue.PushBack(aHash)
+	for queue.Len() != 0 {
+		listElem := queue.Back()
+		queue.Remove(listElem)
+
+		commitHash := listElem.Value.(string)
+		commit := UnmarshalCommit(ReadObject(commitHash))
+		visited[commitHash] = commit
+
+		for _, parent := range commit.Parents {
+			queue.PushBack(parent)
+		}
 	}
 
-	return b1Commit.Parents[0]
+	// Check for ancestor with B
+	queue.PushBack(bHash)
+	for queue.Len() != 0 {
+		listElem := queue.Back()
+		queue.Remove(listElem)
+
+		commitHash := listElem.Value.(string)
+		commit := UnmarshalCommit(ReadObject(commitHash))
+
+		if c, ok := visited[commitHash]; ok {
+			return &c
+		}
+
+		for _, parent := range commit.Parents {
+			queue.PushBack(parent)
+		}
+	}
+
+	return nil
 }
 
 func getBranches() []string {

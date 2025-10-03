@@ -125,10 +125,10 @@ func UnmarshalCommit(contents []byte) CommitObject {
 	return commit
 }
 
-func GetBranchTopCommit(branch string) CommitObject {
+func GetBranchTopCommit(branch string) (CommitObject, string) {
 	branchHeadFile, _ := os.ReadFile(".prot/heads/" + branch)
 	commitFile, _ := os.ReadFile(".prot/obj/" + string(branchHeadFile))
-	return UnmarshalCommit(commitFile)
+	return UnmarshalCommit(commitFile), string(branchHeadFile)
 }
 
 func (c CommitObject) String() string {

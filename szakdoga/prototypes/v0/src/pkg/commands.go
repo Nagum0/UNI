@@ -171,8 +171,26 @@ func Checkout(branchName string) {
 
 func Merge(otherBranch string) {
 	head := GetHead()
+
+	// Find common ancestor
 	commonAncestor := findCommonAncestor(head.Branch, otherBranch)
-	fmt.Println(commonAncestor)
+
+	// Get snapshots
+	aCommit, _ := GetBranchTopCommit(head.Branch)
+	bCommit, _ := GetBranchTopCommit(otherBranch)
+	
+	aSnapshot := UnmarshalSnapshot(ReadObject(aCommit.Snapshot))
+	bSnapshot := UnmarshalSnapshot(ReadObject(bCommit.Snapshot))
+	baseSnapshot := UnmarshalSnapshot(ReadObject(commonAncestor.Snapshot))
+
+	// Collect snapshot differences
+	baseToA := aSnapshot.Diffs(baseSnapshot)
+	baseToB := bSnapshot.Diffs(baseSnapshot)
+	fmt.Println("base ->A")
+	fmt.Println(baseToA)
+	fmt.Println("--------------------")
+	fmt.Println("base ->B")
+	fmt.Println(baseToB)
 }
 
 func findCommonAncestor(a string, b string) *CommitObject {

@@ -58,6 +58,60 @@ func NewSnapshot() *Snapshot {
 	}
 }
 
+func UnmarshalSnapshot(contents []byte) Snapshot {
+	var snapshot Snapshot
+	yaml.Unmarshal(contents, &snapshot)
+	return snapshot
+}
+
+func (s Snapshot) Diffs(other Snapshot) map[string]HashPair {
+	diffs := make(map[string]HashPair)
+	pathPrefix := "."
+	s.collectDiffs(other, &diffs, &pathPrefix)
+	return diffs
+}
+
+type HashPair struct {
+	Current string
+	Other   string
+}
+
+func (s Snapshot) collectDiffs(other Snapshot, diffs *map[string]HashPair, pathPrefix *string) {
+	for blobName, hash := range s.Blobs {
+		if otherHash, ok := other.Blobs[blobName]; ok && hash != otherHash {
+			(*diffs)[*pathPrefix + "/" + blobName] = HashPair{
+				Current: hash,
+				Other: otherHash,
+			}
+		} else if !ok {
+			(*diffs)[*pathPrefix + "/" + blobName] = HashPair{ Current: hash }
+		}
+	}
+
+	for dirName, snapshot := range s.Dirs {
+		*pathPrefix += "/" + dirName
+
+		if otherSnapshot, ok := other.Dirs[dirName]; ok {
+			// Subdir is present in the other snapshot so we look for changes
+			snapshot.collectDiffs(*otherSnapshot, diffs, pathPrefix)
+		} else if !ok {
+			// Subdir is not present in the other snapshot so we add all of its blobs to diffs
+			snapshot.collectAllBlobsToDiffs(diffs, pathPrefix)
+		}
+	}
+}
+
+func (s Snapshot) collectAllBlobsToDiffs(diffs *map[string]HashPair, pathPrefix *string) {
+	for blobName, hash := range s.Blobs {
+		(*diffs)[*pathPrefix + "/" + blobName] = HashPair{ Current: hash }
+	}
+
+	for dirName, snapshot := range s.Dirs {
+		*pathPrefix += "/" + dirName
+		snapshot.collectAllBlobsToDiffs(diffs, pathPrefix)
+	}
+}
+
 // Update working directory to look like the Snapshot's directory structure and
 // update the INDEX to match the commit's tracked files
 func (s Snapshot) UpdateWorkingDirectory(dirs string, index *Index) {

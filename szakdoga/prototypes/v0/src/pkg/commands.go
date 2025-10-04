@@ -169,6 +169,8 @@ func Checkout(branchName string) {
 	newIndexFile.Write(newIndexContents)
 }
 
+// NOTE: Maybe use the INDEX???
+// BUG: Deleted files not tracked
 func Merge(otherBranch string) {
 	head := GetHead()
 
@@ -186,11 +188,58 @@ func Merge(otherBranch string) {
 	// Collect snapshot differences
 	baseToA := aSnapshot.Diffs(baseSnapshot)
 	baseToB := bSnapshot.Diffs(baseSnapshot)
+	
 	fmt.Println("base ->A")
-	fmt.Println(baseToA)
-	fmt.Println("--------------------")
+	for filePath, hashPair := range baseToA {
+		fmt.Printf("%v A: %v Base: %v\n", filePath, hashPair.Current, hashPair.Other)
+	}
+
 	fmt.Println("base ->B")
-	fmt.Println(baseToB)
+	for filePath, hashPair := range baseToB {
+		fmt.Printf("%v B: %v Base: %v\n", filePath, hashPair.Current, hashPair.Other)
+	}
+
+	// Check diffs and create new INDEX
+	index := Index{ Files: make(map[string]string) }
+
+	diffUnion := diffUnion(baseToA, baseToB)
+	fmt.Println(diffUnion)
+	for filePath := range diffUnion {
+		fmt.Println(filePath)
+
+		aHashPair, aOk := baseToA[filePath]
+		bHashPair, bOk := baseToB[filePath]
+		
+		filePath = strings.TrimPrefix(filePath, "./")
+		if aOk && bOk {
+			panic("merge conflict in file: " + filePath)
+		} else if aOk {
+			fmt.Println("here")
+			index.Files[filePath] = aHashPair.Current
+		} else if bOk {
+			fmt.Println("here 2")
+			index.Files[filePath] = bHashPair.Current
+		} else {
+			fmt.Println("here 3")
+		}
+	}
+	
+	indexYaml, _ := yaml.Marshal(index)
+	fmt.Println(string(indexYaml))
+}
+
+func diffUnion(a map[string]HashPair, b map[string]HashPair) map[string]any {
+	out := make(map[string]any)
+
+	for filePath := range a {
+		out[filePath] = nil
+	}
+
+	for filePath := range b {
+		out[filePath] = nil
+	}
+
+	return out
 }
 
 func findCommonAncestor(a string, b string) *CommitObject {

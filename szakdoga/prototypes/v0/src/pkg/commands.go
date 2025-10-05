@@ -160,7 +160,7 @@ func Checkout(branchName string) {
 
 	// Update working directory and INDEX
 	index := Index{ Files: make(map[string]string) }
-	snapshot.UpdateWorkingDirectory(".", &index)
+	snapshot.UpdateWorkingDirectory(".", &index, true)
 
 	// Updating INDEX.yaml file
 	newIndexContents, _ := yaml.Marshal(index)
@@ -177,69 +177,55 @@ func Merge(otherBranch string) {
 	// Find common ancestor
 	commonAncestor := findCommonAncestor(head.Branch, otherBranch)
 
-	// Get snapshots
+	// Get indexes
 	aCommit, _ := GetBranchTopCommit(head.Branch)
 	bCommit, _ := GetBranchTopCommit(otherBranch)
 	
-	aSnapshot := UnmarshalSnapshot(ReadObject(aCommit.Snapshot))
-	bSnapshot := UnmarshalSnapshot(ReadObject(bCommit.Snapshot))
-	baseSnapshot := UnmarshalSnapshot(ReadObject(commonAncestor.Snapshot))
+	aIndex := aCommit.CreateIndex()
+	bIndex := bCommit.CreateIndex()
+	baseIndex := commonAncestor.CreateIndex()
 
-	// Collect snapshot differences
-	baseToA := aSnapshot.Diffs(baseSnapshot)
-	baseToB := bSnapshot.Diffs(baseSnapshot)
-	
-	fmt.Println("base ->A")
-	for filePath, hashPair := range baseToA {
-		fmt.Printf("%v A: %v Base: %v\n", filePath, hashPair.Current, hashPair.Other)
+	// Union of all tracked files among indexes
+	union := indexUnion(aIndex, bIndex, baseIndex)
+
+	// DEBUG
+	for filePath, hashes := range union {
+		fmt.Printf("%v: { A: %v B: %v Base: %v }\n", filePath, hashes.A, hashes.B, hashes.Base)
+	}
+}
+
+type hashes struct {
+	A    string
+	B    string
+	Base string
+}
+
+func indexUnion(a Index, b Index, c Index) map[string]hashes {
+	union := make(map[string]hashes)
+
+	for filePath, hash := range a.Files {
+		union[filePath] = hashes{ A: hash }
 	}
 
-	fmt.Println("base ->B")
-	for filePath, hashPair := range baseToB {
-		fmt.Printf("%v B: %v Base: %v\n", filePath, hashPair.Current, hashPair.Other)
-	}
-
-	// Check diffs and create new INDEX
-	index := Index{ Files: make(map[string]string) }
-
-	diffUnion := diffUnion(baseToA, baseToB)
-	fmt.Println(diffUnion)
-	for filePath := range diffUnion {
-		fmt.Println(filePath)
-
-		aHashPair, aOk := baseToA[filePath]
-		bHashPair, bOk := baseToB[filePath]
-		
-		filePath = strings.TrimPrefix(filePath, "./")
-		if aOk && bOk {
-			panic("merge conflict in file: " + filePath)
-		} else if aOk {
-			fmt.Println("here")
-			index.Files[filePath] = aHashPair.Current
-		} else if bOk {
-			fmt.Println("here 2")
-			index.Files[filePath] = bHashPair.Current
+	for filePath, hash := range b.Files {
+		if hashinfo, ok := union[filePath]; !ok {
+			union[filePath] = hashes{ B: hash }
 		} else {
-			fmt.Println("here 3")
+			hashinfo.B = hash
+			union[filePath] = hashinfo
 		}
 	}
 	
-	indexYaml, _ := yaml.Marshal(index)
-	fmt.Println(string(indexYaml))
-}
-
-func diffUnion(a map[string]HashPair, b map[string]HashPair) map[string]any {
-	out := make(map[string]any)
-
-	for filePath := range a {
-		out[filePath] = nil
+	for filePath, hash := range c.Files {
+		if hashinfo, ok := union[filePath]; !ok {
+			union[filePath] = hashes{ Base: hash }
+		} else {
+			hashinfo.Base = hash
+			union[filePath] = hashinfo
+		}
 	}
 
-	for filePath := range b {
-		out[filePath] = nil
-	}
-
-	return out
+	return union
 }
 
 func findCommonAncestor(a string, b string) *CommitObject {

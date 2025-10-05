@@ -112,21 +112,25 @@ func (s Snapshot) collectAllBlobsToDiffs(diffs *map[string]HashPair, pathPrefix 
 	}
 }
 
-// Update working directory to look like the Snapshot's directory structure and
-// update the INDEX to match the commit's tracked files
-func (s Snapshot) UpdateWorkingDirectory(dirs string, index *Index) {
+// Update working directory to look like the Snapshot's directory structure 
+// if write is set to true.Update the INDEX to match the commit's tracked files. 
+func (s Snapshot) UpdateWorkingDirectory(dirs string, index *Index, write bool) {
 	for fileName, hash := range s.Blobs {
 		filePath := fmt.Sprintf("%v/%v", dirs, fileName)
 		filePath = strings.TrimPrefix(filePath, "./")
-		contents, _ := zlibDecompress(hash)
-		file, _ := os.Create(filePath)
-		defer file.Close()
-		file.Write(contents)
+
+		if write {
+			contents, _ := zlibDecompress(hash)
+			file, _ := os.Create(filePath)
+			defer file.Close()
+			file.Write(contents)
+		}
+
 		index.Files[filePath] = hash
 	}
 
 	for dirName, dirSnapshot := range s.Dirs {
-		dirSnapshot.UpdateWorkingDirectory(dirs + "/" + dirName, index)
+		dirSnapshot.UpdateWorkingDirectory(dirs + "/" + dirName, index, write)
 	}
 }
 
@@ -183,6 +187,13 @@ func GetBranchTopCommit(branch string) (CommitObject, string) {
 	branchHeadFile, _ := os.ReadFile(".prot/heads/" + branch)
 	commitFile, _ := os.ReadFile(".prot/obj/" + string(branchHeadFile))
 	return UnmarshalCommit(commitFile), string(branchHeadFile)
+}
+
+func (c CommitObject) CreateIndex() Index {
+	index := Index{ Files: make(map[string]string) }
+	snapshot := UnmarshalSnapshot(ReadObject(c.Snapshot))
+	snapshot.UpdateWorkingDirectory(".", &index, false)
+	return index
 }
 
 func (c CommitObject) String() string {

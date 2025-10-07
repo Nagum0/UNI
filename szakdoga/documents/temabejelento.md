@@ -18,12 +18,8 @@ miközben ellenőrzi az esetleges konfliktusokat a veriziók közt.
 
 ------
 
-A téma egy git stílusú egyszerűsített verziókezelő rendszer, amely a legfontosabb alapelveket és funkciókat valósítja meg.
-
-Lehetővé teszi új projektek létrehozását és inicializálását, a fájlok módosításainak követését, valamint a változtatások rögzítését és rendszerezését.
-
-Támogatja a fejlesztési ágak létrehozását, köztük a váltást, az ágak összevonását és a konfliktusok kezelését is.
-
-Emellett biztosít eszközöket a változások előzményeinek áttekintésére, a belső objektumok vizsgálatára.
-
-Ehez tartozik egy server is, ami lehetőséget nyújt a távoli repository-kal való együttműködésre, szinkronizációra és az adatok megosztására.
+A szakdolgozat témája egy Git stílusú verziókezelő rendszer fejlesztése. A cél egy olyan program létrehozása,
+amellyel fájlok és projektek különböző verziói kezelhetők és visszakövethetők. 
+A rendszerhez tartozik egy távoli szerver is, ahol ezek a verziók tárolhatók és megoszthatók más felhasználókkal.
+A projekt során a hangsúly a verziókezelés alapelveinek és a kliens–szerver közti kommunikáció megvalósításán lesz.
+A végeredmény egy működő, egyszerűen használható verziókezelő rendszer lesz, ami bemutatja, hogyan épül fel és működik egy ilyen típusú szoftver.

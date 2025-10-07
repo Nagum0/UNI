@@ -169,7 +169,6 @@ func Checkout(branchName string) {
 	newIndexFile.Write(newIndexContents)
 }
 
-// NOTE: Maybe use the INDEX???
 // BUG: Deleted files not tracked
 func Merge(otherBranch string) {
 	head := GetHead()
@@ -192,6 +191,25 @@ func Merge(otherBranch string) {
 	for filePath, hashes := range union {
 		fmt.Printf("%v: { A: %v B: %v Base: %v }\n", filePath, hashes.A, hashes.B, hashes.Base)
 	}
+
+	// Merging
+	index := Index{ make(map[string]string) }
+
+	for filePath, hashes := range union {
+		if hashes.A != "" && hashes.B != "" {
+			if hashes.A != hashes.Base && hashes.B != hashes.Base {
+				panic("Merge conflic in file: " + filePath)
+			} else if hashes.A != hashes.Base && hashes.B == hashes.Base {
+				index.Files[filePath] = hashes.A
+			} else if hashes.A == hashes.Base && hashes.B != hashes.Base {
+				index.Files[filePath] = hashes.B
+			}
+		} else if hashes.A == "" && hashes.B == "" && hashes.Base != "" {
+			index.Files[filePath] = hashes.Base
+		}
+	}
+
+	fmt.Println(index.Files)
 }
 
 type hashes struct {

@@ -3,6 +3,7 @@ package pkg
 import (
 	"bytes"
 	"compress/zlib"
+	"container/list"
 	"crypto/sha1"
 	"fmt"
 	"os"
@@ -146,32 +147,147 @@ func Checkout(branchName string) {
 	SwitchBranch(branchName)
 
 	// Read top commit
-	topCommitHash, ok := GetTopCommitHash()
+	_, ok := GetTopCommitHash()
 	if !ok {
 		return
 	}
-	commitFile, _ := os.ReadFile(".prot/obj/" + topCommitHash)
-	var commit CommitObject
-	yaml.Unmarshal(commitFile, &commit)
-
+	commit, _ := GetBranchTopCommit(branchName)
+	
 	// Read commit's snapshot
 	snapshotFile, _ := os.ReadFile(".prot/obj/" + commit.Snapshot)
 	var snapshot Snapshot
 	yaml.Unmarshal(snapshotFile, &snapshot)
 
-	// Loading INDEX
-	indexFile, _ := os.ReadFile(".prot/INDEX.yaml")
-	var index Index
-	yaml.Unmarshal(indexFile, &index)
+	// Update working directory and INDEX
+	index := Index{ Files: make(map[string]string) }
+	snapshot.UpdateWorkingDirectory(".", &index, true)
 
-	// Update working directory
-	snapshot.UpdateWorkingDirectory(".", &index)
-
-	// Updating INDEX
+	// Updating INDEX.yaml file
 	newIndexContents, _ := yaml.Marshal(index)
 	newIndexFile, _ := os.Create(".prot/INDEX.yaml")
 	defer newIndexFile.Close()
 	newIndexFile.Write(newIndexContents)
+}
+
+// BUG: Deleted files not tracked
+func Merge(otherBranch string) {
+	head := GetHead()
+
+	// Find common ancestor
+	commonAncestor := findCommonAncestor(head.Branch, otherBranch)
+
+	// Get indexes
+	aCommit, _ := GetBranchTopCommit(head.Branch)
+	bCommit, _ := GetBranchTopCommit(otherBranch)
+	
+	aIndex := aCommit.CreateIndex()
+	bIndex := bCommit.CreateIndex()
+	baseIndex := commonAncestor.CreateIndex()
+
+	// Union of all tracked files among indexes
+	union := indexUnion(aIndex, bIndex, baseIndex)
+
+	// DEBUG
+	for filePath, hashes := range union {
+		fmt.Printf("%v: { A: %v B: %v Base: %v }\n", filePath, hashes.A, hashes.B, hashes.Base)
+	}
+
+	// Merging
+	index := Index{ make(map[string]string) }
+
+	for filePath, hashes := range union {
+		if hashes.A != "" && hashes.B != "" {
+			if hashes.A != hashes.Base && hashes.B != hashes.Base {
+				panic("Merge conflic in file: " + filePath)
+			} else if hashes.A != hashes.Base && hashes.B == hashes.Base {
+				index.Files[filePath] = hashes.A
+			} else if hashes.A == hashes.Base && hashes.B != hashes.Base {
+				index.Files[filePath] = hashes.B
+			}
+		} else if hashes.A == "" && hashes.B == "" && hashes.Base != "" {
+			index.Files[filePath] = hashes.Base
+		}
+	}
+
+	fmt.Println(index.Files)
+}
+
+type hashes struct {
+	A    string
+	B    string
+	Base string
+}
+
+func indexUnion(a Index, b Index, c Index) map[string]hashes {
+	union := make(map[string]hashes)
+
+	for filePath, hash := range a.Files {
+		union[filePath] = hashes{ A: hash }
+	}
+
+	for filePath, hash := range b.Files {
+		if hashinfo, ok := union[filePath]; !ok {
+			union[filePath] = hashes{ B: hash }
+		} else {
+			hashinfo.B = hash
+			union[filePath] = hashinfo
+		}
+	}
+	
+	for filePath, hash := range c.Files {
+		if hashinfo, ok := union[filePath]; !ok {
+			union[filePath] = hashes{ Base: hash }
+		} else {
+			hashinfo.Base = hash
+			union[filePath] = hashinfo
+		}
+	}
+
+	return union
+}
+
+func findCommonAncestor(a string, b string) *CommitObject {
+	_, aHash := GetBranchTopCommit(a)
+	_, bHash := GetBranchTopCommit(b)
+	
+	visited := make(map[string]CommitObject)
+	queue := list.List{}
+	queue.Init()
+
+	// Visit A commits
+	queue.PushBack(aHash)
+	for queue.Len() != 0 {
+		listElem := queue.Back()
+		queue.Remove(listElem)
+
+		commitHash := listElem.Value.(string)
+		commit := UnmarshalCommit(ReadObject(commitHash))
+		visited[commitHash] = commit
+
+		for _, parent := range commit.Parents {
+			queue.PushBack(parent)
+		}
+	}
+
+	// Check for ancestor with B
+	queue.PushBack(bHash)
+	for queue.Len() != 0 {
+		listElem := queue.Back()
+		queue.Remove(listElem)
+
+		commitHash := listElem.Value.(string)
+		commit := UnmarshalCommit(ReadObject(commitHash))
+
+		if c, ok := visited[commitHash]; ok {
+			return &c
+		}
+
+		for _, parent := range commit.Parents {
+			queue.PushBack(parent)
+		}
+	}
+
+	return nil
 }
 
 func getBranches() []string {

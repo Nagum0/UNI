@@ -2,7 +2,6 @@
 # (Használjuk a beépített lista műveleteit!)
 # Kezeld a szélsőséges eseteket! (Üres veremből kivétel)
 # Eszerint implementáld: https://people.inf.elte.hu/pgm6rw/algo/Algo1/ElementaryDataStructures/stack/index.html
-
 class Stack:
     data: list[any]
     n: int

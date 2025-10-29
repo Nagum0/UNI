@@ -8,23 +8,49 @@ server.bind(server_addr)
 server.listen(3)
 
 sockets = [server]
+clients = {}
+messages = {}
 
 try: 
     while True:
-        r, _, e = select.select(sockets, [], sockets, None)
+        r, w, _ = select.select(sockets, sockets, sockets, None)
+
+        # Read messages
         for s in r:
             if s is server:
                 conn, addr = server.accept()
-                print(f"New connection at from {addr}")
+                print(f"New connection from {addr}")
                 sockets.append(conn)
+                clients[conn] = addr
+                messages[conn] = None
             else:
                 data = s.recv(1024)
+
                 if data:
-                    print(f"Received from client: {data.decode()}")
-                    s.sendall(b"Echo from server: " + data)
+                    text = data.decode().strip()
+                    client = clients[s]
+                    msg = f"[{client} {text}]"
+                    messages[s] = msg
+                    print(msg)
                 else:
                     sockets.remove(s)
+                    del clients[s]
+                    del messages[s]
                     s.close()
+
+        # Write messages
+        for s in w:
+            if s is server:
+                continue
+
+            for client, msg in messages.items():
+                if client is not s and msg:
+                    s.sendall(msg.encode())
+
+        # Clear messages
+        for key in messages.keys():
+            messages[key] = None
+        
 except KeyboardInterrupt:
     print("Closing server...")
     for s in sockets:

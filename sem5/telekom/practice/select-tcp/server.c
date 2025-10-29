@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Error while starting server...\n");
         return EXIT_FAILURE;
     }
-    printf("Server started on 127.0.0.1:42069\n");
+    printf("Server listening on 127.0.0.1:42069\n");
 
     fd_set sockets;
     fd_set readfds;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
                 if (fd == server) {
                     int conn = accept(server, NULL, NULL);
                     FD_SET(conn, &sockets);
-                    printf("New connection...\n");
+                    printf("New connection (%d)...\n", conn);
 
                     if (conn > maxfd)
                         maxfd = conn;
@@ -70,15 +70,17 @@ int main(int argc, char *argv[]) {
                     if (read_bytes <= 0) {
                         close(fd);
                         FD_CLR(fd, &sockets);
-                        printf("Client disconnected...\n");
-                    } else {
-                        printf("Received from client: %s\n", buffer);
+                        printf("Client %d disconnected...\n", fd);
+                    } 
+                    // Echo back
+                    else {
+                        printf("Received from client %d: %s\n", fd, buffer);
 
                         char resp_buffer[RESP_N];
                         snprintf(resp_buffer, RESP_N, "Echo: %s", buffer);
 
                         if (sendall(fd, resp_buffer, strlen(resp_buffer)) < 0) {
-                            fprintf(stderr, "Error while responding to client...\n");
+                            fprintf(stderr, "Error while responding to client %d...\n", fd);
                             close(fd);
                             FD_CLR(fd, &sockets);
                         }

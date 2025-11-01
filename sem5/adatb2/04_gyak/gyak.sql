@@ -146,9 +146,9 @@ WHERE descend='DESC';
 -- Adjuk meg azoknak az indexeknek a nevét, amelyek legalább 9 oszloposak.
 -- (Vagyis a táblának legalább 9 oszlopát vagy egyéb kifejezését indexelik.)
 
-SELECT index_name
+SELECT index_owner, index_name
 FROM DBA_IND_COLUMNS
-GROUP BY index_name
+GROUP BY index_owner, index_name
 HAVING COUNT(*) >= 9;
 
 -- 3.

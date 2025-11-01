@@ -138,7 +138,7 @@ AND bytes=(
 -- (tulajdonos, szegmens_név, darab)
 -- (A particionalt indexeket most ne vegyük figyelembe.)
 
-SELECT owner, segment_name, extents
+SELECT owner, segment_name, blocks
 FROM DBA_SEGMENTS
 WHERE segment_type='INDEX'
 AND bytes=(

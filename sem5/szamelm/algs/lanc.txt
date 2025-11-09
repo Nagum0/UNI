@@ -1,0 +1,18 @@
+Input: G = (V, Σ, P, S)
+Output: láncmentes grammatika G'
+
+1. For each A in V:
+     Chain(A) := {A}
+2. repeat
+     for each A → B in P (ha láncszabály):
+         Chain(A) := Chain(A) ∪ Chain(B)
+   until nem változik tovább
+
+3. P' := ∅
+4. for each A in V:
+     for each B in Chain(A):
+         for each B → α in P:
+             if α nem egyetlen nemterminális (vagyis nem láncszabály):
+                 add (A → α) to P'
+
+5. G' := (V, Σ, P', S)

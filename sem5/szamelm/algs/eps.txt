@@ -1,0 +1,26 @@
+Input: CFG G = (V, Σ, P, S)
+1. NULL := ∅
+2. repeat
+     for minden A in V:
+         if exists A → ε in P then NULL := NULL ∪ {A}
+         if exists A → X1 X2 ... Xk in P such that minden Xi ∈ NULL akkor NULL := NULL ∪ {A}
+   until NULL nem változik
+
+3. P_new := ∅
+4. for minden produkció A → X1 X2 ... Xk in P:
+     let positions = {i | Xi ∈ V és Xi ∈ NULL}
+     for minden subset S ⊆ positions:
+         form α' = jobb oldal ahol az Xi-k indexei S szerint ki vannak hagyva
+         if α' ≠ ε then add A → α' to P_new
+     if eredeti jobb oldal ≠ ε then add A → eredeti jobb oldal to P_new  (ez is lehet opcionális, de biztonságos)
+
+5. if S ∈ NULL then
+     hozz létre új kezdőt S0
+     add S0 → S to P_new
+     add S0 → ε to P_new
+   else
+     S0 := S
+
+6. G' := (V ∪ {S0}, Σ, P_new, S0)
+7. (opcionálisan) tisztíts: távolíts el elérhetetlen / haszontalan szimbólumokat
+Output: ε-mentes CFG G'

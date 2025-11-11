@@ -1,0 +1,5 @@
+AUTH_TOKEN_PATH = "data/token"
+USER_JSON_FILE_PATH = "data/users.json"
+DATA_JSON_FILE_PATH = "data/data.json"
+USERS = "Users"
+BASKETS = "Baskets"

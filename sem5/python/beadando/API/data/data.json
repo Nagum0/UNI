@@ -26,6 +26,11 @@
             "name": "zeki",
             "email": "zeke@zekester.hu",
             "is_admin": false
+        },
+        {
+            "id": 0,
+            "name": "string",
+            "email": "string@string.com"
         }
     ],
     "Baskets": [
@@ -72,6 +77,11 @@
         {
             "id": 103,
             "user_id": 3,
+            "items": []
+        },
+        {
+            "id": 0,
+            "user_id": 420,
             "items": []
         }
     ]

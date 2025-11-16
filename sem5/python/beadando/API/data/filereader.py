@@ -28,7 +28,7 @@ def get_basket_by_user_id(user_id: int) -> Dict[str, Any]:
     basket_data = load_json()
 
     for basket in basket_data[BASKETS]:
-        if basket.user_id == user_id:
+        if basket["user_id"] == user_id:
             return basket
 
     raise KeyError(f"Basket by user_id: {user_id} not found")

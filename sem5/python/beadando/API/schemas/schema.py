@@ -23,7 +23,6 @@ class User(BaseModel):
     id: int
     name: str
     email: str
-    is_admin: bool = False
 
     @field_validator("id")
     def check_id(cls, id) -> int:

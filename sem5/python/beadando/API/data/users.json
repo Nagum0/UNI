@@ -26,6 +26,11 @@
             "name": "zeki",
             "email": "zeke@zekester.hu",
             "is_admin": false
+        },
+        {
+            "id": 0,
+            "name": "string",
+            "email": "string@string.com"
         }
     ]
 }

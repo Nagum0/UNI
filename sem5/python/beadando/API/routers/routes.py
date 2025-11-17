@@ -4,8 +4,8 @@ from fastapi import FastAPI, HTTPException, Request, Response, Cookie
 from fastapi import APIRouter
 
 from schemas.schema import User, Basket, Item
-from data.filereader import get_basket_by_user_id, get_user_by_id, load_token
-from data.filehandler import add_basket, add_user
+from data.filereader import get_basket_by_user_id, get_user_by_id, load_token, get_total_price_of_basket
+from data.filehandler import add_basket, add_user, add_item_to_basket, delete_item, update_item
 
 '''
 
@@ -66,14 +66,39 @@ def addshoppingbag(userid: int, auth_cookie: str | None = Cookie(default=None)) 
 
 @routers.post('/additem', response_model=Basket)
 def additem(userid: int, item: Item) -> Basket:
-    pass
+    add_item_to_basket(userid, item.model_dump())
 
-@routers.put('/updateitem')
+    try:
+        basket = Basket.model_validate(get_basket_by_user_id(userid))
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"No basket found for user {userid}.")
+
+    return basket
+
+@routers.put('/updateitem', response_model=Basket)
 def updateitem(userid: int, itemid: int, updateItem: Item) -> Basket:
-    pass
+    try:
+        basket = get_basket_by_user_id(userid)
+        update_item(basket, itemid, updateItem.model_dump())
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+    updated_basket = Basket.model_validate(get_basket_by_user_id(userid))
+    return updated_basket
 
-@routers.delete('/deleteitem')
+@routers.delete('/deleteitem', response_model=Basket)
 def deleteitem(userid: int, itemid: int) -> Basket:
+    try:
+        basket = get_basket_by_user_id(userid)
+        delete_item(basket, itemid)
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    updated_basket = Basket.model_validate(get_basket_by_user_id(userid))
+    return updated_basket
+
+@routers.delete("/deleteall", response_model=Basket)
+def deleteall(userid: int) -> Basket:
     pass
 
 @routers.get('/user')
@@ -86,11 +111,18 @@ def users() -> list[User]:
 
 @routers.get('/shoppingbag')
 def shoppingbag(userid: int) -> list[Item]:
-    pass
+    try:
+        basket = Basket.model_validate(get_basket_by_user_id(userid))
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+    return basket.items
 
 @routers.get('/getusertotal')
 def getusertotal(userid: int) -> float:
-    pass
+    try:
+        total = get_total_price_of_basket(userid)
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
-
-
+    return total

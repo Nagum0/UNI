@@ -25,6 +25,33 @@ def add_basket(basket: Dict[str, Any]) -> None:
     data[BASKETS].append(basket)
     save_json(data)
 
+def update_item(basket: Dict[str, Any], item_id: int, new_item: Dict[str, Any]) -> None:
+    found = False
+    for idx, item in enumerate(basket["items"]):
+        if item["item_id"] == item_id:
+            basket["items"][idx] = new_item
+            found = True
+
+    if not found:
+        raise KeyError(f"Item by id: {item_id} does not exist in the basket.")
+
+    data = load_json()
+    data[BASKETS][basket["id"]] = basket
+    save_json(data)
+
+def delete_item(basket: Dict[str, Any], item_id: int) -> None:
+    old_len = len(basket["items"])
+    for item in basket["items"][:]:
+        if item["item_id"] == item_id:
+            basket["items"].remove(item)
+    
+    if len(basket["items"]) == old_len:
+        raise KeyError(f"Item by id: {item_id} does not exist in the basket")
+
+    data = load_json()
+    data[BASKETS][basket["id"]] = basket
+    save_json(data)
+
 def add_item_to_basket(user_id: int, item: Dict[str, Any]) -> None:
     try:
         basket = get_basket_by_user_id(user_id)

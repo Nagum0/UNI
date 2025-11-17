@@ -2,21 +2,6 @@ from typing import List
 from pydantic import BaseModel, field_validator
 import re
 
-'''
-
-Útmutató a fájl használatához:
-
-Az osztályokat a schema alapján ki kell dolgozni.
-
-A schema.py az adatok küldésére és fogadására készített osztályokat tartalmazza.
-Az osztályokban az adatok legyenek validálva.
- - az int adatok nem lehetnek negatívak.
- - az email mező csak e-mail formátumot fogadhat el.
- - Hiba esetén ValuErrort kell dobni, lehetőség szerint ezt a 
-   kliens oldalon is jelezni kell.
-
-'''
-
 ShopName='Bolt'
 
 class User(BaseModel):
@@ -47,7 +32,7 @@ class Item(BaseModel):
     quantity: int
 
     @field_validator("item_id")
-    def check_item_id(cld, item_id):
+    def check_item_id(cls, item_id):
         if item_id < 0:
             raise ValueError("item_id cannot be negative")
 

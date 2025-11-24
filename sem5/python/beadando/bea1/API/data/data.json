@@ -1,0 +1,54 @@
+{
+    "Users": [
+        {
+            "id": 420,
+            "name": "zeki",
+            "email": "zeki@zeke.com"
+        },
+        {
+            "id": 67,
+            "name": "balazs",
+            "email": "balazs@zeke.com"
+        }
+    ],
+    "Baskets": [
+        {
+            "id": 420,
+            "user_id": 420,
+            "items": [
+                {
+                    "item_id": 0,
+                    "name": "more food",
+                    "brand": "idk",
+                    "price": 11.0,
+                    "quantity": 3
+                },
+                {
+                    "item_id": 1,
+                    "name": "food 2",
+                    "brand": "idk",
+                    "price": 5.0,
+                    "quantity": 10
+                }
+            ]
+        },
+        {
+            "id": 69,
+            "user_id": 69,
+            "items": []
+        },
+        {
+            "id": 67,
+            "user_id": 67,
+            "items": [
+                {
+                    "item_id": 0,
+                    "name": "videogame",
+                    "brand": "idk 2",
+                    "price": 50.0,
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+}
